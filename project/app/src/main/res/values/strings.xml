@@ -24,7 +24,7 @@
     <string name="tekstSize">Wielkość czcionki</string>
 
     <string name="check">sprawdź</string>
-    <string name="wyslij">wyślij</string>
+    <string name="wyslij">Wyślij</string>
     <string name="podpowiedz">Jeśli nie znasz hasła wpisz swoje imię i nazwisko i wyślij je wraz z twoim Mac adresem, aby otrzymać hasło dla twojej aplikacji</string>
     <string name="uluAdd">Dodaj do ulubionych</string>
     <string name="noweulu">stworz nową listę ulubionych</string>
@@ -33,5 +33,6 @@
     <string name="usun">Usuń tę listę</string>
     <string name="zabawanadzis">Zabawa na dziś</string>
     <string name="report">Wyślij swoje uwagi o aplikacji lub informacje o błędach</string>
-
+    <string name="reportInfo">Wpisz wiadomość którą chcesz wysłać</string>
+    <string name="message">Wiadomość</string>
 </resources>
