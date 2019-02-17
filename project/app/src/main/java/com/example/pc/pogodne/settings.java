@@ -3,6 +3,7 @@ package com.example.pc.pogodne;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -180,6 +181,23 @@ public class settings extends AppCompatActivity {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
+                                String text = report.getText().toString();
+                                if(text.replace(" ", "").equals(""))
+                                {
+                                    Toast.makeText(settings.this, "Wiadomość nie może być pusta", Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    String[] to = {getString(R.string.mail)};
+                                    Intent intent = new Intent(Intent.ACTION_SEND);
+                                    intent.setData(Uri.parse("mailto:"));
+                                    intent.putExtra(Intent.EXTRA_EMAIL, to);
+                                    intent.putExtra(Intent.EXTRA_SUBJECT, "Zgłoszenie - aplikacja");
+                                    intent.putExtra(Intent.EXTRA_TEXT, text);
+
+                                    intent.setType("message/rfc822");
+                                    Intent chooser = Intent.createChooser(intent, "Wybierz aplikację z której wyślesz maila");
+                                    startActivity(chooser);
+                                }
                             }
                         });
 
