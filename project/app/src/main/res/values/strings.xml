@@ -35,4 +35,5 @@
     <string name="report">Wyślij swoje uwagi o aplikacji lub informacje o błędach</string>
     <string name="reportInfo">Wpisz wiadomość którą chcesz wysłać</string>
     <string name="message">Wiadomość</string>
+    <string name="zgloszenie">Zgłoszenie</string>
 </resources>

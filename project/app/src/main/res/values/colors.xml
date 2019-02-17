@@ -14,4 +14,5 @@
     <color name="kolor4">#ffeaed</color>
     <color name="iconbackground">#FFC107</color>
     <color name="wyswietlenie">#B3000000</color>
+    <color name="alert"></color>
 </resources>

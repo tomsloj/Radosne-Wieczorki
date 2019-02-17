@@ -175,6 +175,7 @@ public class settings extends AppCompatActivity {
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(settings.this);
                 builder.setCancelable(true);
+                builder.setView(R.layout.send_report);
 
                 builder.setPositiveButton(
                         R.string.wyslij,
