@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/relativeLayout"
+    style="@style/AppTheme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/background"
+    >
+    <include
+        android:id="@+id/main_bar"
+        layout="@layout/main_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/main_bar"
+        tools:layout_editor_absoluteX="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/przycisk_lista"
+                style="@style/DużyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/roundbutton"
+                android:text="@string/menu_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_bar" />
+
+            <Button
+                android:id="@+id/tańce"
+                style="@style/MałyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="46dp"
+                android:background="@drawable/roundbutton"
+                android:text="@string/tańce"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/przycisk_lista" />
+
+            <Button
+                android:id="@+id/rywalizacja"
+                style="@style/MałyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="46dp"
+                android:background="@drawable/roundbutton"
+                android:text="@string/rywalizacja"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/integracyjne" />
+
+            <Button
+                android:id="@+id/integracyjne"
+                style="@style/MałyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="46dp"
+                android:background="@drawable/roundbutton"
+                android:text="@string/integracyjne"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tańce" />
+
+            <Button
+                android:id="@+id/piosenki"
+                style="@style/MałyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="46dp"
+                android:background="@drawable/roundbutton"
+                android:text="@string/piosenki"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rywalizacja" />
+
+            <Button
+                android:id="@+id/inne"
+                style="@style/MałyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="46dp"
+                android:background="@drawable/roundbutton"
+                android:text="@string/inne"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/piosenki" />
+
+            <Button
+                android:id="@+id/ulubione"
+                style="@style/MałyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="46dp"
+                android:background="@drawable/roundbutton"
+                android:text="@string/ulubione"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/inne" />
+
+            <Button
+                android:id="@+id/settings_button"
+                style="@style/MałyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="46dp"
+                android:background="@drawable/roundbutton"
+                android:text="@string/action_settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/find_button" />
+
+            <Button
+                android:id="@+id/find_button"
+                style="@style/MałyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="46dp"
+                android:background="@drawable/roundbutton"
+                android:text="@string/szukaj"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ulubione" />
+
+            <Button
+                android:id="@+id/zabawanadzis"
+                style="@style/MałyPrzycisk"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="46dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="46dp"
+                android:background="@drawable/roundbutton"
+                android:layout_marginBottom="14dp"
+                android:text="@string/zabawanadzis"
+                app:layout_constraintHorizontal_bias="1.0" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</android.support.constraint.ConstraintLayout>

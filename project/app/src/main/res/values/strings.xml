@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Radosne Wieczorki</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="action_search">Szukaj</string>
+    <string name="menu_name">Wszystkie zabawy</string>
+    <string name="title">Tytuł</string>
+    <string name="piosenki">piosenki</string>
+    <string name="tańce">tańce</string>
+    <string name="rywalizacja">rywalizacja</string>
+    <string name="integracyjne">integracyjne</string>
+    <string name="inne">inne</string>
+    <string name="szukaj">szukaj</string>
+    <string name="ulubione">ulubione</string>
+    <string name="klucz">wpisz klucz</string>
+    <string name="cancel">Anuluj</string>
+    <string name="akceptuj">akceptuj</string>
+    <string name="request">poproś o klucz</string>
+    <string name="findTytle">Szukaj w tytułach</string>
+    <string name="findText">Szukaj w opisach</string>
+    <string name="wpisz">wpisz tekst do wyszukania</string>
+    <string name="noFound">Nie znalezniono wyników pasujących do twojego zapytania</string>
+    <string name="home">home</string>
+    <string name="back">back</string>
+    <string name="tekstSize">Wielkość czcionki</string>
+
+    <string name="check">sprawdź</string>
+    <string name="wyslij">wyślij</string>
+    <string name="podpowiedz">Jeśli nie znasz hasła wpisz swoje imię i nazwisko i wyślij je wraz z twoim Mac adresem, aby otrzymać hasło dla twojej aplikacji</string>
+    <string name="uluAdd">Dodaj do ulubionych</string>
+    <string name="noweulu">stworz nową listę ulubionych</string>
+    <string name="wybierzulu">Lub wybierz istniejącą już listę</string>
+    <string name="trybusuwania">Usuń wybrany</string>
+    <string name="usun">Usuń tę listę</string>
+    <string name="zabawanadzis">Zabawa na dziś</string>
+</resources>

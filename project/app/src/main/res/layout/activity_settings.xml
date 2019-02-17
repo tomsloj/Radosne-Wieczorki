@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings">
+
+    <include
+        android:id="@+id/main_bar"
+        layout="@layout/main_bar" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="25dp"
+        android:stretchColumns="1"
+        >
+
+        <TableRow>
+
+            <TextView
+                android:id="@+id/czcionka"
+                style="@style/TekstStyle"
+                android:layout_column="1"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_weight="15"
+                android:text="@string/tekstSize" />
+
+            <Button
+                android:id="@+id/plus"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_weight="3"
+                android:background="@drawable/plus" />
+
+            <Button
+                android:id="@+id/minus"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_weight="3"
+                android:background="@drawable/minus" />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
+            >
+
+
+        </TableRow>
+        <TableRow
+            android:layout_marginTop="40dp"
+            android:layout_height="wrap_content"
+            >
+
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

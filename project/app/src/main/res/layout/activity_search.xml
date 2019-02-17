@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".search"
+    >
+
+    <include
+        layout="@layout/main_bar"
+        android:id="@+id/main_bar"
+        />
+
+    <EditText
+        android:id="@+id/poleWyszukiwania"
+        android:layout_width="336dp"
+        android:colorControlActivated = "@color/colorPrimary"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/main_bar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:backgroundTint="@color/colorPrimary"
+        android:inputType="text"
+        android:hint="@string/wpisz"
+        android:autofillHints="auto"
+        />
+
+    <CheckBox
+        android:id="@+id/tytułyCheckbox"
+        style="@style/TekstStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/poleWyszukiwania"
+        android:layout_marginTop="10dp"
+        android:checked="true"
+        android:buttonTint="@color/colorPrimary"
+        android:layout_centerHorizontal="true"
+        android:text="@string/findTytle" />
+
+    <CheckBox
+        android:id="@+id/tekstCheckbox"
+        style="@style/TekstStyle"
+        android:buttonTint="@color/colorPrimary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tytułyCheckbox"
+        android:layout_marginTop="10dp"
+        android:checked="true"
+        android:layout_centerHorizontal="true"
+        android:text="@string/findText" />
+
+    <Button
+        android:id="@+id/przycisk"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tekstCheckbox"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="140dp"
+        android:text="@string/szukaj" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/przycisk"
+        android:layout_marginTop="-1dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/TekstStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/przycisk"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="30dp"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+</RelativeLayout>
