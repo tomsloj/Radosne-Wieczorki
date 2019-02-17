@@ -29,7 +29,9 @@ public class settings extends AppCompatActivity {
 
         final Button plus = (Button) findViewById(R.id.plus);
         final Button minus = (Button) findViewById(R.id.minus);
-        final TextView wielkosc = (TextView) findViewById(R.id.czcionka);
+        final TextView czcionka = (TextView) findViewById(R.id.czcionka);
+        final TextView report= (TextView) findViewById(R.id.report);
+        final Button send = (Button) findViewById(R.id.reportButton);
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
@@ -78,8 +80,8 @@ public class settings extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.back);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        final TextView textView = (TextView) findViewById(R.id.czcionka);
-        textView.setTextSize(tekstSize);
+        czcionka.setTextSize(tekstSize);
+        report.setTextSize(tekstSize);
 
         final int tS = tekstSize;
 
@@ -104,9 +106,8 @@ public class settings extends AppCompatActivity {
 
                 if(tmpSize < 24)
                 {
-
-
-                    textView.setTextSize(tmpSize + 2);
+                    czcionka.setTextSize(tmpSize + 2);
+                    report.setTextSize(tmpSize + 2);
 
                     String string = Integer.toString(tmpSize + 2);
 
@@ -146,7 +147,8 @@ public class settings extends AppCompatActivity {
 
                 if(tmpSize > 10)
                 {
-                    textView.setTextSize(tmpSize - 2);
+                    czcionka.setTextSize(tmpSize - 2);
+                    report.setTextSize(tmpSize - 2);
 
                     String string = Integer.toString(tmpSize - 2);
 
@@ -162,6 +164,12 @@ public class settings extends AppCompatActivity {
                         Toast.makeText(settings.this, "Error18".toString(),Toast.LENGTH_LONG).show();
                     }
                 }
+
+            }
+        });
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
             }
         });
