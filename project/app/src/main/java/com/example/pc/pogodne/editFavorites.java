@@ -22,12 +22,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class edytujUlu extends AppCompatActivity {
+public class editFavorites extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edytuj_ulu);
+        setContentView(R.layout.activity_edit_favorites);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         myToolbar.setTitle("Ulubione");
@@ -61,13 +61,13 @@ public class edytujUlu extends AppCompatActivity {
         }
         catch (IOException e)
         {
-            Toast.makeText(edytujUlu.this, "Error5".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(editFavorites.this, "Error5".toString(),Toast.LENGTH_LONG).show();
         }
         final int tSize = tekstSize;
 
         ArrayList<String> lista= new ArrayList<>();
 
-        final File ulufile = new File(edytujUlu.this.getFilesDir(), "ulu");
+        final File ulufile = new File(editFavorites.this.getFilesDir(), "ulu");
 
         final String nazwaUlu = getIntent().getStringExtra("ulu");
         ObslugaPliku op = new ObslugaPliku();
@@ -76,7 +76,7 @@ public class edytujUlu extends AppCompatActivity {
 
         final ArrayList<String> arrayList= lista;
         //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(edytujUlu.this,android.R.layout.simple_list_item_1, arrayList)
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(editFavorites.this,android.R.layout.simple_list_item_1, arrayList)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -98,7 +98,7 @@ public class edytujUlu extends AppCompatActivity {
                     ObslugaPliku op = new ObslugaPliku();
                     if(op.usunzulu(ulufile,nazwaUlu, arrayList.get(i)) == 0)
                     {
-                        Toast.makeText(edytujUlu.this, "Error27".toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(editFavorites.this, "Error27".toString(),Toast.LENGTH_LONG).show();
                     }
                     finish();
                     startActivity(getIntent());
@@ -115,10 +115,10 @@ public class edytujUlu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ObslugaPliku op = new ObslugaPliku();
-                Toast.makeText(edytujUlu.this, nazwaUlu.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(editFavorites.this, nazwaUlu.toString(),Toast.LENGTH_LONG).show();
                 if(op.usunlisteulu(ulufile, nazwaUlu) == 0)
                 {
-                    Toast.makeText(edytujUlu.this, "Error28".toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(editFavorites.this, "Error28".toString(),Toast.LENGTH_LONG).show();
                 }
                 finish();
             }
@@ -128,7 +128,7 @@ public class edytujUlu extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setContentView(R.layout.activity_edytuj_ulu);
+        setContentView(R.layout.activity_edit_favorites);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         myToolbar.setTitle("Ulubione");
@@ -162,13 +162,13 @@ public class edytujUlu extends AppCompatActivity {
         }
         catch (IOException e)
         {
-            Toast.makeText(edytujUlu.this, "Error5".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(editFavorites.this, "Error5".toString(),Toast.LENGTH_LONG).show();
         }
         final int tSize = tekstSize;
 
         ArrayList<String> lista= new ArrayList<>();
 
-        final File ulufile = new File(edytujUlu.this.getFilesDir(), "ulu");
+        final File ulufile = new File(editFavorites.this.getFilesDir(), "ulu");
 
         final String nazwaUlu = getIntent().getStringExtra("ulu");
         ObslugaPliku op = new ObslugaPliku();
@@ -177,7 +177,7 @@ public class edytujUlu extends AppCompatActivity {
 
         final ArrayList<String> arrayList= lista;
         //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(edytujUlu.this,android.R.layout.simple_list_item_1, arrayList)
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(editFavorites.this,android.R.layout.simple_list_item_1, arrayList)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -199,7 +199,7 @@ public class edytujUlu extends AppCompatActivity {
                     ObslugaPliku op = new ObslugaPliku();
                     if(op.usunzulu(ulufile,nazwaUlu, arrayList.get(i)) == 0)
                     {
-                        Toast.makeText(edytujUlu.this, "Error27".toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(editFavorites.this, "Error27".toString(),Toast.LENGTH_LONG).show();
                     }
                     finish();
                     startActivity(getIntent());
@@ -216,10 +216,10 @@ public class edytujUlu extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ObslugaPliku op = new ObslugaPliku();
-                Toast.makeText(edytujUlu.this, nazwaUlu.toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(editFavorites.this, nazwaUlu.toString(),Toast.LENGTH_LONG).show();
                 if(op.usunlisteulu(ulufile, nazwaUlu) == 0)
                 {
-                    Toast.makeText(edytujUlu.this, "Error28".toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(editFavorites.this, "Error28".toString(),Toast.LENGTH_LONG).show();
                 }
                 finish();
             }

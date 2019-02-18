@@ -89,7 +89,7 @@ public class listaUlu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String nazwaulu = lista.get(i);
 
-                    Intent otworz_edit = new Intent(getApplicationContext(), edytujUlu.class);
+                    Intent otworz_edit = new Intent(getApplicationContext(), editFavorites.class);
                     otworz_edit.putExtra("ulu", nazwaulu);
                     startActivity(otworz_edit);
 
@@ -164,7 +164,7 @@ public class listaUlu extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String nazwaulu = lista.get(i);
 
-                Intent otworz_edit = new Intent(getApplicationContext(), edytujUlu.class);
+                Intent otworz_edit = new Intent(getApplicationContext(), editFavorites.class);
                 otworz_edit.putExtra("ulu", nazwaulu);
                 startActivity(otworz_edit);
 

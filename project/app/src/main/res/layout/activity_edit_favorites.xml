@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".edytujUlu">
+    tools:context=".editFavorites">
 
     <include
         layout="@layout/main_bar"
