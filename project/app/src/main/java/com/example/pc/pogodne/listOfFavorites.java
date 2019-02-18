@@ -2,7 +2,6 @@ package com.example.pc.pogodne;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,12 +20,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class listaUlu extends AppCompatActivity {
+public class listOfFavorites extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista_ulu);
+        setContentView(R.layout.activity_list_of_favorites);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         myToolbar.setTitle("Ulubione");
@@ -56,20 +54,20 @@ public class listaUlu extends AppCompatActivity {
         }
         catch (IOException e)
         {
-            Toast.makeText(listaUlu.this, "Error29".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(listOfFavorites.this, "Error29".toString(),Toast.LENGTH_LONG).show();
         }
 
         final int tSize = tekstSize;
 
-        final ListView listaulu = (ListView) findViewById(R.id.listaUlubionych);
-        final File ulufile = new File(listaUlu.this.getFilesDir(), "ulu");
-        final ObslugaPliku op = new ObslugaPliku();
+        final ListView listaulu = (ListView) findViewById(R.id.listOfFavorites);
+        final File ulufile = new File(listOfFavorites.this.getFilesDir(), "ulu");
+        final FileHelper op = new FileHelper();
 
         ArrayList<String> lista1 = op.listaulu(ulufile);
         //lista1.add(op.calyplik(ulufile));
         final ArrayList<String> lista = lista1;
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listaUlu.this,android.R.layout.simple_list_item_1, lista)
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, lista)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -102,7 +100,7 @@ public class listaUlu extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setContentView(R.layout.activity_lista_ulu);
+        setContentView(R.layout.activity_list_of_favorites);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         myToolbar.setTitle("Ulubione");
@@ -131,20 +129,20 @@ public class listaUlu extends AppCompatActivity {
         }
         catch (IOException e)
         {
-            Toast.makeText(listaUlu.this, "Error29".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(listOfFavorites.this, "Error29".toString(),Toast.LENGTH_LONG).show();
         }
 
         final int tSize = tekstSize;
 
-        final ListView listaulu = (ListView) findViewById(R.id.listaUlubionych);
-        final File ulufile = new File(listaUlu.this.getFilesDir(), "ulu");
-        final ObslugaPliku op = new ObslugaPliku();
+        final ListView listaulu = (ListView) findViewById(R.id.listOfFavorites);
+        final File ulufile = new File(listOfFavorites.this.getFilesDir(), "ulu");
+        final FileHelper op = new FileHelper();
 
         ArrayList<String> lista1 = op.listaulu(ulufile);
         //lista1.add(op.calyplik(ulufile));
         final ArrayList<String> lista = lista1;
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listaUlu.this,android.R.layout.simple_list_item_1, lista)
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, lista)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)

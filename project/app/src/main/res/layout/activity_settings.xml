@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -22,8 +21,8 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/czcionka"
-                style="@style/TekstStyle"
+                android:id="@+id/textSizeText"
+                style="@style/TextStyle"
                 android:layout_column="1"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
@@ -32,7 +31,7 @@
                 android:text="@string/tekstSize" />
 
             <Button
-                android:id="@+id/plus"
+                android:id="@+id/plusButton"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -40,7 +39,7 @@
                 android:background="@drawable/plus" />
 
             <Button
-                android:id="@+id/minus"
+                android:id="@+id/minusButton"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -51,14 +50,14 @@
         <TableRow>
 
             <TextView
-                android:id="@+id/report"
-                style="@style/TekstStyle"
+                android:id="@+id/reportText"
+                style="@style/TextStyle"
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_column="1"
                 android:layout_marginTop="22dp"
                 android:layout_weight="7"
-                android:text="@string/report" />
+                android:text="@string/reportInfo" />
 
             <Button
                 android:id="@+id/reportButton"
@@ -66,14 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_weight="3"
-                android:text="@string/wyslij" />
+                android:text="@string/send" />
 
-
-        </TableRow>
-        <TableRow
-            android:layout_marginTop="40dp"
-            android:layout_height="wrap_content"
-            >
 
         </TableRow>
 

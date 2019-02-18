@@ -13,7 +13,7 @@
         />
 
     <EditText
-        android:id="@+id/poleWyszukiwania"
+        android:id="@+id/searchSpace"
         android:layout_width="336dp"
         android:colorControlActivated = "@color/colorPrimary"
         android:layout_height="wrap_content"
@@ -27,16 +27,16 @@
         android:ems="10"
         android:backgroundTint="@color/colorPrimary"
         android:inputType="text"
-        android:hint="@string/wpisz"
+        android:hint="@string/write"
         android:autofillHints="auto"
         />
 
     <CheckBox
-        android:id="@+id/tytułyCheckbox"
-        style="@style/TekstStyle"
+        android:id="@+id/titlesCheckbox"
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/poleWyszukiwania"
+        android:layout_below="@+id/searchSpace"
         android:layout_marginTop="10dp"
         android:checked="true"
         android:buttonTint="@color/colorPrimary"
@@ -44,42 +44,42 @@
         android:text="@string/findTytle" />
 
     <CheckBox
-        android:id="@+id/tekstCheckbox"
-        style="@style/TekstStyle"
+        android:id="@+id/textsCheckbox"
+        style="@style/TextStyle"
         android:buttonTint="@color/colorPrimary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tytułyCheckbox"
+        android:layout_below="@+id/titlesCheckbox"
         android:layout_marginTop="10dp"
-        android:checked="true"
+        android:checked="false"
         android:layout_centerHorizontal="true"
         android:text="@string/findText" />
 
     <Button
-        android:id="@+id/przycisk"
+        android:id="@+id/searchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tekstCheckbox"
+        android:layout_below="@+id/textsCheckbox"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="140dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="140dp"
-        android:text="@string/szukaj" />
+        android:text="@string/search" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/lisOfFound"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/przycisk"
+        android:layout_below="@+id/searchButton"
         android:layout_marginTop="-1dp" />
 
     <TextView
         android:id="@+id/textView"
-        style="@style/TekstStyle"
+        style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/przycisk"
+        android:layout_below="@+id/searchButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="30dp"

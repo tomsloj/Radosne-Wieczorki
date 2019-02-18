@@ -1,12 +1,10 @@
 package com.example.pc.pogodne;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,7 +21,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
-public class lista extends AppCompatActivity {
+public class list extends AppCompatActivity {
 
     ListView listView;
 
@@ -32,7 +30,7 @@ public class lista extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lista);
+        setContentView(R.layout.activity_list);
 
         //pobieram jaka kategoria ma się znajdować na liście
         String kategoria = getIntent().getStringExtra("kategoria");
@@ -68,7 +66,7 @@ public class lista extends AppCompatActivity {
         }
         catch (IOException e)
         {
-            Toast.makeText(lista.this, "Error5".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(list.this, "Error5".toString(),Toast.LENGTH_LONG).show();
         }
         final int tSize = tekstSize;
 
@@ -80,9 +78,9 @@ public class lista extends AppCompatActivity {
 
         try {
             InputStream stream = getAssets().open(fileName);
-            ObslugaPliku op = new ObslugaPliku();
+            FileHelper op = new FileHelper();
             lista = op.tytułyWkategorii(stream, kategoria);
-            //Toast.makeText(lista.this, Integer.toString(lista.size()),Toast.LENGTH_LONG).show();
+            //Toast.makeText(list.this, Integer.toString(list.size()),Toast.LENGTH_LONG).show();
 
         } catch (IOException ex) {
             Toast.makeText(this, "Error6".toString(), Toast.LENGTH_SHORT).show();
@@ -92,7 +90,7 @@ public class lista extends AppCompatActivity {
         //}
         final ArrayList<String> arrayList= lista;
         //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(lista.this,android.R.layout.simple_list_item_1, arrayList)
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -109,7 +107,7 @@ public class lista extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent otworz_zabawe = new Intent(getApplicationContext(), wyswietlenie.class);
+                Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
                 otworz_zabawe.putExtra("zabawa", arrayList.get(i).toString());
                 startActivity(otworz_zabawe);
             }
@@ -136,7 +134,7 @@ public class lista extends AppCompatActivity {
         }
         catch (IOException e)
         {
-            Toast.makeText(lista.this, "Error5".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(list.this, "Error5".toString(),Toast.LENGTH_LONG).show();
         }
         final int tSize = tekstSize;
 
@@ -148,9 +146,9 @@ public class lista extends AppCompatActivity {
 
         try {
             InputStream stream = getAssets().open(fileName);
-            ObslugaPliku op = new ObslugaPliku();
+            FileHelper op = new FileHelper();
             lista = op.tytułyWkategorii(stream, kategoria);
-            //Toast.makeText(lista.this, Integer.toString(lista.size()),Toast.LENGTH_LONG).show();
+            //Toast.makeText(list.this, Integer.toString(list.size()),Toast.LENGTH_LONG).show();
 
         } catch (IOException ex) {
             Toast.makeText(this, "Error6".toString(), Toast.LENGTH_SHORT).show();
@@ -160,7 +158,7 @@ public class lista extends AppCompatActivity {
         //}
         final ArrayList<String> arrayList= lista;
         //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(lista.this,android.R.layout.simple_list_item_1, arrayList)
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -177,7 +175,7 @@ public class lista extends AppCompatActivity {
 
 
         /*
-        setContentView(R.layout.activity_lista);
+        setContentView(R.layout.activity_list);
 
         //pobieram jaka kategoria ma się znajdować na liście
         String kategoria = getIntent().getStringExtra("kategoria");
@@ -213,20 +211,20 @@ public class lista extends AppCompatActivity {
         }
         catch (IOException e)
         {
-            Toast.makeText(lista.this, "Error5".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(list.this, "Error5".toString(),Toast.LENGTH_LONG).show();
         }
         final int tSize = tekstSize;
 
         listView=(ListView)findViewById(R.id.listview);
-        ArrayList<String> lista= new ArrayList<>();
+        ArrayList<String> list= new ArrayList<>();
 
             String fileName = "dane.txt";
 
             try {
                 InputStream stream = getAssets().open(fileName);
-                ObslugaPliku op = new ObslugaPliku();
-                lista = op.tytułyWkategorii(stream, kategoria);
-                //Toast.makeText(lista.this, Integer.toString(lista.size()),Toast.LENGTH_LONG).show();
+                FileHelper op = new FileHelper();
+                list = op.tytułyWkategorii(stream, kategoria);
+                //Toast.makeText(list.this, Integer.toString(list.size()),Toast.LENGTH_LONG).show();
 
             } catch (IOException ex) {
                 Toast.makeText(this, "Error6".toString(), Toast.LENGTH_SHORT).show();
@@ -234,9 +232,9 @@ public class lista extends AppCompatActivity {
             }
 
         //}
-        final ArrayList<String> arrayList= lista;
+        final ArrayList<String> arrayList= list;
         //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(lista.this,android.R.layout.simple_list_item_1, arrayList)
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -253,7 +251,7 @@ public class lista extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent otworz_zabawe = new Intent(getApplicationContext(), wyswietlenie.class);
+                Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
                 otworz_zabawe.putExtra("zabawa", arrayList.get(i).toString());
                 startActivity(otworz_zabawe);
             }

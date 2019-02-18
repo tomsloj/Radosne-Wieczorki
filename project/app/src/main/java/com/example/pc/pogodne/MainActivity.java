@@ -29,17 +29,17 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         //define buttons
-        final Button przyciskLista = (Button) findViewById(R.id.przycisk_lista);
-        final Button przyciskTańce = (Button) findViewById(R.id.tańce);
-        final Button przyciskPiosenki = (Button) findViewById(R.id.piosenki);
-        final Button przyciskRywalizacja = (Button) findViewById(R.id.rywalizacja);
-        final Button przyciskIntegracyjne = (Button) findViewById(R.id.integracyjne);
-        final Button przyciskInne = (Button) findViewById(R.id.inne);
+        final Button przyciskLista = (Button) findViewById(R.id.wholeListButton);
+        final Button przyciskTańce = (Button) findViewById(R.id.dancesButton);
+        final Button przyciskPiosenki = (Button) findViewById(R.id.singsButton);
+        final Button przyciskRywalizacja = (Button) findViewById(R.id.competitionsButton);
+        final Button przyciskIntegracyjne = (Button) findViewById(R.id.integralsButton);
+        final Button przyciskInne = (Button) findViewById(R.id.othersButton);
 
-        final Button przyciskUstawienia = (Button) findViewById(R.id.settings_button);
-        final Button przyciskSzukaj = (Button) findViewById(R.id.find_button);
-        final Button przyciskUlubione = (Button) findViewById(R.id.ulubione);
-        final Button zabawanadzis = (Button) findViewById(R.id.zabawanadzis);
+        final Button przyciskUstawienia = (Button) findViewById(R.id.settingsButton);
+        final Button przyciskSzukaj = (Button) findViewById(R.id.findButton);
+        final Button przyciskUlubione = (Button) findViewById(R.id.favoritesButton);
+        final Button zabawanadzis = (Button) findViewById(R.id.gameOfTheDayButton);
 
         //setting what buttons do
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         przyciskLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), lista.class);
+                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
                 otworz_liste.putExtra("kategoria", "all");
                 startActivity(otworz_liste);
 
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         przyciskTańce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), lista.class);
+                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
                 otworz_liste.putExtra("kategoria", "tańce");
                 startActivity(otworz_liste);
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         przyciskPiosenki.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), lista.class);
+                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
                 otworz_liste.putExtra("kategoria", "piosenki");
                 startActivity(otworz_liste);
 
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         przyciskRywalizacja.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), lista.class);
+                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
                 otworz_liste.putExtra("kategoria", "rywalizacja");
                 startActivity(otworz_liste);
 
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         przyciskIntegracyjne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), lista.class);
+                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
                 otworz_liste.putExtra("kategoria", "integracyjne");
                 startActivity(otworz_liste);
 
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         przyciskInne.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), lista.class);
+                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
                 otworz_liste.putExtra("kategoria", "inne");
                 startActivity(otworz_liste);
 
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
         przyciskUlubione.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), listaUlu.class);
+                Intent otworz_liste = new Intent(getApplicationContext(), listOfFavorites.class);
 
                 startActivity(otworz_liste);
 
@@ -142,10 +142,10 @@ public class MainActivity extends AppCompatActivity {
         zabawanadzis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), wyswietlenie.class);
+                Intent otworz_liste = new Intent(getApplicationContext(), display.class);
                 String zabawa = null;
                 int seed = Calendar.getInstance().get(Calendar.YEAR)*366+Calendar.getInstance().get(Calendar.MONTH)*31+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-                ObslugaPliku op = new ObslugaPliku();
+                FileHelper op = new FileHelper();
                     String fileName = "nazwy.txt";
 
                     try {

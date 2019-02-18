@@ -39,30 +39,30 @@
 
     </style>
 
-    <style name="DużyPrzycisk" parent="TytulMenu">
+    <style name="BigButton" parent="TitleTextStyle">
         <item name="android:textColor">@color/textColor2</item>
         <item name="android:background">@drawable/roundbutton</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="MałyPrzycisk" parent = "DużyPrzycisk">
+    <style name="SmallButton" parent = "BigButton">
         <item name="android:textColor">@color/textColor2</item>
         <item name="android:background">@drawable/roundbutton</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textStyle">normal</item>
     </style>
 
-    <style name="TekstStyle" parent="AppTheme">
-        <item name="android:background">@color/przezroczysty</item>
+    <style name="TextStyle" parent="AppTheme">
+        <item name="android:background">@color/transparent</item>
         <item name="android:textSize">15sp</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textColor">@color/wyswietlenie</item>
+        <item name="android:textColor">@color/displayColor</item>
     </style>
 
-    <style name="TytulMenu">
-        <item name="android:textColor">@color/wyswietlenie</item>
-        <item name="android:background">@color/przezroczysty</item>
+    <style name="TitleTextStyle">
+        <item name="android:textColor">@color/displayColor</item>
+        <item name="android:background">@color/transparent</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentTop">true</item>

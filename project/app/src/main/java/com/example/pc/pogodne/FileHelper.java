@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ObslugaPliku {
+public class FileHelper {
     public ArrayList<String> tytułyWkategorii(InputStream stream, String kategoria)
     {
         ArrayList<String> lista = new ArrayList<String>();
@@ -45,7 +45,7 @@ public class ObslugaPliku {
         }
         catch (IOException ex)
         {
-            //lista.add("1111");
+            //list.add("1111");
         }
 
 

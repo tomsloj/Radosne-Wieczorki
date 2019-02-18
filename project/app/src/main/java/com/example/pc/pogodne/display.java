@@ -1,24 +1,12 @@
 package com.example.pc.pogodne;
 
-import android.Manifest;
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,13 +14,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,13 +28,13 @@ import java.util.ArrayList;
 
 
 
-public class wyswietlenie extends AppCompatActivity {
+public class display extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wyswietlenie);
+        setContentView(R.layout.activity_display);
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
@@ -64,12 +49,12 @@ public class wyswietlenie extends AppCompatActivity {
             String plik = new String(buffer);
             tekstSize = Integer.parseInt(plik);
         } catch (IOException e) {
-            Toast.makeText(wyswietlenie.this, "Error9".toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(display.this, "Error9".toString(), Toast.LENGTH_LONG).show();
         }
 
 
-        final TextView nazwaZabawy = (TextView) findViewById(R.id.tytuł);
-        final TextView text = (TextView) findViewById(R.id.text);
+        final TextView nazwaZabawy = (TextView) findViewById(R.id.titleOfGame);
+        final TextView text = (TextView) findViewById(R.id.textOfGame);
 
         nazwaZabawy.setTextSize(tekstSize + 6);
         text.setTextSize(tekstSize);
@@ -108,7 +93,7 @@ public class wyswietlenie extends AppCompatActivity {
             String tekst = "";
             nazwaZabawy.setText(zabawa);
 
-            ObslugaPliku op = new ObslugaPliku();
+            FileHelper op = new FileHelper();
             tekst = op.tekst(stream, zabawa);
             text.setText(tekst);
         } catch (IOException ex) {
@@ -123,7 +108,7 @@ public class wyswietlenie extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_ulu, menu);
+        getMenuInflater().inflate(R.menu.menu_favorites, menu);
         return true;
     }
 
@@ -145,28 +130,28 @@ public class wyswietlenie extends AppCompatActivity {
             startActivity(otworz_ustawienia);
         }
         else
-            if(id == R.id.ulubione)
+            if(id == R.id.favoritesButton)
             {
 
-                final AlertDialog.Builder builder = new AlertDialog.Builder(wyswietlenie.this);
-                final LayoutInflater inflater = wyswietlenie.this.getLayoutInflater();
-                final View dialogView = inflater.inflate(R.layout.dodaj_do_ulubionych, null);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(display.this);
+                final LayoutInflater inflater = display.this.getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.add_to_favorites, null);
                 builder.setView(dialogView);
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 // User cancelled the dialog
                             }
                         });
-                final Button stworz = (Button) dialogView.findViewById(R.id.stworzUlu);
-                final EditText nazwa =(EditText) dialogView.findViewById(R.id.nazwaUlu);
-                final ListView listaulu = (ListView) dialogView.findViewById(R.id.listaUlu);
+                final Button stworz = (Button) dialogView.findViewById(R.id.createFavorite);
+                final EditText nazwa =(EditText) dialogView.findViewById(R.id.nameOfFavorite);
+                final ListView listaulu = (ListView) dialogView.findViewById(R.id.dialogLisOfFavorites);
 
-                final File ulufile = new File(wyswietlenie.this.getFilesDir(), "ulu");
-                final File tmpfile = new File(wyswietlenie.this.getFilesDir(), "tmpfile");
+                final File ulufile = new File(display.this.getFilesDir(), "ulu");
+                final File tmpfile = new File(display.this.getFilesDir(), "tmpfile");
 
-                final ObslugaPliku op = new ObslugaPliku();
+                final FileHelper op = new FileHelper();
                 final ArrayList<String> lista = op.listaulu(ulufile);
-                final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(wyswietlenie.this,android.R.layout.simple_list_item_1, lista);
+                final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(display.this,android.R.layout.simple_list_item_1, lista);
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
@@ -180,20 +165,20 @@ public class wyswietlenie extends AppCompatActivity {
                         String nazwaulu = nazwa.getText().toString();
                         if(nazwaulu.isEmpty() || nazwaulu.replace(" ", "").isEmpty())
                         {
-                            Toast.makeText(wyswietlenie.this, "nazwa nie może być pusta".toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(display.this, "nazwa nie może być pusta".toString(),Toast.LENGTH_LONG).show();
                         }
                         else
                             if(nazwaulu.contains("%")||nazwaulu.contains(">")||nazwaulu.contains("@")||nazwaulu.contains("<")||nazwaulu.contains("#")||nazwaulu.contains("|")||nazwaulu.contains("$"))
                             {
-                                Toast.makeText(wyswietlenie.this, "nazwa nie może zawierać:\n%<>@#$|".toString(),Toast.LENGTH_LONG).show();
+                                Toast.makeText(display.this, "nazwa nie może zawierać:\n%<>@#$|".toString(),Toast.LENGTH_LONG).show();
                             }
                             else
                                 {
-                                    ObslugaPliku op = new ObslugaPliku();
+                                    FileHelper op = new FileHelper();
 
-                                    final File ulufile = new File(wyswietlenie.this.getFilesDir(), "ulu");
+                                    final File ulufile = new File(display.this.getFilesDir(), "ulu");
 
-                                    final File tmpfile = new File(wyswietlenie.this.getFilesDir(), "tmpfile");
+                                    final File tmpfile = new File(display.this.getFilesDir(), "tmpfile");
 
                                     String zabawa = null;
                                     try {
@@ -206,22 +191,22 @@ public class wyswietlenie extends AppCompatActivity {
                                     }
                                     catch (IOException e)
                                     {
-                                        Toast.makeText(wyswietlenie.this, "Error22".toString(),Toast.LENGTH_LONG).show();
+                                        Toast.makeText(display.this, "Error22".toString(),Toast.LENGTH_LONG).show();
 
                                     }
 
                                     if(op.czyistnieje(ulufile, nazwaulu))
                                     {
-                                        Toast.makeText(wyswietlenie.this, "taka nazwa listy ulubionych już istnieje".toString(),Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje".toString(),Toast.LENGTH_SHORT).show();
                                     }
                                     else {
                                         if (op.dodajnowaulu(ulufile,nazwaulu, zabawa) == 1) {
-                                            Toast.makeText(wyswietlenie.this, "zabawa została zapisana do nowopowstałej listy".toString(), Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(display.this, "zabawa została zapisana do nowopowstałej listy".toString(), Toast.LENGTH_SHORT).show();
                                             arrayAdapter.add(nazwaulu);
                                         }
                                             else
                                         {
-                                            Toast.makeText(wyswietlenie.this, Integer.toString(op.dodajnowaulu(ulufile,nazwaulu, zabawa)),Toast.LENGTH_LONG).show();
+                                            Toast.makeText(display.this, Integer.toString(op.dodajnowaulu(ulufile,nazwaulu, zabawa)),Toast.LENGTH_LONG).show();
                                         }
                                     }
                             }
@@ -249,31 +234,31 @@ public class wyswietlenie extends AppCompatActivity {
                         }
                         catch (IOException e)
                         {
-                            Toast.makeText(wyswietlenie.this, "Error23".toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(display.this, "Error23".toString(),Toast.LENGTH_LONG).show();
                         }
                         int tmp = op.dodajdoulu(ulufile, nazwaulu, zabawa);
                         if(tmp == 0)
                         {
-                            Toast.makeText(wyswietlenie.this, "Error24".toString(),Toast.LENGTH_LONG).show();
+                            Toast.makeText(display.this, "Error24".toString(),Toast.LENGTH_LONG).show();
                         }
                         else
                         if(tmp == 1)
                         {
-                            Toast.makeText(wyswietlenie.this, "ta zabawa już znajduje sie na tej liście ulubionych".toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(display.this, "ta zabawa już znajduje sie na tej liście ulubionych".toString(),Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
-                            Toast.makeText(wyswietlenie.this, "zabawa została dodana".toString(),Toast.LENGTH_SHORT).show();
+                            Toast.makeText(display.this, "zabawa została dodana".toString(),Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
-                final TextView text = (TextView) dialog.findViewById(R.id.textUlu);
+                final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
                 if(lista.size() == 0)
                 {
                     text.setText("Nie posiadasz jeszcze rzadnej listy ulubionych");
                 }
-                //Toast.makeText(wyswietlenie.this, "ooo".toString(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(display.this, "ooo".toString(),Toast.LENGTH_LONG).show();
             }
 
         return super.onOptionsItemSelected(item);
@@ -282,7 +267,7 @@ public class wyswietlenie extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setContentView(R.layout.activity_wyswietlenie);
+        setContentView(R.layout.activity_display);
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
@@ -297,12 +282,12 @@ public class wyswietlenie extends AppCompatActivity {
             String plik = new String(buffer);
             tekstSize = Integer.parseInt(plik);
         } catch (IOException e) {
-            Toast.makeText(wyswietlenie.this, "Error9".toString(), Toast.LENGTH_LONG).show();
+            Toast.makeText(display.this, "Error9".toString(), Toast.LENGTH_LONG).show();
         }
 
 
-        final TextView nazwaZabawy = (TextView) findViewById(R.id.tytuł);
-        final TextView text = (TextView) findViewById(R.id.text);
+        final TextView nazwaZabawy = (TextView) findViewById(R.id.titleOfGame);
+        final TextView text = (TextView) findViewById(R.id.textOfGame);
 
         nazwaZabawy.setTextSize(tekstSize + 6);
         text.setTextSize(tekstSize);
@@ -340,7 +325,7 @@ public class wyswietlenie extends AppCompatActivity {
             String tekst = "";
             nazwaZabawy.setText(zabawa);
 
-            ObslugaPliku op = new ObslugaPliku();
+            FileHelper op = new FileHelper();
             tekst = op.tekst(stream, zabawa);
             text.setText(tekst);
         } catch (IOException ex) {

@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <color name="colorPrimary">#cf2c26</color>
     <color name="colorPrimaryDark">#d74128</color>
     <color name="colorAccent">#eb5048</color>
-    <color name="foreground_material_light">#000000</color>
+    <color name="foreground_material_light" tools:ignore="PrivateResource">#000000</color>
     <color name="textColor">#FFFFFF</color>
     <color name="textColor2">#000000</color>
-    <color name="przezroczysty">#00008577</color>
+    <color name="transparent">#00008577</color>
     <color name="background">#0DFFFFFF</color>
     <color name="kolor1">#59DDD6D6</color>
     <color name="kolor2">#ffeaed</color>
     <color name="kolor3">#ffeaed</color>
     <color name="kolor4">#ffeaed</color>
     <color name="iconbackground">#FFC107</color>
-    <color name="wyswietlenie">#B3000000</color>
-    <color name="alert"></color>
+    <color name="displayColor">#B3000000</color>
 </resources>

@@ -1,6 +1,5 @@
 package com.example.pc.pogodne;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,8 +19,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
 public class settings extends AppCompatActivity {
 
@@ -30,10 +27,10 @@ public class settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        final Button plus = (Button) findViewById(R.id.plus);
-        final Button minus = (Button) findViewById(R.id.minus);
-        final TextView czcionka = (TextView) findViewById(R.id.czcionka);
-        final TextView report= (TextView) findViewById(R.id.report);
+        final Button plus = (Button) findViewById(R.id.plusButton);
+        final Button minus = (Button) findViewById(R.id.minusButton);
+        final TextView czcionka = (TextView) findViewById(R.id.textSizeText);
+        final TextView report= (TextView) findViewById(R.id.reportText);
         final Button send = (Button) findViewById(R.id.reportButton);
 
         String filename = "settingsFile";
@@ -178,7 +175,7 @@ public class settings extends AppCompatActivity {
                 builder.setView(R.layout.send_report);
 
                 builder.setPositiveButton(
-                        R.string.wyslij,
+                        R.string.send,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 

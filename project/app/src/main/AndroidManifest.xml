@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".editFavorites"></activity>
-        <activity android:name=".listaUlu" />
+        <activity android:name=".listOfFavorites" />
         <activity
             android:name=".search"
             android:parentActivityName=".MainActivity" />
@@ -21,7 +21,7 @@
             android:name=".settings"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".wyswietlenie"
+            android:name=".display"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
@@ -33,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".lista"
+            android:name=".list"
             android:parentActivityName=".MainActivity" />
     </application>
 

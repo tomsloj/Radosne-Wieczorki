@@ -5,9 +5,9 @@
 
 
     <item
-        android:id="@+id/ulubione"
+        android:id="@+id/favoritesButton"
         android:icon="@drawable/star"
-        android:title="@string/uluAdd"
+        android:title="@string/favoritesAdd"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"

@@ -18,20 +18,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:text="@string/usun"
+        android:text="@string/delete"
         android:textSize="13sp" />
 
     <CheckBox
-        android:id="@+id/deletebox"
-        style="@style/TekstStyle"
+        android:id="@+id/deleteBox"
+        style="@style/TextStyle"
         android:layout_marginTop="8dp"
         android:layout_marginStart="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/trybusuwania" />
+        android:text="@string/deleteMode" />
 
     <ListView
-        android:id="@+id/listaedytowalna"
+        android:id="@+id/editableList"
         android:layout_width="match_parent"
         android:layout_marginTop="8dp"
         android:layout_height="match_parent" />

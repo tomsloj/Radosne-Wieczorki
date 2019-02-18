@@ -42,8 +42,8 @@ public class editFavorites extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         final Button usuncalosc = (Button) findViewById(R.id.deleteAll);
-        final CheckBox usunjeden = (CheckBox) findViewById(R.id.deletebox);
-        final ListView listView = (ListView) findViewById(R.id.listaedytowalna);
+        final CheckBox usunjeden = (CheckBox) findViewById(R.id.deleteBox);
+        final ListView listView = (ListView) findViewById(R.id.editableList);
 
 
         String filename = "settingsFile";
@@ -70,7 +70,7 @@ public class editFavorites extends AppCompatActivity {
         final File ulufile = new File(editFavorites.this.getFilesDir(), "ulu");
 
         final String nazwaUlu = getIntent().getStringExtra("ulu");
-        ObslugaPliku op = new ObslugaPliku();
+        FileHelper op = new FileHelper();
         lista = op.tytułyWulu(ulufile, nazwaUlu);
         myToolbar.setTitle(nazwaUlu);
 
@@ -95,7 +95,7 @@ public class editFavorites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(usunjeden.isChecked())
                 {
-                    ObslugaPliku op = new ObslugaPliku();
+                    FileHelper op = new FileHelper();
                     if(op.usunzulu(ulufile,nazwaUlu, arrayList.get(i)) == 0)
                     {
                         Toast.makeText(editFavorites.this, "Error27".toString(),Toast.LENGTH_LONG).show();
@@ -104,7 +104,7 @@ public class editFavorites extends AppCompatActivity {
                     startActivity(getIntent());
                 }
                 else {
-                    Intent otworz_zabawe = new Intent(getApplicationContext(), wyswietlenie.class);
+                    Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
                     otworz_zabawe.putExtra("zabawa", arrayList.get(i).toString());
                     startActivity(otworz_zabawe);
                 }
@@ -114,7 +114,7 @@ public class editFavorites extends AppCompatActivity {
         usuncalosc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ObslugaPliku op = new ObslugaPliku();
+                FileHelper op = new FileHelper();
                 Toast.makeText(editFavorites.this, nazwaUlu.toString(),Toast.LENGTH_LONG).show();
                 if(op.usunlisteulu(ulufile, nazwaUlu) == 0)
                 {
@@ -143,8 +143,8 @@ public class editFavorites extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
         final Button usuncalosc = (Button) findViewById(R.id.deleteAll);
-        final CheckBox usunjeden = (CheckBox) findViewById(R.id.deletebox);
-        final ListView listView = (ListView) findViewById(R.id.listaedytowalna);
+        final CheckBox usunjeden = (CheckBox) findViewById(R.id.deleteBox);
+        final ListView listView = (ListView) findViewById(R.id.editableList);
 
 
         String filename = "settingsFile";
@@ -171,7 +171,7 @@ public class editFavorites extends AppCompatActivity {
         final File ulufile = new File(editFavorites.this.getFilesDir(), "ulu");
 
         final String nazwaUlu = getIntent().getStringExtra("ulu");
-        ObslugaPliku op = new ObslugaPliku();
+        FileHelper op = new FileHelper();
         lista = op.tytułyWulu(ulufile, nazwaUlu);
         myToolbar.setTitle(nazwaUlu);
 
@@ -196,7 +196,7 @@ public class editFavorites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(usunjeden.isChecked())
                 {
-                    ObslugaPliku op = new ObslugaPliku();
+                    FileHelper op = new FileHelper();
                     if(op.usunzulu(ulufile,nazwaUlu, arrayList.get(i)) == 0)
                     {
                         Toast.makeText(editFavorites.this, "Error27".toString(),Toast.LENGTH_LONG).show();
@@ -205,7 +205,7 @@ public class editFavorites extends AppCompatActivity {
                     startActivity(getIntent());
                 }
                 else {
-                    Intent otworz_zabawe = new Intent(getApplicationContext(), wyswietlenie.class);
+                    Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
                     otworz_zabawe.putExtra("zabawa", arrayList.get(i).toString());
                     startActivity(otworz_zabawe);
                 }
@@ -215,7 +215,7 @@ public class editFavorites extends AppCompatActivity {
         usuncalosc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ObslugaPliku op = new ObslugaPliku();
+                FileHelper op = new FileHelper();
                 Toast.makeText(editFavorites.this, nazwaUlu.toString(),Toast.LENGTH_LONG).show();
                 if(op.usunlisteulu(ulufile, nazwaUlu) == 0)
                 {

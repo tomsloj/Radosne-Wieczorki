@@ -5,22 +5,22 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/textView2"
-        style="@style/TytulMenu"
-        android:textColor="@color/colorPrimary"
+        android:id="@+id/favoritesDialogTitle"
+        style="@style/TitleTextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/uluAdd"
         android:layout_marginStart="32dp"
         android:layout_marginTop="18dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:text="@string/favoritesAdd"
+        android:textColor="@color/colorPrimary" />
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:background="@color/colorPrimary" />
 
     <EditText
-        android:id="@+id/nazwaUlu"
+        android:id="@+id/nameOfFavorite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
@@ -32,23 +32,23 @@
         android:inputType="text" />
 
     <Button
-        android:id="@+id/stworzUlu"
+        android:id="@+id/createFavorite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/noweulu" />
+        android:text="@string/newFavorites" />
 
     <TextView
-        android:id="@+id/textUlu"
-        style="@style/TekstStyle"
+        android:id="@+id/textChooseExistingFavorite"
+        style="@style/TextStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/wybierzulu"
+        android:text="@string/selectFavorite"
         android:textAlignment="center" />
 
     <ListView
-        android:id="@+id/listaUlu"
+        android:id="@+id/dialogLisOfFavorites"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="8dp" />

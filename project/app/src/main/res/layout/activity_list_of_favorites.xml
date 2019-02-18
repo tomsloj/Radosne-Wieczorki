@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".listaUlu">
+    tools:context=".listOfFavorites">
 
     <include
         layout="@layout/main_bar"
@@ -12,7 +12,7 @@
         />
 
     <ListView
-        android:id="@+id/listaUlubionych"
+        android:id="@+id/listOfFavorites"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/main_bar"

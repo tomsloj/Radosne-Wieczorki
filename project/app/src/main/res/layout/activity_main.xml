@@ -27,8 +27,8 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/przycisk_lista"
-                style="@style/DużyPrzycisk"
+                android:id="@+id/wholeListButton"
+                style="@style/BigButton"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginStart="30dp"
@@ -43,94 +43,94 @@
                 app:layout_constraintTop_toBottomOf="@+id/main_bar" />
 
             <Button
-                android:id="@+id/tańce"
-                style="@style/MałyPrzycisk"
+                android:id="@+id/dancesButton"
+                style="@style/SmallButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="46dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="46dp"
                 android:background="@drawable/roundbutton"
-                android:text="@string/tańce"
+                android:text="@string/dances"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/przycisk_lista" />
+                app:layout_constraintTop_toBottomOf="@+id/wholeListButton" />
 
             <Button
-                android:id="@+id/rywalizacja"
-                style="@style/MałyPrzycisk"
+                android:id="@+id/competitionsButton"
+                style="@style/SmallButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="46dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="46dp"
                 android:background="@drawable/roundbutton"
-                android:text="@string/rywalizacja"
+                android:text="@string/competition"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/integracyjne" />
+                app:layout_constraintTop_toBottomOf="@+id/integralsButton" />
 
             <Button
-                android:id="@+id/integracyjne"
-                style="@style/MałyPrzycisk"
+                android:id="@+id/integralsButton"
+                style="@style/SmallButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="46dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="46dp"
                 android:background="@drawable/roundbutton"
-                android:text="@string/integracyjne"
+                android:text="@string/integration"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tańce" />
+                app:layout_constraintTop_toBottomOf="@+id/dancesButton" />
 
             <Button
-                android:id="@+id/piosenki"
-                style="@style/MałyPrzycisk"
+                android:id="@+id/singsButton"
+                style="@style/SmallButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="46dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="46dp"
                 android:background="@drawable/roundbutton"
-                android:text="@string/piosenki"
+                android:text="@string/sings"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rywalizacja" />
+                app:layout_constraintTop_toBottomOf="@+id/competitionsButton" />
 
             <Button
-                android:id="@+id/inne"
-                style="@style/MałyPrzycisk"
+                android:id="@+id/othersButton"
+                style="@style/SmallButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="46dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="46dp"
                 android:background="@drawable/roundbutton"
-                android:text="@string/inne"
+                android:text="@string/other"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/piosenki" />
+                app:layout_constraintTop_toBottomOf="@+id/singsButton" />
 
             <Button
-                android:id="@+id/ulubione"
-                style="@style/MałyPrzycisk"
+                android:id="@+id/favoritesButton"
+                style="@style/SmallButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="46dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="46dp"
                 android:background="@drawable/roundbutton"
-                android:text="@string/ulubione"
+                android:text="@string/favorites"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/inne" />
+                app:layout_constraintTop_toBottomOf="@+id/othersButton" />
 
             <Button
-                android:id="@+id/settings_button"
-                style="@style/MałyPrzycisk"
+                android:id="@+id/settingsButton"
+                style="@style/SmallButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="46dp"
@@ -141,26 +141,26 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/find_button" />
+                app:layout_constraintTop_toBottomOf="@+id/findButton" />
 
             <Button
-                android:id="@+id/find_button"
-                style="@style/MałyPrzycisk"
+                android:id="@+id/findButton"
+                style="@style/SmallButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="46dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="46dp"
                 android:background="@drawable/roundbutton"
-                android:text="@string/szukaj"
+                android:text="@string/search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ulubione" />
+                app:layout_constraintTop_toBottomOf="@+id/favoritesButton" />
 
             <Button
-                android:id="@+id/zabawanadzis"
-                style="@style/MałyPrzycisk"
+                android:id="@+id/gameOfTheDayButton"
+                style="@style/SmallButton"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="46dp"
@@ -168,7 +168,7 @@
                 android:layout_marginEnd="46dp"
                 android:background="@drawable/roundbutton"
                 android:layout_marginBottom="14dp"
-                android:text="@string/zabawanadzis"
+                android:text="@string/gameOfTheDay"
                 app:layout_constraintHorizontal_bias="1.0" />
         </LinearLayout>
     </ScrollView>

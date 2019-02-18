@@ -1,7 +1,6 @@
 package com.example.pc.pogodne;
 
 import android.content.Intent;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +22,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.zip.Inflater;
 
 public class search extends AppCompatActivity {
 
@@ -65,11 +63,11 @@ public class search extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
 
-        final Button przyciskSzukaj = (Button) findViewById(R.id.przycisk);
-        final CheckBox szukajTytuły = (CheckBox) findViewById(R.id.tytułyCheckbox);
-        final CheckBox szukajTekst = (CheckBox) findViewById(R.id.tekstCheckbox);
-        final EditText editText = (EditText) findViewById(R.id.poleWyszukiwania);
-        final ListView listView = (ListView)findViewById(R.id.listView);
+        final Button przyciskSzukaj = (Button) findViewById(R.id.searchButton);
+        final CheckBox szukajTytuły = (CheckBox) findViewById(R.id.titlesCheckbox);
+        final CheckBox szukajTekst = (CheckBox) findViewById(R.id.textsCheckbox);
+        final EditText editText = (EditText) findViewById(R.id.searchSpace);
+        final ListView listView = (ListView)findViewById(R.id.lisOfFound);
         final TextView textView = (TextView) findViewById(R.id.textView);
 
         szukajTekst.setTextSize(tekstSize);
@@ -97,7 +95,7 @@ public class search extends AppCompatActivity {
                 {
                     try {
                         InputStream stream = getAssets().open(fileName);
-                        ObslugaPliku op = new ObslugaPliku();
+                        FileHelper op = new FileHelper();
 
                         ArrayList<String> lista = op.szukaj(stream, toFind, box1, box2);
 
@@ -127,7 +125,7 @@ public class search extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent otworz_zabawe = new Intent(getApplicationContext(), wyswietlenie.class);
+                Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
                 otworz_zabawe.putExtra("zabawa", listView.getItemAtPosition(i).toString());
                 startActivity(otworz_zabawe);
             }
@@ -172,11 +170,11 @@ public class search extends AppCompatActivity {
         actionBar.setDisplayShowHomeEnabled(true);
 
 
-        final Button przyciskSzukaj = (Button) findViewById(R.id.przycisk);
-        final CheckBox szukajTytuły = (CheckBox) findViewById(R.id.tytułyCheckbox);
-        final CheckBox szukajTekst = (CheckBox) findViewById(R.id.tekstCheckbox);
-        final EditText editText = (EditText) findViewById(R.id.poleWyszukiwania);
-        final ListView listView = (ListView)findViewById(R.id.listView);
+        final Button przyciskSzukaj = (Button) findViewById(R.id.searchButton);
+        final CheckBox szukajTytuły = (CheckBox) findViewById(R.id.titlesCheckbox);
+        final CheckBox szukajTekst = (CheckBox) findViewById(R.id.textsCheckbox);
+        final EditText editText = (EditText) findViewById(R.id.searchSpace);
+        final ListView listView = (ListView)findViewById(R.id.lisOfFound);
         final TextView textView = (TextView) findViewById(R.id.textView);
 
         szukajTekst.setTextSize(tekstSize);
@@ -204,7 +202,7 @@ public class search extends AppCompatActivity {
                 {
                     try {
                         InputStream stream = getAssets().open(fileName);
-                        ObslugaPliku op = new ObslugaPliku();
+                        FileHelper op = new FileHelper();
 
                         ArrayList<String> lista = op.szukaj(stream, toFind, box1, box2);
 
@@ -234,7 +232,7 @@ public class search extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent otworz_zabawe = new Intent(getApplicationContext(), wyswietlenie.class);
+                Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
                 otworz_zabawe.putExtra("zabawa", listView.getItemAtPosition(i).toString());
                 startActivity(otworz_zabawe);
             }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".wyswietlenie">
+    tools:context=".display">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -18,8 +18,8 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/tytuł"
-                style="@style/TytulMenu"
+                android:id="@+id/titleOfGame"
+                style="@style/TitleTextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -30,13 +30,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_bar" />
 
+            <Button
+                android:id="@+id/hiddenButton"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/transparent"
+             />
+
             <TextView
-                android:id="@+id/text"
-                style="@style/TekstStyle"
+                android:id="@+id/textOfGame"
+                style="@style/TextStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="8dp"
                 android:textIsSelectable="true"
                 android:autoLink="web"
@@ -45,7 +52,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tytuł" />
+                app:layout_constraintTop_toBottomOf="@+id/titleOfGame" />
         </LinearLayout>
     </ScrollView>
 
