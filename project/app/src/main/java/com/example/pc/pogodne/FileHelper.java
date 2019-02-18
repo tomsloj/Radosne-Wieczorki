@@ -1,7 +1,5 @@
 package com.example.pc.pogodne;
 
-import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class FileHelper {
-    public ArrayList<String> tytułyWkategorii(InputStream stream, String kategoria)
+    public static ArrayList<String> titlesInCategory(InputStream stream, String category)
     {
-        ArrayList<String> lista = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
 
         try
         {
@@ -21,40 +19,39 @@ public class FileHelper {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Character.toString((char)65279), "");
+            String wholeFileText = new String(buffer);
+            wholeFileText = wholeFileText.replace("\t", "");
+            wholeFileText = wholeFileText.replace("\r", "");
+            wholeFileText = wholeFileText.replace(Character.toString((char)65279), "");
 
-            String[] podzial = calyPlik.split("@");
-            for(int i = 0; i < podzial.length; ++i)
+            String[] division = wholeFileText.split("@");
+            for(int i = 0; i < division.length; ++i)
             {
-                String[] podzialna2 = podzial[i].split("%");
+                String[] towPartDivision = division[i].split("%");
 
-                if((podzialna2.length == 2) && (kategoria.equals("all") || kategoria.equals(podzialna2[0])))
+                if((towPartDivision.length == 2) && (category.equals("all") || category.equals(towPartDivision[0])))
                 {
 
-                    String[] nazwaitekst = podzialna2[1].split(">\n");
-                    for(int j = 0; j < nazwaitekst.length; ++j)
+                    String[] titleAndText = towPartDivision[1].split(">\n");
+                    for(int j = 0; j < titleAndText.length; ++j)
                     {
-                        String[] podzialnapiewrsze = nazwaitekst[j].split(">");
-                        lista.add(podzialnapiewrsze[0]);
+                        String[] podzialnapiewrsze = titleAndText[j].split(">");
+                        list.add(podzialnapiewrsze[0]);
                     }
                 }
             }
         }
         catch (IOException ex)
         {
-            //list.add("1111");
         }
 
 
-        return lista;
+        return list;
     }
 
-    public ArrayList<String> tytułyWulu(File file, String nazwaplaylisty)
+    public static ArrayList<String> titlesInFavorite(File file, String nazwaplaylisty)
     {
-        ArrayList<String> lista = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
 
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -62,21 +59,21 @@ public class FileHelper {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Integer.toString(65279), "");
+            String wholeFileText = new String(buffer);
+            wholeFileText = wholeFileText.replace("\t", "");
+            wholeFileText = wholeFileText.replace("\r", "");
+            wholeFileText = wholeFileText.replace(Integer.toString(65279), "");
 
-            String[] podzial = calyPlik.split("@");
-            for(int i = 0; i < podzial.length; ++i)
+            String[] division = wholeFileText.split("@");
+            for(int i = 0; i < division.length; ++i)
             {
-                String[] podzialna2 = podzial[i].split("%");
-                if(podzialna2.length == 2 && nazwaplaylisty.equals(podzialna2[0]))
+                String[] twoPartsDivision = division[i].split("%");
+                if(twoPartsDivision.length == 2 && nazwaplaylisty.equals(twoPartsDivision[0]))
                 {
-                    String[] podzialnapierwsze = podzialna2[1].split(">\n");
-                    for(int j = 0; j < podzialnapierwsze.length; ++j)
+                    String[] theSmalestDivision = twoPartsDivision[1].split(">\n");
+                    for(int j = 0; j < theSmalestDivision.length; ++j)
                     {
-                        lista.add(podzialnapierwsze[j]);
+                        list.add(theSmalestDivision[j]);
                     }
                 }
             }
@@ -84,12 +81,12 @@ public class FileHelper {
         catch (IOException e)
         {
         }
-        return lista;
+        return list;
     }
 
-    public ArrayList<String> listaulu(File file)
+    public static ArrayList<String> listOfFavorites(File file)
     {
-        ArrayList<String> lista = new ArrayList<String>();
+        ArrayList<String> lista = new ArrayList<>();
 
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -97,21 +94,21 @@ public class FileHelper {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Integer.toString(65279), "");
+            String textOfWholeFile = new String(buffer);
+            textOfWholeFile = textOfWholeFile.replace("\t", "");
+            textOfWholeFile = textOfWholeFile.replace("\r", "");
+            textOfWholeFile = textOfWholeFile.replace(Integer.toString(65279), "");
 
-            if(calyPlik.equals(""))
+            if(textOfWholeFile.equals(""))
             {
                 return lista;
             }
 
-            String[] podzial = calyPlik.split("@");
-            for(int i = 0; i < podzial.length; ++i)
+            String[] division = textOfWholeFile.split("@");
+            for(int i = 0; i < division.length; ++i)
             {
-                String[] podzialna2 = podzial[i].split("%");
-                lista.add(podzialna2[0]);
+                String[] twoPartDivision = division[i].split("%");
+                lista.add(twoPartDivision[0]);
             }
         }
         catch (IOException e)
@@ -120,7 +117,7 @@ public class FileHelper {
         return lista;
     }
 
-    public boolean czyistnieje(File file, String nazwaulubionych)
+    public static boolean doExistInFavoriteList(File file, String favoriteList)
     {
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -128,16 +125,16 @@ public class FileHelper {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Integer.toString(65279), "");
+            String textOfWholeFile = new String(buffer);
+            textOfWholeFile = textOfWholeFile.replace("\t", "");
+            textOfWholeFile = textOfWholeFile.replace("\r", "");
+            textOfWholeFile = textOfWholeFile.replace(Integer.toString(65279), "");
 
-            String[] podzial = calyPlik.split("@");
-            for(int i = 0; i < podzial.length; ++i)
+            String[] division = textOfWholeFile.split("@");
+            for(int i = 0; i < division.length; ++i)
             {
-                String[] podzialna2 = podzial[i].split("%");
-                if(podzialna2.length == 2 && nazwaulubionych.equals(podzialna2[0]))
+                String[] twoPartDivision = division[i].split("%");
+                if(twoPartDivision.length == 2 && favoriteList.equals(twoPartDivision[0]))
                 {
                     return true;
                 }
@@ -151,7 +148,7 @@ public class FileHelper {
     //0 jeśli nie udało się dodać
     //1 jeśli już tam było
     //2 jeśli się udało
-    public int dodajdoulu(File file, String nazwaulubionych, String nazwazabawy)
+    public static int addToFavorites(File file, String titleOfFavorite, String gameTitle)
     {
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -159,60 +156,60 @@ public class FileHelper {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Integer.toString(65279), "");
+            String textOfWholeFile = new String(buffer);
+            textOfWholeFile = textOfWholeFile.replace("\t", "");
+            textOfWholeFile = textOfWholeFile.replace("\r", "");
+            textOfWholeFile = textOfWholeFile.replace(Integer.toString(65279), "");
 
-            String dozapisu = "";
+            String toSave = "";
 
-            boolean bylo = false;
-            boolean coszapisane = false;
-            String[] podzial = calyPlik.split("@");
-            for(int i = 0; i < podzial.length; ++i)
+            boolean was = false;
+            boolean anythingWritten = false;
+            String[] division = textOfWholeFile.split("@");
+            for(int i = 0; i < division.length; ++i)
             {
-                String[] podzialna2 = podzial[i].split("%");
-                if(podzialna2.length == 2 && nazwaulubionych.equals(podzialna2[0]))
+                String[] twoPartDivision = division[i].split("%");
+                if(twoPartDivision.length == 2 && titleOfFavorite.equals(twoPartDivision[0]))
                 {
-                    String[] podzialnapierwsze = podzialna2[1].split(">\n");
-                    for(int j = 0; j < podzialnapierwsze.length; ++j)
+                    String[] theSmalestDivision = twoPartDivision[1].split(">\n");
+                    for(int j = 0; j < theSmalestDivision.length; ++j)
                     {
-                        if(podzialnapierwsze[j].equals(nazwazabawy))
+                        if(theSmalestDivision[j].equals(gameTitle))
                         {
-                            bylo = true;
+                            was = true;
                         }
                     }
-                    if(bylo)
+                    if(was)
                     {
                         return 1;
                     }
                     else
                     {
-                        if(coszapisane)
-                            dozapisu = dozapisu + "@" + podzial[i] + ">\n" + nazwazabawy;
+                        if(anythingWritten)
+                            toSave = toSave + "@" + division[i] + ">\n" + gameTitle;
                         else
                         {
-                            coszapisane = true;
-                            dozapisu = podzial[i] + ">\n" + nazwazabawy;
+                            anythingWritten = true;
+                            toSave = division[i] + ">\n" + gameTitle;
                         }
                     }
 
                 }
                 else
                 {
-                    if(coszapisane)
-                        dozapisu = dozapisu + "@" + podzial[i];
+                    if(anythingWritten)
+                        toSave = toSave + "@" + division[i];
                     else
                     {
-                        coszapisane = true;
-                        dozapisu = podzial[i];
+                        anythingWritten = true;
+                        toSave = division[i];
                     }
                 }
             }
 
             try {
                 FileOutputStream fos = new FileOutputStream(file);
-                buffer = dozapisu.getBytes();
+                buffer = toSave.getBytes();
                 fos.write(buffer);
                 fos.close();
                 return 2;
@@ -230,7 +227,7 @@ public class FileHelper {
 
     //false jeśli nie udało się dodać
     //true jeśli się udało
-    public int dodajnowaulu(File file, String nazwaulubionych, String nazwazabawy)
+    public static int createNewFavorite(File file, String titleOfFavorite, String gameTitle)
     {
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -238,17 +235,17 @@ public class FileHelper {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Integer.toString(65279), "");
-            if(!calyPlik.equals(""))
-                calyPlik = calyPlik + "@" + nazwaulubionych + "%" + nazwazabawy;
+            String textOfWholeFile = new String(buffer);
+            textOfWholeFile = textOfWholeFile.replace("\t", "");
+            textOfWholeFile = textOfWholeFile.replace("\r", "");
+            textOfWholeFile = textOfWholeFile.replace(Integer.toString(65279), "");
+            if(!textOfWholeFile.equals(""))
+                textOfWholeFile = textOfWholeFile + "@" + titleOfFavorite + "%" + gameTitle;
             else
-                calyPlik = nazwaulubionych + "%" + nazwazabawy;
+                textOfWholeFile = titleOfFavorite + "%" + gameTitle;
             try {
                 FileOutputStream fos = new FileOutputStream(file);
-                buffer = calyPlik.getBytes();
+                buffer = textOfWholeFile.getBytes();
                 fos.write(buffer);
                 fos.close();
                 return 1;
@@ -260,11 +257,11 @@ public class FileHelper {
         }
         catch (IOException e)
         {
-                String calyPlik = nazwaulubionych + "%" + nazwazabawy;
+                String toSave = titleOfFavorite + "%" + gameTitle;
                 try {
                     FileOutputStream fos = new FileOutputStream(file);
                     byte[] buffer = new byte[10000];
-                    buffer = calyPlik.getBytes();
+                    buffer = toSave.getBytes();
                     fos.write(buffer);
                     fos.close();
                     return 1;
@@ -276,27 +273,27 @@ public class FileHelper {
         }
     }
 
-    public String tekst(InputStream stream, String nazwa)
+    public static String textOfGame(InputStream stream, String game)
     {
-        String tekst = "";
+        String text = "";
         try
         {
             int size = stream.available();
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Integer.toString(65279), "");
-            String[] podzial = calyPlik.split("@\n");
-            for(int i = 0; i < podzial.length; ++i)
+            String textOfWholeFile = new String(buffer);
+            textOfWholeFile = textOfWholeFile.replace("\t", "");
+            textOfWholeFile = textOfWholeFile.replace("\r", "");
+            textOfWholeFile = textOfWholeFile.replace(Integer.toString(65279), "");
+            String[] division = textOfWholeFile.split("@\n");
+            for(int i = 0; i < division.length; ++i)
             {
-                String[] nazkattxt = podzial[i].split(">");
-                if(nazkattxt[0].equals(nazwa))
+                String[] nameAndCategoryAndText = division[i].split(">");
+                if(nameAndCategoryAndText[0].equals(game))
                 {
-                    if(nazkattxt.length > 2 )
-                        return nazkattxt[2];
+                    if(nameAndCategoryAndText.length > 2 )
+                        return nameAndCategoryAndText[2];
                     else
                         return "";
                 }
@@ -306,85 +303,80 @@ public class FileHelper {
         {
             ex.printStackTrace();
         }
-        return tekst;
+        return text;
     }
 
-    public String randzabawa(InputStream stream, int seed)
+    public static String randGame(InputStream stream, int seed)
     {
-        String nazwa = "";
+        String nameOfGame = "";
         try
         {
             int size = stream.available();
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Integer.toString(65279), "");
-            String[] podzial = calyPlik.split("@\n");
+            String textOfWholeFile = new String(buffer);
+            textOfWholeFile = textOfWholeFile.replace("\t", "");
+            textOfWholeFile = textOfWholeFile.replace("\r", "");
+            textOfWholeFile = textOfWholeFile.replace(Integer.toString(65279), "");
+            String[] division = textOfWholeFile.split("@\n");
             Random rand = new Random();
             rand.setSeed(seed);
-            int nr = rand.nextInt();
-            nr = ((nr % podzial.length) + podzial.length)%podzial.length;
-            String[] nazkattxt = podzial[nr].split(">");
-            nazwa = nazkattxt[0];
+            int randNumber = rand.nextInt();
+            randNumber = ((randNumber % division.length) + division.length)%division.length;
+            String[] nameAndCategoryAndText = division[randNumber].split(">");
+            nameOfGame = nameAndCategoryAndText[0];
         }
         catch (IOException ex)
         {
             ex.printStackTrace();
         }
-        return nazwa;
+        return nameOfGame;
     }
 
-    public ArrayList<String> szukaj(InputStream stream, String toFind, boolean title, boolean text)
+    public static ArrayList<String> find(InputStream stream, String toFind, boolean title, boolean text)
     {
-        ArrayList<String> lista = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
         int size = 0;
         try {
             size = stream.available();
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
+            String textOfWholeFile = new String(buffer);
 
-
-            boolean found = false;
-            String calyPlik2 = calyPlik;
-            String toFind2 = toFind;
-
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace("\t", "");
-            String[] podzialorginal = calyPlik.split("@\n");
-            calyPlik = calyPlik.toLowerCase();
+            textOfWholeFile = textOfWholeFile.replace("\r", "");
+            textOfWholeFile = textOfWholeFile.replace("\t", "");
+            String[] originalDivision = textOfWholeFile.split("@\n");
+            textOfWholeFile = textOfWholeFile.toLowerCase();
 
             toFind = toFind.replace("\r", "");
             toFind = toFind.replace("\t", "");
             toFind = toFind.toLowerCase();
-            String[] podzial = calyPlik.split("@\n");
-            for(int i = 0; i < podzial.length; ++i)
+            String[] division = textOfWholeFile.split("@\n");
+            for(int i = 0; i < division.length; ++i)
             {
-                String[] nazkattxt = podzial[i].split(">");
-                String[] nazkattxtorginal = podzialorginal[i].split(">");
-                if(title && nazkattxt.length > 0 && nazkattxt[0].contains(toFind))
+                String[] nameAndCategoryAndText = division[i].split(">");
+                String[] nameAndCategoryAndTextOriginal = originalDivision[i].split(">");
+                if(title && nameAndCategoryAndText.length > 0 && nameAndCategoryAndText[0].contains(toFind))
                 {
-                    lista.add(nazkattxtorginal[0]);
+                    list.add(nameAndCategoryAndTextOriginal[0]);
                 }
                 else
                 {
-                    if(text && nazkattxt.length > 2 && nazkattxt[2].contains(toFind))
+                    if(text && nameAndCategoryAndText.length > 2 && nameAndCategoryAndText[2].contains(toFind))
                     {
-                        lista.add(nazkattxtorginal[0]);
+                        list.add(nameAndCategoryAndTextOriginal[0]);
                     }
                 }
             }
-            return lista;
+            return list;
         } catch (IOException e) {
-            return lista;
+            return list;
         }
     }
 
-    public int usunzulu(File file, String nazwaulubionych, String nazwazabawy)
+    public static int removeFromFavorites(File file, String nameOfFavorite, String nameOfGame)
     {
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -392,47 +384,47 @@ public class FileHelper {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Integer.toString(65279), "");
+            String TextOfWholeFile = new String(buffer);
+            TextOfWholeFile = TextOfWholeFile.replace("\t", "");
+            TextOfWholeFile = TextOfWholeFile.replace("\r", "");
+            TextOfWholeFile = TextOfWholeFile.replace(Integer.toString(65279), "");
 
-            String dozapisu = "";
+            String toSave = "";
 
-            boolean coszapisane = false;
+            boolean sthWritten = false;
 
-            String[] podzial = calyPlik.split("@");
-            for(int i = 0; i < podzial.length; ++i)
+            String[] division = TextOfWholeFile.split("@");
+            for(int i = 0; i < division.length; ++i)
             {
-                String[] podzialna2 = podzial[i].split("%");
-                if(podzialna2.length == 2 && nazwaulubionych.equals(podzialna2[0]))
+                String[] twoPartDivision = division[i].split("%");
+                if(twoPartDivision.length == 2 && nameOfFavorite.equals(twoPartDivision[0]))
                 {
-                    String[] podzialnapierwsze = podzialna2[1].split(">\n");
+                    String[] theSmalestDivision = twoPartDivision[1].split(">\n");
 
 
-                    if(coszapisane)
-                        dozapisu = dozapisu + "@" + podzialna2[0] + "%";
+                    if(sthWritten)
+                        toSave = toSave + "@" + twoPartDivision[0] + "%";
                     else
                     {
-                        coszapisane = true;
-                        dozapisu = podzialna2[0] + "%";
+                        sthWritten = true;
+                        toSave = twoPartDivision[0] + "%";
                     }
 
 
-                    boolean jedenwstawiony = false;
+                    boolean firstWritten = false;
 
-                    for(int j = 0; j < podzialnapierwsze.length; ++j)
+                    for(int j = 0; j < theSmalestDivision.length; ++j)
                     {
-                        if(!podzialnapierwsze[j].equals(nazwazabawy))
+                        if(!theSmalestDivision[j].equals(nameOfGame))
                         {
-                            if(jedenwstawiony)
+                            if(firstWritten)
                             {
-                                dozapisu = dozapisu + ">\n" + podzialnapierwsze[j];
+                                toSave = toSave + ">\n" + theSmalestDivision[j];
                             }
                             else
                             {
-                                jedenwstawiony = true;
-                                dozapisu = dozapisu + podzialnapierwsze[j];
+                                firstWritten = true;
+                                toSave = toSave + theSmalestDivision[j];
                             }
 
                         }
@@ -441,18 +433,18 @@ public class FileHelper {
                 }
                 else
                 {
-                    if(coszapisane)
-                        dozapisu = dozapisu + "@" + podzial[i];
+                    if(sthWritten)
+                        toSave = toSave + "@" + division[i];
                     else
                     {
-                        coszapisane = true;
-                        dozapisu = podzial[i];
+                        sthWritten = true;
+                        toSave = division[i];
                     }
                 }
             }
             try {
                 FileOutputStream fos = new FileOutputStream(file);
-                buffer = dozapisu.getBytes();
+                buffer = toSave.getBytes();
                 fos.write(buffer);
                 fos.close();
                 return 1;
@@ -468,7 +460,7 @@ public class FileHelper {
         }
     }
 
-    public int usunlisteulu(File file, String nazwaulubionych)
+    public static int removeFavorites(File file, String nameOfFavorites)
     {
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -476,39 +468,37 @@ public class FileHelper {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String calyPlik = new String(buffer);
-            calyPlik = calyPlik.replace("\t", "");
-            calyPlik = calyPlik.replace("\r", "");
-            calyPlik = calyPlik.replace(Integer.toString(65279), "");
+            String textOfWholeFile = new String(buffer);
+            textOfWholeFile = textOfWholeFile.replace("\t", "");
+            textOfWholeFile = textOfWholeFile.replace("\r", "");
+            textOfWholeFile = textOfWholeFile.replace(Integer.toString(65279), "");
 
-            String dozapisu = "";
+            String toSave = "";
 
-            boolean coszapisane = false;
+            boolean sthWritten = false;
 
-            String[] podzial = calyPlik.split("@");
-            for(int i = 0; i < podzial.length; ++i)
+            String[] division = textOfWholeFile.split("@");
+            for(int i = 0; i < division.length; ++i)
             {
-                String[] podzialna2 = podzial[i].split("%");
-                //dozapisu = dozapisu + "@" + podzialna2[0] + "%";
-                //dozapisu = dozapisu + "\n" + podzialna2[0] + "----\n";
-                if(podzialna2.length != 0 && nazwaulubionych.equals(podzialna2[0]))
+                String[] twoPartDivision = division[i].split("%");
+                if(twoPartDivision.length != 0 && nameOfFavorites.equals(twoPartDivision[0]))
                 {
-                    //dozapisu = dozapisu + ")";
+
                 }
                 else
                 {
-                    if(coszapisane)
-                        dozapisu = dozapisu + "@" + podzial[i];
+                    if(sthWritten)
+                        toSave = toSave + "@" + division[i];
                     else
                     {
-                        coszapisane = true;
-                        dozapisu = podzial[i];
+                        sthWritten = true;
+                        toSave = division[i];
                     }
                 }
             }
             try {
                 FileOutputStream fos = new FileOutputStream(file);
-                buffer = dozapisu.getBytes();
+                buffer = toSave.getBytes();
                 fos.write(buffer);
                 fos.close();
                 return 1;
@@ -524,23 +514,23 @@ public class FileHelper {
         }
     }
 
-    public String calyplik(File file)
+    public static String wholeFile(File file)
     {
-        String calyPlik = "";
+        String wholeFile = "";
         try {
             FileInputStream stream = new FileInputStream(file);
             int size = stream.available();
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            calyPlik = new String(buffer);
+            wholeFile = new String(buffer);
         }
         catch (Exception e)
         {
 
         }
 
-        return calyPlik;
+        return wholeFile;
     }
 }
 

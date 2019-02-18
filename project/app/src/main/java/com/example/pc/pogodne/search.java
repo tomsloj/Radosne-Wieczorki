@@ -95,9 +95,8 @@ public class search extends AppCompatActivity {
                 {
                     try {
                         InputStream stream = getAssets().open(fileName);
-                        FileHelper op = new FileHelper();
 
-                        ArrayList<String> list = op.szukaj(stream, toFind, box1, box2);
+                        ArrayList<String> list = FileHelper.find(stream, toFind, box1, box2);
 
                         if(!list.isEmpty())
                         {
@@ -202,19 +201,18 @@ public class search extends AppCompatActivity {
                 {
                     try {
                         InputStream stream = getAssets().open(fileName);
-                        FileHelper op = new FileHelper();
 
-                        ArrayList<String> lista = op.szukaj(stream, toFind, box1, box2);
+                        ArrayList<String> list = FileHelper.find(stream, toFind, box1, box2);
 
-                        if(!lista.isEmpty())
+                        if(!list.isEmpty())
                         {
-                            ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, lista);
+                            ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
                             listOfFound.setAdapter(arrayAdapter);
                             textNoFavorites.setText("");
                         }
                         else
                         {
-                            ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, lista);
+                            ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
                             listOfFound.setAdapter(arrayAdapter);
                             textNoFavorites.setText(R.string.noFound);
                         }

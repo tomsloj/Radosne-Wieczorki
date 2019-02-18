@@ -145,12 +145,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent openGameOfTheDay = new Intent(getApplicationContext(), display.class);
                 String gameName = null;
                 int seed = Calendar.getInstance().get(Calendar.YEAR)*366+Calendar.getInstance().get(Calendar.MONTH)*31+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-                FileHelper op = new FileHelper();
                     String fileName = "nazwy.txt";
 
                     try {
                         InputStream stream = getAssets().open(fileName);
-                        gameName = op.randzabawa(stream, seed);
+                        gameName = FileHelper.randGame(stream, seed);
                     } catch (IOException ex) {
                         Toast.makeText(MainActivity.this, "Error36", Toast.LENGTH_SHORT).show();
                     }

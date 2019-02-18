@@ -91,8 +91,7 @@ public class display extends AppCompatActivity {
             String textFromFile;
             nazwaZabawy.setText(zabawa);
 
-            FileHelper op = new FileHelper();
-            textFromFile = op.tekst(stream, zabawa);
+            textFromFile = FileHelper.textOfGame(stream, zabawa);
             text.setText(textFromFile);
         } catch (IOException ex) {
             Toast.makeText(this, "Error10", Toast.LENGTH_SHORT).show();
@@ -149,8 +148,7 @@ public class display extends AppCompatActivity {
                 final File ulufile = new File(display.this.getFilesDir(), "ulu");
                 final File tmpfile = new File(display.this.getFilesDir(), "tmpfile");
 
-                final FileHelper op = new FileHelper();
-                final ArrayList<String> lista = op.listaulu(ulufile);
+                final ArrayList<String> lista = FileHelper.listOfFavorites(ulufile);
                 final ArrayAdapter arrayAdapter = new ArrayAdapter<>(display.this,android.R.layout.simple_list_item_1, lista);
 
                 AlertDialog dialog = builder.create();
@@ -195,18 +193,18 @@ public class display extends AppCompatActivity {
 
                                     }
 
-                                    if(op.czyistnieje(ulufile, nazwaulu))
+                                    if(FileHelper.doExistInFavoriteList(ulufile, nazwaulu))
                                     {
                                         Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
                                     }
                                     else {
-                                        if (op.dodajnowaulu(ulufile,nazwaulu, zabawa) == 1) {
+                                        if (FileHelper.createNewFavorite(ulufile,nazwaulu, zabawa) == 1) {
                                             Toast.makeText(display.this, "zabawa została zapisana do nowopowstałej listy", Toast.LENGTH_SHORT).show();
                                             arrayAdapter.add(nazwaulu);
                                         }
                                             else
                                         {
-                                            Toast.makeText(display.this, Integer.toString(op.dodajnowaulu(ulufile,nazwaulu, zabawa)),Toast.LENGTH_LONG).show();
+                                            Toast.makeText(display.this, Integer.toString(FileHelper.createNewFavorite(ulufile,nazwaulu, zabawa)),Toast.LENGTH_LONG).show();
                                         }
                                     }
                             }
@@ -236,7 +234,7 @@ public class display extends AppCompatActivity {
                         {
                             Toast.makeText(display.this, "Error23",Toast.LENGTH_LONG).show();
                         }
-                        int tmp = op.dodajdoulu(ulufile, nazwaulu, zabawa);
+                        int tmp = FileHelper.addToFavorites(ulufile, nazwaulu, zabawa);
                         if(tmp == 0)
                         {
                             Toast.makeText(display.this, "Error24",Toast.LENGTH_LONG).show();
@@ -323,8 +321,7 @@ public class display extends AppCompatActivity {
             String textFromFile;
             nazwaZabawy.setText(zabawa);
 
-            FileHelper op = new FileHelper();
-            textFromFile = op.tekst(stream, zabawa);
+            textFromFile = FileHelper.textOfGame(stream, zabawa);
             text.setText(textFromFile);
         } catch (IOException ex) {
             Toast.makeText(this, "Error10", Toast.LENGTH_SHORT).show();

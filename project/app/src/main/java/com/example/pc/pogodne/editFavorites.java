@@ -72,8 +72,7 @@ public class editFavorites extends AppCompatActivity {
         final File favoritesFile = new File(editFavorites.this.getFilesDir(), "ulu");
 
         final String favoriteName = getIntent().getStringExtra("ulu");
-        FileHelper op = new FileHelper();
-        list = op.tytułyWulu(favoritesFile, favoriteName);
+        list = FileHelper.titlesInFavorite(favoritesFile, favoriteName);
         myToolbar.setTitle(favoriteName);
 
         final ArrayList<String> arrayList= list;
@@ -97,8 +96,7 @@ public class editFavorites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(usunjeden.isChecked())
                 {
-                    FileHelper op = new FileHelper();
-                    if(op.usunzulu(favoritesFile,favoriteName, arrayList.get(i)) == 0)
+                    if(FileHelper.removeFromFavorites(favoritesFile,favoriteName, arrayList.get(i)) == 0)
                     {
                         Toast.makeText(editFavorites.this, "Error27",Toast.LENGTH_LONG).show();
                     }
@@ -116,9 +114,8 @@ public class editFavorites extends AppCompatActivity {
         usuncalosc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FileHelper op = new FileHelper();
                 Toast.makeText(editFavorites.this, favoriteName,Toast.LENGTH_LONG).show();
-                if(op.usunlisteulu(favoritesFile, favoriteName) == 0)
+                if(FileHelper.removeFavorites(favoritesFile, favoriteName) == 0)
                 {
                     Toast.makeText(editFavorites.this, "Error28", Toast.LENGTH_LONG).show();
                 }
@@ -173,8 +170,7 @@ public class editFavorites extends AppCompatActivity {
         final File favoriteFile = new File(editFavorites.this.getFilesDir(), "ulu");
 
         final String nameOfFavorite = getIntent().getStringExtra("ulu");
-        FileHelper op = new FileHelper();
-        list = op.tytułyWulu(favoriteFile, nameOfFavorite);
+        list = FileHelper.titlesInFavorite(favoriteFile, nameOfFavorite);
         myToolbar.setTitle(nameOfFavorite);
 
         final ArrayList<String> arrayList= list;
@@ -198,8 +194,7 @@ public class editFavorites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 if(deleteOne.isChecked())
                 {
-                    FileHelper op = new FileHelper();
-                    if(op.usunzulu(favoriteFile,nameOfFavorite, arrayList.get(i)) == 0)
+                    if(FileHelper.removeFromFavorites(favoriteFile,nameOfFavorite, arrayList.get(i)) == 0)
                     {
                         Toast.makeText(editFavorites.this, "Error27", Toast.LENGTH_LONG).show();
                     }
@@ -217,9 +212,8 @@ public class editFavorites extends AppCompatActivity {
         deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FileHelper op = new FileHelper();
                 Toast.makeText(editFavorites.this, nameOfFavorite,Toast.LENGTH_LONG).show();
-                if(op.usunlisteulu(favoriteFile, nameOfFavorite) == 0)
+                if(FileHelper.removeFavorites(favoriteFile, nameOfFavorite) == 0)
                 {
                     Toast.makeText(editFavorites.this, "Error28",Toast.LENGTH_LONG).show();
                 }

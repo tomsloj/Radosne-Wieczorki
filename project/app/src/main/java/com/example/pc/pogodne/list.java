@@ -78,8 +78,7 @@ public class list extends AppCompatActivity {
 
         try {
             InputStream stream = getAssets().open(fileBase);
-            FileHelper op = new FileHelper();
-            list = op.tytułyWkategorii(stream, category);
+            list = FileHelper.titlesInCategory(stream, category);
 
         } catch (IOException ex) {
             Toast.makeText(this, "Error6", Toast.LENGTH_SHORT).show();
@@ -143,8 +142,7 @@ public class list extends AppCompatActivity {
 
         try {
             InputStream stream = getAssets().open(fileName);
-            FileHelper op = new FileHelper();
-            list = op.tytułyWkategorii(stream, category);
+            list = FileHelper.titlesInCategory(stream, category);
             //Toast.makeText(list.this, Integer.toString(list.size()),Toast.LENGTH_LONG).show();
 
         } catch (IOException ex) {

@@ -61,9 +61,8 @@ public class listOfFavorites extends AppCompatActivity {
 
         final ListView listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
         final File favoritesFile = new File(listOfFavorites.this.getFilesDir(), "ulu");
-        final FileHelper op = new FileHelper();
 
-        ArrayList<String> listFavorites = op.listaulu(favoritesFile);
+        ArrayList<String> listFavorites = FileHelper.listOfFavorites(favoritesFile);
 
         final ArrayList<String> list = listFavorites;
 
@@ -136,10 +135,9 @@ public class listOfFavorites extends AppCompatActivity {
 
         final ListView listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
         final File favoritesFile = new File(listOfFavorites.this.getFilesDir(), "ulu");
-        final FileHelper op = new FileHelper();
 
-        ArrayList<String> listFavorites = op.listaulu(favoritesFile);
-        //lista1.add(op.calyplik(ulufile));
+        ArrayList<String> listFavorites = FileHelper.listOfFavorites(favoritesFile);
+
         final ArrayList<String> list = listFavorites;
 
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, list)
