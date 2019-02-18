@@ -22,12 +22,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static com.example.pc.pogodne.R.layout.activity_edit_favorites;
+
 public class editFavorites extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_favorites);
+        setContentView(activity_edit_favorites);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         myToolbar.setTitle("Ulubione");
@@ -36,10 +38,10 @@ public class editFavorites extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         // Enable the Up button
-        actionBar.setHomeButtonEnabled(true);
+        //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        actionBar.setDisplayShowHomeEnabled(true);
+        //actionBar.setDisplayShowHomeEnabled(true);
 
         final Button usuncalosc = (Button) findViewById(R.id.deleteAll);
         final CheckBox usunjeden = (CheckBox) findViewById(R.id.deleteBox);
@@ -48,7 +50,7 @@ public class editFavorites extends AppCompatActivity {
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
-        int tekstSize = 15;
+        int textSize = 15;
 
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -56,25 +58,25 @@ public class editFavorites extends AppCompatActivity {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String plik = new String(buffer);
-            tekstSize = Integer.parseInt(plik);
+            String textFromFile = new String(buffer);
+            textSize = Integer.parseInt(textFromFile);
         }
         catch (IOException e)
         {
-            Toast.makeText(editFavorites.this, "Error5".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(editFavorites.this, "Error5",Toast.LENGTH_LONG).show();
         }
-        final int tSize = tekstSize;
+        final int tSize = textSize;
 
-        ArrayList<String> lista= new ArrayList<>();
+        ArrayList<String> list= new ArrayList<>();
 
-        final File ulufile = new File(editFavorites.this.getFilesDir(), "ulu");
+        final File favoritesFile = new File(editFavorites.this.getFilesDir(), "ulu");
 
-        final String nazwaUlu = getIntent().getStringExtra("ulu");
+        final String favoriteName = getIntent().getStringExtra("ulu");
         FileHelper op = new FileHelper();
-        lista = op.tytułyWulu(ulufile, nazwaUlu);
-        myToolbar.setTitle(nazwaUlu);
+        list = op.tytułyWulu(favoritesFile, favoriteName);
+        myToolbar.setTitle(favoriteName);
 
-        final ArrayList<String> arrayList= lista;
+        final ArrayList<String> arrayList= list;
         //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(editFavorites.this,android.R.layout.simple_list_item_1, arrayList)
         {
@@ -96,17 +98,17 @@ public class editFavorites extends AppCompatActivity {
                 if(usunjeden.isChecked())
                 {
                     FileHelper op = new FileHelper();
-                    if(op.usunzulu(ulufile,nazwaUlu, arrayList.get(i)) == 0)
+                    if(op.usunzulu(favoritesFile,favoriteName, arrayList.get(i)) == 0)
                     {
-                        Toast.makeText(editFavorites.this, "Error27".toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(editFavorites.this, "Error27",Toast.LENGTH_LONG).show();
                     }
                     finish();
                     startActivity(getIntent());
                 }
                 else {
-                    Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
-                    otworz_zabawe.putExtra("zabawa", arrayList.get(i).toString());
-                    startActivity(otworz_zabawe);
+                    Intent openGame = new Intent(getApplicationContext(), display.class);
+                    openGame.putExtra("zabawa", arrayList.get(i));
+                    startActivity(openGame);
                 }
             }
         });
@@ -115,10 +117,10 @@ public class editFavorites extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FileHelper op = new FileHelper();
-                Toast.makeText(editFavorites.this, nazwaUlu.toString(),Toast.LENGTH_LONG).show();
-                if(op.usunlisteulu(ulufile, nazwaUlu) == 0)
+                Toast.makeText(editFavorites.this, favoriteName,Toast.LENGTH_LONG).show();
+                if(op.usunlisteulu(favoritesFile, favoriteName) == 0)
                 {
-                    Toast.makeText(editFavorites.this, "Error28".toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(editFavorites.this, "Error28", Toast.LENGTH_LONG).show();
                 }
                 finish();
             }
@@ -128,7 +130,7 @@ public class editFavorites extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        setContentView(R.layout.activity_edit_favorites);
+        setContentView(activity_edit_favorites);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         myToolbar.setTitle("Ulubione");
@@ -137,19 +139,19 @@ public class editFavorites extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         // Enable the Up button
-        actionBar.setHomeButtonEnabled(true);
+        //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        actionBar.setDisplayShowHomeEnabled(true);
+        //actionBar.setDisplayShowHomeEnabled(true);
 
-        final Button usuncalosc = (Button) findViewById(R.id.deleteAll);
-        final CheckBox usunjeden = (CheckBox) findViewById(R.id.deleteBox);
+        final Button deleteAll = (Button) findViewById(R.id.deleteAll);
+        final CheckBox deleteOne = (CheckBox) findViewById(R.id.deleteBox);
         final ListView listView = (ListView) findViewById(R.id.editableList);
 
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
-        int tekstSize = 15;
+        int textSize = 15;
 
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -157,25 +159,25 @@ public class editFavorites extends AppCompatActivity {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String plik = new String(buffer);
-            tekstSize = Integer.parseInt(plik);
+            String textFromFile = new String(buffer);
+            textSize = Integer.parseInt(textFromFile);
         }
         catch (IOException e)
         {
-            Toast.makeText(editFavorites.this, "Error5".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(editFavorites.this, "Error5",Toast.LENGTH_LONG).show();
         }
-        final int tSize = tekstSize;
+        final int tSize = textSize;
 
-        ArrayList<String> lista= new ArrayList<>();
+        ArrayList<String> list= new ArrayList<>();
 
-        final File ulufile = new File(editFavorites.this.getFilesDir(), "ulu");
+        final File favoriteFile = new File(editFavorites.this.getFilesDir(), "ulu");
 
-        final String nazwaUlu = getIntent().getStringExtra("ulu");
+        final String nameOfFavorite = getIntent().getStringExtra("ulu");
         FileHelper op = new FileHelper();
-        lista = op.tytułyWulu(ulufile, nazwaUlu);
-        myToolbar.setTitle(nazwaUlu);
+        list = op.tytułyWulu(favoriteFile, nameOfFavorite);
+        myToolbar.setTitle(nameOfFavorite);
 
-        final ArrayList<String> arrayList= lista;
+        final ArrayList<String> arrayList= list;
         //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(editFavorites.this,android.R.layout.simple_list_item_1, arrayList)
         {
@@ -194,32 +196,32 @@ public class editFavorites extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(usunjeden.isChecked())
+                if(deleteOne.isChecked())
                 {
                     FileHelper op = new FileHelper();
-                    if(op.usunzulu(ulufile,nazwaUlu, arrayList.get(i)) == 0)
+                    if(op.usunzulu(favoriteFile,nameOfFavorite, arrayList.get(i)) == 0)
                     {
-                        Toast.makeText(editFavorites.this, "Error27".toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(editFavorites.this, "Error27", Toast.LENGTH_LONG).show();
                     }
                     finish();
                     startActivity(getIntent());
                 }
                 else {
-                    Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
-                    otworz_zabawe.putExtra("zabawa", arrayList.get(i).toString());
-                    startActivity(otworz_zabawe);
+                    Intent openGame = new Intent(getApplicationContext(), display.class);
+                    openGame.putExtra("zabawa", arrayList.get(i));
+                    startActivity(openGame);
                 }
             }
         });
 
-        usuncalosc.setOnClickListener(new View.OnClickListener() {
+        deleteAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FileHelper op = new FileHelper();
-                Toast.makeText(editFavorites.this, nazwaUlu.toString(),Toast.LENGTH_LONG).show();
-                if(op.usunlisteulu(ulufile, nazwaUlu) == 0)
+                Toast.makeText(editFavorites.this, nameOfFavorite,Toast.LENGTH_LONG).show();
+                if(op.usunlisteulu(favoriteFile, nameOfFavorite) == 0)
                 {
-                    Toast.makeText(editFavorites.this, "Error28".toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(editFavorites.this, "Error28",Toast.LENGTH_LONG).show();
                 }
                 finish();
             }
@@ -246,14 +248,14 @@ public class editFavorites extends AppCompatActivity {
 
         if(id == R.id.action_search)
         {
-            Intent otworz_liste = new Intent(getApplicationContext(), search.class);
-            startActivity(otworz_liste);
+            Intent openSearch = new Intent(getApplicationContext(), search.class);
+            startActivity(openSearch);
         }
         else
         if(id == R.id.action_settings)
         {
-            Intent otworz_liste = new Intent(getApplicationContext(), settings.class);
-            startActivity(otworz_liste);
+            Intent openSettings = new Intent(getApplicationContext(), settings.class);
+            startActivity(openSettings);
         }
 
         return super.onOptionsItemSelected(item);

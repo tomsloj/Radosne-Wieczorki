@@ -75,7 +75,7 @@
         android:layout_marginTop="-1dp" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textEmptyFavoritesList"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

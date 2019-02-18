@@ -34,14 +34,14 @@ public class listOfFavorites extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         // Enable the Up button
-        actionBar.setHomeButtonEnabled(true);
+        //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        actionBar.setDisplayShowHomeEnabled(true);
+        //actionBar.setDisplayShowHomeEnabled(true);
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
-        int tekstSize = 15;
+        int textSize = 15;
 
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -49,25 +49,25 @@ public class listOfFavorites extends AppCompatActivity {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String plik = new String(buffer);
-            tekstSize = Integer.parseInt(plik);
+            String textOfFile = new String(buffer);
+            textSize = Integer.parseInt(textOfFile);
         }
         catch (IOException e)
         {
-            Toast.makeText(listOfFavorites.this, "Error29".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(listOfFavorites.this, "Error29",Toast.LENGTH_LONG).show();
         }
 
-        final int tSize = tekstSize;
+        final int tSize = textSize;
 
-        final ListView listaulu = (ListView) findViewById(R.id.listOfFavorites);
-        final File ulufile = new File(listOfFavorites.this.getFilesDir(), "ulu");
+        final ListView listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
+        final File favoritesFile = new File(listOfFavorites.this.getFilesDir(), "ulu");
         final FileHelper op = new FileHelper();
 
-        ArrayList<String> lista1 = op.listaulu(ulufile);
-        //lista1.add(op.calyplik(ulufile));
-        final ArrayList<String> lista = lista1;
+        ArrayList<String> listFavorites = op.listaulu(favoritesFile);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, lista)
+        final ArrayList<String> list = listFavorites;
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, list)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -80,15 +80,15 @@ public class listOfFavorites extends AppCompatActivity {
             }
         };
 
-        listaulu.setAdapter(arrayAdapter);
+        listOfFavorites.setAdapter(arrayAdapter);
 
-        listaulu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listOfFavorites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String nazwaulu = lista.get(i);
+                String favoriteName = list.get(i);
 
                     Intent otworz_edit = new Intent(getApplicationContext(), editFavorites.class);
-                    otworz_edit.putExtra("ulu", nazwaulu);
+                    otworz_edit.putExtra("ulu", favoriteName);
                     startActivity(otworz_edit);
 
             }
@@ -109,14 +109,14 @@ public class listOfFavorites extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         // Enable the Up button
-        actionBar.setHomeButtonEnabled(true);
+        //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        actionBar.setDisplayShowHomeEnabled(true);
+        //actionBar.setDisplayShowHomeEnabled(true);
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
-        int tekstSize = 15;
+        int textSize = 15;
 
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -124,25 +124,25 @@ public class listOfFavorites extends AppCompatActivity {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String plik = new String(buffer);
-            tekstSize = Integer.parseInt(plik);
+            String textOfFile = new String(buffer);
+            textSize = Integer.parseInt(textOfFile);
         }
         catch (IOException e)
         {
-            Toast.makeText(listOfFavorites.this, "Error29".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(listOfFavorites.this, "Error29",Toast.LENGTH_LONG).show();
         }
 
-        final int tSize = tekstSize;
+        final int tSize = textSize;
 
-        final ListView listaulu = (ListView) findViewById(R.id.listOfFavorites);
-        final File ulufile = new File(listOfFavorites.this.getFilesDir(), "ulu");
+        final ListView listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
+        final File favoritesFile = new File(listOfFavorites.this.getFilesDir(), "ulu");
         final FileHelper op = new FileHelper();
 
-        ArrayList<String> lista1 = op.listaulu(ulufile);
+        ArrayList<String> listFavorites = op.listaulu(favoritesFile);
         //lista1.add(op.calyplik(ulufile));
-        final ArrayList<String> lista = lista1;
+        final ArrayList<String> list = listFavorites;
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, lista)
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, list)
         {
             @Override
             public View getView(int position, View convertView, ViewGroup parent)
@@ -155,16 +155,16 @@ public class listOfFavorites extends AppCompatActivity {
             }
         };
 
-        listaulu.setAdapter(arrayAdapter);
+        listOfFavorites.setAdapter(arrayAdapter);
 
-        listaulu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listOfFavorites.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String nazwaulu = lista.get(i);
+                String nazwaulu = list.get(i);
 
-                Intent otworz_edit = new Intent(getApplicationContext(), editFavorites.class);
-                otworz_edit.putExtra("ulu", nazwaulu);
-                startActivity(otworz_edit);
+                Intent openEditFavorites = new Intent(getApplicationContext(), editFavorites.class);
+                openEditFavorites.putExtra("ulu", nazwaulu);
+                startActivity(openEditFavorites);
 
             }
         });
@@ -192,14 +192,14 @@ public class listOfFavorites extends AppCompatActivity {
 
         if(id == R.id.action_search)
         {
-            Intent otworz_liste = new Intent(getApplicationContext(), search.class);
-            startActivity(otworz_liste);
+            Intent openSearch = new Intent(getApplicationContext(), search.class);
+            startActivity(openSearch);
         }
         else
         if(id == R.id.action_settings)
         {
-            Intent otworz_liste = new Intent(getApplicationContext(), settings.class);
-            startActivity(otworz_liste);
+            Intent openSettings = new Intent(getApplicationContext(), settings.class);
+            startActivity(openSettings);
         }
 
         return super.onOptionsItemSelected(item);

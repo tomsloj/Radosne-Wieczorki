@@ -29,136 +29,134 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
 
         //define buttons
-        final Button przyciskLista = (Button) findViewById(R.id.wholeListButton);
-        final Button przyciskTańce = (Button) findViewById(R.id.dancesButton);
-        final Button przyciskPiosenki = (Button) findViewById(R.id.singsButton);
-        final Button przyciskRywalizacja = (Button) findViewById(R.id.competitionsButton);
-        final Button przyciskIntegracyjne = (Button) findViewById(R.id.integralsButton);
-        final Button przyciskInne = (Button) findViewById(R.id.othersButton);
+        final Button wholeListButton = (Button) findViewById(R.id.wholeListButton);
+        final Button dancesButton = (Button) findViewById(R.id.dancesButton);
+        final Button singsButton = (Button) findViewById(R.id.singsButton);
+        final Button competitionButton = (Button) findViewById(R.id.competitionsButton);
+        final Button integralsButton = (Button) findViewById(R.id.integralsButton);
+        final Button otherButtons = (Button) findViewById(R.id.othersButton);
 
-        final Button przyciskUstawienia = (Button) findViewById(R.id.settingsButton);
-        final Button przyciskSzukaj = (Button) findViewById(R.id.findButton);
-        final Button przyciskUlubione = (Button) findViewById(R.id.favoritesButton);
-        final Button zabawanadzis = (Button) findViewById(R.id.gameOfTheDayButton);
+        final Button settingsButton = (Button) findViewById(R.id.settingsButton);
+        final Button searchButton = (Button) findViewById(R.id.findButton);
+        final Button favoritesButton = (Button) findViewById(R.id.favoritesButton);
+        final Button gameOfTheDayButton = (Button) findViewById(R.id.gameOfTheDayButton);
 
         //setting what buttons do
 
         //show the whole list
-        przyciskLista.setOnClickListener(new View.OnClickListener() {
+        wholeListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
-                otworz_liste.putExtra("kategoria", "all");
-                startActivity(otworz_liste);
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "all");
+                startActivity(openList);
 
             }
         });
 
         //show games in category "tańce"
-        przyciskTańce.setOnClickListener(new View.OnClickListener() {
+        dancesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
-                otworz_liste.putExtra("kategoria", "tańce");
-                startActivity(otworz_liste);
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "tańce");
+                startActivity(openList);
 
             }
         });
 
         //show games in category "piosenki"
-        przyciskPiosenki.setOnClickListener(new View.OnClickListener() {
+        singsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
-                otworz_liste.putExtra("kategoria", "piosenki");
-                startActivity(otworz_liste);
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "piosenki");
+                startActivity(openList);
 
             }
         });
 
         //show games in category "rywalizacja"
-        przyciskRywalizacja.setOnClickListener(new View.OnClickListener() {
+        competitionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
-                otworz_liste.putExtra("kategoria", "rywalizacja");
-                startActivity(otworz_liste);
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "rywalizacja");
+                startActivity(openList);
 
             }
         });
 
         //display games in category "integracyjne"
-        przyciskIntegracyjne.setOnClickListener(new View.OnClickListener() {
+        integralsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
-                otworz_liste.putExtra("kategoria", "integracyjne");
-                startActivity(otworz_liste);
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "integracyjne");
+                startActivity(openList);
 
             }
         });
 
         //show games in category "inne"
-        przyciskInne.setOnClickListener(new View.OnClickListener() {
+        otherButtons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), list.class);
-                otworz_liste.putExtra("kategoria", "inne");
-                startActivity(otworz_liste);
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "inne");
+                startActivity(openList);
 
             }
         });
 
         //show searching
-        przyciskSzukaj.setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), search.class);
-                startActivity(otworz_liste);
+                Intent openSearch = new Intent(getApplicationContext(), search.class);
+                startActivity(openSearch);
             }
         });
 
         //show settings
-        przyciskUstawienia.setOnClickListener(new View.OnClickListener() {
+        settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_ustawienia = new Intent(getApplicationContext(), settings.class);
-                startActivity(otworz_ustawienia);
+                Intent openSettings = new Intent(getApplicationContext(), settings.class);
+                startActivity(openSettings);
             }
         });
 
         //show favorites list
-        przyciskUlubione.setOnClickListener(new View.OnClickListener() {
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), listOfFavorites.class);
+                Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
 
-                startActivity(otworz_liste);
+                startActivity(openListOfFavorites);
 
             }
         });
 
         //show random play in current day
-        zabawanadzis.setOnClickListener(new View.OnClickListener() {
+        gameOfTheDayButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent otworz_liste = new Intent(getApplicationContext(), display.class);
-                String zabawa = null;
+                Intent openGameOfTheDay = new Intent(getApplicationContext(), display.class);
+                String gameName = null;
                 int seed = Calendar.getInstance().get(Calendar.YEAR)*366+Calendar.getInstance().get(Calendar.MONTH)*31+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
                 FileHelper op = new FileHelper();
                     String fileName = "nazwy.txt";
 
                     try {
                         InputStream stream = getAssets().open(fileName);
-                        zabawa = op.randzabawa(stream, seed);
-                        //Toast.makeText(MainActivity.this, op.randzabawa(stream, seed+1).toString(), Toast.LENGTH_SHORT).show();
+                        gameName = op.randzabawa(stream, seed);
                     } catch (IOException ex) {
-                        Toast.makeText(MainActivity.this, "Error36".toString(), Toast.LENGTH_SHORT).show();
-                        ex.printStackTrace();
+                        Toast.makeText(MainActivity.this, "Error36", Toast.LENGTH_SHORT).show();
                     }
 
-                otworz_liste.putExtra("zabawa", zabawa);
-                startActivity(otworz_liste);
+                openGameOfTheDay.putExtra("zabawa", gameName);
+                startActivity(openGameOfTheDay);
 
             }
         });
@@ -176,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                 fos.write(buffer);
                 fos.close();
             } catch (IOException e) {
-                Toast.makeText(this, "Error4".toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error4", Toast.LENGTH_LONG).show();
             }
         }
 

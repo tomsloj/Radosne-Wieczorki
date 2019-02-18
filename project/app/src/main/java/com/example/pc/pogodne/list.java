@@ -32,28 +32,28 @@ public class list extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
-        //pobieram jaka kategoria ma się znajdować na liście
-        String kategoria = getIntent().getStringExtra("kategoria");
+        //get category of list
+        String category = getIntent().getStringExtra("kategoria");
 
-        //ustawiam toolbar
+        //create toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
-        if(kategoria.equals("all"))
+        if(category.equals("all"))
             myToolbar.setTitle("Lista zabaw");
         else
-            myToolbar.setTitle(kategoria);
+            myToolbar.setTitle(category);
         setSupportActionBar(myToolbar);
 
         ActionBar actionBar = getSupportActionBar();
 
         // Enable the Up button
-        actionBar.setHomeButtonEnabled(true);
+        //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        actionBar.setDisplayShowHomeEnabled(true);
+        //actionBar.setDisplayShowHomeEnabled(true);
 
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int tekstSize = 15;
+        String fileSettingsName = "settingsFile";
+        final File file = new File(this.getFilesDir(), fileSettingsName);
+        int textSize = 15;
 
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -61,35 +61,32 @@ public class list extends AppCompatActivity {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String plik = new String(buffer);
-            tekstSize = Integer.parseInt(plik);
+            String textOfFile = new String(buffer);
+            textSize = Integer.parseInt(textOfFile);
         }
         catch (IOException e)
         {
-            Toast.makeText(list.this, "Error5".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(list.this, "Error5",Toast.LENGTH_LONG).show();
         }
-        final int tSize = tekstSize;
+        final int tSize = textSize;
 
         listView=(ListView)findViewById(R.id.listview);
-        ArrayList<String> lista= new ArrayList<>();
+        ArrayList<String> list= new ArrayList<>();
 
 
-        String fileName = "dane.txt";
+        String fileBase = "dane.txt";
 
         try {
-            InputStream stream = getAssets().open(fileName);
+            InputStream stream = getAssets().open(fileBase);
             FileHelper op = new FileHelper();
-            lista = op.tytułyWkategorii(stream, kategoria);
-            //Toast.makeText(list.this, Integer.toString(list.size()),Toast.LENGTH_LONG).show();
+            list = op.tytułyWkategorii(stream, category);
 
         } catch (IOException ex) {
-            Toast.makeText(this, "Error6".toString(), Toast.LENGTH_SHORT).show();
-            ex.printStackTrace();
+            Toast.makeText(this, "Error6", Toast.LENGTH_SHORT).show();
         }
 
-        //}
-        final ArrayList<String> arrayList= lista;
-        //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
+        final ArrayList<String> arrayList= list;
+
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
         {
             @Override
@@ -107,9 +104,9 @@ public class list extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
-                otworz_zabawe.putExtra("zabawa", arrayList.get(i).toString());
-                startActivity(otworz_zabawe);
+                Intent openGame = new Intent(getApplicationContext(), display.class);
+                openGame.putExtra("zabawa", arrayList.get(i).toString());
+                startActivity(openGame);
             }
         });
     }
@@ -121,7 +118,7 @@ public class list extends AppCompatActivity {
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
-        int tekstSize = 15;
+        int textSize = 15;
 
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -129,109 +126,31 @@ public class list extends AppCompatActivity {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String plik = new String(buffer);
-            tekstSize = Integer.parseInt(plik);
+            String textOfFile = new String(buffer);
+            textSize = Integer.parseInt(textOfFile);
         }
         catch (IOException e)
         {
-            Toast.makeText(list.this, "Error5".toString(),Toast.LENGTH_LONG).show();
+            Toast.makeText(list.this, "Error5",Toast.LENGTH_LONG).show();
         }
-        final int tSize = tekstSize;
+        final int tSize = textSize;
 
         listView=(ListView)findViewById(R.id.listview);
-        ArrayList<String> lista= new ArrayList<>();
+        ArrayList<String> list= new ArrayList<>();
 
-        String kategoria = getIntent().getStringExtra("kategoria");
+        String category = getIntent().getStringExtra("kategoria");
         String fileName = "dane.txt";
 
         try {
             InputStream stream = getAssets().open(fileName);
             FileHelper op = new FileHelper();
-            lista = op.tytułyWkategorii(stream, kategoria);
+            list = op.tytułyWkategorii(stream, category);
             //Toast.makeText(list.this, Integer.toString(list.size()),Toast.LENGTH_LONG).show();
 
         } catch (IOException ex) {
-            Toast.makeText(this, "Error6".toString(), Toast.LENGTH_SHORT).show();
-            ex.printStackTrace();
+            Toast.makeText(this, "Error6", Toast.LENGTH_SHORT).show();
         }
 
-        //}
-        final ArrayList<String> arrayList= lista;
-        //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
-        {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent)
-            {
-                View view = super.getView(position, convertView, parent);
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setTextSize(tSize);
-
-                return view;
-            }
-        };
-        listView.setAdapter(arrayAdapter);
-
-
-
-        /*
-        setContentView(R.layout.activity_list);
-
-        //pobieram jaka kategoria ma się znajdować na liście
-        String kategoria = getIntent().getStringExtra("kategoria");
-
-        //ustawiam toolbar
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
-        if(kategoria.equals("all"))
-            myToolbar.setTitle("Lista zabaw");
-        else
-            myToolbar.setTitle(kategoria);
-        setSupportActionBar(myToolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-
-        // Enable the Up button
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.back);
-        actionBar.setDisplayShowHomeEnabled(true);
-
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int tekstSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String plik = new String(buffer);
-            tekstSize = Integer.parseInt(plik);
-        }
-        catch (IOException e)
-        {
-            Toast.makeText(list.this, "Error5".toString(),Toast.LENGTH_LONG).show();
-        }
-        final int tSize = tekstSize;
-
-        listView=(ListView)findViewById(R.id.listview);
-        ArrayList<String> list= new ArrayList<>();
-
-            String fileName = "dane.txt";
-
-            try {
-                InputStream stream = getAssets().open(fileName);
-                FileHelper op = new FileHelper();
-                list = op.tytułyWkategorii(stream, kategoria);
-                //Toast.makeText(list.this, Integer.toString(list.size()),Toast.LENGTH_LONG).show();
-
-            } catch (IOException ex) {
-                Toast.makeText(this, "Error6".toString(), Toast.LENGTH_SHORT).show();
-                ex.printStackTrace();
-            }
-
-        //}
         final ArrayList<String> arrayList= list;
         //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
@@ -247,17 +166,6 @@ public class list extends AppCompatActivity {
             }
         };
         listView.setAdapter(arrayAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent otworz_zabawe = new Intent(getApplicationContext(), display.class);
-                otworz_zabawe.putExtra("zabawa", arrayList.get(i).toString());
-                startActivity(otworz_zabawe);
-            }
-        });
-
-        */
 
     }
 
@@ -280,14 +188,14 @@ public class list extends AppCompatActivity {
 
         if(id == R.id.action_search)
         {
-            Intent otworz_liste = new Intent(getApplicationContext(), search.class);
-            startActivity(otworz_liste);
+            Intent openSearch = new Intent(getApplicationContext(), search.class);
+            startActivity(openSearch);
         }
         else
         if(id == R.id.action_settings)
         {
-            Intent otworz_liste = new Intent(getApplicationContext(), settings.class);
-            startActivity(otworz_liste);
+            Intent openSettings = new Intent(getApplicationContext(), settings.class);
+            startActivity(openSettings);
         }
 
         return super.onOptionsItemSelected(item);

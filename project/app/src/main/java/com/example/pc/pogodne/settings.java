@@ -29,14 +29,14 @@ public class settings extends AppCompatActivity {
 
         final Button plus = (Button) findViewById(R.id.plusButton);
         final Button minus = (Button) findViewById(R.id.minusButton);
-        final TextView czcionka = (TextView) findViewById(R.id.textSizeText);
+        final TextView textSizeText = (TextView) findViewById(R.id.textSizeText);
         final TextView report= (TextView) findViewById(R.id.reportText);
         final Button send = (Button) findViewById(R.id.reportButton);
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
 
-        int tekstSize = 15;
+        int textSize = 15;
 
         if(!file.exists())
         {
@@ -48,7 +48,7 @@ public class settings extends AppCompatActivity {
             }
             catch (IOException e)
             {
-                Toast.makeText(this, "Error13".toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Error13",Toast.LENGTH_LONG).show();
             }
         }
         else
@@ -59,12 +59,12 @@ public class settings extends AppCompatActivity {
                 byte[] buffer = new byte[size];
                 stream.read(buffer);
                 stream.close();
-                String plik = new String(buffer);
-                tekstSize = Integer.parseInt(plik);
+                String textOfFile = new String(buffer);
+                textSize = Integer.parseInt(textOfFile);
             }
             catch (IOException e)
             {
-                Toast.makeText(settings.this, "Error14".toString(),Toast.LENGTH_LONG).show();
+                Toast.makeText(settings.this, "Error14",Toast.LENGTH_LONG).show();
             }
         }
 
@@ -75,15 +75,13 @@ public class settings extends AppCompatActivity {
 
         myToolbar.setTitle("Ustawienia");
 
-        actionBar.setHomeButtonEnabled(true);
+        //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        actionBar.setDisplayShowHomeEnabled(true);
+        //actionBar.setDisplayShowHomeEnabled(true);
 
-        czcionka.setTextSize(tekstSize);
-        report.setTextSize(tekstSize);
-
-        final int tS = tekstSize;
+        textSizeText.setTextSize(textSize);
+        report.setTextSize(textSize);
 
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,22 +94,21 @@ public class settings extends AppCompatActivity {
                     byte[] buffer = new byte[size];
                     stream.read(buffer);
                     stream.close();
-                    String plik = new String(buffer);
-                    tmpSize = Integer.parseInt(plik);
+                    String textOfFile = new String(buffer);
+                    tmpSize = Integer.parseInt(textOfFile);
                 }
                 catch (IOException e)
                 {
-                    Toast.makeText(settings.this, "Error15".toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(settings.this, "Error15",Toast.LENGTH_LONG).show();
                 }
 
                 if(tmpSize < 24)
                 {
-                    czcionka.setTextSize(tmpSize + 2);
+                    textSizeText.setTextSize(tmpSize + 2);
                     report.setTextSize(tmpSize + 2);
 
                     String string = Integer.toString(tmpSize + 2);
 
-                    FileOutputStream outputStream;
                     try {
                         FileOutputStream fos = new FileOutputStream(file);
                         byte[] buffer = string.getBytes();
@@ -120,7 +117,7 @@ public class settings extends AppCompatActivity {
                     }
                     catch (IOException e)
                     {
-                        Toast.makeText(settings.this, "Error16".toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(settings.this, "Error16",Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -137,22 +134,21 @@ public class settings extends AppCompatActivity {
                     byte[] buffer = new byte[size];
                     stream.read(buffer);
                     stream.close();
-                    String plik = new String(buffer);
-                    tmpSize = Integer.parseInt(plik);
+                    String textOfFile = new String(buffer);
+                    tmpSize = Integer.parseInt(textOfFile);
                 }
                 catch (IOException e)
                 {
-                    Toast.makeText(settings.this, "Error17".toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(settings.this, "Error17",Toast.LENGTH_LONG).show();
                 }
 
                 if(tmpSize > 10)
                 {
-                    czcionka.setTextSize(tmpSize - 2);
+                    textSizeText.setTextSize(tmpSize - 2);
                     report.setTextSize(tmpSize - 2);
 
                     String string = Integer.toString(tmpSize - 2);
 
-                    FileOutputStream outputStream;
                     try {
                         FileOutputStream fos = new FileOutputStream(file);
                         byte[] buffer = string.getBytes();
@@ -161,7 +157,7 @@ public class settings extends AppCompatActivity {
                     }
                     catch (IOException e)
                     {
-                        Toast.makeText(settings.this, "Error18".toString(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(settings.this, "Error18",Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -228,7 +224,6 @@ public class settings extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
         return super.onOptionsItemSelected(item);
     }
 
