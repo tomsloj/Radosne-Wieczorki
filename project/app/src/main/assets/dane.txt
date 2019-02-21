@@ -1,4 +1,4 @@
-﻿	tańce	%	belgijka	>	"Taniec tańczony w parach damsko męskich. Pary ustawiają się w okręgu - mężczyźni od strony wewnętrznej, a kobiety zewnętrznej.
+﻿tańce%belgijka>Taniec tańczony w parach damsko męskich. Pary ustawiają się w okręgu - mężczyźni od strony wewnętrznej, a kobiety zewnętrznej.
 Choreografia:
 4 kroki do przodu
 obrót
@@ -15,21 +15,21 @@ zamiana miejsc
 partnerka przechodzi do partnera z przodu
 
 Taniec ten można tańczyć do muzyki:
-"" 't Smidje "" zespołu Laïs
+" 't Smidje " zespołu Laïs
 https://www.youtube.com/watch?time_continue=2&v=sWVD7WfpdgA
-""W moim ogródeczku"" zespołu Rokiczanka
+"W moim ogródeczku" zespołu Rokiczanka
 https://www.youtube.com/watch?v=hp4endJMu1E
-""Takie ładne oczy"" zespołu Czerwone gitary (jeszcze nie przetestowane przez autora aplikacji)
-https://www.youtube.com/watch?v=Wwzweg7f2-E"	>
-			Soco Bate Vira	>	"Zabawa polegająca na pokazywaniu 3 znaków do słów piosenki:
+"Takie ładne oczy" zespołu Czerwone gitary (jeszcze nie przetestowane przez autora aplikacji)
+https://www.youtube.com/watch?v=Wwzweg7f2-E>
+Soco Bate Vira>Zabawa polegająca na pokazywaniu 3 znaków do słów piosenki:
 Soco [czyt. soku] - stuknięcie pięściami od strony małego palca
 Bate [czyt. baczi] - klaśnięcie
 Vira [cyt. wira] - stuknięcie w ramiona skrzyżowanymi rękami
 Muzyka:
-https://www.youtube.com/watch?v=OfJss-nviEk"	>
-			Skrzypek	>	"Taniec tańczony indywidualnie
+https://www.youtube.com/watch?v=OfJss-nviEk>
+Skrzypek>Taniec tańczony indywidualnie
 Muzyka:
-""Skrzypek"" Orkiestra Dni Naszych
+"Skrzypek" Orkiestra Dni Naszych
 https://www.youtube.com/watch?v=lpXbvvVp3KA
 Układ:
 dwa razy prawa noga do przodu
@@ -42,10 +42,10 @@ obrót w prawo
 klaśnięcie
 obrót w lewo
 klaśnięcie
-powtarzamy wszystko tylko zmieniając nogę"	>
-			skrzypek w parach	>	"Taniec tańczony w parach damsko męskich, wszystkie pary ustawiają się w okręgu, partner stoi za partnerką, trzymają się za ręce
+powtarzamy wszystko tylko zmieniając nogę>
+Skrzypek w parach>Taniec tańczony w parach damsko męskich, wszystkie pary ustawiają się w okręgu, partner stoi za partnerką, trzymają się za ręce
 Muzyka:
-""Skrzypek"" Orkiestra Dni Naszych
+"Skrzypek" Orkiestra Dni Naszych
 https://www.youtube.com/watch?v=lpXbvvVp3KA
 Układ:
 zewnętrzna noga: pięta, palce
@@ -54,21 +54,21 @@ wewnętrzna noga: pięta, palce
 2 skoki do wewnątrz
 spojrzenie się w oczy partnera z prawej strony
 spojrzenie się w oczy partnera z lewej strony
-obrót i partnerka idzie do tyłu"	>
-			obyrtka	>	"Taniec w parach damsko-męskich prowadzony przez wodzireja wydającego komendy
+obrót i partnerka idzie do tyłu>
+obyrtka>Taniec w parach damsko-męskich prowadzony przez wodzireja wydającego komendy
 Pary ustawiają się w okręgu jedna za drugą
 Partnerka stoi przed partnerem po jego prawej stronie i trzymają się za ręce
 Muzyka:
-""Prawy do lewego"" Kayah
+"Prawy do lewego" Kayah
 Układ:
 Pary biegną w kółko w rytm muzyki, a wodzirej wydaje komendy:
 baba na prawo - partnerka idzie na prawą stronę partnera
 baba na lewo - partnerka idzie na lewą stronę partnera
 baba do przodu - partnerki przechodzą do partnerów z przodu
 baba do tyłu -  partnerki przechodzą do partnerów z tyłu
-obyrtka - obrót pray wokół własnej osi"	>
-			HOP HOP HOP HULA HOP	>	do uzupełnienia	>
-			menuet	>	"Tekst:
+obyrtka - obrót pray wokół własnej osi>
+HOP HOP HOP HULA HOP>Do uzupełnienia>
+menuet>Tekst:
 Szyjka bielutka, usteczka różowe,
 oczami, gwiazdami tak świeci.
 Powiedz - kim jesteś, kim jesteś - powiedz,
@@ -78,54 +78,210 @@ może ten blask co z oczu świeci.
 Może on księciu, na uszko coś powie,
 może coś powie w sekrecie.
 Układ:
-Do uzupełnienia"	>
-			crazy frog	>	prawa ręka góra, prawa ręka góra, lewa ręka góra, lewawa ręka góra, obie prawo góra x2, obie lewo góra x2, prawa noga przód, lewa przód, prawa tył lewa tył, skok przód, tył obrót o 90* w prawo, klask	>
-			Il pulcino pio	>	wszystko dzieje się w radiu, kurczaczek, kura, kogut, indyk, gołąb, kot, pies, koza, owca, krowa, byk, traktor	>
-			chocolate	>		>
-			Krasnoludki	>	"Wąską ścieżką przez ogródek
+Do uzupełnienia>
+crazy frog>prawa ręka góra, prawa ręka góra, lewa ręka góra, lewawa ręka góra, obie prawo góra x2, obie lewo góra x2, prawa noga przód, lewa przód, prawa tył lewa tył, skok przód, tył obrót o 90* w prawo, klask>
+Il pulcino pio>wszystko dzieje się w radiu, kurczaczek, kura, kogut, indyk, gołąb, kot, pies, koza, owca, krowa, byk, traktor>
+chocolate>Do uzupełnienia>
+krasnoludki>Uczestnicy idą jeden za drugim śpiewając:
+"Wąską ścieżką przez ogródek
 idzie pierwszy krasnoludek.
 - Dokąd idziesz mój malutki?
 - Idę do swej krasnoludki.
 
 Ref. Siabadabadaba tibitibiti x3
-""Idę do swej krasnoludki""
+Idę do swej krasnoludki
 Siabadabadaba tibitibi x3
-""Idę do swej krasnoludki"""	>
-@	rywalizacja	%	walka pcheł	>	2 drużyny, na zmianę drużyny skaczą obunóż, jeśli dotkną kogoś z przeciwnej drużyny, ta osoba odpada	>
-			wyścigi na krzesłach	>	drużyny przemieszczają się do przodu przekładając krzesła z końca do przodu i przesuwając się	>
-			pif-paf	>		>
-			łosie	>	łoś łoś numer .. do łosia łosia nr ..	>
-			zbijanie balonów	>	zbijanie sobie balonów przy nodze	>
-			przerzucanie balonów	>	staramy przerzucić balon nad drugą drużyną	>
-			bitwa na piosenki	>		>
-			przekrzykiwanie	>		>
-			kto pierwszy wskaże nóż, łyżkę lub widelec	>		>
-			sztandary	>		>
-			wojna papierowa	>	każda osoba dostaje papierowe kulki, przez jakiś czas drużyny wyrzucają kulki ze swojego pola na pole przeciwnika, każdy może trzymać tylko jedną kulkę, kto ma mniej kulek na koniec czasu ten wygrywa	>
-			wyścig z podawaniem balonów	>	są rzędy, osoba z początku podaje balon do tyłu między nogami, ostatnia osoba biegnie na początek i podaje do tyłu balona	>
-			czołgi	>		>
-			roboty	>	jedna osoba siedzi na baranach drugiej osoby i steruje robotem, chce doprowadzić aby roboty złapały się za ręce	>
-			wyścig z nalewaniem wody łyżką 	>		>
-			orzeł czy reszka	>	ostatnia osoba z rzędu patrzy na prowadzącego gdy wyrzuci on orła puszczamy iskierkę i ostatnia osoba ma podnieść jakiś przedmiot który przed nią leży lub po prostu rękę	>
-			papier	>	bierzemy spory kawał papieru i każda drużyna musi umieścić na nim jak najwięcej osób	>
-@	integracyjne	%	tunel	>		>
-			klepanie w krzesło	>	klepiemy w krzesło i mówimy imię osoby która ma tam usiąść	>
-			czy podobają ci się twoi sąsiedzi	>		>
-			sałatka owocowa	>		>
-			zamki i księżniczki	>		>
-			poznawanie osoby za zasłoną	>		>
-			bingo	>	znajdywanie osób i zapisywanie ich imion	>
-			sardynki	>	jedna osoba się chowa a reszta jej szuka, gdy ją znajdzie chowa się razem z nią	>
-			2 fakty, 1 kłamstwo	>	piszemy na kartkach 2 prawdziwe informacje o sobie i jedną fałszywą, wszyscy mają zgadnąć która to kłamstwo	>
-@	piosenki	%	tyś jak skała tyś jak wzgórze	>	"tyś jak skała tyś jak wzgórze
-Panie nasz, Baże nasz!
-Tyś jak wiatr w swej naturze
+Idę do swej krasnoludki"
+https://www.youtube.com/watch?v=TFh2hW0KEmc
+Po każdorazowym zaśpiewaniu piosenki dodawane są kolejne elementy:
+Prowadzący: Kciuki do przodu
+Wszyscy wyciągają kciuki do przodu i odpowiadają
+Wszyscy: Są ksiuki do przodu
+I ruszają śpiewając
+
+P: Kciuki do przodu
+Wszyscy wyciągają kciuki do przodu
+W: Są ksiuki do przodu
+P: �?okcie do tyłu
+Wszyscy biorą łokcie do tyłu
+W: Są łokcie do tyłu
+I ruszają śpiewając
+
+...
+P: Kolana zgięte
+Wszyscy zginają kolana
+W: Są kolana zgięte
+I ruszają śpiewając
+
+...
+P: Pupy wypięte
+Wszyscy wypinają pupy
+W: Są pupy wypięte
+I ruszają śpiewając
+
+...
+P: Głowy do góry
+Wszyscy podnosza głowy do góry
+W: Są głowy do góry
+I ruszają śpiewając
+
+...
+P: Język na brodę
+Wszyscy dotykają językiem brody
+W: Są języki na brodzie
+I ruszają śpiewając>
+@rywalizacja%walka pcheł>Dzielimy wszystkich na 2 drużyny
+Jenda grupa staje na jednym , a druga na drugim końcu pola
+Na zmianę następuje tura jednej i drugiej drużyny
+W swojej turze każdy uczestnik może raz skoczyć obunóż i dotknąć przeciwnika
+Jeśli ktoś zostanie dotknięty lub jeśli ktoś się wywróci odpada>
+wyścigi na krzesłach>Dzielimy uczestników na grupy i dla każdej z grup ustawiamy w rzędzie krzesła
+Każda drużyna staje na krzesłach i ma za zadanie jak najszybciej przebyć określoną trasę stojąc na krzesłach, poruszając się tylko przenosząc krzesła z końca na przód>
+pif-paf>Wszyscy stają w okręgu, a jedna osoba staje w środku
+Osoba z środka kręci się i "strzela" do jakiejś osoby mówiąc pif
+Osoba do której został oddany strzał musi ukucnąć, a jej sąsiedzi muszą do siebie strzelić mówiąc paf
+Jeśli osoba do której padł strzał nie zdąrzy ukucnąć odpada
+Jeśli zdąży ukucnąć odpada ten z sąsiadów który później oddał strzał>
+łosie>Wszyscy siadają na krzesłach w okręgu i przydzielamy każdemu numer
+Następnie jedna osoba zaczyna zabawę mówiąc:
+"łoś łoś numer (numer osoby mówiącej) do łosia łosia nr ..", w tym czasie przykłada sobie ręce do głowy imitując poroże łosia, a osoby siedzące koło niego dokładają do jego "poroża" po jednej swojej ręce
+Następnie osoba która została wywołana powtarza tę czynność
+Jeśli ktoś się zagapi i od razu nie powie swojej kwestii lub nie zrobi "poroża" sąsiadowi odpada>
+przebijanie balonów>W tę zabawę można grać indywidualnie lub drużynowo
+Każda osoba musi przywiązać sobie balona do nogi na ok. 50cm sznurku
+Następnie, gdy już wszyscy to zrobią należy przebić balony wszystkim przeciwnikom stając na nie
+Jeśli czyjś balon zostanie przebity, ta osoba odpada>
+przerzucanie balonów>Dzielimy wszystkich na 2 drużyny
+Drużyny siadają na krzesłach naprzeciwko siebie w rzędzie
+Każda z drużyn dostaje tyle samo balonów
+Na sygnał drużyny przerzucają balony nad przeciwnikami (nikt nie może wstawać z krzeseł)
+Wygrywa drużyna której uda się przerzucić więcej balonów
+staramy przerzucić balon nad drugą drużyną>
+bitwa na piosenki>Dzielimy uczestników na grupy i podajemy temat piosenek (np. imię, lato, święta)
+Następnie drużyny mają chwilę na naradzenie się i przygotowanie istniejących piosenek których tekst jest o zadanym temacie 
+Potem każda drużyna kolejno śpiewa przygotowane przez siebie piosenki
+Jeśli któraś drużyna nie zaśpiewa piosenki gdy będzie ich kolej lub zaśpiewa piosenkę która była już śpiewana odpada>
+przekrzykiwanie>Dzielimy wszystkich na 3 drużyny
+Jedna drużyna staje po jednej stronie i nie może przechodzić przez środek
+Druga staje po drugiej stronie i też nie może przechodzić przez środek
+Trzecia może poruszać się gdzie chce
+Pierwsza drużyna otrzymuje hasło które ma za zadanie przekazać drugiej drużynie
+W tym czasie trzecia drużyna musi uniemożliwić tej drużynie przekazanie hasła>
+kto pierwszy wskaże nóż, łyżkę lub widelec>Dzielimy uczestników na grupy
+Każda drużyna ustala znak który będą przekazywali sobie gdy zostanie pokazany nóż, widelec lub łyżka
+Każda grupa ustawia się w rzędzie, jedna osoba za drugą, przed pierwszą osobą z każdej grupy musi leżeć nóz, widelec i łyżka
+Wszystkie osoby patrzą do przodu, a osoba stojąca na końcu każdego rzędu patrzy na osobę prowadzącą
+Gdy prowadzący pokaże jakiś sztuciec, ostatania osoba puszcza do przodu sygnał
+Gdy sygnał dotrze do pierwszej osoby podnosi ona odpowiedzni sztuciec
+Wygrywa zespół który pokaże dobry sztuciec jako pierwszy
+W wygranym zespole osoba z początku przechodzi na koniec>
+sztandary>Do uzupełnienia>
+wojna papierowa>Dzielimy uczestników na dwie drużyny
+Każda drużyna ma wytyczone swoje pole
+Każda osoba dostaje jedną papierową kulkę
+Zadaniem drużyny jest przeżucanie kulek które znajdują się po ich stronie na stronę przeciwnika w taki sposób, aby po minucie na ich polu znajdowało się mniej kulek niż z drugiej strony
+każda osoba dostaje papierowe kulki, przez jakiś czas drużyny wyrzucają kulki ze swojego pola na pole przeciwnika, każdy może trzymać tylko jedną kulkę, kto ma mniej kulek na koniec czasu ten wygrywa>
+wyścig z balonami>Dzielimy uczestników na grupy
+Każda grupa ustawia się w rzędzie, jedna osoba za drugą
+Ostatnia osoba dostaje balon
+Zadanie polega na przekazywaniu balonu z tyłu rzędu do przodu w sposób wskazany przez osobę prowadzącą zabawę (np. między nogami, nad głową)
+Gdy balon dotrze do pierwszej osoby biegnie ona na koniec i znowu przekazuje balon do przodu
+Wygrywa ta drużyna która jako pierwsza wróci do ustawienia początkowego>
+czołgi>Uczestnicy muszą się podzielić na grupy
+Istnieje kilka opcji rozegrania tej zabawy:
+grupy 2 osobowe - jedna osoba jest czołgiem, druga czołgistą
+grupy 3 osobowa - dwie osoby tworzą czołg, tworząc "krzesełko" z rąk które jest miejscem dla jednego czołgisty
+grupy 4 osobowe -  dwie osoby tworzą czołg, tworząc "krzesełko" z rąk które jest miejscem dla jednego czołgisty, drugi czołgista wskakuje na plecy jednej z osób tworzących czołg
+Czołgi ustawiają się w okręgu
+Występują 2 rozkazy:
+"Czołgiści na czołg" - czołgiści wskakują na swoje czołgi i przygotowują się do startu
+"Czołgiści z czołgu" - czołgiści zeskakują z czołgu i biegną dookoła okręgu utowrzonego z czołgów,a następnie wskakują na swój czołg
+Drużyna której czołgista/ści jako ostatni wrócą na czołg przegrywa i odpada>
+roboty>Uczestnicy zabawy muszą się dobrać w pary
+W każdej parze jedna osoba musi mieć zasłonięte oczy - ona będzie robotem
+Druga osoba wskakuje na barana robota i nim steruje
+Zadaniem wszystkich uczestników jest, aby wszystkie roboty stworzyły okrąg trzymając za ręce inne roboty
+jedna osoba siedzi na baranach drugiej osoby i steruje robotem, chce doprowadzić aby roboty złapały się za ręce>
+wyścig z nalewaniem wody łyżką >Dzielimy uczestników na grupy
+Każda grupa ustawia się w rzędzie
+Dla każdej grupy należy przygotowac duże naczynie z wodą, łyżkę oraz szklankę którą ustawiamy kilka metrów od grup
+Każda grupa ma za zadanie napełnić szklankę wodą, ale musi stosować się do zasad:
+Woda może być przenoszona tylko w łyżce
+Wodę przenoszą pojedynczo i po kolei
+Każda osoba zanim nabierze wody musi obórcić się 5 razy
+Wygrywa grupa która jako pierwsza napełni szklankę>
+orzeł czy reszka>Dzielimy uczestników na grupy
+Każda grupa ustawia się w rzędzie
+Wszystkie osoby patrzą do przodu, a osoba stojąca na końcu każdego rzędu patrzy na osobę prowadzącą
+Osoba prowadząca rzuca monetą
+W momencie, gdy wypadnie orzeł ostatnia osoba puszczas sygnał do przodu, gdy pierwsza osoba otrzyma sygnał podnosi rękę
+W rzędzie w którym pierwsza osoba jako pierwsza podniosła rękę we właściwym momencie pierwsza osoba idzie na koniec
+ostatnia osoba z rzędu patrzy na prowadzącego gdy wyrzuci on orła puszczamy iskierkę i ostatnia osoba ma podnieść jakiś przedmiot który przed nią leży lub po prostu rękę>
+papier>Dzielimy uczestników na drużyny
+Każdej drużynie dajemy kartkę papieru
+Zadaniem każdej drużyny jed ustawienie się w taki sposób aby jak najwięcej osób ustawiło się tak, że jedyne punkty podparcia każdej osoby będą się znajdowały na kartce
+Najlepiej na czas przygotowania strategii umieścić drużyny w innych miejscach, aby nie mogli wzajemnie podglądać swoich pomysłów>
+@integracyjne%tunel>Wszyscy dobierają się w pary i stają para za parą
+Każda para podnosi ręce za które się trzymają tworząc w ten sposób tunel między sobą
+Osoba bez pary Wbiega z tyłu do tunelu krzycząc i "porywa" jedną osobę i staje z nią na początku tunelu
+Osoba której partner został porwany idzie na koniec i wbiega jako kolejna do tunelu
+Jeśli stworzy się dziura przed jakąś parą powinna ona się udać do przodu
+W celu sprawienia, aby zabawa była bardziej dynamiczna można rozbijać pary, aby więcej osób wbiegało do tunelu>
+klepanie w krzesło>Uczestnicy zabawy siadają na krzesłach w okręgu, a jedna osoba staje na środku
+Jedno krzesło stoi puste
+Osoba, która ma wolne miejsce po prawej stronie musi klepnąć w krzesło i powiedzieć imię osoby, która ma usiąść na tym miejscu
+Wywołana osoba zmienia miejsce, a osoba z środka musi usiąść na wolne miejsce zanim osoba która siedzi obok wolnego miejsca "zaklepie" je dla innej osoby>
+czy podobają ci się twoi sąsiedzi>Uczestnicy zabawy siadają na krzesłach w okręgu, a jedna osoba staje na środku
+Osoba na środku mówi do wybranej osoby:
+"(imię), czy podobają Ci się twoi sąsiedzi?"
+Jeśli osoba zapytana odpowie, że tak wtedy osoby siędzące obok niej zamieniają się miejscami
+W tym momencie osoba z środka może spróbować zająć miejscę osobom zamieniającym się miejscami
+Jeśli osoba zapytana odpowie, że nie wtedy osoba z środka pyta się kogo ta osoba by chciała, za sąsiadów
+Pytana osoba mówi dwa imiona i w tym momencie osoby wymienione udają się na miejsca koło osoby pytanej
+Sąsiedzi osoby pytanej udają się na miejsca osób wymienionych, ale osoba z środka może ich uprzedzić i jako pierwsza zająć miejsce>
+sałatka owocowa>Uczestnicy zabawy siadają na krzesłach w okręgu, a jedna osoba staje na środku
+Osoba na środku mówi:
+"Niech wstaną wszyscy ci, którzy tak jak ja …"
+I dodaje cehcę, lub coś co może o sobie powiedzieć
+Wszystkie osoby które mogą podpisać się pod słowami osoby w środku wstają i zmieniają miejsce
+W tym momencie osoba z środka stara się zająć któreś z wolnych miejsc
+Należy wprowadzić zasadę, że nie można się przesiadać na sąsiednie miejsce>
+zamki i księżniczki>Wszyscy uczestnicy dobierają się w trójki, lecz jedna osoba musi zostać bez grupy
+Dwie osoby z grupy łapią się za ręce - one będą zamkiem, a trzecia osoba staje między nimi - jest księżniczką
+Osoba która jest bez grupy wydaje polecenie i stara się znaleźć grupę dla siebie:
+zamki - wszystkie księżniczki zostają w miejscu, a zamki zmieniają miejsce i szukają innej księżniczki
+księżniczki - zamki podnoszą ręce i stoją w miejscu, a księżniczki zmieniają swój zamek
+trzęsienie ziemi - wszystkie grupy się rozpadają i tworzą nowe trzyosobowe grupy
+Osoba, która zostanie bez grupy wydaje kolejne polecenie>
+poznawanie osoby za zasłoną>Dzielimy wszystkich uczestników zabawy na dwie grupy i oddzielamy je zasłoną (np. koc)
+Obie grupy wybierają po jednej osobie, które ustawiają się przy zasłonie
+Zasłona zostaje opószczona, a osoby wybrane przez zespoły muszą powiedzieć imię osoby z drugiej strony
+Osoba która zrobi to jako pierwsza zabiera przeciwnika do swojej drużyny
+Należy pozwolić, a nawet zachęcić drużyny do ucharakteryzowywania swoich przedstawicieli, aby byli trudniej rozpoznawalni>
+bingo>Do przeprowadzenia tej gry musimy przygotować dla każdego uczestnika coś do pisania oraz kartkę z kilkoma stwierdzeniami np.
+- mieszka w tym samym mieście
+- ma taki sam rozmiar buta
+- jest ode mnie wyższy
+- ma taki sam kolor oczu jak ja
+- nie znałem go wcześniej
+- jej nazwisko zaczyna się na tę samą literę co moje
+Każda osoba musi znaleźć osoby pasujące do danego stwierdzenia i wpisać na kartce imię tej osoby, ale żadna osoba nie może być wpisana więcej niż raz
+Wygrywa osoba która jako pierwsza będzie miała wpisane kogoś w każdym polu>
+sardynki>Jeden uczestnik zabawy chowa się, a reszta jej szuka
+Gdy ktoś znajdzei szukaną osobę chowa się razem z nią w jej kryjówce
+Zabawa trwa, aż wszyscy nie znajdą poszukiwanej osoby>
+2 fakty, 1 kłamstwo>Wszyscy uczestnicy zabawy piszą na kartkach 2 prawdziwe informacje o sobie lub historie ze swojego życia i jedną fałszywą
+Następnie kolejno czytają napisane przez siebie rzeczy, a zadaniem innych jest zgadnąć która z nich jest fałszywa
+Zabawę tę można przeprowadzić tak, aby podzielić wszystkich na grupy i grupy rywalizują która z nich zgadnie najwięcej historii pozostałych grup>
+@piosenki%tyś jak skała tyś jak wzgórze>tyś jak skała tyś jak wzgórze
+Panie nasz, Baże nasz! 
+Tyś jak wiatr w swej naturze 
 Tyś jest stwórcą wszystkich nas
 Światłem swym roświetlasz drogę
 która prosto wiedzie nas
 Tam, gdzie źródło Twej miłości
-gdzie radośnie płynie czas"	>
-			Ziemia którą mi dajesz	>	"1. Ziemia, którą mi dajesz
+gdzie radośnie płynie czas>
+Ziemia którą mi dajesz>1. Ziemia, którą mi dajesz
 Nie jest fikcją ani bajką.
 Wolność, którą mam w Tobie
 Jest prawdziwa
@@ -145,38 +301,103 @@ Już nie, nie zatrzyma mnie już.
 2. Większy, większy jest we mnie Ten
 Który mnie umacnia
 Żaden goliat nie może
-Z nim równać się x2"	>
-			Gdy na morzu wielka burza	>	"Gdy na morzu wielka burza,
+Z nim równać się x2>
+Gdy na morzu wielka burza>Gdy na morzu wielka burza,
 Jezus ze mną w łodzi jest.
 
 On za rękę trzyma mnie,
 łódka nie kołysze się.
 
 Gdy na morzu wielka burza,
-Jezus ze mną w łodzi jest. "	>
-			Jeśli kochasz Pana Boga zaklaszcz w dłonie	>	"Jeśli kochasz Pana Boga zaklaszcz w dłonie,
+Jezus ze mną w łodzi jest.>
+Jeśli kochasz Pana Boga zaklaszcz w dłonie>Jeśli kochasz Pana Boga zaklaszcz w dłonie,
 zaklaszcz w dłonie, jeszcze raz,
 Jeśli kochasz Pana Boga zaklaszcz w dłonie,
-popatrz kto jest przy tobie i …….."	>
-@	inne	%	jajko, pisklak, kura, superkura	>	gramy w kamień papier nożyce z tym samym poziomem ewolucji, jeśli wygramy idziemy na wyższy poziom	>
-			krzesełka	>		>
-			dyrygent	>		>
-			goofi	>		>
-			oczko	>		>
-			pingwinki	>		>
-			wojna światów	>		>
-			zamykamy oczy i liczymy do 10	>		>
-			murarz	>		>
-			toster, mikser, pralka 	>		>
-			poduszka na kolanach osób w okręgu krąży poduszka, a osoba z środka ma na niej usiąść	>		>
-			dyrygent 	>		>
-			gwizdek	>	na plecach prowadzącego jest przyczepiony gwizdek, osoba z środka ma znaleźć gdzie jest gwizdek, i mówimy jej że on krąży po okręgu	>
-			alarm	>	ludzie siedzą na krzesłach w okręgu, jedna osoba chodzi na zewnątrz okręgu, klepie jakąś osobę i krzyczy alarm, jedna osoba biegnie w jedną stronę, a druga w drugą, kto przegra wyścig o miejsce ten wywołuje kolejny alarm	>
-			morderca	>	jedna osoba wychodzi - jest detektywem wybieramy mordercę, który mrugnięciem uśmierca osoby, detektyw szuka mordercy	>
-			węzeł	>	stajemy w kole, zamykamy oczy, wyciągamy ręce do przodu i idziemy do przodu łapiąc 2 inne ręce, potem otwieramy oczy i musimy się rozplątać	>
-			zwierzę	>	jedna osoba wychodzi i mówimy jej żeby przedstawiła jakieś zwierzę, grupie mówimy jakie to zwierze, a oni udają że nie mogą zgadnąć	>
-			zwierzęta	>		>
-			Icek	>		>
-			pokaż jak się tańczy disco	>		>
-			przejście przez rzekę	>	ludzie trzymają się za ręce, w środku jedna osoba próbuje się wydostać z koła, na polecenia prowadzącego koło robi różne rzeczy np.: faluje, zmniejsza się, idzie w prawo	>
-			podkuwanie	>	dwie osoby siadają na krzesłach tyłem do siebie z zasłoniętymi oczami, na podłodze leżą buty lub inne przedmioty je imitujące, ścigają się kto pierwszy założy te buty na krzesło i usiądzie na nim	>
+popatrz kto jest przy tobie i ……..>
+@inne%jajko, pisklak, kura, superkura>Celem gry jest osiągnięcie miana superkury
+Każda osoba musi jak najszybciej znaleźć osobę będącą na tym samym etapie rozwoju i zagrać z nią w kamień, papier, nożyce
+Zwycięska osobba przechodzi na wyższy poziom rozwoju
+etapy rozwoju:
+jajko - uczestnicy trzymają zaciśniętą pięść na swojej głowie
+pisklak - uczestnicy robią dziubek z dłoni na swojej głowie
+kura - uczestnicy robią skrzydła z rąk
+superkura
+Do zabawy można dodać więcej etapów rozwoju np. Kogut>
+krzesełka>Ustawiamy krzesła w okręgu
+Krzeseł musi być o jedno mniej niż uczestników zabawy
+Włączamy muzykę i dopóki ona gra wszyscy chodzą dookoła krzeseł, a gdy uzyka przestaje grać muszą usiąść na krześle
+Osobie której nie udało się usiąść odpada zabierając ze sobą jedno krzesło>
+Goofi>Do tej zabawy potrzebujemy ograniczonej przestrzeni
+Wszyscy uczestnicy zamykają oczy i w tym momencie prowadzący zabawe wybiera osobę która będzie Goofim
+Goofi może otworzyć oczy i on nic nie mówi tylk oucieka przed innymi
+Pozostali z zamkniętymi oczami chodzą i szukają Goofiego
+Jeśli kogoś dotkną to pytają:
+Goofi?
+Jeśli ta osoba nie jest Goofim to też pyta osoby która go dotknęła:
+Goofi?
+Jeśli kogoś dotkniemy i nie odpowie nam znaczy, że jest to Goofi i wtedy możemy otworzyć oczy, łapiemy Goofiego za ramiona tworząc pociąg i już nie odpowiadamy na zapytania innych
+Zabawa trwa dotąd aż wszyscy nie złapią Goofiego>
+oczko>Wszyscy uczestnicy dobierają się w pary najlepiej damsko-męskie
+kobiety siadają w okręgu na krzesłach, a mężczyźni stają za nimi z rękami za plecami
+Jeden mężczyzna musi być bez pary
+Puszcza on oczko do wybranej przez siebie kobiety
+Jej zadaniem jest przejście na wolne miejsce, a mężczyzny stojącego za nią zatrzymanie jej
+Jeśli uda jej się uciec osamotniona osoba puszcza oczko do kolejnej kobiety, a  jeśli nie to osoba bez pary szuka szczęścia gdzie indziej>
+pingwinki>Do uzupełnienia>
+wojna światów>Fabuła:
+Jesteśmy przedstawicielami 4 różnych światów i toczymy między sobą wojnę, chcąc pokonać przedstawicieli innych światów
+Przebieg zabawy:
+Dzielimy wszystkich na 4 zespoły
+Każdy zespół wymyśla swój znak który będzie jego bronią oraz wybiera lidera
+Drużyny pokazują swoje znaki, a następnie rozpoczyna się wojna
+Pierwsza z drużyn atakuje inną pokazując znak atakowanej drużyny
+Atakowana drużyna musi się obronić za pomocą swojego znaku, a następnie atakują kolejną drużynę przy użyciu jej znaku>
+liczenie>Wszyscy uczestnicy zabawy zamykają oczy i mają doliczyć do pewnej liczby w taki sposób, aby nigdy nie odezwały się dwie osoby w tym samym momencie
+Możemy wprowadzić dodatkowe ograniczenia np.
+czas między kolejnymi liczbami nie może być dłuższy niż 3 sekundy,
+każda osoba musi powiedzieć co najmniej jedną liczbę
+jedna osoba nie może się odezwać częściej niż co 3 liczby>
+murarz>Do tej zabawy potrzebujemy prostokątnej przestrzeni
+Na lini znajdującej się na środku prostokąta, staje osoba która będzie murarzem
+Pozostali uczestnicy gry przebiegają z jednego końca na drugi starając się nie dać złapać przez murarza
+Jeśli ktoś zostanie złapany staje na linii środkowej tworząc mur i wten sposub powodując, że pozostali mają mniej miejsca na przebiegnięcie koło murarza
+Wygrywa osoba, która nie została złapana przez murarza>
+toster, mikser, pralka >Jedna osoba staje w środku, a reszta ma okręgu
+Osoba w środku wskazuje jedną osobę i wydaje polecenia:
+toster - osoba wskazana podskakuje, a jej sąsiedzi łapią się za ręce
+mikser - osoba wskazana trzyma ręce nad sąsiadami, a oni się obracają
+pralka - sąsiedzi łapią się za ręce przed osobą wskazaną, tworząc ze swoich rąk okrąg, a osoba wskazana kręci głową w tym okręgu
+jeżeli ktoś się pomyli to odpada i wychodzi z okręgu>
+poduszka>Wszyscy siadają w okręgu, a jedna osoba znajduje się w środku
+Poduszka krąży w koło (może zmieniać kierunek) z kolan jednej osoby na kolana osoby obok, a zadaniem osoby z środka jest usiąść na poduszce, jeśli jej się to uda zamienia się miejscem z osobą na której kolanach poduszka aktualnie się znajdowała>
+dyrygent >Jedna osoba wychodzi, a reszta ustawia się w okręgu i wybiera dyrygenta
+Dyrygent pokazuje co pozostali mają robić, wszyscy pokazują to co dyrygent, a osoba która była poza pomieszczeniem w czasie wyboru dyrygenta ma za zadanie go zlokalizować>
+alarm>Ludzie siedzą na krzesłach w okręgu plecami do siebie, krzeseł musi być o jedno mniej niż osób
+Jedna osoba chodzi na zewnątrz okręgu, klepie jakąś osobę i krzyczy ALARM - osoba klepiąca biegnie w jedną stronę, a druga w drugą i ścigają się dookoła okręgu kto pierwszy dobiegnie do wolnego miejsca
+Osoba która przegra wyścig wywołuje kolejne alarmy>
+morderca>Jedna osoba która będzie detektywem wychodzi wychodzi
+Spośród pozostałych osób wybieramy jedną będącą mordercą
+Detektyw wraca i mam za zadanie zlokalizować mordercę, a morderca uśmierca innych mrugnięciem do nich, a osoby które zostają zamordowane kucają>
+węzeł>Wszyscy stają na okręgu
+Zamykamy oczy i idziemy w stronę środka i łapiemy inne osoby za ręce
+Gdy wszyscy złapią 2 osoby otwieramy oczy i staramy się rozplątać>
+pokaż jak się tańczy disco>Uczestnicy zabawy stoją w okręgu, a jedna osoba staje w środku
+Osoba z środka (OŚ) wybiera jedną osobę z okręgu (OO) i krzyczy do niej, a wszyscy (W) powtarzają:
+OŚ: (Imię osoby wybranej)
+W: (Imię osoby wybranej)
+OO: Co?
+OŚ: (Imię osoby wybranej)
+W: (Imię osoby wybranej)
+OO: Co?
+OŚ: Pokaż jak się tańczy disco
+W: Pokaż jak się tańczy disco
+OO: Ręce w górę, ręce nisko, tak się właśnie tańczy disco (kolejno podnosi i opuszcza ręce)
+W: Ręce w górę, ręce nisko, tak się właśnie tańczy disco (wszyscy kolejno podnoszą i opuszczają ręce)
+OO: Disco disco uuu, uuu! Disco disco uuu, uuu! (prezentuje swój wymyślony układ)
+W: Disco disco uuu, uuu! Disco disco uuu, uuu! (powtarzają pokazany układ)>
+przejście przez rzekę>Uczestnicy zabawy trzymają się za ręce
+Jedna osoba znajduje się w środku i próbuje się wydostać na zewnątrz, a ludzie w okręgu starają się jej to uniemożliwić
+Na polecenia osoby prowadzącej zabawy koło robi różne rzeczy np.: faluje, zmniejsza się, idzie w prawo>
+podkuwanie>dwie osoby siadają na krzesłach tyłem do siebie z zasłoniętymi oczami
+na podłodze leżą buty lub inne przedmioty je imitujące
+uczestnicy ścigają się kto pierwszy założy te buty na swoje krzesło i usiądzie na nim>
