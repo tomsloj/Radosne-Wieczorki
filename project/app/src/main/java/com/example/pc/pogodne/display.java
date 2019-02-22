@@ -39,7 +39,7 @@ public class display extends AppCompatActivity {
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
-        int tekstSize = 15;
+        int textSize = 15;
 
         try {
             FileInputStream stream = new FileInputStream(file);
@@ -48,25 +48,25 @@ public class display extends AppCompatActivity {
             stream.read(buffer);
             stream.close();
             String plik = new String(buffer);
-            tekstSize = Integer.parseInt(plik);
+            textSize = Integer.parseInt(plik);
         } catch (IOException e) {
             Toast.makeText(display.this, "Error9", Toast.LENGTH_LONG).show();
         }
 
 
-        final TextView nazwaZabawy = (TextView) findViewById(R.id.titleOfGame);
+        final TextView gameName = (TextView) findViewById(R.id.titleOfGame);
         final TextView text = (TextView) findViewById(R.id.textOfGame);
 
-        nazwaZabawy.setTextSize(tekstSize + 6);
-        text.setTextSize(tekstSize);
+        gameName.setTextSize(textSize + 6);
+        text.setTextSize(textSize);
 
-        final String zabawa = getIntent().getStringExtra("zabawa");
+        final String game = getIntent().getStringExtra("zabawa");
 
-        final File tmpfile = new File(this.getFilesDir(), "tmpfile");
+        final File tmpFile = new File(this.getFilesDir(), "tmpfile");
 
         try {
-            FileOutputStream fos = new FileOutputStream(tmpfile);
-            byte[] buffer = zabawa.getBytes();
+            FileOutputStream fos = new FileOutputStream(tmpFile);
+            byte[] buffer = game.getBytes();
             fos.write(buffer);
             fos.close();
         } catch (IOException e) {
@@ -79,7 +79,7 @@ public class display extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
 
-        myToolbar.setTitle(zabawa);
+        myToolbar.setTitle(game);
 
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
@@ -89,14 +89,32 @@ public class display extends AppCompatActivity {
             InputStream stream = getAssets().open(fileName);
 
             String textFromFile;
-            nazwaZabawy.setText(zabawa);
+            gameName.setText(game);
 
-            textFromFile = FileHelper.textOfGame(stream, zabawa);
+            textFromFile = FileHelper.textOfGame(stream, game);
             text.setText(textFromFile);
         } catch (IOException ex) {
             Toast.makeText(this, "Error10", Toast.LENGTH_SHORT).show();
             ex.printStackTrace();
         }
+
+        final Button hiddenButton = (Button) findViewById(R.id.hiddenButton);
+
+
+        hiddenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(game.equals("HOP HOP HULA HOP"))
+                {
+                    /*
+                    * wstaw zakazane zabawy
+                    *
+                     */
+                }
+            }
+        });
+
+
 
 
     }
