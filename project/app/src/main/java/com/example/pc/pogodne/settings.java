@@ -73,7 +73,7 @@ public class settings extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
 
-        myToolbar.setTitle("Ustawienia");
+        actionBar.setTitle("Ustawienia");
 
         //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);

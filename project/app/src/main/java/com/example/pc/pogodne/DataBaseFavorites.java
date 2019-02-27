@@ -1,0 +1,260 @@
+package com.example.pc.pogodne;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
+import android.util.Log;
+import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.Random;
+
+public class DataBaseFavorites extends SQLiteOpenHelper {
+
+    private SQLiteDatabase myBase;
+    private static String dataBaseName = "favorites";
+
+    private final Context appContext;
+    public static String dataBasePath = "data/data/com.example.pc.pogodne/databases";
+    public static final int dataBAseVersion = 1;
+
+    public DataBaseFavorites(Context context) {
+        super(context, dataBaseName, null, dataBAseVersion);
+        this.appContext = context;
+        //dataBasePath = context.getDatabasePath(dataBaseName).getPath();
+        //myBase = getWritableDatabase();
+    }
+
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String creareTable = "CREATE TABLE " + dataBaseName + "(name TEXT, game TEXT, number INT)";
+        db.execSQL(creareTable);
+        db.close();
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + dataBaseName);
+        onCreate(db);
+    }
+
+    private int maxNumber(String name) {
+        int number;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT MAX(number) FROM " + dataBaseName + " WHERE name = '" + name + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        number = cursor.getInt(0);
+        cursor.close();
+        db.close();
+        return number;
+    }
+
+    public boolean addData(String name, String game) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int number;
+        if (game.equals("remove"))
+            number = 0;
+        else
+            number = maxNumber(name) + 1;
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("game", game);
+        contentValues.put("number", number);
+
+        long result = db.insert(dataBaseName, null, contentValues);
+
+        if (result == -1)
+            return false;
+        else
+            return true;
+    }
+
+    private int numberOfGame(String name, String game)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT number FROM " + dataBaseName + " WHERE name = '" + name + "' AND game = '" + game +"'";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        int number = cursor.getInt(0);
+        db.close();
+        return number;
+    }
+
+    private String gameFromNumber(int number, String name)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT game FROM " + dataBaseName + " WHERE name = '" + name + "' AND number = " + Integer.toString(number);
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        String game = cursor.getString(0);
+        cursor.close();
+        db.close();
+        return game;
+    }
+
+    public void upGame(String name, String game)
+    {
+        int numberOfGame =numberOfGame(name, game);
+        if(numberOfGame <= 1)
+                return;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame) + " WHERE name = '" + name + "' AND number = " + Integer.toString(numberOfGame - 1);
+        db.execSQL(query);
+        query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame - 1) + " WHERE name = '" + name + "' AND game = '" + game +"'";
+        db.execSQL(query);
+        db.close();
+    }
+
+    public void downGame(String name, String game)
+    {
+        int numberOfGame =numberOfGame(name, game);
+        int maxNumber = maxNumber(name);
+        if(numberOfGame >= maxNumber)
+            return;
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame) + " WHERE name = '" + name + "' AND number = " + Integer.toString(numberOfGame + 1);
+        db.execSQL(query);
+        query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame + 1) + " WHERE name = '" + name + "' AND game = '" + game +"'";
+        db.execSQL(query);
+        db.close();
+    }
+
+    public void createFavorites(String name, String game)
+    {
+        addData(name, "remove");
+        addData(name, game);
+    }
+
+    public boolean favoriteExist(String name)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT count(*) FROM " + dataBaseName +" WHERE name = '" + name +"'";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        int counted = cursor.getInt(0);
+        cursor.close();
+        db.close();
+        if(counted == 0)
+            return false;
+        else
+            return true;
+
+    }
+
+    public boolean gameInFavoriteExists(String name, String game)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT count(*) FROM " + dataBaseName +" WHERE name = '" + name +"' AND game = '" + game + "'";
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        int counted = cursor.getInt(0);
+        cursor.close();
+        db.close();
+        if(counted == 0)
+            return false;
+        else
+            return true;
+
+    }
+
+    public ArrayList<String> getGamesInFavorite(String name)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT game FROM " + dataBaseName + " WHERE name = '" + name + "' ORDER BY number";
+        Cursor cursor = db.rawQuery(query, null);
+        ArrayList<String> list = new ArrayList<>();
+        while (cursor.moveToNext())
+            if(!cursor.getString(0).equals("remove"))
+                list.add(cursor.getString(0));
+
+        db.close();
+        return list;
+    }
+
+
+
+    private Cursor getNames(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT name FROM " + dataBaseName + " GROUP BY name";
+        Cursor data = db.rawQuery(query, null);
+        //db.close();
+        return data;
+    }
+
+    public ArrayList<String> getFavoritesList(){
+        ArrayList<String> list = new ArrayList<>();
+        Cursor data = getNames();
+        while (data.moveToNext())
+            list.add(data.getString(0));
+        return list;
+    }
+
+
+    public void deleteName(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM " + dataBaseName + " WHERE "
+                + "name" + " = '" + name + "'";
+        db.execSQL(query);
+        db.close();
+    }
+
+    public void deleteGame(String name, String game){
+        SQLiteDatabase db = this.getWritableDatabase();
+        int number = numberOfGame(name, game);
+        String query = "DELETE FROM " + dataBaseName + " WHERE "
+                + "name" + " = '" + name + "' AND game = '" + game +"'";
+        db.execSQL(query);
+        query = "UPDATE " + dataBaseName + " SET number = number - 1 WHERE "
+                + "name" + " = '" + name + "' AND number > " + Integer.toString(number);
+        db.execSQL(query);
+        db.close();
+    }
+
+    public void editNameOfFavorite(String name, String newName)
+    {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE  " + dataBaseName + " SET name = '" + newName + "' WHERE name = '" + name + "'";
+        db.execSQL(query);
+        db.close();
+    }
+
+    /*public String randomGame(int seed)
+    {
+        Random rand = new Random();
+        rand.setSeed(seed);
+        int randNumber = rand.nextInt();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT count(*) FROM " + dataBaseName;
+        Cursor cursor = db.rawQuery(query, null);
+        cursor.moveToFirst();
+        int counted = cursor.getInt(0);
+        cursor.close();
+
+        randNumber = ((randNumber % counted) + counted) % counted;
+
+        query = "SELECT name FROM " + dataBaseName + " ORDER BY RANDOM() LIMIT " + Integer.toString(randNumber);
+        cursor = db.rawQuery(query, null);
+        cursor.moveToLast();
+        String game = cursor.getString(0);
+        cursor.close();
+
+        return game;
+
+    }*/
+
+
+}

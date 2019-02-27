@@ -40,8 +40,8 @@ public class search extends AppCompatActivity {
             byte[] buffer = new byte[size];
             stream.read(buffer);
             stream.close();
-            String textOfFile = new String(buffer);
-            textSize = Integer.parseInt(textOfFile);
+            String TextOfFile = new String(buffer);
+            textSize = Integer.parseInt(TextOfFile);
         }
         catch (IOException e)
         {
@@ -54,8 +54,7 @@ public class search extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
 
-        myToolbar.setTitle("Szukaj");
-
+        actionBar.setTitle("Szukaj");
 
         //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -79,7 +78,6 @@ public class search extends AppCompatActivity {
             public void onClick(View v) {
                 boolean box1 = titleBox.isChecked();
                 boolean box2 = textBox.isChecked();
-                String fileName = "nazwy.txt";
                 String toFind = searchSpace.getText().toString();
 
                 if(!box1 && !box2)
@@ -87,33 +85,27 @@ public class search extends AppCompatActivity {
                     Toast.makeText(search.this, "Po co w ogóle tu wchodzisz\njeśli nie chcesz nic znaleźć?",Toast.LENGTH_LONG).show();
                 }
                 else
-                    if(toFind.equals(""))
-                    {
-                        Toast.makeText(search.this, "Uzupełnij co chcesz wyszukać",Toast.LENGTH_LONG).show();
-                    }
+                if(toFind.equals(""))
+                {
+                    Toast.makeText(search.this, "Uzupełnij co chcesz wyszukać",Toast.LENGTH_LONG).show();
+                }
                 else
                 {
-                    try {
-                        InputStream stream = getAssets().open(fileName);
+                    DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
 
-                        ArrayList<String> list = FileHelper.find(stream, toFind, box1, box2);
+                    final ArrayList<String> list = dbHelper.find(toFind, box1, box2);
 
-                        if(!list.isEmpty())
-                        {
-                            ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
-                            listOfFound.setAdapter(arrayAdapter);
-                            textNoFavorites.setText("");
-                        }
-                        else
-                        {
-                            ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
-                            listOfFound.setAdapter(arrayAdapter);
-                            textNoFavorites.setText(R.string.noFound);
-                        }
-                    }
-                    catch (IOException e)
+                    if(!list.isEmpty())
                     {
-                        Toast.makeText(search.this, "Error20",Toast.LENGTH_LONG).show();
+                        ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
+                        listOfFound.setAdapter(arrayAdapter);
+                        textNoFavorites.setText("");
+                    }
+                    else
+                    {
+                        ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
+                        listOfFound.setAdapter(arrayAdapter);
+                        textNoFavorites.setText(R.string.noFound);
                     }
                 }
 
@@ -131,7 +123,7 @@ public class search extends AppCompatActivity {
         });
     }
 
-
+    /*
     @Override
     protected void onResume() {
         super.onResume();
@@ -185,7 +177,6 @@ public class search extends AppCompatActivity {
             public void onClick(View v) {
                 boolean box1 = titleBox.isChecked();
                 boolean box2 = textBox.isChecked();
-                String fileName = "nazwy.txt";
                 String toFind = searchSpace.getText().toString();
 
                 if(!box1 && !box2)
@@ -236,7 +227,7 @@ public class search extends AppCompatActivity {
             }
         });
     }
-
+    */
 
 
 

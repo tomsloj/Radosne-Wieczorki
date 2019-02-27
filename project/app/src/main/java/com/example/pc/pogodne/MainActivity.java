@@ -1,13 +1,17 @@
 package com.example.pc.pogodne;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.io.OutputStream;
 import java.util.Calendar;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -23,10 +27,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
+
         //setting toolbar
         //toolbar with title
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         setSupportActionBar(myToolbar);
+
+
+        //copy database
+        DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
+
+        File database = getApplicationContext().getDatabasePath(DataBaseHelper.dataBaseName);
+
+
+        if(!database.exists())
+        {
+            dbHelper.getReadableDatabase();
+            //copy db
+            if(copyDatabase(this)) {
+                Toast.makeText(this, "Copy database succes", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        else
+        {
+            Toast.makeText(this, "oooo", Toast.LENGTH_SHORT).show();
+        }
+
 
         //define buttons
         final Button wholeListButton = (Button) findViewById(R.id.wholeListButton);
@@ -143,16 +174,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent openGameOfTheDay = new Intent(getApplicationContext(), display.class);
-                String gameName = null;
                 int seed = Calendar.getInstance().get(Calendar.YEAR)*366+Calendar.getInstance().get(Calendar.MONTH)*31+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-                    String fileName = "nazwy.txt";
 
-                    try {
-                        InputStream stream = getAssets().open(fileName);
-                        gameName = FileHelper.randGame(stream, seed);
-                    } catch (IOException ex) {
-                        Toast.makeText(MainActivity.this, "Error36", Toast.LENGTH_SHORT).show();
-                    }
+                DataBaseHelper dbHelper = new DataBaseHelper(MainActivity.this);
+
+                String gameName = dbHelper.getRandomGame(seed);
 
                 openGameOfTheDay.putExtra("zabawa", gameName);
                 startActivity(openGameOfTheDay);
@@ -177,6 +203,27 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    private boolean copyDatabase(Context context) {
+        try {
+
+            InputStream inputStream = context.getAssets().open(DataBaseHelper.dataBaseName);
+            String outFileName = DataBaseHelper.dataBasePath + DataBaseHelper.dataBaseName;
+            OutputStream outputStream = new FileOutputStream(outFileName);
+            byte[]buff = new byte[1024];
+            int length = 0;
+            while ((length = inputStream.read(buff)) > 0) {
+                outputStream.write(buff, 0, length);
+            }
+            outputStream.flush();
+            outputStream.close();
+            Log.w("listActivity","DB copied");
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
 

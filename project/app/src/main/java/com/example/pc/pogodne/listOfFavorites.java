@@ -22,12 +22,14 @@ import java.util.ArrayList;
 
 public class listOfFavorites extends AppCompatActivity {
 
+    Toolbar myToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_of_favorites);
 
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
+        myToolbar = (Toolbar) findViewById(R.id.main_bar);
         myToolbar.setTitle("Ulubione");
         setSupportActionBar(myToolbar);
 
@@ -62,7 +64,9 @@ public class listOfFavorites extends AppCompatActivity {
         final ListView listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
         final File favoritesFile = new File(listOfFavorites.this.getFilesDir(), "ulu");
 
-        ArrayList<String> listFavorites = FileHelper.listOfFavorites(favoritesFile);
+        DataBaseFavorites dbHelperFavorites = new DataBaseFavorites(listOfFavorites.this);
+
+        ArrayList<String> listFavorites = dbHelperFavorites.getFavoritesList();
 
         final ArrayList<String> list = listFavorites;
 
@@ -86,9 +90,11 @@ public class listOfFavorites extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String favoriteName = list.get(i);
 
-                    Intent otworz_edit = new Intent(getApplicationContext(), editFavorites.class);
-                    otworz_edit.putExtra("ulu", favoriteName);
-                    startActivity(otworz_edit);
+                    Intent otworz_liste = new Intent(getApplicationContext(), displayFavorite.class);
+                    otworz_liste.putExtra("ulu", favoriteName);
+                    otworz_liste.putExtra("ID", i);
+                    otworz_liste.putExtra("list", list);
+                    startActivity(otworz_liste);
 
             }
         });
@@ -96,6 +102,14 @@ public class listOfFavorites extends AppCompatActivity {
 
     }
 
+    protected void onResume()
+    {
+        super.onResume();
+
+    }
+
+
+    /*
     @Override
     protected void onResume() {
         super.onResume();
@@ -169,6 +183,7 @@ public class listOfFavorites extends AppCompatActivity {
 
 
     }
+    */
 
 
     @Override

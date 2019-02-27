@@ -10,15 +10,15 @@
         android:title="@string/favoritesAdd"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_settings"
-        android:icon="@drawable/settings"
-        android:title="@string/action_settings"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/action_search"
         android:icon="@drawable/search"
         android:title="@string/action_search"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/settings"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
 
 
 </menu>

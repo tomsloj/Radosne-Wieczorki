@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".editFavorites"></activity>
+        <activity android:name=".displayFavorite"></activity>
+        <activity android:name=".editFavorites" />
         <activity android:name=".listOfFavorites" />
         <activity
             android:name=".search"

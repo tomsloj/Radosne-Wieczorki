@@ -1,10 +1,12 @@
 package com.example.pc.pogodne;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,8 +19,10 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 public class list extends AppCompatActivity {
@@ -74,17 +78,9 @@ public class list extends AppCompatActivity {
         ArrayList<String> list= new ArrayList<>();
 
 
-        String fileBase = "dane.txt";
+        DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
 
-        try {
-            InputStream stream = getAssets().open(fileBase);
-            list = FileHelper.titlesInCategory(stream, category);
-
-        } catch (IOException ex) {
-            Toast.makeText(this, "Error6", Toast.LENGTH_SHORT).show();
-        }
-
-        final ArrayList<String> arrayList= list;
+        final ArrayList<String> arrayList= dbHelper.getGamesInCategory(category);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
         {
@@ -108,8 +104,31 @@ public class list extends AppCompatActivity {
                 startActivity(openGame);
             }
         });
+
     }
 
+    private boolean copyDatabase(Context context) {
+        try {
+
+            InputStream inputStream = context.getAssets().open(DataBaseHelper.dataBaseName);
+            String outFileName = DataBaseHelper.dataBasePath + DataBaseHelper.dataBaseName;
+            OutputStream outputStream = new FileOutputStream(outFileName);
+            byte[]buff = new byte[1024];
+            int length = 0;
+            while ((length = inputStream.read(buff)) > 0) {
+                outputStream.write(buff, 0, length);
+            }
+            outputStream.flush();
+            outputStream.close();
+            Log.w("listActivity","DB copied");
+            return true;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /*
     @Override
     protected void onResume() {
         super.onResume();
@@ -138,7 +157,6 @@ public class list extends AppCompatActivity {
         ArrayList<String> list= new ArrayList<>();
 
         String category = getIntent().getStringExtra("kategoria");
-        String fileName = "dane.txt";
 
         try {
             InputStream stream = getAssets().open(fileName);
@@ -166,7 +184,7 @@ public class list extends AppCompatActivity {
         listView.setAdapter(arrayAdapter);
 
     }
-
+    */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

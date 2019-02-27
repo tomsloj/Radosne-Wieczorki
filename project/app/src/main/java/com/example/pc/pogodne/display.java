@@ -31,7 +31,7 @@ import java.util.ArrayList;
 
 public class display extends AppCompatActivity {
 
-
+    int counter = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,8 +83,17 @@ public class display extends AppCompatActivity {
 
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
+        actionBar.setTitle(game);
 
-        String fileName = "nazwy.txt";
+
+
+        DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
+
+        String txt = dbHelper.getText(game);
+
+        gameName.setText(game);
+        text.setText(txt);
+        /*
         try {
             InputStream stream = getAssets().open(fileName);
 
@@ -97,6 +106,7 @@ public class display extends AppCompatActivity {
             Toast.makeText(this, "Error10", Toast.LENGTH_SHORT).show();
             ex.printStackTrace();
         }
+        */
 
         final Button hiddenButton = (Button) findViewById(R.id.hiddenButton);
 
@@ -104,12 +114,21 @@ public class display extends AppCompatActivity {
         hiddenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(game.equals("HOP HOP HULA HOP"))
+                if(game.equals("HOP HOP HOP HULA HOP"))
                 {
-                    /*
-                    * wstaw zakazane zabawy
-                    *
-                     */
+                    counter ++;
+                    if(counter > 3)
+                    {
+                        DataBaseFavorites dataBaseFavorites = new DataBaseFavorites(display.this);
+                        if(!dataBaseFavorites.favoriteExist("zakazane zabawy"))
+                        {
+                            dataBaseFavorites.createFavorites("zakazane zabawy", "Icek");
+                            dataBaseFavorites.addData("zakazane zabawy", "zwierzęta");
+                            dataBaseFavorites.addData("zakazane zabawy", "zwierzę");
+                            Toast.makeText(display.this, "chyba dodało", Toast.LENGTH_LONG).show();
+                        }
+                        Toast.makeText(display.this, "przycisk działa", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
@@ -150,15 +169,12 @@ public class display extends AppCompatActivity {
             if(id == R.id.favoritesButton)
             {
 
+
+
                 final AlertDialog.Builder builder = new AlertDialog.Builder(display.this);
                 final LayoutInflater inflater = display.this.getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.add_to_favorites, null);
-                builder.setView(dialogView);
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                // User cancelled the dialog
-                            }
-                        });
+
                 final Button stworz = (Button) dialogView.findViewById(R.id.createFavorite);
                 final EditText nazwa =(EditText) dialogView.findViewById(R.id.nameOfFavorite);
                 final ListView listaulu = (ListView) dialogView.findViewById(R.id.dialogLisOfFavorites);
@@ -166,13 +182,41 @@ public class display extends AppCompatActivity {
                 final File ulufile = new File(display.this.getFilesDir(), "ulu");
                 final File tmpfile = new File(display.this.getFilesDir(), "tmpfile");
 
-                final ArrayList<String> lista = FileHelper.listOfFavorites(ulufile);
-                final ArrayAdapter arrayAdapter = new ArrayAdapter<>(display.this,android.R.layout.simple_list_item_1, lista);
+                //final DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
 
+                final DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites(display.this);
+
+                final ArrayList<String> list = dbFavoritesHelper.getFavoritesList();
+                final ArrayAdapter arrayAdapter = new ArrayAdapter<>(display.this,android.R.layout.simple_list_item_1, list);
+
+                builder.setView(dialogView);
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
                 listaulu.setAdapter(arrayAdapter);
+
+
+                //get game which is delayed from tmpfile
+                String tmpGame = null;
+                try {
+                    FileInputStream stream = new FileInputStream(tmpfile);
+                    int size = stream.available();
+                    byte[] buffer = new byte[size];
+                    stream.read(buffer);
+                    stream.close();
+                    tmpGame = new String(buffer);
+                }
+                catch (IOException e)
+                {
+                    Toast.makeText(display.this, "Error22",Toast.LENGTH_LONG).show();
+                }
+
+                final String zabawa = tmpGame;
 
 
                 stworz.setOnClickListener(new View.OnClickListener() {
@@ -184,12 +228,39 @@ public class display extends AppCompatActivity {
                             Toast.makeText(display.this, "nazwa nie może być pusta",Toast.LENGTH_LONG).show();
                         }
                         else
-                            if(nazwaulu.contains("%")||nazwaulu.contains(">")||nazwaulu.contains("@")||nazwaulu.contains("<")||nazwaulu.contains("#")||nazwaulu.contains("|")||nazwaulu.contains("$"))
+                            if(nazwaulu.contains("%") || nazwaulu.contains(">") ||
+                                    nazwaulu.contains("@") || nazwaulu.contains("<") ||
+                                    nazwaulu.contains("#") || nazwaulu.contains("|") ||
+                                    nazwaulu.contains("$"))
                             {
                                 Toast.makeText(display.this, "nazwa nie może zawierać:\n%<>@#$|",Toast.LENGTH_LONG).show();
                             }
                             else
                                 {
+                                    if(dbFavoritesHelper.favoriteExist(nazwaulu))
+                                        Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
+                                    else
+                                        dbFavoritesHelper.createFavorites(nazwaulu, zabawa);
+                                    //if(dbHelper.existsFavorite(nazwaulu))
+                                    //{
+                                    //    Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
+                                    //}
+                                    //else
+                                    {
+                                        //dbHelper.createFavorite(nazwaulu);
+                                        //if(dbHelper.chceck())
+                                        //    Toast.makeText(display.this, "ok",Toast.LENGTH_SHORT).show();
+                                        //else
+                                        //    Toast.makeText(display.this, "nieok",Toast.LENGTH_SHORT).show();
+
+                                        //ArrayList<String>tmp = dbHelper.tableNames();
+                                        //for(int i = 0 ; i < tmp.size(); ++i)
+                                        //    Toast.makeText(display.this, tmp.get(i),Toast.LENGTH_SHORT).show();
+
+                                        //dbHelper.addToFavorites(nazwaulu, zabawa);
+                                    }
+
+                                    /*
                                     FileHelper op = new FileHelper();
 
                                     final File ulufile = new File(display.this.getFilesDir(), "ulu");
@@ -225,6 +296,7 @@ public class display extends AppCompatActivity {
                                             Toast.makeText(display.this, Integer.toString(FileHelper.createNewFavorite(ulufile,nazwaulu, zabawa)),Toast.LENGTH_LONG).show();
                                         }
                                     }
+                                    */
                             }
                     }
                 });
@@ -237,22 +309,20 @@ public class display extends AppCompatActivity {
                 listaulu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String nazwaulu = lista.get(i);
+                        String favoritesName = list.get(i);
 
-                        String zabawa = null;
-                        try {
-                            FileInputStream stream = new FileInputStream(tmpfile);
-                            int size = stream.available();
-                            byte[] buffer = new byte[size];
-                            stream.read(buffer);
-                            stream.close();
-                            zabawa = new String(buffer);
-                        }
-                        catch (IOException e)
+                        //dbHelper.addToFavorites(favoritesName, zabawa);
+                        if(dbFavoritesHelper.gameInFavoriteExists(favoritesName, zabawa))
+                            Toast.makeText(display.this, "ta zabawa już znajduje sie na tej liście ulubionych",Toast.LENGTH_SHORT).show();
+                        else
                         {
-                            Toast.makeText(display.this, "Error23",Toast.LENGTH_LONG).show();
+                            dbFavoritesHelper.addData(favoritesName, zabawa);
+                            Toast.makeText(display.this, "zabawa została dodana",Toast.LENGTH_SHORT).show();
                         }
-                        int tmp = FileHelper.addToFavorites(ulufile, nazwaulu, zabawa);
+
+
+                        /*
+                        int tmp = FileHelper.addToFavorites(ulufile, favoritesName, zabawa);
                         if(tmp == 0)
                         {
                             Toast.makeText(display.this, "Error24",Toast.LENGTH_LONG).show();
@@ -266,13 +336,14 @@ public class display extends AppCompatActivity {
                         {
                             Toast.makeText(display.this, "zabawa została dodana",Toast.LENGTH_SHORT).show();
                         }
+                        */
 
                     }
                 });
                 final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
-                if(lista.size() == 0)
+                if(list.size() == 0)
                 {
-                    text.setText("Nie posiadasz jeszcze rzadnej listy ulubionych");
+                    text.setText("Nie posiadasz jeszcze żadnej listy ulubionych");
                 }
                 //Toast.makeText(display.this, "ooo".toString(),Toast.LENGTH_LONG).show();
             }
@@ -280,6 +351,7 @@ public class display extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*
     @Override
     protected void onResume() {
         super.onResume();
@@ -332,7 +404,6 @@ public class display extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.back);
 
 
-        String fileName = "nazwy.txt";
         try {
             InputStream stream = getAssets().open(fileName);
 
@@ -348,4 +419,5 @@ public class display extends AppCompatActivity {
 
 
     }
+    */
 }

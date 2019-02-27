@@ -36,4 +36,6 @@
     <string name="reportHint">Wpisz wiadomość którą chcesz wysłać</string>
     <string name="message">Wiadomość</string>
     <string name="report">Zgłoszenie</string>
+    <string name="edit">Edytuj</string>
+    <string name="editNameOfFavorite">Zmień nazwę listy</string>
 </resources>

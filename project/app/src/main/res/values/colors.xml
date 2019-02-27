@@ -8,10 +8,11 @@
     <color name="textColor2">#000000</color>
     <color name="transparent">#00008577</color>
     <color name="background">#0DFFFFFF</color>
-    <color name="kolor1">#59DDD6D6</color>
-    <color name="kolor2">#ffeaed</color>
+    <color name="mainMenuButtonsColor">#4DDDD6D6</color>
+    <color name="hintColor">#D5D5D5</color>
     <color name="kolor3">#ffeaed</color>
     <color name="kolor4">#ffeaed</color>
     <color name="iconbackground">#FFC107</color>
     <color name="displayColor">#B3000000</color>
+    <color name="green">#4CAF50</color>
 </resources>

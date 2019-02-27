@@ -10,7 +10,7 @@
     </style>
 
     <style name="CustomToolbarStyle" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColor">@color/textColor2</item>
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
@@ -19,8 +19,9 @@
         <item name="android:text">@string/title</item>
         <item name="android:textAlignment">center</item>
         <item name="android:textSize">14sp</item>
-        <item name="actionMenuTextColor">@color/textColor</item>
         <item name="actionModeBackground">@color/background</item>
+        <item name = "tooltipForegroundColor">@color/textColor</item>
+        <item name="colorControlNormal">@color/textColor</item>
 
     </style>
 
