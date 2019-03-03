@@ -38,7 +38,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String creareTable = "CREATE TABLE " + dataBaseName + "(name TEXT, game TEXT, number INT)";
         db.execSQL(creareTable);
-        db.close();
     }
 
     @Override
@@ -55,7 +54,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         cursor.moveToFirst();
         number = cursor.getInt(0);
         cursor.close();
-        db.close();
         return number;
     }
 
@@ -88,7 +86,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         int number = cursor.getInt(0);
-        db.close();
         return number;
     }
 
@@ -100,7 +97,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         cursor.moveToFirst();
         String game = cursor.getString(0);
         cursor.close();
-        db.close();
         return game;
     }
 
@@ -114,7 +110,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         db.execSQL(query);
         query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame - 1) + " WHERE name = '" + name + "' AND game = '" + game +"'";
         db.execSQL(query);
-        db.close();
     }
 
     public void downGame(String name, String game)
@@ -128,7 +123,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         db.execSQL(query);
         query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame + 1) + " WHERE name = '" + name + "' AND game = '" + game +"'";
         db.execSQL(query);
-        db.close();
     }
 
     public void createFavorites(String name, String game)
@@ -145,7 +139,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         cursor.moveToFirst();
         int counted = cursor.getInt(0);
         cursor.close();
-        db.close();
         if(counted == 0)
             return false;
         else
@@ -161,7 +154,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         cursor.moveToFirst();
         int counted = cursor.getInt(0);
         cursor.close();
-        db.close();
         if(counted == 0)
             return false;
         else
@@ -179,7 +171,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
             if(!cursor.getString(0).equals("remove"))
                 list.add(cursor.getString(0));
 
-        db.close();
         return list;
     }
 
@@ -189,7 +180,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT name FROM " + dataBaseName + " GROUP BY name";
         Cursor data = db.rawQuery(query, null);
-        //db.close();
         return data;
     }
 
@@ -207,7 +197,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         String query = "DELETE FROM " + dataBaseName + " WHERE "
                 + "name" + " = '" + name + "'";
         db.execSQL(query);
-        db.close();
     }
 
     public void deleteGame(String name, String game){
@@ -219,7 +208,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         query = "UPDATE " + dataBaseName + " SET number = number - 1 WHERE "
                 + "name" + " = '" + name + "' AND number > " + Integer.toString(number);
         db.execSQL(query);
-        db.close();
     }
 
     public void editNameOfFavorite(String name, String newName)
@@ -228,7 +216,6 @@ public class DataBaseFavorites extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE  " + dataBaseName + " SET name = '" + newName + "' WHERE name = '" + name + "'";
         db.execSQL(query);
-        db.close();
     }
 
     /*public String randomGame(int seed)

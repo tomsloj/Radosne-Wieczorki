@@ -35,14 +35,16 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/upButton"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:background="@drawable/uparrowblack" />
 
@@ -55,8 +57,12 @@
 
         <Button
             android:id="@+id/downButton"
-            android:layout_width="wrap_content"
+            android:layout_width="60dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:background="@drawable/downarrowblack" />
     </LinearLayout>
