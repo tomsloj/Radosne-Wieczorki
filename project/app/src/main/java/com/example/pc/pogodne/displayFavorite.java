@@ -28,6 +28,7 @@ public class displayFavorite extends AppCompatActivity {
     ListView listView;
     int favoriteID = -1;
     int listSize;
+    int textSize;
 
 
     @Override
@@ -47,6 +48,7 @@ public class displayFavorite extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
 
+        /*
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
         int textSize = 15;
@@ -64,7 +66,11 @@ public class displayFavorite extends AppCompatActivity {
         {
             Toast.makeText(displayFavorite.this, "Error5",Toast.LENGTH_LONG).show();
         }
-        final int tSize = textSize;
+
+        */
+
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        textSize = sService.getSize();
 
 
         listView = (ListView) findViewById(R.id.listOfGames);
@@ -85,7 +91,7 @@ public class displayFavorite extends AppCompatActivity {
             {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setTextSize(tSize);
+                tv.setTextSize(textSize);
 
                 return view;
             }
@@ -118,9 +124,6 @@ public class displayFavorite extends AppCompatActivity {
         super.onResume();
 
         DataBaseFavorites dbFavorite = new DataBaseFavorites(displayFavorite.this);
-        //if(!dbFavorite.favoriteExist(nameOfFavorite))
-        //    finish();
-        //Toast.makeText(displayFavorite.this, Integer.toString(favoriteID), Toast.LENGTH_SHORT).show();
 
         ArrayList<String> favoriteList = dbFavorite.getFavoritesList();
 

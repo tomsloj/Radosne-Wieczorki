@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        /*
         //if settingsFile doesn't exist, set the default text size at 15sp
         //and write it to settingFile
         String filename = "settingsFile";
@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Error4", Toast.LENGTH_LONG).show();
             }
         }
+        */
 
     }
 

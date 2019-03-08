@@ -15,12 +15,13 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 public class settings extends AppCompatActivity {
+
+    int textSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,40 +34,8 @@ public class settings extends AppCompatActivity {
         final TextView report= (TextView) findViewById(R.id.reportText);
         final Button send = (Button) findViewById(R.id.reportButton);
 
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-
-        int textSize = 15;
-
-        if(!file.exists())
-        {
-            try {
-                FileOutputStream fos = new FileOutputStream(file);
-                byte[] buffer = "15".getBytes();
-                fos.write(buffer);
-                fos.close();
-            }
-            catch (IOException e)
-            {
-                Toast.makeText(this, "Error13",Toast.LENGTH_LONG).show();
-            }
-        }
-        else
-        {
-            try {
-                FileInputStream stream = new FileInputStream(file);
-                int size = stream.available();
-                byte[] buffer = new byte[size];
-                stream.read(buffer);
-                stream.close();
-                String textOfFile = new String(buffer);
-                textSize = Integer.parseInt(textOfFile);
-            }
-            catch (IOException e)
-            {
-                Toast.makeText(settings.this, "Error14",Toast.LENGTH_LONG).show();
-            }
-        }
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        textSize = sService.getSize();
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         setSupportActionBar(myToolbar);
@@ -86,83 +55,30 @@ public class settings extends AppCompatActivity {
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int tmpSize = 15;
-
-                try {
-                    FileInputStream stream = new FileInputStream(file);
-                    int size = stream.available();
-                    byte[] buffer = new byte[size];
-                    stream.read(buffer);
-                    stream.close();
-                    String textOfFile = new String(buffer);
-                    tmpSize = Integer.parseInt(textOfFile);
-                }
-                catch (IOException e)
+                if( textSize < 24 )
                 {
-                    Toast.makeText(settings.this, "Error15",Toast.LENGTH_LONG).show();
+                    sService.setSize( textSize + 2 );
+                    textSize += 2;
                 }
-
-                if(tmpSize < 24)
-                {
-                    textSizeText.setTextSize(tmpSize + 2);
-                    report.setTextSize(tmpSize + 2);
-
-                    String string = Integer.toString(tmpSize + 2);
-
-                    try {
-                        FileOutputStream fos = new FileOutputStream(file);
-                        byte[] buffer = string.getBytes();
-                        fos.write(buffer);
-                        fos.close();
-                    }
-                    catch (IOException e)
-                    {
-                        Toast.makeText(settings.this, "Error16",Toast.LENGTH_LONG).show();
-                    }
-                }
+                textSizeText.setTextSize(textSize);
+                report.setTextSize(textSize);
 
             }
         });
+
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int tmpSize = 15;
-
-                try {
-                    FileInputStream stream = new FileInputStream(file);
-                    int size = stream.available();
-                    byte[] buffer = new byte[size];
-                    stream.read(buffer);
-                    stream.close();
-                    String textOfFile = new String(buffer);
-                    tmpSize = Integer.parseInt(textOfFile);
-                }
-                catch (IOException e)
+                if( textSize > 10 )
                 {
-                    Toast.makeText(settings.this, "Error17",Toast.LENGTH_LONG).show();
+                    sService.setSize( textSize - 2 );
+                    textSize -= 2;
                 }
-
-                if(tmpSize > 10)
-                {
-                    textSizeText.setTextSize(tmpSize - 2);
-                    report.setTextSize(tmpSize - 2);
-
-                    String string = Integer.toString(tmpSize - 2);
-
-                    try {
-                        FileOutputStream fos = new FileOutputStream(file);
-                        byte[] buffer = string.getBytes();
-                        fos.write(buffer);
-                        fos.close();
-                    }
-                    catch (IOException e)
-                    {
-                        Toast.makeText(settings.this, "Error18",Toast.LENGTH_LONG).show();
-                    }
-                }
-
+                textSizeText.setTextSize(textSize);
+                report.setTextSize(textSize);
             }
         });
+
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

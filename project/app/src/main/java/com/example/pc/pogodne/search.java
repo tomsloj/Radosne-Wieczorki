@@ -25,11 +25,14 @@ import java.util.ArrayList;
 
 public class search extends AppCompatActivity {
 
+    int textSize;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        /*
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
         int textSize = 15;
@@ -47,6 +50,10 @@ public class search extends AppCompatActivity {
         {
             Toast.makeText(search.this, "Error19",Toast.LENGTH_LONG).show();
         }
+        */
+
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        textSize = sService.getSize();
 
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);

@@ -33,6 +33,7 @@ public class editFavorites extends AppCompatActivity {
     int mSelectedItem = -1;
     int olderSelection = -1;
     String nameOfFavorite;
+    int textSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class editFavorites extends AppCompatActivity {
         final Button downButton = (Button) findViewById(R.id.downButton);
         final ListView listView = (ListView) findViewById(R.id.editableList);
 
-
+        /*
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
         int textSize = 15;
@@ -76,7 +77,10 @@ public class editFavorites extends AppCompatActivity {
         {
             Toast.makeText(editFavorites.this, "Error5",Toast.LENGTH_LONG).show();
         }
-        final int tSize = textSize;
+        */
+
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        textSize = sService.getSize();
 
 
         final File favoriteFile = new File(editFavorites.this.getFilesDir(), "ulu");
@@ -98,7 +102,7 @@ public class editFavorites extends AppCompatActivity {
             {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setTextSize(tSize);
+                tv.setTextSize(textSize);
 
                 if(position == mSelectedItem)
                     view.setBackgroundColor(Color.GREEN);

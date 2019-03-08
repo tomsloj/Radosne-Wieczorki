@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class list extends AppCompatActivity {
 
     ListView listView;
-
+    int textSize;
     
     
     @Override
@@ -55,6 +55,8 @@ public class list extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.back);
         //actionBar.setDisplayShowHomeEnabled(true);
 
+
+        /*
         String fileSettingsName = "settingsFile";
         final File file = new File(this.getFilesDir(), fileSettingsName);
         int textSize = 15;
@@ -72,7 +74,10 @@ public class list extends AppCompatActivity {
         {
             Toast.makeText(list.this, "Error5",Toast.LENGTH_LONG).show();
         }
-        final int tSize = textSize;
+        */
+
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        textSize = sService.getSize();
 
         listView=(ListView)findViewById(R.id.listview);
         ArrayList<String> list= new ArrayList<>();
@@ -89,7 +94,7 @@ public class list extends AppCompatActivity {
             {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setTextSize(tSize);
+                tv.setTextSize(textSize);
 
                 return view;
             }

@@ -32,10 +32,16 @@ import java.util.ArrayList;
 public class display extends AppCompatActivity {
 
     int counter = 0;
+    int textSize;
+    TextView gameName;
+    TextView text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+
+        /*
 
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
@@ -52,10 +58,13 @@ public class display extends AppCompatActivity {
         } catch (IOException e) {
             Toast.makeText(display.this, "Error9", Toast.LENGTH_LONG).show();
         }
+        */
 
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        textSize = sService.getSize();
 
-        final TextView gameName = (TextView) findViewById(R.id.titleOfGame);
-        final TextView text = (TextView) findViewById(R.id.textOfGame);
+        gameName = (TextView) findViewById(R.id.titleOfGame);
+        text = (TextView) findViewById(R.id.textOfGame);
 
         gameName.setTextSize(textSize + 6);
         text.setTextSize(textSize);
@@ -133,9 +142,19 @@ public class display extends AppCompatActivity {
             }
         });
 
+    }
 
-
-
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        int currentTextSize = sService.getSize();
+        if(currentTextSize != textSize)
+        {
+            gameName.setTextSize(currentTextSize + 6);
+            text.setTextSize(currentTextSize);
+        }
     }
 
 

@@ -23,6 +23,7 @@ import java.util.ArrayList;
 public class listOfFavorites extends AppCompatActivity {
 
     Toolbar myToolbar;
+    int textSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,7 @@ public class listOfFavorites extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.back);
         //actionBar.setDisplayShowHomeEnabled(true);
 
+        /*
         String filename = "settingsFile";
         final File file = new File(this.getFilesDir(), filename);
         int textSize = 15;
@@ -58,8 +60,9 @@ public class listOfFavorites extends AppCompatActivity {
         {
             Toast.makeText(listOfFavorites.this, "Error29",Toast.LENGTH_LONG).show();
         }
-
-        final int tSize = textSize;
+        */
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        textSize = sService.getSize();
 
         final ListView listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
         final File favoritesFile = new File(listOfFavorites.this.getFilesDir(), "ulu");
@@ -77,7 +80,7 @@ public class listOfFavorites extends AppCompatActivity {
             {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setTextSize(tSize);
+                tv.setTextSize(textSize);
 
                 return view;
             }
