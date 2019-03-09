@@ -2,6 +2,7 @@ package com.example.pc.pogodne;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -29,6 +30,7 @@ public class list extends AppCompatActivity {
 
     ListView listView;
     int textSize;
+    String category;
     
     
     @Override
@@ -37,7 +39,7 @@ public class list extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         //get category of list
-        String category = getIntent().getStringExtra("kategoria");
+        category = getIntent().getStringExtra("kategoria");
 
         //create toolbar
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
@@ -53,28 +55,6 @@ public class list extends AppCompatActivity {
         //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        //actionBar.setDisplayShowHomeEnabled(true);
-
-
-        /*
-        String fileSettingsName = "settingsFile";
-        final File file = new File(this.getFilesDir(), fileSettingsName);
-        int textSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String textOfFile = new String(buffer);
-            textSize = Integer.parseInt(textOfFile);
-        }
-        catch (IOException e)
-        {
-            Toast.makeText(list.this, "Error5",Toast.LENGTH_LONG).show();
-        }
-        */
 
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getSize();
@@ -133,63 +113,33 @@ public class list extends AppCompatActivity {
         }
     }
 
-    /*
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
 
-
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int textSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String textOfFile = new String(buffer);
-            textSize = Integer.parseInt(textOfFile);
-        }
-        catch (IOException e)
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        final int currentTextSize = sService.getSize();
+        if(currentTextSize != textSize)
         {
-            Toast.makeText(list.this, "Error5",Toast.LENGTH_LONG).show();
+            DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
+
+            final ArrayList<String> arrayList = dbHelper.getGamesInCategory(category);
+
+            ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this, android.R.layout.simple_list_item_1, arrayList) {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                    tv.setTextSize(currentTextSize);
+
+                    return view;
+                }
+            };
+            listView.setAdapter(arrayAdapter);
         }
-        final int tSize = textSize;
-
-        listView=(ListView)findViewById(R.id.listview);
-        ArrayList<String> list= new ArrayList<>();
-
-        String category = getIntent().getStringExtra("kategoria");
-
-        try {
-            InputStream stream = getAssets().open(fileName);
-            list = FileHelper.titlesInCategory(stream, category);
-            //Toast.makeText(list.this, Integer.toString(list.size()),Toast.LENGTH_LONG).show();
-
-        } catch (IOException ex) {
-            Toast.makeText(this, "Error6", Toast.LENGTH_SHORT).show();
-        }
-
-        final ArrayList<String> arrayList= list;
-        //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
-        {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent)
-            {
-                View view = super.getView(position, convertView, parent);
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setTextSize(tSize);
-
-                return view;
-            }
-        };
-        listView.setAdapter(arrayAdapter);
-
     }
-    */
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

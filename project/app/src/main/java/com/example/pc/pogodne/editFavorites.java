@@ -34,6 +34,8 @@ public class editFavorites extends AppCompatActivity {
     int olderSelection = -1;
     String nameOfFavorite;
     int textSize;
+    ArrayList<String> list;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +59,7 @@ public class editFavorites extends AppCompatActivity {
         final Button deleteOne = (Button) findViewById(R.id.buttonDeleteOne);
         final Button upButton = (Button) findViewById(R.id.upButton);
         final Button downButton = (Button) findViewById(R.id.downButton);
-        final ListView listView = (ListView) findViewById(R.id.editableList);
+        listView = (ListView) findViewById(R.id.editableList);
 
         /*
         String filename = "settingsFile";
@@ -89,7 +91,7 @@ public class editFavorites extends AppCompatActivity {
 
         final DataBaseFavorites dbHelperFavorites = new DataBaseFavorites(editFavorites.this);
 
-        final ArrayList<String> list = dbHelperFavorites.getGamesInFavorite(nameOfFavorite);
+        list = dbHelperFavorites.getGamesInFavorite(nameOfFavorite);
         myToolbar.setTitle(nameOfFavorite);
 
         final ArrayList<String> arrayList= list;
@@ -260,6 +262,37 @@ public class editFavorites extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        final int currentTextSize = sService.getSize();
+        if(currentTextSize != textSize)
+        {
+            final ArrayList<String> arrayList= list;
+            final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(editFavorites.this,android.R.layout.simple_list_item_1, arrayList)
+            {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent)
+                {
+                    View view = super.getView(position, convertView, parent);
+                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                    tv.setTextSize(currentTextSize);
+
+                    if(position == mSelectedItem)
+                        view.setBackgroundColor(Color.GREEN);
+                    else
+                        view.setBackgroundColor(Color.TRANSPARENT);
+
+                    return view;
+                }
+            };
+            listView.setAdapter(arrayAdapter);
+
+        }
     }
 
     /*

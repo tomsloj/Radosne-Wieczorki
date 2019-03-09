@@ -1,6 +1,7 @@
 package com.example.pc.pogodne;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ public class listOfFavorites extends AppCompatActivity {
 
     Toolbar myToolbar;
     int textSize;
+    ArrayList<String> list;
+    ListView listOfFavorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,38 +43,18 @@ public class listOfFavorites extends AppCompatActivity {
         //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        //actionBar.setDisplayShowHomeEnabled(true);
 
-        /*
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int textSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String textOfFile = new String(buffer);
-            textSize = Integer.parseInt(textOfFile);
-        }
-        catch (IOException e)
-        {
-            Toast.makeText(listOfFavorites.this, "Error29",Toast.LENGTH_LONG).show();
-        }
-        */
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getSize();
 
-        final ListView listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
+        listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
         final File favoritesFile = new File(listOfFavorites.this.getFilesDir(), "ulu");
 
         DataBaseFavorites dbHelperFavorites = new DataBaseFavorites(listOfFavorites.this);
 
         ArrayList<String> listFavorites = dbHelperFavorites.getFavoritesList();
 
-        final ArrayList<String> list = listFavorites;
+        list = listFavorites;
 
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, list)
         {
@@ -108,6 +91,34 @@ public class listOfFavorites extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
+
+        boolean toChange = false;
+        DataBaseFavorites dbFavorite = new DataBaseFavorites(getApplicationContext());
+        ArrayList<String> favoritesList = dbFavorite.getFavoritesList();
+        if(list.size() != favoritesList.size()) {
+            list = favoritesList;
+            toChange = true;
+        }
+
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        final int currentTextSize = sService.getSize();
+        if(currentTextSize != textSize  || toChange)
+        {
+            final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, list)
+            {
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent)
+                {
+                    View view = super.getView(position, convertView, parent);
+                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                    tv.setTextSize(currentTextSize);
+
+                    return view;
+                }
+            };
+            listOfFavorites.setAdapter(arrayAdapter);
+        }
+
 
     }
 

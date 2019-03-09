@@ -29,6 +29,7 @@ public class displayFavorite extends AppCompatActivity {
     int favoriteID = -1;
     int listSize;
     int textSize;
+    ArrayList<String> list;
 
 
     @Override
@@ -48,27 +49,6 @@ public class displayFavorite extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
 
-        /*
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int textSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String textFromFile = new String(buffer);
-            textSize = Integer.parseInt(textFromFile);
-        }
-        catch (IOException e)
-        {
-            Toast.makeText(displayFavorite.this, "Error5",Toast.LENGTH_LONG).show();
-        }
-
-        */
-
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getSize();
 
@@ -82,7 +62,7 @@ public class displayFavorite extends AppCompatActivity {
 
         listSize = favoriteList.size();
 
-        final ArrayList<String> list = dbFavorites.getGamesInFavorite(nameOfFavorite);
+        list = dbFavorites.getGamesInFavorite(nameOfFavorite);
 
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this,android.R.layout.simple_list_item_1, list)
         {
@@ -123,20 +103,46 @@ public class displayFavorite extends AppCompatActivity {
     {
         super.onResume();
 
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        final int currentTextSize = sService.getSize();
+
         DataBaseFavorites dbFavorite = new DataBaseFavorites(displayFavorite.this);
 
         ArrayList<String> favoriteList = dbFavorite.getFavoritesList();
 
         if(listSize != favoriteList.size())
         {
+            Toast.makeText(getApplicationContext(), "nr 1", Toast.LENGTH_SHORT).show();
             finish();
         }
         else
         {
+            boolean toChange = false;
+            ArrayList<String> gamesList = dbFavorite.getGamesInFavorite(nameOfFavorite);
+            if(list.size() != gamesList.size()) {
+                list = gamesList;
+                toChange = true;
+                Toast.makeText(getApplicationContext(), "pppp", Toast.LENGTH_SHORT).show();
+            }
+                //Toast.makeText(getApplicationContext(), Integer.toString(textSize) + "," + Integer.toString(currentTextSize), Toast.LENGTH_SHORT).show();
             myToolbar.setTitle(favoriteList.get(favoriteID));
-        }
+            if(currentTextSize != textSize || toChange)
+            {
+                Toast.makeText(getApplicationContext(), "nr 3", Toast.LENGTH_SHORT).show();
+                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this, android.R.layout.simple_list_item_1, list) {
+                    @Override
+                    public View getView(int position, View convertView, ViewGroup parent) {
+                        View view = super.getView(position, convertView, parent);
+                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                        tv.setTextSize(currentTextSize);
 
-        //myToolbar.setTitle(nameOfFavorite);
+                        return view;
+                    }
+                };
+                listView.setAdapter(arrayAdapter);
+            }
+
+        }
 
     }
 
