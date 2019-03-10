@@ -105,6 +105,7 @@ public class editFavorites extends AppCompatActivity {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
                 tv.setTextSize(textSize);
+                tv.setTextColor(Color.BLACK);
 
                 if(position == mSelectedItem)
                     view.setBackgroundColor(Color.GREEN);
@@ -281,9 +282,11 @@ public class editFavorites extends AppCompatActivity {
                     View view = super.getView(position, convertView, parent);
                     TextView tv = (TextView) view.findViewById(android.R.id.text1);
                     tv.setTextSize(currentTextSize);
+                    tv.setTextColor(Color.BLACK);
 
-                    if(position == mSelectedItem)
+                    if(position == mSelectedItem) {
                         view.setBackgroundColor(Color.GREEN);
+                    }
                     else
                         view.setBackgroundColor(Color.TRANSPARENT);
 
@@ -292,6 +295,14 @@ public class editFavorites extends AppCompatActivity {
             };
             listView.setAdapter(arrayAdapter);
 
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    olderSelection = mSelectedItem;
+                    mSelectedItem = i;
+                    arrayAdapter.notifyDataSetChanged();
+                }
+            });
         }
     }
 

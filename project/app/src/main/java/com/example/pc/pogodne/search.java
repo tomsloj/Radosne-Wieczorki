@@ -1,6 +1,7 @@
 package com.example.pc.pogodne;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -32,26 +34,6 @@ public class search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        /*
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int textSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String TextOfFile = new String(buffer);
-            textSize = Integer.parseInt(TextOfFile);
-        }
-        catch (IOException e)
-        {
-            Toast.makeText(search.this, "Error19",Toast.LENGTH_LONG).show();
-        }
-        */
-
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getSize();
 
@@ -66,7 +48,6 @@ public class search extends AppCompatActivity {
         //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        //actionBar.setDisplayShowHomeEnabled(true);
 
 
         final Button searchButton = (Button) findViewById(R.id.searchButton);
@@ -104,7 +85,19 @@ public class search extends AppCompatActivity {
 
                     if(!list.isEmpty())
                     {
-                        ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
+                        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(search.this, android.R.layout.simple_list_item_1, list)
+                        {
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent)
+                            {
+                                View view = super.getView(position, convertView, parent);
+                                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                                tv.setTextSize(textSize);
+                                tv.setTextColor(Color.BLACK);
+
+                                return view;
+                            }
+                        };
                         listOfFound.setAdapter(arrayAdapter);
                         textNoFavorites.setText("");
                     }

@@ -1,6 +1,7 @@
 package com.example.pc.pogodne;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -72,6 +73,7 @@ public class displayFavorite extends AppCompatActivity {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
                 tv.setTextSize(textSize);
+                tv.setTextColor(Color.BLACK);
 
                 return view;
             }
@@ -135,6 +137,7 @@ public class displayFavorite extends AppCompatActivity {
                         View view = super.getView(position, convertView, parent);
                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
                         tv.setTextSize(currentTextSize);
+                        tv.setTextColor(Color.BLACK);
 
                         return view;
                     }

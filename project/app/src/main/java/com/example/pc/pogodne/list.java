@@ -75,6 +75,7 @@ public class list extends AppCompatActivity {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
                 tv.setTextSize(textSize);
+                tv.setTextColor(Color.BLACK);
 
                 return view;
             }
@@ -132,6 +133,7 @@ public class list extends AppCompatActivity {
                     View view = super.getView(position, convertView, parent);
                     TextView tv = (TextView) view.findViewById(android.R.id.text1);
                     tv.setTextSize(currentTextSize);
+                    tv.setTextColor(Color.BLACK);
 
                     return view;
                 }
