@@ -83,12 +83,13 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
             query = "SELECT zabawa FROM DANE WHERE kategoria <> 'zz'";
         else
             query = "SELECT zabawa FROM DANE WHERE kategoria = '" + category + "'";
+        query = query + " ORDER BY zabawa";
         return getList(query);
     }
 
     public ArrayList<String> getListOfFavorites()
     {
-        String query = "SELECT name FROM FAVORITESLIST";
+        String query = "SELECT name FROM FAVORITESLIST ORDER BY name";
         return getList(query);
     }
 

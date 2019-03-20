@@ -35,30 +35,12 @@ public class display extends AppCompatActivity {
     int textSize;
     TextView gameName;
     TextView text;
+    String game;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
-
-        /*
-
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int textSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String plik = new String(buffer);
-            textSize = Integer.parseInt(plik);
-        } catch (IOException e) {
-            Toast.makeText(display.this, "Error9", Toast.LENGTH_LONG).show();
-        }
-        */
 
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getSize();
@@ -69,7 +51,7 @@ public class display extends AppCompatActivity {
         gameName.setTextSize(textSize + 6);
         text.setTextSize(textSize);
 
-        final String game = getIntent().getStringExtra("zabawa");
+        game = getIntent().getStringExtra("zabawa");
 
         final File tmpFile = new File(this.getFilesDir(), "tmpfile");
 
@@ -171,14 +153,14 @@ public class display extends AppCompatActivity {
         return true;
     }
 
-    @SuppressLint("SetTextI18n")
+    //@SuppressLint("SetTextI18n")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == R.id.action_search) {
-            Intent otworz_wyszukiwanie = new Intent(getApplicationContext(), search.class);
-            startActivity(otworz_wyszukiwanie);
+            Intent openSearching = new Intent(getApplicationContext(), search.class);
+            startActivity(openSearching);
         }
         else if (id == R.id.action_settings) {
             Intent otworz_ustawienia = new Intent(getApplicationContext(), settings.class);
@@ -187,9 +169,6 @@ public class display extends AppCompatActivity {
         else
             if(id == R.id.favoritesButton)
             {
-
-
-
                 final AlertDialog.Builder builder = new AlertDialog.Builder(display.this);
                 final LayoutInflater inflater = display.this.getLayoutInflater();
                 final View dialogView = inflater.inflate(R.layout.add_to_favorites, null);
@@ -197,11 +176,6 @@ public class display extends AppCompatActivity {
                 final Button stworz = (Button) dialogView.findViewById(R.id.createFavorite);
                 final EditText nazwa =(EditText) dialogView.findViewById(R.id.nameOfFavorite);
                 final ListView listaulu = (ListView) dialogView.findViewById(R.id.dialogLisOfFavorites);
-
-                final File ulufile = new File(display.this.getFilesDir(), "ulu");
-                final File tmpfile = new File(display.this.getFilesDir(), "tmpfile");
-
-                //final DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
 
                 final DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites(display.this);
 
@@ -219,111 +193,36 @@ public class display extends AppCompatActivity {
 
                 listaulu.setAdapter(arrayAdapter);
 
-
-                //get game which is delayed from tmpfile
-                String tmpGame = null;
-                try {
-                    FileInputStream stream = new FileInputStream(tmpfile);
-                    int size = stream.available();
-                    byte[] buffer = new byte[size];
-                    stream.read(buffer);
-                    stream.close();
-                    tmpGame = new String(buffer);
-                }
-                catch (IOException e)
-                {
-                    Toast.makeText(display.this, "Error22",Toast.LENGTH_LONG).show();
-                }
-
-                final String zabawa = tmpGame;
-
-
                 stworz.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String nazwaulu = nazwa.getText().toString();
-                        if(nazwaulu.isEmpty() || nazwaulu.replace(" ", "").isEmpty())
+                        String nameOfFavorite = nazwa.getText().toString();
+                        if(nameOfFavorite.isEmpty() || nameOfFavorite.replace(" ", "").isEmpty())
                         {
                             Toast.makeText(display.this, "nazwa nie może być pusta",Toast.LENGTH_LONG).show();
                         }
                         else
-                            if(nazwaulu.contains("%") || nazwaulu.contains(">") ||
-                                    nazwaulu.contains("@") || nazwaulu.contains("<") ||
-                                    nazwaulu.contains("#") || nazwaulu.contains("|") ||
-                                    nazwaulu.contains("$"))
+                            if(nameOfFavorite.contains("%") || nameOfFavorite.contains(">") ||
+                                    nameOfFavorite.contains("@") || nameOfFavorite.contains("<") ||
+                                    nameOfFavorite.contains("#") || nameOfFavorite.contains("|") ||
+                                    nameOfFavorite.contains("$"))
                             {
                                 Toast.makeText(display.this, "nazwa nie może zawierać:\n%<>@#$|",Toast.LENGTH_LONG).show();
                             }
                             else
                                 {
-                                    if(dbFavoritesHelper.favoriteExist(nazwaulu))
+                                    if(dbFavoritesHelper.favoriteExist(nameOfFavorite))
                                         Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
                                     else
-                                        dbFavoritesHelper.createFavorites(nazwaulu, zabawa);
-                                    //if(dbHelper.existsFavorite(nazwaulu))
-                                    //{
-                                    //    Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
-                                    //}
-                                    //else
                                     {
-                                        //dbHelper.createFavorite(nazwaulu);
-                                        //if(dbHelper.chceck())
-                                        //    Toast.makeText(display.this, "ok",Toast.LENGTH_SHORT).show();
-                                        //else
-                                        //    Toast.makeText(display.this, "nieok",Toast.LENGTH_SHORT).show();
-
-                                        //ArrayList<String>tmp = dbHelper.tableNames();
-                                        //for(int i = 0 ; i < tmp.size(); ++i)
-                                        //    Toast.makeText(display.this, tmp.get(i),Toast.LENGTH_SHORT).show();
-
-                                        //dbHelper.addToFavorites(nazwaulu, zabawa);
+                                        dbFavoritesHelper.createFavorites(nameOfFavorite, game);
+                                        arrayAdapter.add(nameOfFavorite);
+                                        arrayAdapter.notifyDataSetChanged();
+                                        Toast.makeText(display.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
                                     }
-
-                                    /*
-                                    FileHelper op = new FileHelper();
-
-                                    final File ulufile = new File(display.this.getFilesDir(), "ulu");
-
-                                    final File tmpfile = new File(display.this.getFilesDir(), "tmpfile");
-
-                                    String zabawa = null;
-                                    try {
-                                        FileInputStream stream = new FileInputStream(tmpfile);
-                                        int size = stream.available();
-                                        byte[] buffer = new byte[size];
-                                        stream.read(buffer);
-                                        stream.close();
-                                        zabawa = new String(buffer);
-                                    }
-                                    catch (IOException e)
-                                    {
-                                        Toast.makeText(display.this, "Error22",Toast.LENGTH_LONG).show();
-
-                                    }
-
-                                    if(FileHelper.doExistInFavoriteList(ulufile, nazwaulu))
-                                    {
-                                        Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
-                                    }
-                                    else {
-                                        if (FileHelper.createNewFavorite(ulufile,nazwaulu, zabawa) == 1) {
-                                            Toast.makeText(display.this, "zabawa została zapisana do nowopowstałej listy", Toast.LENGTH_SHORT).show();
-                                            arrayAdapter.add(nazwaulu);
-                                        }
-                                            else
-                                        {
-                                            Toast.makeText(display.this, Integer.toString(FileHelper.createNewFavorite(ulufile,nazwaulu, zabawa)),Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                                    */
                             }
                     }
                 });
-
-
-
-
-
 
                 listaulu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
@@ -331,112 +230,25 @@ public class display extends AppCompatActivity {
                         String favoritesName = list.get(i);
 
                         //dbHelper.addToFavorites(favoritesName, zabawa);
-                        if(dbFavoritesHelper.gameInFavoriteExists(favoritesName, zabawa))
+                        if(dbFavoritesHelper.gameInFavoriteExists(favoritesName, game))
                             Toast.makeText(display.this, "ta zabawa już znajduje sie na tej liście ulubionych",Toast.LENGTH_SHORT).show();
                         else
                         {
-                            dbFavoritesHelper.addData(favoritesName, zabawa);
+                            dbFavoritesHelper.addData(favoritesName, game);
                             Toast.makeText(display.this, "zabawa została dodana",Toast.LENGTH_SHORT).show();
                         }
-
-
-                        /*
-                        int tmp = FileHelper.addToFavorites(ulufile, favoritesName, zabawa);
-                        if(tmp == 0)
-                        {
-                            Toast.makeText(display.this, "Error24",Toast.LENGTH_LONG).show();
-                        }
-                        else
-                        if(tmp == 1)
-                        {
-                            Toast.makeText(display.this, "ta zabawa już znajduje sie na tej liście ulubionych",Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
-                            Toast.makeText(display.this, "zabawa została dodana",Toast.LENGTH_SHORT).show();
-                        }
-                        */
 
                     }
                 });
+
                 final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
                 if(list.size() == 0)
                 {
                     text.setText("Nie posiadasz jeszcze żadnej listy ulubionych");
                 }
-                //Toast.makeText(display.this, "ooo".toString(),Toast.LENGTH_LONG).show();
             }
 
         return super.onOptionsItemSelected(item);
     }
 
-    /*
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int tekstSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String plik = new String(buffer);
-            tekstSize = Integer.parseInt(plik);
-        } catch (IOException e) {
-            Toast.makeText(display.this, "Error9", Toast.LENGTH_LONG).show();
-        }
-
-
-        final TextView nazwaZabawy = (TextView) findViewById(R.id.titleOfGame);
-        final TextView text = (TextView) findViewById(R.id.textOfGame);
-
-        nazwaZabawy.setTextSize(tekstSize + 6);
-        text.setTextSize(tekstSize);
-
-        final String zabawa = getIntent().getStringExtra("zabawa");
-
-        final File tmpfile = new File(this.getFilesDir(), "tmpfile");
-
-        try {
-            FileOutputStream fos = new FileOutputStream(tmpfile);
-            byte[] buffer = zabawa.getBytes();
-            fos.write(buffer);
-            fos.close();
-        } catch (IOException e) {
-            Toast.makeText(this, "Error13", Toast.LENGTH_LONG).show();
-        }
-
-
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
-        setSupportActionBar(myToolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-
-        myToolbar.setTitle(zabawa);
-
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.back);
-
-
-        try {
-            InputStream stream = getAssets().open(fileName);
-
-            String textFromFile;
-            nazwaZabawy.setText(zabawa);
-
-            textFromFile = FileHelper.textOfGame(stream, zabawa);
-            text.setText(textFromFile);
-        } catch (IOException ex) {
-            Toast.makeText(this, "Error10", Toast.LENGTH_SHORT).show();
-            ex.printStackTrace();
-        }
-
-
-    }
-    */
 }

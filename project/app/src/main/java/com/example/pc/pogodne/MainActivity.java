@@ -53,10 +53,6 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
         }
-        else
-        {
-            Toast.makeText(this, "oooo", Toast.LENGTH_SHORT).show();
-        }
 
 
         //define buttons

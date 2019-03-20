@@ -1,5 +1,6 @@
 package com.example.pc.pogodne;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -108,7 +109,7 @@ public class editFavorites extends AppCompatActivity {
                 tv.setTextColor(Color.BLACK);
 
                 if(position == mSelectedItem)
-                    view.setBackgroundColor(Color.GREEN);
+                    view.setBackgroundColor(Color.parseColor("#eb5048" ));
                 else
                     view.setBackgroundColor(Color.TRANSPARENT);
 
@@ -285,7 +286,7 @@ public class editFavorites extends AppCompatActivity {
                     tv.setTextColor(Color.BLACK);
 
                     if(position == mSelectedItem) {
-                        view.setBackgroundColor(Color.GREEN);
+                        view.setBackgroundColor(Color.parseColor("#eb5048" ));
                     }
                     else
                         view.setBackgroundColor(Color.TRANSPARENT);
