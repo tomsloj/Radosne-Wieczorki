@@ -69,8 +69,14 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         rand.setSeed(seed);
         int randNumber = rand.nextInt();
         randNumber = ((randNumber % counted) + counted) % counted;
-        String query = "SELECT zabawa FROM DANE WHERE _id = " + Integer.toString(randNumber + 1);
-        ArrayList<String> aList = getList(query);
+        ArrayList<String> aList = new ArrayList<String>();
+        while( aList.isEmpty() )
+        {
+            String query = "SELECT zabawa FROM DANE WHERE _id = " + Integer.toString(randNumber + 1) + " AND kategoria <> 'zz'";
+            aList = getList(query);
+            randNumber = rand.nextInt();
+            randNumber = ((randNumber % counted) + counted) % counted;
+        }
         if(aList.isEmpty())
             return "Error 73";
         return aList.get(0);
