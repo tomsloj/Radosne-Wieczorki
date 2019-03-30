@@ -40,14 +40,18 @@ public class MainActivity extends AppCompatActivity {
         DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
 
         File database = getApplicationContext().getDatabasePath(DataBaseHelper.dataBaseName);
-
-
+        /*DataBaseHelper helper = new DataBaseHelper(this);
+        SQLiteDatabase base = helper.getReadableDatabase();
+        String filePath = base.getPath();
+        base.close();
+        File database = new File(filePath);
+        */
         if(!database.exists())
         {
             dbHelper.getReadableDatabase();
             //copy db
             if(copyDatabase(this)) {
-                Toast.makeText(this, "Copy database succes", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Copy database succes", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
                 return;

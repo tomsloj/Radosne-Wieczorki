@@ -74,7 +74,6 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         {
             String query = "SELECT zabawa FROM DANE WHERE _id = " + Integer.toString(randNumber + 1) + " AND kategoria <> 'zz'";
             aList = getList(query);
-            randNumber = rand.nextInt();
             randNumber = ((randNumber % counted) + counted) % counted;
         }
         if(aList.isEmpty())
@@ -163,6 +162,12 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    }
+
+    @Override
+    public void onOpen(SQLiteDatabase db) {
+        super.onOpen(db);
+        db.disableWriteAheadLogging();
     }
 
 

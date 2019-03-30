@@ -118,7 +118,7 @@ public class display extends AppCompatActivity {
                             dataBaseFavorites.addData("zakazane zabawy", "zwierzę");
                             Toast.makeText(display.this, "chyba dodało", Toast.LENGTH_LONG).show();
                         }
-                        Toast.makeText(display.this, "przycisk działa", Toast.LENGTH_LONG).show();
+                        Toast.makeText(display.this, "niespodzianka", Toast.LENGTH_LONG).show();
                     }
                 }
             }
