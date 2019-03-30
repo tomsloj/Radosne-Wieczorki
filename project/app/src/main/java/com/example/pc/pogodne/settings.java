@@ -8,10 +8,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -82,21 +84,24 @@ public class settings extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(settings.this);
-                builder.setCancelable(true);
-                builder.setView(R.layout.send_report);
-
+                final AlertDialog.Builder builder = new AlertDialog.Builder(settings.this);
+                //builder.setCancelable(true);
+                final LayoutInflater inflater = LayoutInflater.from(settings.this);
+                final View dialogView = inflater.inflate(R.layout.send_report, null);
+                final EditText message = (EditText) dialogView.findViewById(R.id.message);
+                builder.setView(dialogView);
                 builder.setPositiveButton(
                         R.string.send,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
 
-                                String text = report.getText().toString();
+                                String text =  message.getText().toString();
                                 if(text.replace(" ", "").equals(""))
                                 {
                                     Toast.makeText(settings.this, "Wiadomość nie może być pusta", Toast.LENGTH_SHORT).show();
                                 }
-                                else {
+                                else
+                                {
                                     String[] to = {getString(R.string.mail)};
                                     Intent intent = new Intent(Intent.ACTION_SEND);
                                     intent.setData(Uri.parse("mailto:"));
@@ -105,6 +110,7 @@ public class settings extends AppCompatActivity {
                                     intent.putExtra(Intent.EXTRA_TEXT, text);
 
                                     intent.setType("message/rfc822");
+                                    //Toast.makeText(settings.this, text, Toast.LENGTH_SHORT).show();
                                     Intent chooser = Intent.createChooser(intent, "Wybierz aplikację z której wyślesz maila");
                                     startActivity(chooser);
                                 }
