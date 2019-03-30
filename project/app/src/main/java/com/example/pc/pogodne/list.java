@@ -121,7 +121,7 @@ public class list extends AppCompatActivity {
 
         final SettingsService sService = new SettingsService(getApplicationContext());
         final int currentTextSize = sService.getSize();
-        Toast.makeText(list.this, Integer.toString(currentTextSize) + " " + Integer.toString(textSize), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(list.this, Integer.toString(currentTextSize) + " " + Integer.toString(textSize), Toast.LENGTH_SHORT).show();
         if(currentTextSize != textSize)
         {
             textSize = currentTextSize;
