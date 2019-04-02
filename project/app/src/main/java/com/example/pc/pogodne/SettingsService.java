@@ -2,10 +2,10 @@ package com.example.pc.pogodne;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.Preference;
 import android.preference.PreferenceManager;
 
-public class SettingsService {
+public class SettingsService
+{
     Context settingsContext;
 
     SettingsService(Context context)
