@@ -1,0 +1,3 @@
+-> kopiowanie nowej bazy danych gdy aplikacja została zaktualizowana do nowej wersji
+-> naprawienie bugów związanych ze zmienianiem nazwy listy ulubionych (wracanie do poprzednich aktywności po zmianie nazwy)
+-> aktualizacja bazy
