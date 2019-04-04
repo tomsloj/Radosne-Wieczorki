@@ -77,7 +77,8 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     private int numberOfGame(String name, String game)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT number FROM " + dataBaseName + " WHERE name = '" + name + "' AND game = '" + game +"'";
+        String query = "SELECT number FROM " + dataBaseName + " WHERE name = '" + name
+                + "' AND game = '" + game +"'";
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         int number = cursor.getInt(0);
@@ -87,7 +88,8 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     private String gameFromNumber(int number, String name)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT game FROM " + dataBaseName + " WHERE name = '" + name + "' AND number = " + Integer.toString(number);
+        String query = "SELECT game FROM " + dataBaseName + " WHERE name = '" + name
+                + "' AND number = " + Integer.toString(number);
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         String game = cursor.getString(0);
@@ -104,9 +106,11 @@ public class DataBaseFavorites extends SQLiteOpenHelper
                 return;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame) + " WHERE name = '" + name + "' AND number = " + Integer.toString(numberOfGame - 1);
+        String query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame)
+                + " WHERE name = '" + name + "' AND number = " + Integer.toString(numberOfGame - 1);
         db.execSQL(query);
-        query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame - 1) + " WHERE name = '" + name + "' AND game = '" + game +"'";
+        query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame - 1)
+                + " WHERE name = '" + name + "' AND game = '" + game +"'";
         db.execSQL(query);
     }
 
@@ -120,9 +124,11 @@ public class DataBaseFavorites extends SQLiteOpenHelper
             return;
 
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame) + " WHERE name = '" + name + "' AND number = " + Integer.toString(numberOfGame + 1);
+        String query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame)
+                + " WHERE name = '" + name + "' AND number = " + Integer.toString(numberOfGame + 1);
         db.execSQL(query);
-        query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame + 1) + " WHERE name = '" + name + "' AND game = '" + game +"'";
+        query = "UPDATE  " + dataBaseName + " SET number = " + Integer.toString(numberOfGame + 1)
+                + " WHERE name = '" + name + "' AND game = '" + game +"'";
         db.execSQL(query);
     }
 
@@ -154,7 +160,8 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     public boolean gameInFavoriteExists(String name, String game)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT count(*) FROM " + dataBaseName +" WHERE name = '" + name +"' AND game = '" + game + "'";
+        String query = "SELECT count(*) FROM " + dataBaseName +" WHERE name = '" + name
+                + "' AND game = '" + game + "'";
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         int counted = cursor.getInt(0);
@@ -171,7 +178,8 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     public ArrayList<String> getGamesInFavorite(String name)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT game FROM " + dataBaseName + " WHERE name = '" + name + "' ORDER BY number";
+        String query = "SELECT game FROM " + dataBaseName + " WHERE name = '" + name
+                + "' ORDER BY number";
         Cursor cursor = db.rawQuery(query, null);
         ArrayList<String> list = new ArrayList<>();
 
@@ -229,7 +237,8 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     public void editNameOfFavorite(String name, String newName)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "UPDATE  " + dataBaseName + " SET name = '" + newName + "' WHERE name = '" + name + "'";
+        String query = "UPDATE  " + dataBaseName + " SET name = '" + newName + "' WHERE name = '"
+                + name + "'";
         db.execSQL(query);
     }
 
