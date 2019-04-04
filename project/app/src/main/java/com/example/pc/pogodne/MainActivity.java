@@ -18,6 +18,7 @@ import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity
 {
+    int nr = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -30,11 +31,13 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(myToolbar);
 
         //copy database
-        //TODO copping base when newer file is detected
         DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
-        File database = getApplicationContext().getDatabasePath(DataBaseHelper.dataBaseName);
-        if(!database.exists())
+        SettingsService settingsService = new SettingsService(getApplicationContext());
+        String version = settingsService.getCurrentVersion();
+        //update only when new version was installed
+        if(!version.equals(settingsService.getPrevVersion()))
         {
+            settingsService.setPrevVersion(version);
             dbHelper.getReadableDatabase();
             //copy db
             if(copyDatabase(this)) {
@@ -44,7 +47,6 @@ public class MainActivity extends AppCompatActivity
                 return;
             }
         }
-
 
         //define buttons
         final Button wholeListButton = (Button) findViewById(R.id.wholeListButton);
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         final Button gameOfTheDayButton = (Button) findViewById(R.id.gameOfTheDayButton);
 
         /*
-        * set what buttons do
+         * set what buttons do
          */
 
         //show the whole list
