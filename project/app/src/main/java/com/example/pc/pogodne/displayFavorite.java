@@ -15,11 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class displayFavorite extends AppCompatActivity {
@@ -112,26 +108,29 @@ public class displayFavorite extends AppCompatActivity {
 
         ArrayList<String> favoriteList = dbFavorite.getFavoritesList();
 
-        //TODO same like in listoffavorites: what with changed name
         if(listSize != favoriteList.size())
         {
-            //Toast.makeText(getApplicationContext(), "nr 1", Toast.LENGTH_SHORT).show();
             finish();
         }
         else
         {
             boolean toChange = false;
+            String newNameOfFavorite = sService.getNewNameOfFavorite();
+            if( !nameOfFavorite.equals(newNameOfFavorite) && !newNameOfFavorite.equals("") )
+            {
+                nameOfFavorite = newNameOfFavorite;
+                toChange = true;
+            }
+
             ArrayList<String> gamesList = dbFavorite.getGamesInFavorite(nameOfFavorite);
             if(list.size() != gamesList.size()) {
                 list = gamesList;
                 toChange = true;
-                //Toast.makeText(getApplicationContext(), "pppp", Toast.LENGTH_SHORT).show();
             }
-                //Toast.makeText(getApplicationContext(), Integer.toString(textSize) + "," + Integer.toString(currentTextSize), Toast.LENGTH_SHORT).show();
-            myToolbar.setTitle(favoriteList.get(favoriteID));
+
+            myToolbar.setTitle(nameOfFavorite);
             if(currentTextSize != textSize || toChange)
             {
-                //Toast.makeText(getApplicationContext(), "nr 3", Toast.LENGTH_SHORT).show();
                 ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this, android.R.layout.simple_list_item_1, list) {
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
@@ -149,7 +148,6 @@ public class displayFavorite extends AppCompatActivity {
         }
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -81,6 +81,7 @@ public class listOfFavorites extends AppCompatActivity
                 open_list.putExtra("ulu", favoriteName);
                 open_list.putExtra("ID", i);
                 open_list.putExtra("list", listFavorites);
+                sService.setNewNameOfFavorite("");
                 startActivity(open_list);
             }
         });
@@ -94,18 +95,18 @@ public class listOfFavorites extends AppCompatActivity
         DataBaseFavorites dbFavorite = new DataBaseFavorites(getApplicationContext());
         ArrayList<String> favoritesList = dbFavorite.getFavoritesList();
         //if we can other number of favorites we had to change list
-        //TODO when we change only names of favorites without removing it doesn't change list, but it should
-        if(listFavorites.size() != favoritesList.size())
-        {
+        //TODO when we change only names of favorites without removing it doesn't change list, but it should (FIXED but it's not optimal)
+        //if(listFavorites.size() != favoritesList.size())
+        //{
             listFavorites = favoritesList;
-            toChange = true;
-        }
+        //   toChange = true;
+        //}
 
         final SettingsService sService = new SettingsService(getApplicationContext());
         final int currentTextSize = sService.getTextSize();
         //if size of text is changed of number of favorites is changed create new list
-        if(currentTextSize != textSize  || toChange)
-        {
+        //if(currentTextSize != textSize  || toChange)
+        //{
             final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
             {
                 @Override
@@ -120,7 +121,7 @@ public class listOfFavorites extends AppCompatActivity
                 }
             };
             listOfFavorites.setAdapter(arrayAdapter);
-        }
+        //}
     }
 
     @Override

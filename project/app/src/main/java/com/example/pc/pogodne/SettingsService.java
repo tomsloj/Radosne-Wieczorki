@@ -54,7 +54,6 @@ public class SettingsService
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
 
         return preferences.getString("prevVersion", "0");
-
     }
 
     public String getCurrentVersion()
@@ -70,5 +69,20 @@ public class SettingsService
         return version;
     }
 
+    public void setNewNameOfFavorite(String name)
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString("NewNameOfFavorite", name);
+        editor.commit();
+    }
+
+    public String getNewNameOfFavorite()
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
+        return preferences.getString("NewNameOfFavorite", "");
+
+    }
 
 }
