@@ -48,8 +48,6 @@ public class listOfFavorites extends AppCompatActivity
         listFavorites = dbHelperFavorites.getFavoritesList();
 
         //display list of favorites
-        //can be removed ?????????????????????????????????????
-        //TODO check it
         ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
         {
             @Override
@@ -64,6 +62,7 @@ public class listOfFavorites extends AppCompatActivity
             }
         };
         listOfFavorites.setAdapter(arrayAdapter);
+
         /*
          * list choosing
          * send to displayFavorites Activity:
