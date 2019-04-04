@@ -35,7 +35,7 @@ public class search extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         final SettingsService sService = new SettingsService(getApplicationContext());
-        textSize = sService.getSize();
+        textSize = sService.getTextSize();
 
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);

@@ -51,7 +51,7 @@ public class displayFavorite extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.back);
 
         final SettingsService sService = new SettingsService(getApplicationContext());
-        textSize = sService.getSize();
+        textSize = sService.getTextSize();
 
 
         listView = (ListView) findViewById(R.id.listOfGames);
@@ -106,15 +106,16 @@ public class displayFavorite extends AppCompatActivity {
         super.onResume();
 
         final SettingsService sService = new SettingsService(getApplicationContext());
-        final int currentTextSize = sService.getSize();
+        final int currentTextSize = sService.getTextSize();
 
         DataBaseFavorites dbFavorite = new DataBaseFavorites(displayFavorite.this);
 
         ArrayList<String> favoriteList = dbFavorite.getFavoritesList();
 
+        //TODO same like in listoffavorites: what with changed name
         if(listSize != favoriteList.size())
         {
-            Toast.makeText(getApplicationContext(), "nr 1", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "nr 1", Toast.LENGTH_SHORT).show();
             finish();
         }
         else
@@ -124,13 +125,13 @@ public class displayFavorite extends AppCompatActivity {
             if(list.size() != gamesList.size()) {
                 list = gamesList;
                 toChange = true;
-                Toast.makeText(getApplicationContext(), "pppp", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "pppp", Toast.LENGTH_SHORT).show();
             }
                 //Toast.makeText(getApplicationContext(), Integer.toString(textSize) + "," + Integer.toString(currentTextSize), Toast.LENGTH_SHORT).show();
             myToolbar.setTitle(favoriteList.get(favoriteID));
             if(currentTextSize != textSize || toChange)
             {
-                Toast.makeText(getApplicationContext(), "nr 3", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "nr 3", Toast.LENGTH_SHORT).show();
                 ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this, android.R.layout.simple_list_item_1, list) {
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {

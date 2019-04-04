@@ -36,7 +36,7 @@ public class settings extends AppCompatActivity
 
         //set size of text
         final SettingsService sService = new SettingsService(getApplicationContext());
-        textSize = sService.getSize();
+        textSize = sService.getTextSize();
         textSizeText.setTextSize(textSize);
         report.setTextSize(textSize);
 
@@ -56,7 +56,7 @@ public class settings extends AppCompatActivity
             {
                 if( textSize < 24 )
                 {
-                    sService.setSize( textSize + 2 );
+                    sService.setTextSize( textSize + 2 );
                     textSize += 2;
                 }
                 textSizeText.setTextSize(textSize);
@@ -72,7 +72,7 @@ public class settings extends AppCompatActivity
             {
                 if( textSize > 10 )
                 {
-                    sService.setSize( textSize - 2 );
+                    sService.setTextSize( textSize - 2 );
                     textSize -= 2;
                 }
                 textSizeText.setTextSize(textSize);

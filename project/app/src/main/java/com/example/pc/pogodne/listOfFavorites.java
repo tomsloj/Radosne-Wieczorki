@@ -39,7 +39,7 @@ public class listOfFavorites extends AppCompatActivity
         actionBar.setHomeAsUpIndicator(R.drawable.back);
 
         final SettingsService sService = new SettingsService(getApplicationContext());
-        textSize = sService.getSize();
+        textSize = sService.getTextSize();
 
         listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
 
@@ -103,7 +103,7 @@ public class listOfFavorites extends AppCompatActivity
         }
 
         final SettingsService sService = new SettingsService(getApplicationContext());
-        final int currentTextSize = sService.getSize();
+        final int currentTextSize = sService.getTextSize();
         //if size of text is changed of number of favorites is changed create new list
         if(currentTextSize != textSize  || toChange)
         {

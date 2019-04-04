@@ -57,7 +57,7 @@ public class list extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.back);
 
         final SettingsService sService = new SettingsService(getApplicationContext());
-        textSize = sService.getSize();
+        textSize = sService.getTextSize();
 
         listView=(ListView)findViewById(R.id.listview);
         ArrayList<String> list= new ArrayList<>();
@@ -120,7 +120,7 @@ public class list extends AppCompatActivity {
         super.onResume();
 
         final SettingsService sService = new SettingsService(getApplicationContext());
-        final int currentTextSize = sService.getSize();
+        final int currentTextSize = sService.getTextSize();
         //Toast.makeText(list.this, Integer.toString(currentTextSize) + " " + Integer.toString(textSize), Toast.LENGTH_SHORT).show();
         if(currentTextSize != textSize)
         {

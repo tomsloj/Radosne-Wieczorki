@@ -1,6 +1,5 @@
 package com.example.pc.pogodne;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
@@ -21,10 +20,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 
@@ -43,7 +40,7 @@ public class display extends AppCompatActivity {
         setContentView(R.layout.activity_display);
 
         final SettingsService sService = new SettingsService(getApplicationContext());
-        textSize = sService.getSize();
+        textSize = sService.getTextSize();
 
         gameName = (TextView) findViewById(R.id.titleOfGame);
         text = (TextView) findViewById(R.id.textOfGame);
@@ -101,7 +98,7 @@ public class display extends AppCompatActivity {
 
         final Button hiddenButton = (Button) findViewById(R.id.hiddenButton);
 
-
+        //TODO zz from database
         hiddenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,8 +111,8 @@ public class display extends AppCompatActivity {
                         if(!dataBaseFavorites.favoriteExist("zakazane zabawy"))
                         {
                             dataBaseFavorites.createFavorites("zakazane zabawy", "Icek");
-                            dataBaseFavorites.addData("zakazane zabawy", "zwierzęta");
-                            dataBaseFavorites.addData("zakazane zabawy", "zwierzę");
+                            dataBaseFavorites.addGametoFavorite("zakazane zabawy", "zwierzęta");
+                            dataBaseFavorites.addGametoFavorite("zakazane zabawy", "zwierzę");
                             Toast.makeText(display.this, "chyba dodało", Toast.LENGTH_LONG).show();
                         }
                         Toast.makeText(display.this, "niespodzianka", Toast.LENGTH_LONG).show();
@@ -131,7 +128,7 @@ public class display extends AppCompatActivity {
     {
         super.onResume();
         final SettingsService sService = new SettingsService(getApplicationContext());
-        int currentTextSize = sService.getSize();
+        int currentTextSize = sService.getTextSize();
         if(currentTextSize != textSize)
         {
             gameName.setTextSize(currentTextSize + 6);
@@ -234,7 +231,7 @@ public class display extends AppCompatActivity {
                             Toast.makeText(display.this, "ta zabawa już znajduje sie na tej liście ulubionych",Toast.LENGTH_SHORT).show();
                         else
                         {
-                            dbFavoritesHelper.addData(favoritesName, game);
+                            dbFavoritesHelper.addGametoFavorite(favoritesName, game);
                             Toast.makeText(display.this, "zabawa została dodana",Toast.LENGTH_SHORT).show();
                         }
 

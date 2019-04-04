@@ -1,6 +1,5 @@
 package com.example.pc.pogodne;
 
-import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -23,8 +22,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static com.example.pc.pogodne.R.layout.activity_edit_favorites;
@@ -83,7 +80,7 @@ public class editFavorites extends AppCompatActivity {
         */
 
         final SettingsService sService = new SettingsService(getApplicationContext());
-        textSize = sService.getSize();
+        textSize = sService.getTextSize();
 
 
         final File favoriteFile = new File(editFavorites.this.getFilesDir(), "ulu");
@@ -144,7 +141,7 @@ public class editFavorites extends AppCompatActivity {
                 builder.setPositiveButton("Usuń", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dbHelperFavorites.deleteName(nameOfFavorite);
+                        dbHelperFavorites.deleteFavorite(nameOfFavorite);
                         finish();
                     }
                 });
@@ -271,7 +268,7 @@ public class editFavorites extends AppCompatActivity {
     {
         super.onResume();
         final SettingsService sService = new SettingsService(getApplicationContext());
-        final int currentTextSize = sService.getSize();
+        final int currentTextSize = sService.getTextSize();
         if(currentTextSize != textSize)
         {
             final ArrayList<String> arrayList= list;
