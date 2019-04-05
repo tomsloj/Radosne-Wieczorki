@@ -73,32 +73,15 @@ public class display extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.back);
         actionBar.setTitle(game);
 
-
-
         DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
 
         String txt = dbHelper.getText(game);
 
         gameName.setText(game);
         text.setText(txt);
-        /*
-        try {
-            InputStream stream = getAssets().open(fileName);
 
-            String textFromFile;
-            gameName.setText(game);
-
-            textFromFile = FileHelper.textOfGame(stream, game);
-            text.setText(textFromFile);
-        } catch (IOException ex) {
-            Toast.makeText(this, "Error10", Toast.LENGTH_SHORT).show();
-            ex.printStackTrace();
-        }
-        */
-
+        //surprise
         final Button hiddenButton = (Button) findViewById(R.id.hiddenButton);
-
-        //TODO zz from database
         hiddenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,15 +90,22 @@ public class display extends AppCompatActivity {
                     counter ++;
                     if(counter > 3)
                     {
-                        DataBaseFavorites dataBaseFavorites = new DataBaseFavorites(display.this);
-                        if(!dataBaseFavorites.favoriteExist("zakazane zabawy"))
+                        DataBaseFavorites dataBaseFavorites = new DataBaseFavorites( display.this );
+                        if(  !dataBaseFavorites.favoriteExist( "zakazane zabawy" ) )
                         {
-                            dataBaseFavorites.createFavorites("zakazane zabawy", "Icek");
-                            dataBaseFavorites.addGametoFavorite("zakazane zabawy", "zwierzęta");
-                            dataBaseFavorites.addGametoFavorite("zakazane zabawy", "zwierzę");
-                            Toast.makeText(display.this, "chyba dodało", Toast.LENGTH_LONG).show();
+                            DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+                            ArrayList<String> listOfGames = dataBaseHelper.getGamesInCategory("zz");
+                            if( ! listOfGames.isEmpty() )
+                            {
+                                dataBaseFavorites.createFavorites("zakazane zabawy", listOfGames.get( 0 ) );
+                                for( int i = 1 ; i < listOfGames.size() ; ++i )
+                                {
+                                    dataBaseFavorites.addGametoFavorite("zakazane zabawy", listOfGames.get( i ) );
+                                }
+                            }
+
+                            Toast.makeText(display.this, "niespodzianka", Toast.LENGTH_LONG).show();
                         }
-                        Toast.makeText(display.this, "niespodzianka", Toast.LENGTH_LONG).show();
                     }
                 }
             }
@@ -136,7 +126,6 @@ public class display extends AppCompatActivity {
         }
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -150,7 +139,6 @@ public class display extends AppCompatActivity {
         return true;
     }
 
-    //@SuppressLint("SetTextI18n")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -244,8 +232,6 @@ public class display extends AppCompatActivity {
                     text.setText("Nie posiadasz jeszcze żadnej listy ulubionych");
                 }
             }
-
         return super.onOptionsItemSelected(item);
     }
-
 }
