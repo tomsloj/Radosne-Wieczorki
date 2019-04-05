@@ -194,7 +194,7 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     private Cursor getNames()
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT name FROM " + dataBaseName + " GROUP BY name";
+        String query = "SELECT name FROM " + dataBaseName + " GROUP BY name COLLATE LOCALIZED";
         Cursor data = db.rawQuery(query, null);
         return data;
     }

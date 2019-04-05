@@ -16,12 +16,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -121,7 +117,6 @@ public class list extends AppCompatActivity {
 
         final SettingsService sService = new SettingsService(getApplicationContext());
         final int currentTextSize = sService.getTextSize();
-        //Toast.makeText(list.this, Integer.toString(currentTextSize) + " " + Integer.toString(textSize), Toast.LENGTH_SHORT).show();
         if(currentTextSize != textSize)
         {
             textSize = currentTextSize;
