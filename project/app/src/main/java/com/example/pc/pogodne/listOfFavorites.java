@@ -15,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class listOfFavorites extends AppCompatActivity
@@ -94,19 +93,21 @@ public class listOfFavorites extends AppCompatActivity
         boolean toChange = false;
         DataBaseFavorites dbFavorite = new DataBaseFavorites(getApplicationContext());
         ArrayList<String> favoritesList = dbFavorite.getFavoritesList();
-        //if we can other number of favorites we had to change list
-        //TODO when we change only names of favorites without removing it doesn't change list, but it should (FIXED but it's not optimal)
-        //if(listFavorites.size() != favoritesList.size())
-        //{
-            listFavorites = favoritesList;
-        //   toChange = true;
-        //}
-
         final SettingsService sService = new SettingsService(getApplicationContext());
         final int currentTextSize = sService.getTextSize();
-        //if size of text is changed of number of favorites is changed create new list
-        //if(currentTextSize != textSize  || toChange)
-        //{
+        final String newName = sService.getNewNameOfFavorite();
+
+        //if we can other number of favorites we had to change list
+        //or we changed name of one favorite
+        if(listFavorites.size() != favoritesList.size() || !newName.equals(""))
+        {
+            listFavorites = favoritesList;
+            toChange = true;
+        }
+
+        //if is changed: text size, number of favorites or name of one favorite display new list
+        if(currentTextSize != textSize  || toChange)
+        {
             final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
             {
                 @Override
@@ -121,7 +122,7 @@ public class listOfFavorites extends AppCompatActivity
                 }
             };
             listOfFavorites.setAdapter(arrayAdapter);
-        //}
+        }
     }
 
     @Override
