@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-
 public class display extends AppCompatActivity {
 
     int counter = 0;
@@ -50,6 +49,8 @@ public class display extends AppCompatActivity {
 
         game = getIntent().getStringExtra("zabawa");
 
+
+        //chyba do wyrzucenia?????????????????????????????????????????????????????????????????????????
         final File tmpFile = new File(this.getFilesDir(), "tmpfile");
 
         try {
@@ -73,12 +74,15 @@ public class display extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.back);
         actionBar.setTitle(game);
 
+        /*
+         * display title of game and description
+         */
         DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
-
         String txt = dbHelper.getText(game);
 
         gameName.setText(game);
         text.setText(txt);
+
 
         //surprise
         final Button hiddenButton = (Button) findViewById(R.id.hiddenButton);
@@ -118,6 +122,10 @@ public class display extends AppCompatActivity {
     {
         super.onResume();
         final SettingsService sService = new SettingsService(getApplicationContext());
+
+        /*
+         * check if text size is changed
+         */
         int currentTextSize = sService.getTextSize();
         if(currentTextSize != textSize)
         {
@@ -167,6 +175,7 @@ public class display extends AppCompatActivity {
                 final ArrayList<String> list = dbFavoritesHelper.getFavoritesList();
                 final ArrayAdapter arrayAdapter = new ArrayAdapter<>(display.this,android.R.layout.simple_list_item_1, list);
 
+
                 builder.setView(dialogView);
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -175,6 +184,12 @@ public class display extends AppCompatActivity {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+
+                final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
+                if(list.size() == 0)
+                {
+                    text.setText("Nie posiadasz jeszcze żadnej listy ulubionych");
+                }
 
                 listaulu.setAdapter(arrayAdapter);
 
@@ -203,6 +218,7 @@ public class display extends AppCompatActivity {
                                         dbFavoritesHelper.createFavorites(nameOfFavorite, game);
                                         arrayAdapter.add(nameOfFavorite);
                                         arrayAdapter.notifyDataSetChanged();
+                                        text.setText(R.string.selectFavorite);
                                         Toast.makeText(display.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
                                     }
                             }
@@ -226,11 +242,7 @@ public class display extends AppCompatActivity {
                     }
                 });
 
-                final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
-                if(list.size() == 0)
-                {
-                    text.setText("Nie posiadasz jeszcze żadnej listy ulubionych");
-                }
+
             }
         return super.onOptionsItemSelected(item);
     }
