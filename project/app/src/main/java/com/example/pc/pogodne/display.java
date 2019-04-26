@@ -171,6 +171,7 @@ public class display extends AppCompatActivity {
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
+                //display info that user hasn't any list of favorites
                 final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
                 if(list.size() == 0)
                 {
@@ -182,7 +183,9 @@ public class display extends AppCompatActivity {
                 stworz.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         String nameOfFavorite = nazwa.getText().toString();
+                        //list can't be empty, and can't contain %<>@#$|
                         if(nameOfFavorite.isEmpty() || nameOfFavorite.replace(" ", "").isEmpty())
                         {
                             Toast.makeText(display.this, "nazwa nie może być pusta",Toast.LENGTH_LONG).show();
@@ -201,10 +204,15 @@ public class display extends AppCompatActivity {
                                         Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
                                     else
                                     {
+                                        //create new list of favorites
                                         dbFavoritesHelper.createFavorites(nameOfFavorite, game);
+
+                                        //display new list
                                         arrayAdapter.add(nameOfFavorite);
                                         arrayAdapter.notifyDataSetChanged();
+
                                         text.setText(R.string.selectFavorite);
+
                                         Toast.makeText(display.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
                                     }
                             }
