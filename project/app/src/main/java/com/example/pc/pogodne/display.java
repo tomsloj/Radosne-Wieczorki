@@ -194,9 +194,9 @@ public class display extends AppCompatActivity {
                             if(nameOfFavorite.contains("%") || nameOfFavorite.contains(">") ||
                                     nameOfFavorite.contains("@") || nameOfFavorite.contains("<") ||
                                     nameOfFavorite.contains("#") || nameOfFavorite.contains("|") ||
-                                    nameOfFavorite.contains("$"))
+                                    nameOfFavorite.contains("$") || nameOfFavorite.contains("'") )
                             {
-                                Toast.makeText(display.this, "nazwa nie może zawierać:\n%<>@#$|",Toast.LENGTH_LONG).show();
+                                Toast.makeText(display.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
                             }
                             else
                                 {
