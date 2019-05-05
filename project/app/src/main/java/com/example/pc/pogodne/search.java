@@ -19,10 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class search extends AppCompatActivity {
@@ -70,12 +66,17 @@ public class search extends AppCompatActivity {
 
                 if(!box1 && !box2)
                 {
-                    Toast.makeText(search.this, "Po co w ogóle tu wchodzisz\njeśli nie chcesz nic znaleźć?",Toast.LENGTH_LONG).show();
+                    Toast.makeText(search.this, "Wybierz gdzie chcesz szukać",Toast.LENGTH_LONG).show();
                 }
                 else
                 if(toFind.equals(""))
                 {
                     Toast.makeText(search.this, "Uzupełnij co chcesz wyszukać",Toast.LENGTH_LONG).show();
+                }
+                else
+                if( toFind.contains("'") )
+                {
+                    Toast.makeText(search.this, "Wyszukiwana fraza nie może zawierać apostrofu",Toast.LENGTH_LONG).show();
                 }
                 else
                 {
@@ -122,114 +123,6 @@ public class search extends AppCompatActivity {
             }
         });
     }
-
-    /*
-    @Override
-    protected void onResume() {
-        super.onResume();
-        setContentView(R.layout.activity_search);
-
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int textSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String TextOfFile = new String(buffer);
-            textSize = Integer.parseInt(TextOfFile);
-        }
-        catch (IOException e)
-        {
-            Toast.makeText(search.this, "Error19",Toast.LENGTH_LONG).show();
-        }
-
-
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
-        setSupportActionBar(myToolbar);
-
-        ActionBar actionBar = getSupportActionBar();
-
-        myToolbar.setTitle("Szukaj");
-
-        //actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.back);
-        //actionBar.setDisplayShowHomeEnabled(true);
-
-
-        final Button searchButton = (Button) findViewById(R.id.searchButton);
-        final CheckBox titleBox = (CheckBox) findViewById(R.id.titlesCheckbox);
-        final CheckBox textBox = (CheckBox) findViewById(R.id.textsCheckbox);
-        final EditText searchSpace = (EditText) findViewById(R.id.searchSpace);
-        final ListView listOfFound = (ListView)findViewById(R.id.lisOfFound);
-        final TextView textNoFavorites = (TextView) findViewById(R.id.textEmptyFavoritesList);
-
-        textBox.setTextSize(textSize);
-        titleBox.setTextSize(textSize);
-        searchSpace.setTextSize(textSize);
-
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean box1 = titleBox.isChecked();
-                boolean box2 = textBox.isChecked();
-                String toFind = searchSpace.getText().toString();
-
-                if(!box1 && !box2)
-                {
-                    Toast.makeText(search.this, "Po co w ogóle tu wchodzisz\njeśli nie chcesz nic znaleźć?",Toast.LENGTH_LONG).show();
-                }
-                else
-                if(toFind.equals(""))
-                {
-                    Toast.makeText(search.this, "Uzupełnij co chcesz wyszukać",Toast.LENGTH_LONG).show();
-                }
-                else
-                {
-                    try {
-                        InputStream stream = getAssets().open(fileName);
-
-                        ArrayList<String> list = FileHelper.find(stream, toFind, box1, box2);
-
-                        if(!list.isEmpty())
-                        {
-                            ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
-                            listOfFound.setAdapter(arrayAdapter);
-                            textNoFavorites.setText("");
-                        }
-                        else
-                        {
-                            ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
-                            listOfFound.setAdapter(arrayAdapter);
-                            textNoFavorites.setText(R.string.noFound);
-                        }
-                    }
-                    catch (IOException e)
-                    {
-                        Toast.makeText(search.this, "Error20",Toast.LENGTH_LONG).show();
-                    }
-                }
-
-
-            }
-        });
-
-        listOfFound.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent openGame = new Intent(getApplicationContext(), display.class);
-                openGame.putExtra("zabawa", listOfFound.getItemAtPosition(i).toString());
-                startActivity(openGame);
-            }
-        });
-    }
-    */
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
