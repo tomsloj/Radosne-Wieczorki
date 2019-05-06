@@ -170,6 +170,7 @@ public class editFavorites extends AppCompatActivity {
                             public void onClick( View view )
                             {
                                 String newName = newNameSpace.getText().toString();
+                                DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites( getApplicationContext() );
                                 if (newName.replace(" ", "").equals(""))
                                 {
                                     Toast.makeText(editFavorites.this, "Uzupełnij nową nazwę", Toast.LENGTH_SHORT).show();
@@ -182,6 +183,8 @@ public class editFavorites extends AppCompatActivity {
                                 {
                                     Toast.makeText(editFavorites.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
                                 }
+                                if(dbFavoritesHelper.favoriteExist(nameOfFavorite))
+                                    Toast.makeText( getApplicationContext(), "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
                                 else
                                 {
                                     dbHelperFavorites.editNameOfFavorite(nameOfFavorite, newName);
