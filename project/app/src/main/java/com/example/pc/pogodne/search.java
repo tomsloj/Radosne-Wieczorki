@@ -74,9 +74,12 @@ public class search extends AppCompatActivity {
                     Toast.makeText(search.this, "Uzupełnij co chcesz wyszukać",Toast.LENGTH_LONG).show();
                 }
                 else
-                if( toFind.contains("'") )
+                if( toFind.contains("'") || toFind.contains("%") || toFind.contains("_") )
                 {
-                    Toast.makeText(search.this, "Wyszukiwana fraza nie może zawierać apostrofu",Toast.LENGTH_LONG).show();
+                    final ArrayList<String> list = new ArrayList<>();
+                    ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
+                    listOfFound.setAdapter(arrayAdapter);
+                    textNoFavorites.setText(R.string.noFound);
                 }
                 else
                 {

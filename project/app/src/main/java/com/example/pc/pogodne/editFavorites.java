@@ -47,10 +47,8 @@ public class editFavorites extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
 
         // Enable the Up button
-        //actionBar.setHomeButtonEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.back);
-        //actionBar.setDisplayShowHomeEnabled(true);
 
         final Button deleteAll = (Button) findViewById(R.id.deleteAll);
         final Button editNameOfFavorite = (Button) findViewById(R.id.editNameButton);
@@ -58,26 +56,6 @@ public class editFavorites extends AppCompatActivity {
         final Button upButton = (Button) findViewById(R.id.upButton);
         final Button downButton = (Button) findViewById(R.id.downButton);
         listView = (ListView) findViewById(R.id.editableList);
-
-        /*
-        String filename = "settingsFile";
-        final File file = new File(this.getFilesDir(), filename);
-        int textSize = 15;
-
-        try {
-            FileInputStream stream = new FileInputStream(file);
-            int size = stream.available();
-            byte[] buffer = new byte[size];
-            stream.read(buffer);
-            stream.close();
-            String textFromFile = new String(buffer);
-            textSize = Integer.parseInt(textFromFile);
-        }
-        catch (IOException e)
-        {
-            Toast.makeText(editFavorites.this, "Error5",Toast.LENGTH_LONG).show();
-        }
-        */
 
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getTextSize();
@@ -94,7 +72,7 @@ public class editFavorites extends AppCompatActivity {
 
         final ArrayList<String> arrayList= list;
 
-        //Toast.makeText(this, arrayList.get(0).toString(),Toast.LENGTH_SHORT).show();
+        //list of games
         final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(editFavorites.this,android.R.layout.simple_list_item_1, arrayList)
         {
             @Override
@@ -105,6 +83,7 @@ public class editFavorites extends AppCompatActivity {
                 tv.setTextSize(textSize);
                 tv.setTextColor(Color.BLACK);
 
+                //mark selected game
                 if(position == mSelectedItem)
                     view.setBackgroundColor(Color.parseColor("#eb5048" ));
                 else
@@ -114,8 +93,7 @@ public class editFavorites extends AppCompatActivity {
             }
         };
         listView.setAdapter(arrayAdapter);
-
-
+        //select game
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -154,7 +132,7 @@ public class editFavorites extends AppCompatActivity {
         editNameOfFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(editFavorites.this);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(editFavorites.this);
 
                 final EditText newNameSpace = new EditText(editFavorites.this);
                 newNameSpace.setSingleLine();
@@ -180,33 +158,43 @@ public class editFavorites extends AppCompatActivity {
 
                     }
                 });
-                builder.setPositiveButton("Zmień", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Zmień", null ).create();
+
+                final AlertDialog aDialog = builder.create();
+                aDialog.setOnShowListener(new DialogInterface.OnShowListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String newName = newNameSpace.getText().toString();
-                        if (newName.replace(" ", "").equals(""))
-                        {
-                            Toast.makeText(editFavorites.this, "Uzupełnij nową nazwę", Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        if(newName.contains("%") || newName.contains(">") ||
-                                newName.contains("@") || newName.contains("<") ||
-                                newName.contains("#") || newName.contains("|") ||
-                                newName.contains("$"))
-                        {
-                            Toast.makeText(editFavorites.this, "nazwa nie może zawierać:\n%<>@#$|",Toast.LENGTH_LONG).show();
-                        }
-                        else
-                        {
-                            dbHelperFavorites.editNameOfFavorite(nameOfFavorite, newName);
-                            nameOfFavorite = newName;
-                            myToolbar.setTitle(newName);
-                        }
+                    public void onShow(final DialogInterface dialog) {
+                        Button button = aDialog.getButton( AlertDialog.BUTTON_POSITIVE );
+                        button.setOnClickListener( new View.OnClickListener(){
+                            @Override
+                            public void onClick( View view )
+                            {
+                                String newName = newNameSpace.getText().toString();
+                                if (newName.replace(" ", "").equals(""))
+                                {
+                                    Toast.makeText(editFavorites.this, "Uzupełnij nową nazwę", Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                if(newName.contains("%") || newName.contains(">") ||
+                                        newName.contains("@") || newName.contains("<") ||
+                                        newName.contains("#") || newName.contains("|") ||
+                                        newName.contains("$") || newName.contains("'") )
+                                {
+                                    Toast.makeText(editFavorites.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    dbHelperFavorites.editNameOfFavorite(nameOfFavorite, newName);
+                                    nameOfFavorite = newName;
+                                    myToolbar.setTitle(newName);
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
                     }
                 });
 
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                aDialog.show();
             }
         });
 
