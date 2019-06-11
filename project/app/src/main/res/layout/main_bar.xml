@@ -7,4 +7,5 @@
     app:popupTheme="@style/PopupMenu"
     app:titleTextColor="@color/textColor"
     app:theme="@style/CustomToolbarStyle"
+    android:elevation="4dp"
     />

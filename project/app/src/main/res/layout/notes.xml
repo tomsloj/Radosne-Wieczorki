@@ -6,40 +6,36 @@
     <TextView
         android:id="@+id/reportTitle"
         style="@style/TitleTextStyle"
-        android:textColor="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/report"
         android:layout_marginStart="32dp"
         android:layout_marginTop="18dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:text="@string/notes"
+        android:textColor="@color/colorPrimary" />
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dip"
         android:background="@color/colorPrimary" />
 
-    <TextView
-        android:id="@+id/reportInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/reportHint" />
-
     <EditText
-        android:id="@+id/message"
+        android:id="@+id/notesEditText"
         style="@style/TextStyle"
         android:textCursorDrawable="@color/colorAccent"
-        android:minLines="1"
-        android:maxLines="20"
-        android:inputType="text"
+        android:gravity="top|left"
+        android:background="@drawable/border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:hint="@string/message"
-        android:autofillHints="auto"/>
+        android:autofillHints="auto"
+        android:hint="@string/notes"
+        android:inputType="textMultiLine"
+        android:minLines="1"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        />
+
 </LinearLayout>

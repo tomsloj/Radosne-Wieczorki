@@ -29,6 +29,8 @@ public class display extends AppCompatActivity {
     TextView gameName;
     TextView text;
     String game;
+    String playlist;
+    String notes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class display extends AppCompatActivity {
         /*
          * display title of game and description
          */
-        DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
+        final DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
         String txt = dbHelper.getText(game);
 
         gameName.setText(game);
@@ -97,6 +99,52 @@ public class display extends AppCompatActivity {
                 }
             }
         });
+        final Button notesButton = (Button) findViewById(R.id.notesButton);
+        final DataBaseFavorites dbFavorites = new DataBaseFavorites( getApplicationContext() );
+        playlist = getIntent().getStringExtra("playlist");
+        if ( playlist == null )
+            notesButton.setVisibility(View.GONE);
+        notesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                notes = dbFavorites.getNotes( game, playlist );
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder( display.this );
+                final LayoutInflater inflater = display.this.getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.notes, null);
+
+                final EditText notesEditText = (EditText) dialogView.findViewById(R.id.notesEditText);
+                if( notes != null && !notes.equals("") )
+                {
+                    notesEditText.setText( notes );
+                }
+
+                builder.setView(dialogView);
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+
+                builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        notes = notesEditText.getText().toString();
+                        dbFavorites.updateNotes( notes, game, playlist );
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                Button negativButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                negativButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
+                positiveButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
+                dialog.setCanceledOnTouchOutside( false );
+            }
+        });
+
 
     }
 
@@ -167,6 +215,11 @@ public class display extends AppCompatActivity {
                 });
                 AlertDialog dialog = builder.create();
                 dialog.show();
+
+                Button negativButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                negativButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
+                positiveButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
 
                 //display info that user hasn't any list of favorites
                 final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);

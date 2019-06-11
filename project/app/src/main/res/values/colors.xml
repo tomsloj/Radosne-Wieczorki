@@ -15,4 +15,5 @@
     <color name="iconbackground">#FFC107</color>
     <color name="displayColor">#B3000000</color>
     <color name="green">#4CAF50</color>
+    <color name="borderColor">#F5F5F5</color>
 </resources>

@@ -12,13 +12,11 @@ import android.widget.Toast;
 
 import java.io.OutputStream;
 import java.util.Calendar;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity
 {
-    int nr = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

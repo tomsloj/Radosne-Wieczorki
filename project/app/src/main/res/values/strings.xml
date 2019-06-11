@@ -38,4 +38,6 @@
     <string name="report">Zgłoszenie</string>
     <string name="edit">Edytuj</string>
     <string name="editNameOfFavorite">Zmień nazwę listy</string>
+    <string name="notes">Notatki</string>
+    <string name="save">ZAPISz</string>
 </resources>

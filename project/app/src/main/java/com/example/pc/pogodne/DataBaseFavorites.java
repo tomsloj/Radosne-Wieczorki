@@ -25,7 +25,7 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db)
     {
-        String creareTable = "CREATE TABLE " + dataBaseName + "(name TEXT, game TEXT, number INT)";
+        String creareTable = "CREATE TABLE " + dataBaseName + "(name TEXT, game TEXT, number INT, notes TEXT)";
         db.execSQL(creareTable);
     }
 
@@ -239,6 +239,26 @@ public class DataBaseFavorites extends SQLiteOpenHelper
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "UPDATE  " + dataBaseName + " SET name = '" + newName + "' WHERE name = '"
                 + name + "'";
+        db.execSQL(query);
+    }
+
+    public String getNotes( String game, String playlist )
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT notes FROM " + dataBaseName + " WHERE name = '"
+                + playlist + "' AND game = '" + game + "'";
+        Cursor data = db.rawQuery(query, null);
+        data.moveToFirst();
+        String notes = data.getString(0);
+        data.close();
+        return notes;
+    }
+
+    public void updateNotes( String notes, String game, String playlist )
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "UPDATE  " + dataBaseName + " SET notes = '" + notes + "' WHERE name = '"
+                + playlist + "' AND game = '" + game + "'";
         db.execSQL(query);
     }
 

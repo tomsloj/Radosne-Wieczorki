@@ -126,6 +126,11 @@ public class editFavorites extends AppCompatActivity {
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
+
+                Button negativButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                negativButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
+                positiveButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
             }
         });
 
@@ -198,6 +203,11 @@ public class editFavorites extends AppCompatActivity {
                 });
 
                 aDialog.show();
+
+                Button negativButton = aDialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                Button positiveButton = aDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                negativButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
+                positiveButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
             }
         });
 

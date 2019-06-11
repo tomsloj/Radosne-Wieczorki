@@ -56,6 +56,15 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleOfGame" />
+
+            <Button
+                android:id="@+id/notesButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginLeft="90dp"
+                android:layout_marginRight="90dp"
+                android:text="@string/notes" />
         </LinearLayout>
     </ScrollView>
 
