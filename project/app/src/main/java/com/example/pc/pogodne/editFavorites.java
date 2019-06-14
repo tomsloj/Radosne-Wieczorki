@@ -85,7 +85,7 @@ public class editFavorites extends AppCompatActivity {
 
                 //mark selected game
                 if(position == mSelectedItem)
-                    view.setBackgroundColor(Color.parseColor("#eb5048" ));
+                    view.setBackgroundColor( getResources().getColor( R.color.checkedColor) );
                 else
                     view.setBackgroundColor(Color.TRANSPARENT);
 
@@ -284,7 +284,7 @@ public class editFavorites extends AppCompatActivity {
                     tv.setTextColor(Color.BLACK);
 
                     if(position == mSelectedItem) {
-                        view.setBackgroundColor(Color.parseColor("#eb5048" ));
+                        view.setBackgroundColor( getResources().getColor( R.color.checkedColor) );
                     }
                     else
                         view.setBackgroundColor(Color.TRANSPARENT);
