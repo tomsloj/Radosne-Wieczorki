@@ -188,7 +188,7 @@ public class editFavorites extends AppCompatActivity {
                                 {
                                     Toast.makeText(editFavorites.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
                                 }
-                                if(dbFavoritesHelper.favoriteExist(nameOfFavorite))
+                                if( dbFavoritesHelper.favoriteExist( newName ) )
                                     Toast.makeText( getApplicationContext(), "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
                                 else
                                 {
@@ -249,7 +249,7 @@ public class editFavorites extends AppCompatActivity {
         downButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mSelectedItem < list.size()-1)
+                if(mSelectedItem < list.size()-1 && mSelectedItem >= 0)
                 {
                     String aboveItem = list.get(mSelectedItem + 1);
                     String game = list.get(mSelectedItem);
