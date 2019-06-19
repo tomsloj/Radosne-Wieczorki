@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fenjuly.mylibrary.FloorListView;
+
 import java.util.ArrayList;
 
 public class displayFavorite extends AppCompatActivity {
@@ -50,7 +52,9 @@ public class displayFavorite extends AppCompatActivity {
         textSize = sService.getTextSize();
 
 
-        listView = (ListView) findViewById(R.id.listOfGames);
+        listView = (FloorListView)findViewById(R.id.listOfGames);
+        ((FloorListView) listView).setMode(FloorListView.ABOVE);
+
         final Button editButton = (Button) findViewById(R.id.editButton);
 
         DataBaseFavorites dbFavorites = new DataBaseFavorites(displayFavorite.this);
@@ -68,6 +72,7 @@ public class displayFavorite extends AppCompatActivity {
             {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                tv.setBackgroundColor(getResources().getColor( R.color.background ));
                 tv.setTextSize(textSize);
                 tv.setTextColor(Color.BLACK);
 
@@ -137,6 +142,7 @@ public class displayFavorite extends AppCompatActivity {
                     public View getView(int position, View convertView, ViewGroup parent) {
                         View view = super.getView(position, convertView, parent);
                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                        tv.setBackgroundColor(getResources().getColor( R.color.background ));
                         tv.setTextSize(currentTextSize);
                         tv.setTextColor(Color.BLACK);
 

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     tools:context=".search"
     >
 
@@ -67,12 +68,15 @@
         android:layout_marginEnd="0dp"
         android:text="@string/search" />
 
-    <ListView
+    <com.fenjuly.mylibrary.FloorListView
         android:id="@+id/lisOfFound"
+        android:divider="@color/borderColor"
+        android:dividerHeight="1dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/searchButton"
-        android:layout_marginTop="-1dp" />
+        android:layout_marginTop="1dp"
+        android:layout_marginBottom="0dp"/>
 
     <TextView
         android:id="@+id/textEmptyFavoritesList"

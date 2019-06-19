@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fenjuly.mylibrary.FloorListView;
+
 import java.util.ArrayList;
 
 public class listOfFavorites extends AppCompatActivity
@@ -40,8 +42,8 @@ public class listOfFavorites extends AppCompatActivity
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getTextSize();
 
-        listOfFavorites = (ListView) findViewById(R.id.listOfFavorites);
-
+        listOfFavorites = (FloorListView) findViewById(R.id.listOfFavorites);
+        ((FloorListView) listOfFavorites).setMode(FloorListView.ABOVE);
         //get list of names of favorites from favorites base
         DataBaseFavorites dbHelperFavorites = new DataBaseFavorites(listOfFavorites.this);
         listFavorites = dbHelperFavorites.getFavoritesList();
@@ -54,6 +56,7 @@ public class listOfFavorites extends AppCompatActivity
             {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                tv.setBackgroundColor(getResources().getColor( R.color.background ));
                 tv.setTextSize(textSize);
                 tv.setTextColor(Color.BLACK);
 

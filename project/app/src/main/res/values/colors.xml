@@ -7,14 +7,14 @@
     <color name="textColor">#FFFFFF</color>
     <color name="textColor2">#000000</color>
     <color name="transparent">#00008577</color>
-    <color name="background">#1AFFFFFF</color>
+    <color name="background">#F8F8F8</color>
     <color name="mainMenuButtonsColor">#F3F0F0</color>
-    <color name="hintColor">#D5D5D5</color>
+    <color name="hintColor">#FFFFFF</color>
     <color name="kolor3">#ffeaed</color>
     <color name="kolor4">#ffeaed</color>
     <color name="iconbackground">#FFC107</color>
     <color name="displayColor">#B3000000</color>
     <color name="green">#4CAF50</color>
     <color name="borderColor">#F5F5F5</color>
-    <color name="checkedColor">#66EB5048</color>
+    <color name="checkedColor">#FF9591</color>
 </resources>

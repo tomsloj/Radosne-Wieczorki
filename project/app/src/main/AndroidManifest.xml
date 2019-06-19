@@ -41,7 +41,12 @@
         </activity>
         <activity
             android:name=".list"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity" >
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -19,11 +19,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fenjuly.mylibrary.FloorListView;
+
 import java.util.ArrayList;
 
 public class search extends AppCompatActivity {
 
     int textSize;
+    ListView listOfFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +53,32 @@ public class search extends AppCompatActivity {
         final CheckBox titleBox = (CheckBox) findViewById(R.id.titlesCheckbox);
         final CheckBox textBox = (CheckBox) findViewById(R.id.textsCheckbox);
         final EditText searchSpace = (EditText) findViewById(R.id.searchSpace);
-        final ListView listOfFound = (ListView)findViewById(R.id.lisOfFound);
         final TextView textNoFavorites = (TextView) findViewById(R.id.textEmptyFavoritesList);
+
+        listOfFound = (FloorListView) findViewById(R.id.lisOfFound);
+        ((FloorListView) listOfFound).setMode(FloorListView.ABOVE);
+
+
+        /*
+        ArrayList<String> tmplist = new ArrayList<>();
+        tmplist.add("aaaa");
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(search.this, android.R.layout.simple_list_item_1, tmplist)
+        {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent)
+            {
+                View view = super.getView(position, convertView, parent);
+                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                tv.setTextSize(textSize);
+                tv.setTextColor(Color.BLACK);
+
+                return view;
+            }
+        };
+        listOfFound.setAdapter(arrayAdapter);
+        */
+        listOfFound.setEmptyView(findViewById(R.id.textEmptyFavoritesList));
+
 
         textBox.setTextSize(textSize);
         titleBox.setTextSize(textSize);
@@ -96,6 +123,7 @@ public class search extends AppCompatActivity {
                             {
                                 View view = super.getView(position, convertView, parent);
                                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                                tv.setBackgroundColor(getResources().getColor( R.color.background ));
                                 tv.setTextSize(textSize);
                                 tv.setTextColor(Color.BLACK);
 
@@ -108,7 +136,7 @@ public class search extends AppCompatActivity {
                     else
                     {
                         ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
-                        listOfFound.setAdapter(arrayAdapter);
+                        listOfFound.setEmptyView(findViewById(R.id.textEmptyFavoritesList));
                         textNoFavorites.setText(R.string.noFound);
                     }
                 }
@@ -125,6 +153,7 @@ public class search extends AppCompatActivity {
                 startActivity(openGame);
             }
         });
+
     }
 
     @Override

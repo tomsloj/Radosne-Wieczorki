@@ -21,7 +21,7 @@
     <string name="noFound">Nie znalezniono wyników pasujących do twojego zapytania</string>
     <string name="home">home</string>
     <string name="back">back</string>
-    <string name="tekstSize">Wielkość czcionki</string>
+    <string name="tekstSize">Wielkość tekstu</string>
     <string name="mail">300268@pw.edu.pl</string>
     <string name="check">sprawdź</string>
     <string name="send">Wyślij</string>
@@ -32,12 +32,13 @@
     <string name="deleteMode">Usuń wybrany</string>
     <string name="delete">Usuń tę listę</string>
     <string name="gameOfTheDay">Zabawa na dziś</string>
-    <string name="reportInfo">Wyślij swoje uwagi o aplikacji lub informacje o błędach</string>
+    <string name="reportInfo">Wyślij uwagi</string>
     <string name="reportHint">Wpisz wiadomość którą chcesz wysłać</string>
     <string name="message">Wiadomość</string>
     <string name="report">Zgłoszenie</string>
     <string name="edit">Edytuj</string>
     <string name="editNameOfFavorite">Zmień nazwę listy</string>
     <string name="notes">Notatki</string>
-    <string name="save">ZAPISz</string>
+    <string name="save">ZAPISZ</string>
+    <string name="addGame">Dodaj zabawę</string>
 </resources>

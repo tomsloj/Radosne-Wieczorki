@@ -21,6 +21,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fenjuly.mylibrary.FloorListView;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -55,8 +57,8 @@ public class editFavorites extends AppCompatActivity {
         final Button deleteOne = (Button) findViewById(R.id.buttonDeleteOne);
         final Button upButton = (Button) findViewById(R.id.upButton);
         final Button downButton = (Button) findViewById(R.id.downButton);
-        listView = (ListView) findViewById(R.id.editableList);
-
+        listView = (FloorListView) findViewById(R.id.editableList);
+        ((FloorListView) listView).setMode(FloorListView.ABOVE);
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getTextSize();
 
@@ -80,6 +82,7 @@ public class editFavorites extends AppCompatActivity {
             {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                tv.setBackgroundColor(getResources().getColor( R.color.background ));
                 tv.setTextSize(textSize);
                 tv.setTextColor(Color.BLACK);
 
@@ -87,7 +90,7 @@ public class editFavorites extends AppCompatActivity {
                 if(position == mSelectedItem)
                     view.setBackgroundColor( getResources().getColor( R.color.checkedColor) );
                 else
-                    view.setBackgroundColor(Color.TRANSPARENT);
+                    view.setBackgroundColor(getResources().getColor( R.color.background ));
 
                 return view;
             }

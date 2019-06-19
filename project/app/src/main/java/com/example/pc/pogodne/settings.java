@@ -32,13 +32,15 @@ public class settings extends AppCompatActivity
         final Button send = (Button) findViewById(R.id.reportButton);
 
         final TextView textSizeText = (TextView) findViewById(R.id.textSizeText);
-        final TextView report= (TextView) findViewById(R.id.reportText);
+        final TextView report = (TextView) findViewById(R.id.reportText);
+        final TextView addGame = (TextView) findViewById(R.id.addGameText);
 
         //set size of text
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getTextSize();
         textSizeText.setTextSize(textSize);
         report.setTextSize(textSize);
+        addGame.setTextSize(textSize);
 
         //set toolbar with title and back button
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
@@ -61,6 +63,7 @@ public class settings extends AppCompatActivity
                 }
                 textSizeText.setTextSize(textSize);
                 report.setTextSize(textSize);
+                addGame.setTextSize(textSize);
             }
         });
 
@@ -77,6 +80,7 @@ public class settings extends AppCompatActivity
                 }
                 textSizeText.setTextSize(textSize);
                 report.setTextSize(textSize);
+                addGame.setTextSize(textSize);
             }
         });
 
@@ -134,6 +138,13 @@ public class settings extends AppCompatActivity
                     }
                 );
                 builder.create().show();
+            }
+        });
+
+        addGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
