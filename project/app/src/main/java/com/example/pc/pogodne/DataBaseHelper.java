@@ -52,6 +52,29 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return aList.get(0);
     }
 
+    public void addGame(String category, String game, String text)
+    {
+        String query = "INSERT INTO DANE (zabawa, kategoria, tekst) VALUES ('" + game + "','"+
+                category + "','" + text + "')";
+        openDataBase();
+        myBase.execSQL(query);
+        closeDataBase();
+
+        /*
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("zabawa", game);
+        contentValues.put("kategoria", category);
+        contentValues.put("tekst", text);
+
+        long result = db.insert(dataBaseName, null, contentValues);
+        db.close();
+        return result;
+        */
+
+    }
+
     public String getRandomGame(int seed)
     {
         int counted = count();

@@ -13,7 +13,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +33,7 @@ public class settings extends AppCompatActivity
         final Button plus = (Button) findViewById(R.id.plusButton);
         final Button minus = (Button) findViewById(R.id.minusButton);
         final Button send = (Button) findViewById(R.id.reportButton);
+        final Button addGameButton = (Button) findViewById(R.id.addGameButton);
 
         final TextView textSizeText = (TextView) findViewById(R.id.textSizeText);
         final TextView report = (TextView) findViewById(R.id.reportText);
@@ -141,10 +145,83 @@ public class settings extends AppCompatActivity
             }
         });
 
-        addGame.setOnClickListener(new View.OnClickListener() {
+
+        //add new game
+        addGameButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final LayoutInflater inflater = LayoutInflater.from(settings.this);
+                final View dialogView = inflater.inflate(R.layout.add_game, null);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(settings.this);
 
+                final TextView gameName = dialogView.findViewById(R.id.nameOfAddedGame);
+                final TextView gameText = dialogView.findViewById(R.id.textOfAddedGame);
+                final RadioGroup radioGroup = dialogView.findViewById(R.id.categoryGroup);
+                final CheckBox shareBox = dialogView.findViewById(R.id.shareGameBox);
+
+                builder.setView(dialogView);
+
+                builder.setPositiveButton
+                        (
+                                R.string.addGame,
+                                new DialogInterface.OnClickListener()
+                                {
+                                    public void onClick(DialogInterface dialog, int id)
+                                    {
+                                        int radioId = radioGroup.getCheckedRadioButtonId();
+                                        RadioButton radioButton = (RadioButton) dialogView.findViewById(radioId);
+
+                                        String game = gameName.getText().toString();
+                                        String text = gameText.getText().toString();
+                                        CharSequence charSequence = radioButton.getText();
+                                        String category = charSequence.toString().toLowerCase();
+
+                                        DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+                                        AddedGamesService addedGamesService = new AddedGamesService(getApplicationContext());
+
+                                        if(!dataBaseHelper.getText(game).equals("Error 73") && !addedGamesService.gameExist(game))
+                                        {
+                                            Toast.makeText(settings.this, "Ta zabawa jest już dodana", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else
+                                        {
+                                            //Toast.makeText(settings.this, Long.toString(addedGamesService.addGame(category, game, text)),Toast.LENGTH_SHORT).show();
+                                            dataBaseHelper.addGame(category, game, text);
+
+                                            if( shareBox.isChecked() )
+                                            {
+                                                String[] recipient = {getString(R.string.mail)};
+                                                Intent intent = new Intent(Intent.ACTION_SEND);
+                                                intent.setData(Uri.parse("mailto:"));
+                                                intent.putExtra(Intent.EXTRA_EMAIL, recipient);
+                                                intent.putExtra(Intent.EXTRA_SUBJECT, "Nowa zabawa");
+                                                intent.putExtra(Intent.EXTRA_TEXT, "kategoria: " + category +
+                                                        "\nNazwa: " + game + "\n" + text);
+                                                intent.setType("message/rfc822");
+                                                //choosing application which user wants to use to send report
+                                                Intent chooser = Intent.createChooser(intent, "Wybierz aplikację z której wyślesz maila");
+                                                startActivity(chooser);
+                                            }
+                                        }
+
+
+
+
+                                    }
+                                }
+                        );
+                builder.setNegativeButton
+                        (
+                                R.string.cancel,
+                                new DialogInterface.OnClickListener()
+                                {
+                                    public void onClick(DialogInterface dialog, int id)
+                                    {
+                                        dialog.cancel();
+                                    }
+                                }
+                        );
+                builder.create().show();
             }
         });
     }

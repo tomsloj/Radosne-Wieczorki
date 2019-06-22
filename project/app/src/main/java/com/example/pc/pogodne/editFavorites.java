@@ -96,6 +96,8 @@ public class editFavorites extends AppCompatActivity {
             }
         };
         listView.setAdapter(arrayAdapter);
+        if(list.size() == 0)
+            listView.setEmptyView(findViewById(R.id.emptyListText));
         //select game
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

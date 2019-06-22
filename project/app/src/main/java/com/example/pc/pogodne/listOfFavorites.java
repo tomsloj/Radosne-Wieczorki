@@ -64,6 +64,8 @@ public class listOfFavorites extends AppCompatActivity
             }
         };
         listOfFavorites.setAdapter(arrayAdapter);
+        if(listFavorites.size() == 0)
+            listOfFavorites.setEmptyView(findViewById(R.id.emptyListText));
 
         /*
          * list choosing

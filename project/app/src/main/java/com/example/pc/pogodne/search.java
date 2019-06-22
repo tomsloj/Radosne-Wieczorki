@@ -154,6 +154,7 @@ public class search extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent openGame = new Intent(getApplicationContext(), display.class);
                 openGame.putExtra("zabawa", listOfFound.getItemAtPosition(i).toString());
+                openGame.putExtra("kategoria", "search");
                 startActivity(openGame);
             }
         });

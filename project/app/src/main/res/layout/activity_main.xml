@@ -14,11 +14,13 @@
         layout="@layout/main_bar" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="0dp"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/main_bar"
+        app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="0dp">
 
         <LinearLayout
@@ -166,12 +168,25 @@
                 android:layout_marginStart="46dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="46dp"
-                android:background="@drawable/roundbutton"
                 android:layout_marginBottom="14dp"
+                android:background="@drawable/roundbutton"
                 android:text="@string/gameOfTheDay"
                 app:layout_constraintHorizontal_bias="1.0" />
+
         </LinearLayout>
+
     </ScrollView>
+
+    <!--
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:Background="@drawable/bottom_background"
+        app:itemIconSize="56dp"
+        app:layout_constraintBottom_toBottomOf="@id/scrollView2"
+        app:menu="@menu/bottom_menu_main" />
+    -->
 
 
 </android.support.constraint.ConstraintLayout>

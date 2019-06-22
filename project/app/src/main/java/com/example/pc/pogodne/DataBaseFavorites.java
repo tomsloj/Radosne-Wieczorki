@@ -37,7 +37,7 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     }
 
     //@return max number of favorite games(how many games is in favorite)
-    private int maxNumber(String name)
+    public int maxNumber(String name)
     {
         int number;
         SQLiteDatabase db = this.getWritableDatabase();
@@ -74,7 +74,7 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     }
 
     //@return number of game in favorite
-    private int numberOfGame(String name, String game)
+    public int numberOfGame(String name, String game)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT number FROM " + dataBaseName + " WHERE name = '" + name
@@ -85,7 +85,7 @@ public class DataBaseFavorites extends SQLiteOpenHelper
         return number;
     }
 
-    private String gameFromNumber(int number, String name)
+    public String gameFromNumber(int number, String name)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         String query = "SELECT game FROM " + dataBaseName + " WHERE name = '" + name

@@ -155,7 +155,7 @@ public class display extends AppCompatActivity {
         final Button nextButton = (Button) findViewById(R.id.next);
         final Button prevButton = (Button) findViewById(R.id.prev);
 
-        if( category!=null && category.equals("gameOfTheDay") )
+        if( category!=null && (category.equals("gameOfTheDay") || category.equals("search")) )
         {
             nextButton.setVisibility(View.GONE);
             prevButton.setVisibility(View.GONE);

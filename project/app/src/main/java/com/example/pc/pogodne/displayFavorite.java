@@ -80,6 +80,8 @@ public class displayFavorite extends AppCompatActivity {
             }
         };
         listView.setAdapter(arrayAdapter);
+        if(list.size() == 0)
+            listView.setEmptyView(findViewById(R.id.emptyListText));
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
