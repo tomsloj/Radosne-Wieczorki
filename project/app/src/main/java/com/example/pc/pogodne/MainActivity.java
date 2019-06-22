@@ -3,14 +3,19 @@ package com.example.pc.pogodne;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Pair;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -28,6 +33,27 @@ public class MainActivity extends AppCompatActivity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         setSupportActionBar(myToolbar);
 
+        /*
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomMenu);
+        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId())
+                {
+                    case R.id.button1:
+
+                        break;
+                    case R.id.button2:
+
+                        break;
+                    case R.id.button3:
+
+                        break;
+                }
+            }
+        });
+        */
+
         //copy database
         DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
         SettingsService settingsService = new SettingsService(getApplicationContext());
@@ -38,9 +64,20 @@ public class MainActivity extends AppCompatActivity
             settingsService.setPrevVersion(version);
             dbHelper.getReadableDatabase();
             //copy db
-            if(copyDatabase(this)) {
+            if(copyDatabase(this))
+            {
                 //all right
-            } else {
+
+                DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+                AddedGamesService addedGamesService = new AddedGamesService(getApplicationContext());
+                ArrayList<ArrayList<String> > list = addedGamesService.getList();
+                for ( int i = 0; i < list.size(); ++i )
+                {
+                    dataBaseHelper.addGame(list.get(i).get(0), list.get(i).get(1), list.get(i).get(2) );
+                }
+            }
+            else
+            {
                 Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -181,6 +218,7 @@ public class MainActivity extends AppCompatActivity
 
                 Intent openGameOfTheDay = new Intent(getApplicationContext(), display.class);
                 openGameOfTheDay.putExtra("zabawa", gameName);
+                openGameOfTheDay.putExtra("kategoria", "gameOfTheDay");
                 startActivity(openGameOfTheDay);
             }
         });
@@ -207,11 +245,11 @@ public class MainActivity extends AppCompatActivity
             outputStream.close();
             Log.w("listActivity","DB copied");
             return true;
-        }catch (Exception e)
-        {
+        }catch (Exception e) {
             e.printStackTrace();
             return false;
         }
+
     }
 }
 
