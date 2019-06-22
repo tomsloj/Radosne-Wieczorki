@@ -41,4 +41,18 @@
     <string name="notes">Notatki</string>
     <string name="save">ZAPISZ</string>
     <string name="addGame">Dodaj zabawę</string>
+    <string name="prev">prev</string>
+    <string name="next">next</string>
+    <string name="addTitle">Dodaj zabawę</string>
+    <string name="nameHint">Wpisz nazwę zabawy</string>
+    <string name="textHint">Wprowadź opis zabawy</string>
+    <string name="choseCategory">Wybierz kategorię</string>
+    <string name="category1">Tańce</string>
+    <string name="category2">Rywalizacja</string>
+    <string name="category3">Integracyjne</string>
+    <string name="category4">Piosenki</string>
+    <string name="category5">Inne</string>
+    <string name="shareGame">Podziel się zabawą z innymi</string>
+
+
 </resources>

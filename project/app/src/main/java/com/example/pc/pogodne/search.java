@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,7 +50,7 @@ public class search extends AppCompatActivity {
         actionBar.setHomeAsUpIndicator(R.drawable.back);
 
 
-        final Button searchButton = (Button) findViewById(R.id.searchButton);
+        final ImageButton searchButton = (ImageButton) findViewById(R.id.searchButton);
         final CheckBox titleBox = (CheckBox) findViewById(R.id.titlesCheckbox);
         final CheckBox textBox = (CheckBox) findViewById(R.id.textsCheckbox);
         final EditText searchSpace = (EditText) findViewById(R.id.searchSpace);
@@ -106,6 +107,7 @@ public class search extends AppCompatActivity {
                     final ArrayList<String> list = new ArrayList<>();
                     ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
                     listOfFound.setAdapter(arrayAdapter);
+                    listOfFound.setEmptyView(findViewById(R.id.textEmptyFavoritesList));
                     textNoFavorites.setText(R.string.noFound);
                 }
                 else
@@ -135,7 +137,9 @@ public class search extends AppCompatActivity {
                     }
                     else
                     {
+                        Toast.makeText(search.this, "ooooooooooo",Toast.LENGTH_LONG).show();
                         ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
+                        listOfFound.setAdapter(arrayAdapter);
                         listOfFound.setEmptyView(findViewById(R.id.textEmptyFavoritesList));
                         textNoFavorites.setText(R.string.noFound);
                     }

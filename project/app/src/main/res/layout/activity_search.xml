@@ -13,28 +13,46 @@
         android:id="@+id/main_bar"
         />
 
-    <EditText
-        android:id="@+id/searchSpace"
-        android:layout_width="290dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/main_bar"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="24dp"
+    <LinearLayout
+        android:id="@+id/linearL"
         android:layout_marginTop="68dp"
-        android:autofillHints="auto"
-        android:backgroundTint="@color/darkBlue"
-        android:colorControlActivated="@color/darkBlue"
-        android:ems="10"
-        android:hint="@string/write"
-        android:inputType="text" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/searchSpace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="18dp"
+            android:autofillHints="auto"
+            android:backgroundTint="@color/darkBlue"
+            android:colorControlActivated="@color/darkBlue"
+            android:ems="10"
+            android:hint="@string/write"
+            android:inputType="text" />
+
+        <ImageButton
+            android:id="@+id/searchButton"
+            style="@style/NormalButton"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="24dp"
+            android:layout_weight="1"
+            android:background="@color/darkBlue"
+            android:src="@drawable/search"
+            android:text="@string/search"
+            />
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/titlesCheckbox"
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchSpace"
+        android:layout_below="@+id/linearL"
         android:layout_marginTop="12dp"
         android:checked="true"
         android:buttonTint="@color/darkBlue"
@@ -53,28 +71,13 @@
         android:layout_marginStart="40dp"
         android:text="@string/findText" />
 
-    <android.support.v7.widget.AppCompatImageButton
-        android:id="@+id/searchButton"
-        style="@style/NormalButton"
-        android:src="@drawable/search"
-        android:background="@color/darkBlue"
-        android:layout_width="50dp"
-        android:layout_height="45dp"
-        android:layout_alignTop="@+id/main_bar"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="68dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_toEndOf="@+id/searchSpace"
-        android:text="@string/search" />
-
     <com.fenjuly.mylibrary.FloorListView
         android:id="@+id/lisOfFound"
         android:divider="@color/borderColor"
         android:dividerHeight="1dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/searchButton"
+        android:layout_below="@+id/textsCheckbox"
         android:layout_marginTop="1dp"
         android:layout_marginBottom="0dp"/>
 
@@ -83,7 +86,7 @@
         style="@style/TextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/searchButton"
+        android:layout_below="@+id/textsCheckbox"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="30dp"
