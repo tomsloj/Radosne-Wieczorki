@@ -29,6 +29,8 @@ public class display extends AppCompatActivity {
     TextView gameName;
     TextView text;
     String game;
+    String txt;
+    String category;
     String playlist;
     String notes;
 
@@ -47,6 +49,7 @@ public class display extends AppCompatActivity {
         text.setTextSize(textSize);
 
         game = getIntent().getStringExtra("zabawa");
+        category = getIntent().getStringExtra("kategoria");
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         setSupportActionBar(myToolbar);
@@ -63,11 +66,13 @@ public class display extends AppCompatActivity {
          * display title of game and description
          */
         final DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
-        String txt = dbHelper.getText(game);
+        txt = dbHelper.getText(game);
 
         gameName.setText(game);
         text.setText(txt);
 
+
+        /*
 
         //surprise
         final Button hiddenButton = (Button) findViewById(R.id.hiddenButton);
@@ -99,6 +104,8 @@ public class display extends AppCompatActivity {
                 }
             }
         });
+
+        */
         final Button notesButton = (Button) findViewById(R.id.notesButton);
         final DataBaseFavorites dbFavorites = new DataBaseFavorites( getApplicationContext() );
         playlist = getIntent().getStringExtra("playlist");
@@ -144,6 +151,59 @@ public class display extends AppCompatActivity {
                 dialog.setCanceledOnTouchOutside( false );
             }
         });
+
+        final Button nextButton = (Button) findViewById(R.id.next);
+        final Button prevButton = (Button) findViewById(R.id.prev);
+
+        nextButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(category.equals("ulu"))
+                {
+                    int idgame = dbFavorites.numberOfGame(playlist, game);
+                    int maxNR = dbFavorites.maxNumber(playlist);
+                    if( idgame != maxNR )
+                    {
+                        game = dbFavorites.gameFromNumber( idgame+1, playlist );
+                    }
+                }
+                else
+                {
+                    String newgame = dbHelper.nextGame(category, game);
+                    if (!newgame.equals(""))
+                        game = newgame;
+                }
+                txt = dbHelper.getText(game);
+                text.setText(txt);
+                gameName.setText(game);
+            }
+        });
+
+        prevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(category.equals("ulu"))
+                {
+                    int idgame = dbFavorites.numberOfGame(playlist, game);
+                    //int maxNR = dbFavorites.maxNumber(playlist);
+                    if( idgame != 1 )
+                    {
+                        game = dbFavorites.gameFromNumber( idgame-1, playlist );
+                        txt = dbHelper.getText(game);
+                    }
+                }
+                else
+                {
+                    String newgame = dbHelper.prevGame(category, game);
+                    if (!newgame.equals(""))
+                        game = newgame;
+                }
+                txt = dbHelper.getText(game);
+                text.setText(txt);
+                gameName.setText(game);
+            }
+        });
+
 
 
     }

@@ -88,6 +88,7 @@ public class list extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent openGame = new Intent(getApplicationContext(), display.class);
                 openGame.putExtra("zabawa", arrayList.get(i).toString());
+                openGame.putExtra("kategoria", category);
                 startActivity(openGame);
             }
         });

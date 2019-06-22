@@ -1,5 +1,6 @@
 package com.example.pc.pogodne;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -80,6 +81,42 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
             query = "SELECT zabawa FROM DANE WHERE kategoria = '" + category + "'";
         query = query + " ORDER BY zabawa COLLATE LOCALIZED ASC";
         return getList(query);
+    }
+
+    public String nextGame (String category, String game)
+    {
+        ArrayList<String> list = getGamesInCategory(category);
+        for( int i = 0; i < list.size(); ++i )
+        {
+            if(game.equals(list.get(i)))
+            {
+                if( i < list.size()-1 )
+                {
+                    return list.get(i+1);
+                }
+                else
+                    return "";
+            }
+        }
+        return "";
+    }
+
+    public String prevGame (String category, String game)
+    {
+        ArrayList<String> list = getGamesInCategory(category);
+        for( int i = 0; i < list.size(); ++i )
+        {
+            if(game.equals(list.get(i)))
+            {
+                if( i == 0 )
+                {
+                    return "";
+                }
+                else
+                    return list.get(i-1);
+            }
+        }
+        return "";
     }
 
     public ArrayList<String> getGameInFavorite(String favorite)

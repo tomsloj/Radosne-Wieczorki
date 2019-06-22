@@ -88,6 +88,7 @@ public class displayFavorite extends AppCompatActivity {
                 Intent openGame = new Intent(getApplicationContext(), display.class);
                 openGame.putExtra("zabawa", gameName);
                 openGame.putExtra("playlist", nameOfFavorite );
+                openGame.putExtra("kategoria", "ulu");
                 startActivity(openGame);
             }
         });
