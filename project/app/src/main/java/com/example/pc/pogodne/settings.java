@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -38,6 +39,10 @@ public class settings extends AppCompatActivity
         final TextView textSizeText = (TextView) findViewById(R.id.textSizeText);
         final TextView report = (TextView) findViewById(R.id.reportText);
         final TextView addGame = (TextView) findViewById(R.id.addGameText);
+
+        final ImageButton wholeListButton = (ImageButton) findViewById(R.id.wholeListButton);
+        final ImageButton searchButton = (ImageButton) findViewById(R.id.findButton);
+        final ImageButton favoritesButton = (ImageButton) findViewById(R.id.favoritesButton);
 
         //set size of text
         final SettingsService sService = new SettingsService(getApplicationContext());
@@ -185,8 +190,9 @@ public class settings extends AppCompatActivity
                                         }
                                         else
                                         {
-                                            //Toast.makeText(settings.this, Long.toString(addedGamesService.addGame(category, game, text)),Toast.LENGTH_SHORT).show();
                                             dataBaseHelper.addGame(category, game, text);
+
+                                            Toast.makeText(settings.this, "Zabawa: " + game + "\nzostała dodana do: " + category,Toast.LENGTH_SHORT).show();
 
                                             if( shareBox.isChecked() )
                                             {
@@ -222,6 +228,40 @@ public class settings extends AppCompatActivity
                                 }
                         );
                 builder.create().show();
+            }
+        });
+
+        //show the whole list
+        wholeListButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "all");
+                startActivity(openList);
+            }
+        });
+
+        //show favorites list
+        favoritesButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
+                startActivity(openListOfFavorites);
+            }
+        });
+
+        //show search engine
+        searchButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openSearch = new Intent(getApplicationContext(), search.class);
+                startActivity(openSearch);
             }
         });
     }

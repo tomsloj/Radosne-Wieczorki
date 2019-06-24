@@ -12,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -159,12 +158,53 @@ public class search extends AppCompatActivity {
             }
         });
 
+
+        final ImageButton wholeListButton = (ImageButton) findViewById(R.id.wholeListButton);
+        //final ImageButton searchButton = (ImageButton) findViewById(R.id.findButton);
+        final ImageButton favoritesButton = (ImageButton) findViewById(R.id.favoritesButton);
+
+        //show the whole list
+        wholeListButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "all");
+                startActivity(openList);
+            }
+        });
+
+        //show favorites list
+        favoritesButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
+                startActivity(openListOfFavorites);
+            }
+        });
+
+        /*
+        //show search engine
+        searchButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openSearch = new Intent(getApplicationContext(), search.class);
+                startActivity(openSearch);
+            }
+        });
+        */
+
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_back, menu);
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
         return true;
     }
 
@@ -177,17 +217,11 @@ public class search extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.action_search)
+        if(id == R.id.action_settings)
         {
-            Intent openSearch = new Intent(getApplicationContext(), search.class);
-            startActivity(openSearch);
+            Intent openSettings = new Intent(getApplicationContext(), settings.class);
+            startActivity(openSettings);
         }
-            else
-                if(id == R.id.action_settings)
-                {
-                    Intent openSettings = new Intent(getApplicationContext(), settings.class);
-                    startActivity(openSettings);
-                }
 
         return super.onOptionsItemSelected(item);
     }

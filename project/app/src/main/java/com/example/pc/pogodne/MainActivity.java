@@ -1,6 +1,7 @@
 package com.example.pc.pogodne;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -9,9 +10,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.util.Pair;
+import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.OutputStream;
@@ -84,16 +93,15 @@ public class MainActivity extends AppCompatActivity
         }
 
         //define buttons
-        final Button wholeListButton = (Button) findViewById(R.id.wholeListButton);
+        final ImageButton wholeListButton = (ImageButton) findViewById(R.id.wholeListButton);
         final Button dancesButton = (Button) findViewById(R.id.dancesButton);
         final Button singsButton = (Button) findViewById(R.id.singsButton);
         final Button competitionButton = (Button) findViewById(R.id.competitionsButton);
         final Button integralsButton = (Button) findViewById(R.id.integralsButton);
         final Button otherButtons = (Button) findViewById(R.id.othersButton);
 
-        final Button settingsButton = (Button) findViewById(R.id.settingsButton);
-        final Button searchButton = (Button) findViewById(R.id.findButton);
-        final Button favoritesButton = (Button) findViewById(R.id.favoritesButton);
+        final ImageButton searchButton = (ImageButton) findViewById(R.id.findButton);
+        final ImageButton favoritesButton = (ImageButton) findViewById(R.id.favoritesButton);
         final Button gameOfTheDayButton = (Button) findViewById(R.id.gameOfTheDayButton);
 
         /*
@@ -183,17 +191,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-        //show settings
-        settingsButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent openSettings = new Intent(getApplicationContext(), settings.class);
-                startActivity(openSettings);
-            }
-        });
-
         //show favorites list
         favoritesButton.setOnClickListener(new View.OnClickListener()
         {
@@ -251,6 +248,25 @@ public class MainActivity extends AppCompatActivity
         }
 
     }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent otworz_ustawienia = new Intent(getApplicationContext(), settings.class);
+            startActivity(otworz_ustawienia);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
 
 

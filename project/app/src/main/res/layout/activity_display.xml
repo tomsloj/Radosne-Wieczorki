@@ -12,92 +12,100 @@
         android:id="@+id/main_bar"
         layout="@layout/main_bar" />
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_bar">
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="0dp">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/titleOfGame"
-                style="@style/TitleTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
-                android:textIsSelectable="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_bar" />
-
-            <Button
-                android:id="@+id/hiddenButton"
-                android:layout_width="match_parent"
-                android:layout_height="10dp"
-                android:background="@color/transparent" />
-
-            <TextView
-                android:id="@+id/textOfGame"
-                style="@style/TextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="8dp"
-                android:autoLink="web"
-                android:textIsSelectable="true"
-                android:textSize="15sp"
-                android:textStyle="normal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleOfGame" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_bar"
+            android:layout_marginBottom="70dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/titleOfGame"
+                    style="@style/TitleTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:textIsSelectable="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/main_bar" />
 
                 <Button
-                    android:id="@+id/prev"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:text="@string/prev"
-                    style="@style/NormalButton" />
+                    android:id="@+id/hiddenButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/transparent" />
 
-                <Button
-                    android:id="@+id/notesButton"
-                    style="@style/NormalButton"
-                    android:layout_weight="1"
+                <TextView
+                    android:id="@+id/textOfGame"
+                    style="@style/TextStyle"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:text="@string/notes" />
-
-                <Button
-                    android:id="@+id/next"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:text="@string/next"
-                    style="@style/NormalButton"/>
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:autoLink="web"
+                    android:textIsSelectable="true"
+                    android:textSize="15sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/titleOfGame" />
             </LinearLayout>
+        </ScrollView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:background="@color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/frameLayout"
+            android:gravity="top">
+
+            <ImageButton
+                android:id="@+id/prev"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="3"
+
+                android:background="@drawable/down_background"
+                android:src="@drawable/prev" />
+            <ImageButton
+                android:id="@+id/notesButton"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:src="@drawable/notes"
+                android:contentDescription="notes" />
+            <ImageButton
+                android:id="@+id/next"
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/next"
+                android:background="@drawable/down_background"
+                />
         </LinearLayout>
-    </ScrollView>
+
+    </FrameLayout>
 
 
 </android.support.constraint.ConstraintLayout>

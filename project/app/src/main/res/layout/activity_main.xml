@@ -13,170 +13,177 @@
         android:id="@+id/main_bar"
         layout="@layout/main_bar" />
 
-    <ScrollView
-        android:id="@+id/scrollView2"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="0dp">
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_bar"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="0dp">
 
-        <LinearLayout
+        <ScrollView
+            android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginBottom="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/main_bar"
+            app:layout_constraintVertical_bias="0.0"
+            tools:layout_editor_absoluteX="0dp">
 
-            <Button
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:scrollbars="vertical"
+                >
+
+                <Button
+                    android:id="@+id/dancesButton"
+                    style="@style/SmallButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="46dp"
+                    android:background="@drawable/roundbutton"
+                    android:text="@string/dances"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <Button
+                    android:id="@+id/competitionsButton"
+                    style="@style/SmallButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="46dp"
+                    android:background="@drawable/roundbutton"
+                    android:text="@string/competition"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/integralsButton" />
+
+                <Button
+                    android:id="@+id/integralsButton"
+                    style="@style/SmallButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="46dp"
+                    android:background="@drawable/roundbutton"
+                    android:text="@string/integration"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dancesButton" />
+
+                <Button
+                    android:id="@+id/singsButton"
+                    style="@style/SmallButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="46dp"
+                    android:background="@drawable/roundbutton"
+                    android:text="@string/sings"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/competitionsButton" />
+
+                <Button
+                    android:id="@+id/othersButton"
+                    style="@style/SmallButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="46dp"
+                    android:background="@drawable/roundbutton"
+                    android:text="@string/other"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/singsButton" />
+
+                <Button
+                    android:id="@+id/gameOfTheDayButton"
+                    style="@style/SmallButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="46dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="46dp"
+                    android:layout_marginBottom="14dp"
+                    android:background="@drawable/roundbutton"
+                    android:text="@string/gameOfTheDay"
+                    app:layout_constraintHorizontal_bias="1.0" />
+
+            </LinearLayout>
+
+        </ScrollView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:background="@color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/frameLayout">
+
+            <ImageButton
                 android:id="@+id/wholeListButton"
-                style="@style/BigButton"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="30dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/menu_name"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_bar" />
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="3"
 
-            <Button
-                android:id="@+id/dancesButton"
-                style="@style/SmallButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="46dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/dances"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/wholeListButton" />
-
-            <Button
-                android:id="@+id/competitionsButton"
-                style="@style/SmallButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="46dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/competition"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/integralsButton" />
-
-            <Button
-                android:id="@+id/integralsButton"
-                style="@style/SmallButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="46dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/integration"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dancesButton" />
-
-            <Button
-                android:id="@+id/singsButton"
-                style="@style/SmallButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="46dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/sings"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/competitionsButton" />
-
-            <Button
-                android:id="@+id/othersButton"
-                style="@style/SmallButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="46dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/other"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/singsButton" />
-
-            <Button
+                android:background="@drawable/down_background"
+                android:src="@drawable/az"
+                android:scaleType="fitCenter"
+                android:padding="12dp" />
+            <ImageButton
                 android:id="@+id/favoritesButton"
-                style="@style/SmallButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="46dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/favorites"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/othersButton" />
-
-            <Button
-                android:id="@+id/settingsButton"
-                style="@style/SmallButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="46dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/action_settings"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/findButton" />
-
-            <Button
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:src="@drawable/show_list"
+                android:contentDescription="search" />
+            <ImageButton
                 android:id="@+id/findButton"
-                style="@style/SmallButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="46dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/search"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/favoritesButton" />
-
-            <Button
-                android:id="@+id/gameOfTheDayButton"
-                style="@style/SmallButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="46dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="46dp"
-                android:layout_marginBottom="14dp"
-                android:background="@drawable/roundbutton"
-                android:text="@string/gameOfTheDay"
-                app:layout_constraintHorizontal_bias="1.0" />
-
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/bigger_search"
+                android:background="@drawable/down_background"
+                 />
         </LinearLayout>
 
-    </ScrollView>
+    </FrameLayout>
 
+
+    <!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@id/frameLayout"
+        android:gravity="top">
+        <Button
+        android:layout_width="wrap_content"
+        android:layout_height="80dp"
+            android:layout_marginTop="-20dp"
+        android:foregroundGravity="top"
+        android:gravity="top"
+        android:text="Aaaaaaaaa" />
+    </LinearLayout>
+    -->
     <!--
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottomMenu"

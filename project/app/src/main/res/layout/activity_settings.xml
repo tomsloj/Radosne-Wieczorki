@@ -10,90 +10,135 @@
         android:id="@+id/main_bar"
         layout="@layout/main_bar" />
 
-    <TableLayout
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="25dp"
-        android:stretchColumns="1"
-        >
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="0dp">
 
-        <TableRow>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="70dp"
+            android:stretchColumns="1"
+            >
 
-            <TextView
-                android:id="@+id/textSizeText"
-                style="@style/TextStyle"
-                android:background="@color/transparent"
-                android:layout_column="1"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_weight="15"
-                android:text="@string/tekstSize" />
+            <TableRow>
 
-            <Button
-                android:id="@+id/plusButton"
-                style="@style/NormalButton"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                <TextView
+                    android:id="@+id/textSizeText"
+                    style="@style/TextStyle"
+                    android:background="@color/transparent"
+                    android:layout_column="1"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="15"
+                    android:text="@string/tekstSize" />
+
+                <Button
+                    android:id="@+id/plusButton"
+                    style="@style/NormalButton"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/plus" />
+
+                <Button
+                    android:id="@+id/minusButton"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/minus" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/addGameText"
+                    style="@style/TextStyle"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="22dp"
+                    android:layout_weight="7"
+                    android:text="@string/addGame" />
+
+                <Button
+                    android:id="@+id/addGameButton"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="3"
+                    android:text="@string/send" />
+
+
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:id="@+id/reportText"
+                    style="@style/TextStyle"
+                    android:layout_width="0px"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="22dp"
+                    android:layout_weight="7"
+                    android:text="@string/reportInfo" />
+
+                <Button
+                    android:id="@+id/reportButton"
+                    android:layout_width="0px"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:layout_weight="3"
+                    android:background="@drawable/send"/>
+
+
+            </TableRow>
+
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:background="@color/transparent"
+            android:gravity="top">
+
+            <ImageButton
+                android:id="@+id/wholeListButton"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
                 android:layout_weight="3"
-                android:background="@drawable/plus" />
 
-            <Button
-                android:id="@+id/minusButton"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:background="@drawable/down_background"
+                android:src="@drawable/az"
+                android:scaleType="fitCenter"
+                android:padding="12dp" />
+            <ImageButton
+                android:id="@+id/favoritesButton"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:src="@drawable/show_list"
+                android:contentDescription="search" />
+            <ImageButton
+                android:id="@+id/findButton"
                 android:layout_weight="3"
-                android:background="@drawable/minus" />
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/addGameText"
-                style="@style/TextStyle"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:layout_weight="7"
-                android:text="@string/addGame" />
-
-            <Button
-                android:id="@+id/addGameButton"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_weight="3"
-                android:text="@string/send" />
-
-
-        </TableRow>
-
-        <TableRow>
-
-            <TextView
-                android:id="@+id/reportText"
-                style="@style/TextStyle"
-                android:layout_width="0px"
-                android:layout_height="200dp"
-                android:layout_marginTop="22dp"
-                android:layout_weight="7"
-                android:text="@string/reportInfo" />
-
-            <Button
-                android:id="@+id/reportButton"
-                android:layout_width="0px"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:layout_weight="3"
-                android:text="@string/send" />
-
-
-        </TableRow>
-
-    </TableLayout>
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/bigger_search"
+                android:background="@drawable/down_background"
+                />
+        </LinearLayout>
+    </FrameLayout>
 
 </RelativeLayout>
