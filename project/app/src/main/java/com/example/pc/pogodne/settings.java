@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -31,10 +30,10 @@ public class settings extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        final Button plus = (Button) findViewById(R.id.plusButton);
-        final Button minus = (Button) findViewById(R.id.minusButton);
-        final Button send = (Button) findViewById(R.id.reportButton);
-        final Button addGameButton = (Button) findViewById(R.id.addGameButton);
+        final ImageButton plus = (ImageButton) findViewById(R.id.plusButton);
+        final ImageButton minus = (ImageButton) findViewById(R.id.minusButton);
+        final ImageButton send = (ImageButton) findViewById(R.id.reportButton);
+        final ImageButton addGameButton = (ImageButton) findViewById(R.id.addGameButton);
 
         final TextView textSizeText = (TextView) findViewById(R.id.textSizeText);
         final TextView report = (TextView) findViewById(R.id.reportText);
