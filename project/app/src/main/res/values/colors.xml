@@ -19,4 +19,11 @@
     <color name="checkedColor">#FF9591</color>
     <color name="darkBlue">#002A53</color>
     <color name="blue">#0071bc</color>
+    <color name="main_activity_background">#002A53</color>
+    <color name="button1">#F15A24</color>
+    <color name="button2">#F7931E</color>
+    <color name="button3">#FBB03B</color>
+    <color name="button4">#FCEE21</color>
+    <color name="button5">#8CC63F</color>
+    <color name="button6">#39B54A</color>
 </resources>

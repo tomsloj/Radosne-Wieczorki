@@ -85,7 +85,10 @@
                 android:layout_weight="3"
 
                 android:background="@drawable/down_background"
-                android:src="@drawable/prev" />
+                android:src="@drawable/prev"
+                android:scaleType="fitCenter"
+                android:padding="19dp"
+                />
             <ImageButton
                 android:id="@+id/notesButton"
                 android:layout_weight="2"
@@ -93,7 +96,9 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
                 android:src="@drawable/notes"
-                android:contentDescription="notes" />
+                android:contentDescription="notes"
+                android:scaleType="fitCenter"
+                android:padding="12dp"/>
             <ImageButton
                 android:id="@+id/next"
                 android:layout_weight="3"
@@ -102,6 +107,8 @@
                 android:layout_marginTop="10dp"
                 android:src="@drawable/next"
                 android:background="@drawable/down_background"
+                android:scaleType="fitCenter"
+                android:padding="19dp"
                 />
         </LinearLayout>
 

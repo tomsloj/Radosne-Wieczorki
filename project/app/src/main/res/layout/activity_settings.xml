@@ -39,6 +39,15 @@
                     android:text="@string/tekstSize" />
 
                 <ImageButton
+                    android:id="@+id/minusButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/minus"
+                    android:background="@drawable/circle_background_blue"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"/>
+
+                <ImageButton
                     android:id="@+id/plusButton"
                     style="@style/NormalButton"
                     android:layout_width="wrap_content"
@@ -46,15 +55,9 @@
                     android:src="@drawable/plus"
                     android:background="@drawable/circle_background_blue"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="10dp"/>
+                    />
 
-                <ImageButton
-                    android:id="@+id/minusButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/minus"
-                    android:background="@drawable/circle_background_blue"
-                    android:layout_gravity="end" />
+
             </TableRow>
 
             <TableRow
@@ -97,7 +100,9 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/send"
                     android:background="@drawable/circle_background_red"
-                    android:layout_gravity="end"/>
+                    android:layout_gravity="end"
+                    android:scaleType="fitCenter"
+                    android:padding="4dp" />
 
 
             </TableRow>
@@ -121,7 +126,7 @@
                 android:background="@drawable/down_background"
                 android:src="@drawable/az"
                 android:scaleType="fitCenter"
-                android:padding="12dp" />
+                android:padding="20dp" />
             <ImageButton
                 android:id="@+id/favoritesButton"
                 android:layout_weight="2"
@@ -129,7 +134,8 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimary"
                 android:src="@drawable/show_list"
-                android:contentDescription="search" />
+                android:scaleType="fitCenter"
+                android:padding="12dp"/>
             <ImageButton
                 android:id="@+id/findButton"
                 android:layout_weight="3"
