@@ -1,24 +1,67 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:orientation="vertical">
+        <TextView
+            android:id="@+id/favoritesDialogTitle"
+            style="@style/DialogText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/favoritesAdd" />
 
-    <TextView
-        android:id="@+id/favoritesDialogTitle"
-        style="@style/TitleTextStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginBottom="16dp"
-        android:text="@string/favoritesAdd"
-        android:textColor="@color/colorPrimary" />
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:background="@color/colorPrimary" />
+            <ExpandableListView
+                android:orientation="vertical"
+                android:id="@+id/dialogLisOfFavorites"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="15dp"
+                android:scrollbars="vertical"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"/>
 
+            <Button
+                android:id="@+id/create"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:text="@string/newFavorites"
+                android:textSize="17sp"
+                android:textAllCaps="false"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                />
+
+            <TableRow
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="20dp"
+                android:layout_gravity="center">
+                <Button
+                    android:id="@+id/addGameButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/addGame"
+                    style="@style/NormalButton"
+                    android:layout_marginEnd="15dp"
+                    />
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"
+                    style="@style/NormalButton"
+                    android:layout_marginStart="15dp"
+                    />
+            </TableRow>
+
+    <!--
     <EditText
         android:id="@+id/nameOfFavorite"
         android:textCursorDrawable="@color/colorAccent"
@@ -47,10 +90,6 @@
         android:layout_marginEnd="8dp"
         android:text="@string/selectFavorite"
         android:textAlignment="center" />
+       -->
 
-    <ListView
-        android:id="@+id/dialogLisOfFavorites"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp" />
 </LinearLayout>

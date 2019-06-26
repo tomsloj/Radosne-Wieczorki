@@ -1,21 +1,32 @@
 package com.example.pc.pogodne;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.fenjuly.mylibrary.FloorListView;
+import com.baoyz.swipemenulistview.SwipeMenu;
+import com.baoyz.swipemenulistview.SwipeMenuCreator;
+import com.baoyz.swipemenulistview.SwipeMenuItem;
+import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
 
@@ -23,7 +34,7 @@ public class listOfFavorites extends AppCompatActivity
 {
     int textSize;
     ArrayList<String> listFavorites;
-    ListView listOfFavorites;
+    SwipeMenuListView listOfFavorites;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,10 +53,9 @@ public class listOfFavorites extends AppCompatActivity
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getTextSize();
 
-        listOfFavorites = (FloorListView) findViewById(R.id.listOfFavorites);
-        ((FloorListView) listOfFavorites).setMode(FloorListView.ABOVE);
+        listOfFavorites = (SwipeMenuListView) findViewById(R.id.listOfFavorites);
         //get list of names of favorites from favorites base
-        DataBaseFavorites dbHelperFavorites = new DataBaseFavorites(listOfFavorites.this);
+        final DataBaseFavorites dbHelperFavorites = new DataBaseFavorites(listOfFavorites.this);
         listFavorites = dbHelperFavorites.getFavoritesList();
 
         //display list of favorites
@@ -89,6 +99,204 @@ public class listOfFavorites extends AppCompatActivity
                 startActivity(open_list);
             }
         });
+
+
+
+        SwipeMenuCreator creator = new SwipeMenuCreator() {
+
+            @Override
+            public void create(SwipeMenu menu) {
+                // create "open" item
+                SwipeMenuItem openItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                openItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
+                // set item width
+                openItem.setWidth(150);
+
+                openItem.setIcon(R.drawable.edit);
+                // add to menu
+                menu.addMenuItem(openItem);
+
+                // create "delete" item
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
+                // set item width
+                deleteItem.setWidth(150);
+                // set a icon
+                deleteItem.setIcon(R.drawable.delete);
+                // add to menu
+                menu.addMenuItem(deleteItem);
+            }
+        };
+
+// set creator
+        listOfFavorites.setMenuCreator(creator);
+
+       listOfFavorites.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
+                switch (index) {
+                    case 0:
+                        // open
+                        String favoriteName = listFavorites.get(position);
+
+                        Intent open_list = new Intent(getApplicationContext(), displayFavorite.class);
+                        open_list.putExtra("ulu", favoriteName);
+                        open_list.putExtra("ID", position);
+                        open_list.putExtra("list", listFavorites);
+                        sService.setNewNameOfFavorite("");
+                        startActivity(open_list);
+                        break;
+                    case 1:
+                        // delete
+                        AlertDialog.Builder builder = new AlertDialog.Builder(listOfFavorites.this);
+                        builder.setTitle("Czy na pewno chcesz usunąć tę listę?");
+                        builder.setNegativeButton("Anuluj", new DialogInterface.OnClickListener(){
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        builder.setPositiveButton("Usuń", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dbHelperFavorites.deleteFavorite(listFavorites.get(position));
+                                listFavorites.remove(position);
+                                Toast.makeText(getApplicationContext(),listFavorites.get(position),Toast.LENGTH_SHORT).show();
+                                //finish();
+                            }
+                        });
+
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+
+                        Button negativButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
+                        Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                        negativButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
+                        positiveButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
+                        break;
+                }
+                return false;
+            }
+        });
+
+
+        final ImageButton wholeListButton = (ImageButton) findViewById(R.id.wholeListButton);
+        final ImageButton searchButton = (ImageButton) findViewById(R.id.findButton);
+        final ImageButton favoritesButton = (ImageButton) findViewById(R.id.favoritesButton);
+
+        //show the whole list
+        wholeListButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "all");
+                startActivity(openList);
+            }
+        });
+
+        //show search engine
+        searchButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openSearch = new Intent(getApplicationContext(), search.class);
+                startActivity(openSearch);
+            }
+        });
+
+        favoritesButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(listOfFavorites.this);
+                final LayoutInflater inflater = listOfFavorites.this.getLayoutInflater();
+                final View dialogView = inflater.inflate(R.layout.create_new_favorite, null);
+                builder.setView(dialogView);
+                final AlertDialog dialog2 = builder.create();
+                dialog2.show();
+                Button createButton = (Button) dialogView.findViewById(R.id.newGameButton);
+                Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
+                final TextView name = (TextView) dialogView.findViewById(R.id.newListName);
+
+                createButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites(getApplicationContext());
+
+                        String nameOfFavorite = name.getText().toString();
+                        //list can't be empty, and can't contain %<>@#$|
+                        if(nameOfFavorite.isEmpty() || nameOfFavorite.replace(" ", "").isEmpty())
+                        {
+                            Toast.makeText(listOfFavorites.this, "nazwa nie może być pusta",Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        if(nameOfFavorite.contains("%") || nameOfFavorite.contains(">") ||
+                                nameOfFavorite.contains("@") || nameOfFavorite.contains("<") ||
+                                nameOfFavorite.contains("#") || nameOfFavorite.contains("|") ||
+                                nameOfFavorite.contains("$") || nameOfFavorite.contains("'") )
+                        {
+                            Toast.makeText(listOfFavorites.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            if(dbFavoritesHelper.favoriteExist(nameOfFavorite))
+                                Toast.makeText(listOfFavorites.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
+                            else
+                            {
+                                //create new list of favorites
+                                dbFavoritesHelper.createFavorites(nameOfFavorite, null);
+
+                                final AlertDialog.Builder builder = new AlertDialog.Builder(listOfFavorites.this);
+                                final LayoutInflater inflater = listOfFavorites.this.getLayoutInflater();
+                                final View dialogView = inflater.inflate(R.layout.creation_finished, null);
+                                builder.setView(dialogView);
+                                final AlertDialog dialog3 = builder.create();
+                                dialog3.show();
+                                final Button finish = (Button) dialogView.findViewById(R.id.finish);
+                                Button back = (Button) dialogView.findViewById(R.id.back);
+
+                                back.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        finish();
+                                    }
+                                });
+
+                                finish.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        dialog3.dismiss();
+                                        dialog2.dismiss();
+                                    }
+                                });
+
+
+
+                                Toast.makeText(listOfFavorites.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+
+
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog2.dismiss();
+                    }
+                });
+
+
+            }
+        });
+
     }
 
     protected void onResume()

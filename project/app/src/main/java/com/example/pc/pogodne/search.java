@@ -19,8 +19,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fenjuly.mylibrary.FloorListView;
-
 import java.util.ArrayList;
 
 public class search extends AppCompatActivity {
@@ -55,8 +53,7 @@ public class search extends AppCompatActivity {
         final EditText searchSpace = (EditText) findViewById(R.id.searchSpace);
         final TextView textNoFavorites = (TextView) findViewById(R.id.textEmptyFavoritesList);
 
-        listOfFound = (FloorListView) findViewById(R.id.lisOfFound);
-        ((FloorListView) listOfFound).setMode(FloorListView.ABOVE);
+        listOfFound = (ListView) findViewById(R.id.lisOfFound);
 
 
         /*

@@ -21,8 +21,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.fenjuly.mylibrary.FloorListView;
-
 import java.io.File;
 import java.util.ArrayList;
 
@@ -57,8 +55,7 @@ public class editFavorites extends AppCompatActivity {
         final Button deleteOne = (Button) findViewById(R.id.buttonDeleteOne);
         final Button upButton = (Button) findViewById(R.id.upButton);
         final Button downButton = (Button) findViewById(R.id.downButton);
-        listView = (FloorListView) findViewById(R.id.editableList);
-        ((FloorListView) listView).setMode(FloorListView.ABOVE);
+        listView = (ListView) findViewById(R.id.editableList);
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getTextSize();
 

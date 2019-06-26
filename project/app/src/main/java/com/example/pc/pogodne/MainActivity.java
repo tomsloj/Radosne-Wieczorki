@@ -93,16 +93,17 @@ public class MainActivity extends AppCompatActivity
         }
 
         //define buttons
-        final ImageButton wholeListButton = (ImageButton) findViewById(R.id.wholeListButton);
         final Button dancesButton = (Button) findViewById(R.id.dancesButton);
         final Button singsButton = (Button) findViewById(R.id.singsButton);
         final Button competitionButton = (Button) findViewById(R.id.competitionsButton);
         final Button integralsButton = (Button) findViewById(R.id.integralsButton);
-        final Button otherButtons = (Button) findViewById(R.id.othersButton);
+        final Button perceptivityButton = (Button) findViewById(R.id.perceptivityButton);
+        final Button efficiencyButton = (Button) findViewById(R.id.efficiencyButton);
 
+        final ImageButton wholeListButton = (ImageButton) findViewById(R.id.wholeListButton);
         final ImageButton searchButton = (ImageButton) findViewById(R.id.findButton);
         final ImageButton favoritesButton = (ImageButton) findViewById(R.id.favoritesButton);
-        final Button gameOfTheDayButton = (Button) findViewById(R.id.gameOfTheDayButton);
+
 
         /*
          * set what buttons do
@@ -169,13 +170,24 @@ public class MainActivity extends AppCompatActivity
         });
 
         //show games in category "inne"
-        otherButtons.setOnClickListener(new View.OnClickListener()
+        perceptivityButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 Intent openList = new Intent(getApplicationContext(), list.class);
-                openList.putExtra("kategoria", "inne");
+                openList.putExtra("kategoria", "spostrzegawczość");
+                startActivity(openList);
+            }
+        });
+
+        efficiencyButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "sprawnościowe");
                 startActivity(openList);
             }
         });
@@ -202,6 +214,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        /*
         //show random play in current day
         gameOfTheDayButton.setOnClickListener(new View.OnClickListener()
         {
@@ -219,6 +232,7 @@ public class MainActivity extends AppCompatActivity
                 startActivity(openGameOfTheDay);
             }
         });
+        */
     }
 
     /*

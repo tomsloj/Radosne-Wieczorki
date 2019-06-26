@@ -20,17 +20,17 @@
     <string name="write">wpisz tekst do wyszukania</string>
     <string name="noFound">Nie znalezniono wyników pasujących do twojego zapytania</string>
     <string name="home">home</string>
-    <string name="back">back</string>
+    <string name="back">Wróć</string>
     <string name="tekstSize">Wielkość tekstu</string>
     <string name="mail">300268@pw.edu.pl</string>
     <string name="check">sprawdź</string>
     <string name="send">Wyślij</string>
     <string name="hint">Jeśli nie znasz hasła wpisz swoje imię i nazwisko i wyślij je wraz z twoim Mac adresem, aby otrzymać hasło dla twojej aplikacji</string>
-    <string name="favoritesAdd">Dodaj do ulubionych</string>
-    <string name="newFavorites">stworz nową listę ulubionych</string>
+    <string name="favoritesAdd">Dodaj do listy:</string>
+    <string name="newFavorites"><u>Utwórz nową listę</u></string>
     <string name="selectFavorite">Lub wybierz istniejącą już listę</string>
     <string name="deleteMode">Usuń wybrany</string>
-    <string name="delete">Usuń tę listę</string>
+    <string name="deleteList">Usuń tę listę</string>
     <string name="gameOfTheDay">Zabawa na dziś</string>
     <string name="reportInfo">Wyślij uwagi</string>
     <string name="reportHint">Wpisz wiadomość którą chcesz wysłać</string>
@@ -40,7 +40,7 @@
     <string name="editNameOfFavorite">Zmień nazwę listy</string>
     <string name="notes">Notatki</string>
     <string name="save">ZAPISZ</string>
-    <string name="addGame">Dodaj zabawę</string>
+    <string name="addGame">Dodaj</string>
     <string name="prev">prev</string>
     <string name="next">next</string>
     <string name="addTitle">Dodaj zabawę</string>
@@ -56,5 +56,16 @@
     <string name="az">A...Z</string>
     <string name="perceptivity">Na spostrzegawczość</string>
     <string name="efficiency">Sprawnościowe</string>
+    <string name="newList">Nowa lista zabaw</string>
+    <string name="create">Utwórz</string>
+    <string name="listHint">wprowadz nazwę</string>
+    <string name="creationFinished">Lista utworzona</string>
+    <string name="backToMainMenu">Przeglądaj zabawy</string>
+    <string name="sure">Czy na pewno chcesz usunąć tę pozycję?</string>
+    <string name="delete">usuń</string>
+    <string name="ok">ok</string>
+    <string name="newName">nowa nazwa</string>
+    <string name="addGameText">Dodaj zabawę</string>
+
 
 </resources>

@@ -81,7 +81,7 @@
         android:layout_marginBottom="0dp"
         android:layout_below="@+id/textsCheckbox">
 
-        <com.fenjuly.mylibrary.FloorListView
+        <ListView
             android:id="@+id/lisOfFound"
             android:divider="@color/borderColor"
             android:dividerHeight="1dp"

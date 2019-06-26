@@ -2,6 +2,8 @@ package com.example.pc.pogodne;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -10,17 +12,21 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import iammert.com.expandablelib.ExpandableLayout;
 
 
 public class display extends AppCompatActivity {
@@ -34,11 +40,17 @@ public class display extends AppCompatActivity {
     String category;
     String playlist;
     String notes;
+    boolean hideFirst = false;
+    boolean hideSecond = false;
+    boolean hideThird = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+
+
 
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getTextSize();
@@ -109,15 +121,20 @@ public class display extends AppCompatActivity {
         */
 
         //NOTES BUTTON CAN BE FAVORITE BUTTON
-        final ImageButton notesButton = (ImageButton) findViewById(R.id.notesButton);
+        final ImageButton starButton = (ImageButton) findViewById(R.id.starButton);
         final DataBaseFavorites dbFavorites = new DataBaseFavorites( getApplicationContext() );
-        playlist = getIntent().getStringExtra("playlist");
-        //favorite
-        if ( playlist == null )
-        {
-            notesButton.setImageDrawable(getDrawable(R.drawable.star));
+        final FloatingActionButton notesButton = (FloatingActionButton)findViewById(R.id.notesButton);
 
-            notesButton.setOnClickListener(new View.OnClickListener() {
+        playlist = getIntent().getStringExtra("playlist");
+
+        if(playlist == null)
+        {
+            notesButton.hide();
+        }
+
+        //favorite
+
+            starButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
@@ -125,9 +142,9 @@ public class display extends AppCompatActivity {
                     final LayoutInflater inflater = display.this.getLayoutInflater();
                     final View dialogView = inflater.inflate(R.layout.add_to_favorites, null);
 
-                    final Button stworz = (Button) dialogView.findViewById(R.id.createFavorite);
-                    final EditText nazwa =(EditText) dialogView.findViewById(R.id.nameOfFavorite);
-                    final ListView listaulu = (ListView) dialogView.findViewById(R.id.dialogLisOfFavorites);
+                    //final Button stworz = (Button) dialogView.findViewById(R.id.createFavorite);
+                    //final EditText nazwa =(EditText) dialogView.findViewById(R.id.nameOfFavorite);
+                    final ExpandableListView listaulu = (ExpandableListView) dialogView.findViewById(R.id.dialogLisOfFavorites);
 
                     final DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites(display.this);
 
@@ -136,28 +153,143 @@ public class display extends AppCompatActivity {
 
 
                     builder.setView(dialogView);
-                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
-                        }
-                    });
-                    AlertDialog dialog = builder.create();
-                    dialog.show();
+                    final AlertDialog dialog1 = builder.create();
+                    dialog1.show();
 
-                    Button negativButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-                    Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
+                    Button positiveButton = dialog1.getButton(DialogInterface.BUTTON_POSITIVE);
+                    Button negativButton = dialog1.getButton(DialogInterface.BUTTON_NEGATIVE);
                     negativButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
                     positiveButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
 
                     //display info that user hasn't any list of favorites
-                    final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
+                    //final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
+                    /*
                     if(list.size() == 0)
                     {
                         text.setText("Nie posiadasz jeszcze żadnej listy ulubionych");
                     }
+                    */
 
-                    listaulu.setAdapter(arrayAdapter);
+                    Button createButton = (Button) dialogView.findViewById(R.id.create);
+                    Button addGameButton = (Button) dialogView.findViewById(R.id.addGameButton);
+                    Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
+                    final ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(getApplicationContext(), list.get(0), list, listaulu);
 
+                    if(list.isEmpty()) {
+                        listaulu.setVisibility(View.GONE);
+                        addGameButton.setVisibility(View.INVISIBLE);
+                    }
+                    else
+                    {
+                        listaulu.setAdapter(adapter);
+                    }
+
+
+
+                    createButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(display.this);
+                            final LayoutInflater inflater = display.this.getLayoutInflater();
+                            final View dialogView = inflater.inflate(R.layout.create_new_favorite, null);
+                            builder.setView(dialogView);
+                            final AlertDialog dialog2 = builder.create();
+                            dialog2.show();
+                            Button createButton = (Button) dialogView.findViewById(R.id.newGameButton);
+                            Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
+                            final TextView name = (TextView) dialogView.findViewById(R.id.newListName);
+
+                            createButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String nameOfFavorite = name.getText().toString();
+                                    //list can't be empty, and can't contain %<>@#$|
+                                    if(nameOfFavorite.isEmpty() || nameOfFavorite.replace(" ", "").isEmpty())
+                                    {
+                                        Toast.makeText(display.this, "nazwa nie może być pusta",Toast.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    if(nameOfFavorite.contains("%") || nameOfFavorite.contains(">") ||
+                                            nameOfFavorite.contains("@") || nameOfFavorite.contains("<") ||
+                                            nameOfFavorite.contains("#") || nameOfFavorite.contains("|") ||
+                                            nameOfFavorite.contains("$") || nameOfFavorite.contains("'") )
+                                    {
+                                        Toast.makeText(display.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
+                                    }
+                                    else
+                                    {
+                                        if(dbFavoritesHelper.favoriteExist(nameOfFavorite))
+                                            Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
+                                        else
+                                        {
+                                            //create new list of favorites
+                                            dbFavoritesHelper.createFavorites(nameOfFavorite, game);
+
+                                            final AlertDialog.Builder builder = new AlertDialog.Builder(display.this);
+                                            final LayoutInflater inflater = display.this.getLayoutInflater();
+                                            final View dialogView = inflater.inflate(R.layout.creation_finished, null);
+                                            builder.setView(dialogView);
+                                            final AlertDialog dialog3 = builder.create();
+                                            dialog3.show();
+                                            final Button finish = (Button) dialogView.findViewById(R.id.finish);
+                                            Button back = (Button) dialogView.findViewById(R.id.back);
+
+                                            back.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    finish();
+                                                }
+                                            });
+
+                                            finish.setOnClickListener(new View.OnClickListener() {
+                                                @Override
+                                                public void onClick(View v) {
+                                                    dialog3.dismiss();
+                                                    dialog2.dismiss();
+                                                    dialog1.dismiss();
+                                                }
+                                            });
+
+
+
+                                            Toast.makeText(display.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            });
+
+
+                            cancelButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog2.dismiss();
+                                }
+                            });
+                        }
+                    });
+                    addGameButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String favoritesName = adapter.getGroup(0).toString();
+
+                            if(dbFavoritesHelper.gameInFavoriteExists(favoritesName, game))
+                                Toast.makeText(display.this, "ta zabawa już znajduje sie na tej liście ulubionych",Toast.LENGTH_SHORT).show();
+                            else
+                            {
+                                dbFavoritesHelper.addGametoFavorite(favoritesName, game);
+                                Toast.makeText(display.this, "zabawa została dodana",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog1.dismiss();
+                        }
+                    });
+
+                    /*
                     stworz.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -196,7 +328,9 @@ public class display extends AppCompatActivity {
                             }
                         }
                     });
+                    */
 
+                    /*
                     listaulu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -213,13 +347,11 @@ public class display extends AppCompatActivity {
 
                         }
                     });
+                    */
                 }
             });
 
-
-        }
         //notes
-        else {
             notesButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -259,7 +391,6 @@ public class display extends AppCompatActivity {
                     dialog.setCanceledOnTouchOutside(false);
                 }
             });
-        }
 
         final ImageButton nextButton = (ImageButton) findViewById(R.id.next);
         final ImageButton prevButton = (ImageButton) findViewById(R.id.prev);
@@ -344,7 +475,7 @@ public class display extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_favorites, menu);
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
         return true;
     }
 

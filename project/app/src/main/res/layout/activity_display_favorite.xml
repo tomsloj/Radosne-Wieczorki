@@ -10,7 +10,7 @@
         android:id="@+id/main_bar"
         layout="@layout/main_bar" />
 
-    <com.fenjuly.mylibrary.FloorListView
+    <com.baoyz.swipemenulistview.SwipeMenuListView
         android:id="@+id/listOfGames"
         android:divider="@color/borderColor"
         android:dividerHeight="1dp"

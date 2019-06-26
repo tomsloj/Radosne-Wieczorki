@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.pc.pogodne">
 
+
     <application
 
         android:allowBackup="true"

@@ -136,7 +136,8 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     public void createFavorites(String name, String game)
     {
         addGametoFavorite(name, "remove");
-        addGametoFavorite(name, game);
+        if( game != null )
+            addGametoFavorite(name, game);
     }
 
     //check if favorite exists

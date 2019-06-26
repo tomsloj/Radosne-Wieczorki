@@ -75,7 +75,7 @@
             android:background="@drawable/downarrowblack" />
     </LinearLayout>
 
-    <com.fenjuly.mylibrary.FloorListView
+    <ListView
         android:id="@+id/editableList"
         android:divider="@color/borderColor"
         android:dividerHeight="1dp"

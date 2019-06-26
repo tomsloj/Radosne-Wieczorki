@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
 
-                    android:text="@string/addGame" />
+                    android:text="@string/addGameText" />
 
                 <ImageButton
                     android:id="@+id/addGameButton"

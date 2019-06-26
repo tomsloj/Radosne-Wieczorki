@@ -17,8 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.fenjuly.mylibrary.FloorListView;
-
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -57,8 +55,7 @@ public class list extends AppCompatActivity {
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getTextSize();
 
-        listView = (FloorListView)findViewById(R.id.listview);
-        ((FloorListView) listView).setMode(FloorListView.ABOVE);
+        listView = (ListView) findViewById(R.id.listview);
 
         ArrayList<String> list= new ArrayList<>();
 

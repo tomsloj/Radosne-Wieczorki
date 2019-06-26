@@ -26,4 +26,7 @@
     <color name="button4">#FCEE21</color>
     <color name="button5">#8CC63F</color>
     <color name="button6">#39B54A</color>
+    <color name="darkBackground">#002A53</color>
+    <color name="lightBackground">#F8F8F8</color>
+    <color name="iconsBackground">#FFEEAA</color>
 </resources>
