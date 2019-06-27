@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -66,7 +67,7 @@ public class listOfFavorites extends AppCompatActivity
             {
                 View view = super.getView(position, convertView, parent);
                 TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setBackgroundColor(getResources().getColor( R.color.background ));
+                tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
                 tv.setTextSize(textSize);
                 tv.setTextColor(Color.BLACK);
 
@@ -106,17 +107,17 @@ public class listOfFavorites extends AppCompatActivity
 
             @Override
             public void create(SwipeMenu menu) {
-                // create "open" item
-                SwipeMenuItem openItem = new SwipeMenuItem(
+                // create "edit" item
+                SwipeMenuItem editItem = new SwipeMenuItem(
                         getApplicationContext());
                 // set item background
-                openItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
+                editItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
                 // set item width
-                openItem.setWidth(150);
+                editItem.setWidth(150);
 
-                openItem.setIcon(R.drawable.edit);
+                editItem.setIcon(R.drawable.edit);
                 // add to menu
-                menu.addMenuItem(openItem);
+                menu.addMenuItem(editItem);
 
                 // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(
@@ -140,44 +141,125 @@ public class listOfFavorites extends AppCompatActivity
             public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
                 switch (index) {
                     case 0:
-                        // open
-                        String favoriteName = listFavorites.get(position);
+                     {
+                        // edit
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(listOfFavorites.this);
+                        final LayoutInflater inflater = listOfFavorites.this.getLayoutInflater();
+                        final View dialogView = inflater.inflate(R.layout.edit_name, null);
 
-                        Intent open_list = new Intent(getApplicationContext(), displayFavorite.class);
-                        open_list.putExtra("ulu", favoriteName);
-                        open_list.putExtra("ID", position);
-                        open_list.putExtra("list", listFavorites);
-                        sService.setNewNameOfFavorite("");
-                        startActivity(open_list);
-                        break;
-                    case 1:
-                        // delete
-                        AlertDialog.Builder builder = new AlertDialog.Builder(listOfFavorites.this);
-                        builder.setTitle("Czy na pewno chcesz usunąć tę listę?");
-                        builder.setNegativeButton("Anuluj", new DialogInterface.OnClickListener(){
+                        final Button acceptButton = (Button) dialogView.findViewById(R.id.accept);
+                        final Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
+                        final EditText nameEdit = (EditText) dialogView.findViewById(R.id.newName);
+
+                        builder.setView(dialogView);
+                        final AlertDialog dialog = builder.create();
+
+                        acceptButton.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick(View v) {
+                                DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites( getApplicationContext() );
 
+                                String newName = nameEdit.getText().toString();
+                                String nameOfFavorite = listFavorites.get(position);
+
+                                if (newName.replace(" ", "").equals(""))
+                                {
+                                    Toast.makeText(listOfFavorites.this, "Uzupełnij nową nazwę", Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                if(newName.contains("%") || newName.contains(">") ||
+                                        newName.contains("@") || newName.contains("<") ||
+                                        newName.contains("#") || newName.contains("|") ||
+                                        newName.contains("$") || newName.contains("'") )
+                                {
+                                    Toast.makeText(listOfFavorites.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
+                                }
+                                if( dbFavoritesHelper.favoriteExist( newName ) )
+                                    Toast.makeText( getApplicationContext(), "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
+                                else
+                                {
+                                    dbHelperFavorites.editNameOfFavorite(nameOfFavorite, newName);
+                                    nameOfFavorite = newName;
+                                    listFavorites = dbHelperFavorites.getFavoritesList();
+
+                                    //update list of favorites
+                                    ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
+                                    {
+                                        @Override
+                                        public View getView(int position, View convertView, ViewGroup parent)
+                                        {
+                                            View view = super.getView(position, convertView, parent);
+                                            TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                                            tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
+                                            tv.setTextSize(textSize);
+                                            tv.setTextColor(Color.BLACK);
+
+                                            return view;
+                                        }
+                                    };
+                                    listOfFavorites.setAdapter(arrayAdapter);
+                                    dialog.dismiss();
+                                }
                             }
                         });
-                        builder.setPositiveButton("Usuń", new DialogInterface.OnClickListener() {
+                        dialog.show();
+                        break;
+                    }
+                    case 1:
+                    {
+                        // delete
+
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(listOfFavorites.this);
+                        final LayoutInflater inflater = listOfFavorites.this.getLayoutInflater();
+                        final View dialogView = inflater.inflate(R.layout.delete_dialog, null);
+
+                        final Button acceptButton = (Button) dialogView.findViewById(R.id.accept);
+                        final Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
+
+                        builder.setView(dialogView);
+                        final AlertDialog dialog = builder.create();
+
+                        acceptButton.setOnClickListener(new View.OnClickListener() {
                             @Override
-                            public void onClick(DialogInterface dialog, int which) {
+                            public void onClick(View v) {
                                 dbHelperFavorites.deleteFavorite(listFavorites.get(position));
                                 listFavorites.remove(position);
                                 Toast.makeText(getApplicationContext(),listFavorites.get(position),Toast.LENGTH_SHORT).show();
-                                //finish();
+
+
+                                //update list of favorites
+                                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
+                                {
+                                    @Override
+                                    public View getView(int position, View convertView, ViewGroup parent)
+                                    {
+                                        View view = super.getView(position, convertView, parent);
+                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                                        tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
+                                        tv.setTextSize(textSize);
+                                        tv.setTextColor(Color.BLACK);
+
+                                        return view;
+                                    }
+                                };
+                                listOfFavorites.setAdapter(arrayAdapter);
+
+                                dialog.dismiss();
                             }
                         });
 
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
+                        cancelButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog.dismiss();
+                            }
+                        });
 
-                        Button negativButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-                        Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                        negativButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
-                        positiveButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
+
+
+                        dialog.show();
                         break;
+                    }
                 }
                 return false;
             }

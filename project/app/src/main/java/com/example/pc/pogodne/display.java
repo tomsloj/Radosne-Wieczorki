@@ -2,7 +2,6 @@ package com.example.pc.pogodne;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -12,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.VelocityTracker;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -252,7 +250,7 @@ public class display extends AppCompatActivity {
 
 
 
-                                            Toast.makeText(display.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
+                                            //Toast.makeText(display.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 }
@@ -361,34 +359,37 @@ public class display extends AppCompatActivity {
                     final LayoutInflater inflater = display.this.getLayoutInflater();
                     final View dialogView = inflater.inflate(R.layout.notes, null);
 
+                    final Button addNoteButton = (Button) dialogView.findViewById(R.id.addNote);
+                    final Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
+
+                    builder.setView(dialogView);
+                    final AlertDialog dialog = builder.create();
+
                     final EditText notesEditText = (EditText) dialogView.findViewById(R.id.notesEditText);
                     if (notes != null && !notes.equals("")) {
                         notesEditText.setText(notes);
                     }
 
-                    builder.setView(dialogView);
-                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            // User cancelled the dialog
+
+                    cancelButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
                         }
                     });
 
-                    builder.setPositiveButton(R.string.save, new DialogInterface.OnClickListener() {
+                    addNoteButton.setOnClickListener(new View.OnClickListener() {
                         @Override
-                        public void onClick(DialogInterface dialog, int which) {
+                        public void onClick(View v) {
                             notes = notesEditText.getText().toString();
                             dbFavorites.updateNotes(notes, game, playlist);
+                            dialog.dismiss();
                         }
                     });
 
-                    AlertDialog dialog = builder.create();
+
                     dialog.show();
 
-                    Button negativButton = dialog.getButton(DialogInterface.BUTTON_NEGATIVE);
-                    Button positiveButton = dialog.getButton(DialogInterface.BUTTON_POSITIVE);
-                    negativButton.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    dialog.setCanceledOnTouchOutside(false);
                 }
             });
 

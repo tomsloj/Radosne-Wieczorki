@@ -5,42 +5,67 @@
 
     <TextView
         android:id="@+id/reportTitle"
-        style="@style/TitleTextStyle"
-        android:textColor="@color/colorPrimary"
+        style="@style/DialogText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/report"
+        android:text="@string/reportInfo"
+        android:textStyle="bold"
         android:layout_marginStart="32dp"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="16dp"/>
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="1dip"
-        android:background="@color/colorPrimary" />
 
-    <TextView
-        android:id="@+id/reportInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+    <ExpandableListView
+        android:id="@+id/reportCategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="20dp"
         android:text="@string/reportHint" />
 
     <EditText
         android:id="@+id/message"
         style="@style/TextStyle"
         android:textCursorDrawable="@color/colorAccent"
-        android:minLines="1"
-        android:maxLines="8"
-        android:inputType="textMultiLine"
-        android:scrollbars="vertical"
+        android:gravity="top|left"
+        android:background="@drawable/border"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="15dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:hint="@string/message"
-        android:autofillHints="auto"/>
+        android:layout_marginBottom="20dp"
+        android:autofillHints="auto"
+        android:hint="@string/notes"
+        android:inputType="textMultiLine"
+        android:minLines="5"
+        android:maxLines="10"
+        android:scrollbars="vertical"
+        />
+
+    <TableRow
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp">
+        <Button
+            android:id="@+id/sendButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/send"
+            style="@style/NormalButton"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/blue_line"
+            />
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            style="@style/NormalButton"
+            android:layout_marginStart="15dp"
+            android:background="@drawable/red_line"
+            />
+    </TableRow>
+
 </LinearLayout>

@@ -4,8 +4,11 @@ import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -85,12 +88,15 @@ public class ExpandableListViewAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+
         TextView textView = new TextView(context);
         textView.setText(groupNames[groupPosition]);
         textView.setPadding(80,0,0,0);
         textView.setTextColor(Color.BLACK);
         textView.setTextSize(19);
+
         textView.setBackground( context.getResources().getDrawable( R.drawable.list_border ) );
+
         return textView;
     }
 

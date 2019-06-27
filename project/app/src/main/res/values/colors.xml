@@ -12,7 +12,7 @@
     <color name="hintColor">#FFFFFF</color>
     <color name="kolor3">#ffeaed</color>
     <color name="kolor4">#ffeaed</color>
-    <color name="iconbackground">#FFC107</color>
+    <color name="iconbackground">#FFEEAA</color>
     <color name="displayColor">#B3000000</color>
     <color name="green">#4CAF50</color>
     <color name="borderColor">#F5F5F5</color>
@@ -29,4 +29,18 @@
     <color name="darkBackground">#002A53</color>
     <color name="lightBackground">#F8F8F8</color>
     <color name="iconsBackground">#FFEEAA</color>
+    <color name="listBackground">#FFDD55</color>
+
+    <color name="color1">#F15A24</color>
+    <color name="color2">#FBB03B</color>
+    <color name="color3">#FCEE21</color>
+    <color name="color4">#9ADE00</color>
+    <color name="color5">#34BA39</color>
+    <color name="color6">#1EAE89</color>
+    <color name="color7">#00C2D4</color>
+    <color name="color8">#0083D9</color>
+    <color name="color9">#6A7BF6</color>
+
+    <color name="buttonColorGray">#E6E6E6</color>
+
 </resources>

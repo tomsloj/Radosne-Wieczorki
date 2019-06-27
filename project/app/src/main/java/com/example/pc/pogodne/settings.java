@@ -12,13 +12,17 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class settings extends AppCompatActivity
 {
@@ -103,49 +107,56 @@ public class settings extends AppCompatActivity
                 final View dialogView = inflater.inflate(R.layout.send_report, null);
                 final AlertDialog.Builder builder = new AlertDialog.Builder(settings.this);
                 final EditText message = (EditText) dialogView.findViewById(R.id.message);
+
                 builder.setView(dialogView);
-                //"send" button
-                builder.setPositiveButton
-                (
-                    R.string.send,
-                    new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface dialog, int id)
+                final AlertDialog dialog = builder.create();
+
+                ArrayList<String>list = new ArrayList<>();
+                list.add("Pomysł na rozwój");
+                list.add("Zgłoszenie błędu działania");
+                list.add("Błędny opis zabawy");
+                final ExpandableListView categoryList = (ExpandableListView) dialogView.findViewById(R.id.reportCategory);
+                final ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(getApplicationContext(), list.get(0), list, categoryList);
+
+                categoryList.setAdapter(adapter);
+
+                final Button buttonSend = (Button) dialogView.findViewById(R.id.sendButton);
+                final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
+
+                buttonSend.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String text =  message.getText().toString(); //text to send
+                        String subject = adapter.getGroup(0).toString();
+                        //if text is empty
+                        if(text.replace(" ", "").equals(""))
                         {
-                            String text =  message.getText().toString(); //text to send
-                            //if text is empty
-                            if(text.replace(" ", "").equals(""))
-                            {
-                                Toast.makeText(settings.this, "Wiadomość nie może być pusta", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                            {
-                                String[] recipient = {getString(R.string.mail)};
-                                Intent intent = new Intent(Intent.ACTION_SEND);
-                                intent.setData(Uri.parse("mailto:"));
-                                intent.putExtra(Intent.EXTRA_EMAIL, recipient);
-                                intent.putExtra(Intent.EXTRA_SUBJECT, "Zgłoszenie - aplikacja");
-                                intent.putExtra(Intent.EXTRA_TEXT, text);
-                                intent.setType("message/rfc822");
-                                //choosing application which user wants to use to send report
-                                Intent chooser = Intent.createChooser(intent, "Wybierz aplikację z której wyślesz maila");
-                                startActivity(chooser);
-                            }
+                            Toast.makeText(settings.this, "Wiadomość nie może być pusta", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            String[] recipient = {getString(R.string.mail)};
+                            Intent intent = new Intent(Intent.ACTION_SEND);
+                            intent.setData(Uri.parse("mailto:"));
+                            intent.putExtra(Intent.EXTRA_EMAIL, recipient);
+                            intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+                            intent.putExtra(Intent.EXTRA_TEXT, text);
+                            intent.setType("message/rfc822");
+                            //choosing application which user wants to use to send report
+                            Intent chooser = Intent.createChooser(intent, "Wybierz aplikację z której wyślesz maila");
+                            startActivity(chooser);
                         }
                     }
-                );
-                builder.setNegativeButton
-                (
-                    R.string.cancel,
-                    new DialogInterface.OnClickListener()
-                    {
-                        public void onClick(DialogInterface dialog, int id)
-                        {
-                            dialog.cancel();
-                        }
+                });
+
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
                     }
-                );
-                builder.create().show();
+                });
+
+                dialog.show();
             }
         });
 
@@ -160,73 +171,98 @@ public class settings extends AppCompatActivity
 
                 final TextView gameName = dialogView.findViewById(R.id.nameOfAddedGame);
                 final TextView gameText = dialogView.findViewById(R.id.textOfAddedGame);
-                final RadioGroup radioGroup = dialogView.findViewById(R.id.categoryGroup);
-                final CheckBox shareBox = dialogView.findViewById(R.id.shareGameBox);
+
+                builder.setView(dialogView);
+                final AlertDialog dialog1 = builder.create();
+
+                ArrayList<String>list = new ArrayList<>();
+                list.add("Tańce");
+                list.add("Rywalizacja");
+                list.add("Integracyjne");
+                list.add("Piosenki");
+                list.add("Na spostrzegawczość");
+                list.add("Sprawnościowe");
+                final ExpandableListView categoryList = (ExpandableListView) dialogView.findViewById(R.id.categoryList);
+                final ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(getApplicationContext(), list.get(0), list, categoryList);
+
+                categoryList.setAdapter(adapter);
 
                 builder.setView(dialogView);
 
-                builder.setPositiveButton
-                        (
-                                R.string.addGame,
-                                new DialogInterface.OnClickListener()
-                                {
-                                    public void onClick(DialogInterface dialog, int id)
-                                    {
-                                        int radioId = radioGroup.getCheckedRadioButtonId();
-                                        RadioButton radioButton = (RadioButton) dialogView.findViewById(radioId);
+                final Button buttonAdd = (Button) dialogView.findViewById(R.id.addGameButton);
+                final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
 
-                                        String game = gameName.getText().toString();
-                                        String text = gameText.getText().toString();
-                                        CharSequence charSequence = radioButton.getText();
-                                        String category = charSequence.toString().toLowerCase();
+                buttonAdd.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final String game = gameName.getText().toString();
+                        final String text = gameText.getText().toString();
+                        //CharSequence charSequence = radioButton.getText();
+                        final String category = adapter.getGroup(0).toString().toLowerCase();
 
-                                        DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
-                                        AddedGamesService addedGamesService = new AddedGamesService(getApplicationContext());
+                        DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+                        AddedGamesService addedGamesService = new AddedGamesService(getApplicationContext());
 
-                                        if(!dataBaseHelper.getText(game).equals("Error 73") && !addedGamesService.gameExist(game))
-                                        {
-                                            Toast.makeText(settings.this, "Ta zabawa jest już dodana", Toast.LENGTH_SHORT).show();
-                                        }
-                                        else
-                                        {
-                                            dataBaseHelper.addGame(category, game, text);
+                        if(!dataBaseHelper.getText(game).equals("Error 73") && !addedGamesService.gameExist(game))
+                        {
+                            Toast.makeText(settings.this, "Ta zabawa jest już dodana", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            dataBaseHelper.addGame(category, game, text);
 
-                                            Toast.makeText(settings.this, "Zabawa: " + game + "\nzostała dodana do: " + category,Toast.LENGTH_SHORT).show();
+                            final LayoutInflater inflater = LayoutInflater.from(settings.this);
+                            final View dialogView = inflater.inflate(R.layout.added_game, null);
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(settings.this);
 
-                                            if( shareBox.isChecked() )
-                                            {
-                                                String[] recipient = {getString(R.string.mail)};
-                                                Intent intent = new Intent(Intent.ACTION_SEND);
-                                                intent.setData(Uri.parse("mailto:"));
-                                                intent.putExtra(Intent.EXTRA_EMAIL, recipient);
-                                                intent.putExtra(Intent.EXTRA_SUBJECT, "Nowa zabawa");
-                                                intent.putExtra(Intent.EXTRA_TEXT, "kategoria: " + category +
-                                                        "\nNazwa: " + game + "\n" + text);
-                                                intent.setType("message/rfc822");
-                                                //choosing application which user wants to use to send report
-                                                Intent chooser = Intent.createChooser(intent, "Wybierz aplikację z której wyślesz maila");
-                                                startActivity(chooser);
-                                            }
-                                        }
+                            builder.setView(dialogView);
+                            final AlertDialog dialog = builder.create();
 
+                            final Button buttonAccept = (Button) dialogView.findViewById(R.id.accept);
+                            final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
 
+                            buttonAccept.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    String[] recipient = {getString(R.string.mail)};
+                                    Intent intent = new Intent(Intent.ACTION_SEND);
+                                    intent.setData(Uri.parse("mailto:"));
+                                    intent.putExtra(Intent.EXTRA_EMAIL, recipient);
+                                    intent.putExtra(Intent.EXTRA_SUBJECT, "Nowa zabawa");
+                                    intent.putExtra(Intent.EXTRA_TEXT, "kategoria: " + category +
+                                            "\nNazwa: " + game + "\n" + text);
+                                    intent.setType("message/rfc822");
+                                    //choosing application which user wants to use to send report
+                                    Intent chooser = Intent.createChooser(intent, "Wybierz aplikację z której wyślesz maila");
+                                    startActivity(chooser);
 
-
-                                    }
+                                    Toast.makeText(getApplicationContext(), "Dziękujemy za pomoc w rozwijaniu aplikacji", Toast.LENGTH_LONG).show();
+                                    dialog.dismiss();
+                                    dialog1.dismiss();
                                 }
-                        );
-                builder.setNegativeButton
-                        (
-                                R.string.cancel,
-                                new DialogInterface.OnClickListener()
-                                {
-                                    public void onClick(DialogInterface dialog, int id)
-                                    {
-                                        dialog.cancel();
-                                    }
+                            });
+
+                            buttonCancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dialog.dismiss();
+                                    dialog1.dismiss();
                                 }
-                        );
-                builder.create().show();
+                            });
+
+                            dialog.show();
+                        }
+                    }
+                });
+
+                buttonCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog1.cancel();
+                    }
+                });
+
+                dialog1.show();
             }
         });
 

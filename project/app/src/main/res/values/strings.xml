@@ -38,14 +38,14 @@
     <string name="report">Zgłoszenie</string>
     <string name="edit">Edytuj</string>
     <string name="editNameOfFavorite">Zmień nazwę listy</string>
-    <string name="notes">Notatki</string>
+    <string name="notes">Treść...</string>
     <string name="save">ZAPISZ</string>
     <string name="addGame">Dodaj</string>
     <string name="prev">prev</string>
     <string name="next">next</string>
     <string name="addTitle">Dodaj zabawę</string>
-    <string name="nameHint">Wpisz nazwę zabawy</string>
-    <string name="textHint">Wprowadź opis zabawy</string>
+    <string name="nameHint">Wpisz nazwę</string>
+    <string name="textHint">Opis...</string>
     <string name="choseCategory">Wybierz kategorię</string>
     <string name="category1">Tańce</string>
     <string name="category2">Rywalizacja</string>
@@ -66,6 +66,11 @@
     <string name="ok">ok</string>
     <string name="newName">nowa nazwa</string>
     <string name="addGameText">Dodaj zabawę</string>
-
-
+    <string name="gameIsSend">Zabawa została wysłana</string>
+    <string name="thanks">Dziękujemy za Twój wkład w rozwój aplikacji</string>
+    <string name="gameSave">Zabawa została zapisana</string>
+    <string name="addedGameCommunicate">Możesz teraz dodać ją do swoich ulubionych list\nMożesz przesłać jej opis do naszej biblioteki, aby po weryfikacji mogli z niej korzystać inni użytkownicy</string>
+    <string name="addNote">Dodaj notatkę</string>
+    <string name="ofCourse">Jasne!</string>
+    <string name="noThanks">Nie chcę</string>
 </resources>
