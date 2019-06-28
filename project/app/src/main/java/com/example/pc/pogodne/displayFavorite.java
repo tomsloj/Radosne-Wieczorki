@@ -42,6 +42,7 @@ public class displayFavorite extends AppCompatActivity {
     int listSize;
     int textSize;
     ArrayList<String> list;
+    ArrayList<String> favoriteList;
 
 
     @Override
@@ -68,9 +69,9 @@ public class displayFavorite extends AppCompatActivity {
         listView = (SwipeMenuListView)findViewById(R.id.listOfGames);
 
 
-        DataBaseFavorites dbFavorites = new DataBaseFavorites(displayFavorite.this);
+        final DataBaseFavorites dbFavorites = new DataBaseFavorites(displayFavorite.this);
 
-        final ArrayList<String> favoriteList = getIntent().getStringArrayListExtra("list");
+        favoriteList = getIntent().getStringArrayListExtra("list");
 
         listSize = favoriteList.size();
 
@@ -111,16 +112,16 @@ public class displayFavorite extends AppCompatActivity {
             @Override
             public void create(SwipeMenu menu) {
                 // create "add" item
-                SwipeMenuItem addItem = new SwipeMenuItem(
+                SwipeMenuItem deleteItem = new SwipeMenuItem(
                         getApplicationContext());
                 // set item background
-                addItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
+                deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
                 // set item width
-                addItem.setWidth(150);
+                deleteItem.setWidth(150);
                 // set item title
-                addItem.setIcon(R.drawable.add);
+                deleteItem.setIcon(R.drawable.delete);
                 // add to menu
-                menu.addMenuItem(addItem);
+                menu.addMenuItem(deleteItem);
             }
         };
 
@@ -132,131 +133,45 @@ public class displayFavorite extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
 
-                final String game = favoriteList.get(position);
+                final String game = list.get(position);
 
                 final AlertDialog.Builder builder = new AlertDialog.Builder(displayFavorite.this);
                 final LayoutInflater inflater = displayFavorite.this.getLayoutInflater();
-                final View dialogView = inflater.inflate(R.layout.add_to_favorites, null);
-
-                //final Button stworz = (Button) dialogView.findViewById(R.id.createFavorite);
-                //final EditText nazwa =(EditText) dialogView.findViewById(R.id.nameOfFavorite);
-                final ExpandableListView listaulu = (ExpandableListView) dialogView.findViewById(R.id.dialogLisOfFavorites);
-
-                final DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites(displayFavorite.this);
-
-                final ArrayList<String> list = dbFavoritesHelper.getFavoritesList();
-                final ArrayAdapter arrayAdapter = new ArrayAdapter<>(displayFavorite.this,android.R.layout.simple_list_item_1, list);
+                final View dialogView = inflater.inflate(R.layout.delete_dialog, null);
 
 
                 builder.setView(dialogView);
                 final AlertDialog dialog1 = builder.create();
                 dialog1.show();
 
-                Button positiveButton = dialog1.getButton(DialogInterface.BUTTON_POSITIVE);
-                Button negativButton = dialog1.getButton(DialogInterface.BUTTON_NEGATIVE);
-                negativButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
-                positiveButton.setTextColor( getResources().getColor( R.color.colorPrimary) );
-
-                //display info that user hasn't any list of favorites
-                //final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
-                    /*
-                    if(list.size() == 0)
-                    {
-                        text.setText("Nie posiadasz jeszcze żadnej listy ulubionych");
-                    }
-                    */
-
-                Button createButton = (Button) dialogView.findViewById(R.id.create);
-                Button addGameButton = (Button) dialogView.findViewById(R.id.addGameButton);
+                Button acceptButton = (Button) dialogView.findViewById(R.id.accept);
                 Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
-                final ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(getApplicationContext(), list.get(0), list, listaulu);
 
-                if(list.isEmpty()) {
-                    listaulu.setVisibility(View.GONE);
-                    addGameButton.setVisibility(View.INVISIBLE);
-                }
-                else
-                {
-                    listaulu.setAdapter(adapter);
-                }
-
-
-
-                createButton.setOnClickListener(new View.OnClickListener() {
+                acceptButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(displayFavorite.this);
-                        final LayoutInflater inflater = displayFavorite.this.getLayoutInflater();
-                        final View dialogView = inflater.inflate(R.layout.create_new_favorite, null);
-                        builder.setView(dialogView);
-                        final AlertDialog dialog2 = builder.create();
-                        dialog2.show();
-                        Button createButton = (Button) dialogView.findViewById(R.id.newGameButton);
-                        Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
-                        final TextView name = (TextView) dialogView.findViewById(R.id.newListName);
-
-                        createButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                String nameOfFavorite = name.getText().toString();
-                                //list can't be empty, and can't contain %<>@#$|
-                                if(nameOfFavorite.isEmpty() || nameOfFavorite.replace(" ", "").isEmpty())
-                                {
-                                    Toast.makeText(displayFavorite.this, "nazwa nie może być pusta",Toast.LENGTH_LONG).show();
-                                }
-                                else
-                                if(nameOfFavorite.contains("%") || nameOfFavorite.contains(">") ||
-                                        nameOfFavorite.contains("@") || nameOfFavorite.contains("<") ||
-                                        nameOfFavorite.contains("#") || nameOfFavorite.contains("|") ||
-                                        nameOfFavorite.contains("$") || nameOfFavorite.contains("'") )
-                                {
-                                    Toast.makeText(displayFavorite.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
-                                }
-                                else
-                                {
-                                    if(dbFavoritesHelper.favoriteExist(nameOfFavorite))
-                                        Toast.makeText(displayFavorite.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
-                                    else
-                                    {
-                                        //create new list of favorites
-                                        dbFavoritesHelper.createFavorites(nameOfFavorite, game);
-
-                                        Toast.makeText(getApplicationContext(),"Lista została stworzona", Toast.LENGTH_SHORT).show();
-                                        dialog2.dismiss();
-                                        dialog1.dismiss();
-
-
-
-                                        //Toast.makeText(displayFavorite.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            }
-                        });
-
-
-                        cancelButton.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog2.dismiss();
-                            }
-                        });
-                    }
-                });
-                addGameButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String favoritesName = adapter.getGroup(0).toString();
-
-                        if(dbFavoritesHelper.gameInFavoriteExists(favoritesName, game))
-                            Toast.makeText(displayFavorite.this, "ta zabawa już znajduje sie na tej liście ulubionych",Toast.LENGTH_SHORT).show();
-                        else
+                        //Toast.makeText(getApplicationContext(), nameOfFavorite + "  " + game, Toast.LENGTH_SHORT).show();
+                        dbFavorites.deleteGame(nameOfFavorite, game);
+                        Toast.makeText(getApplicationContext(),"Zabawa została usunięta z listy", Toast.LENGTH_SHORT).show();
+                        list = dbFavorites.getGamesInFavorite(nameOfFavorite);
+                        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this,android.R.layout.simple_list_item_1, list)
                         {
-                            dbFavoritesHelper.addGametoFavorite(favoritesName, game);
-                            Toast.makeText(displayFavorite.this, "zabawa została dodana",Toast.LENGTH_SHORT).show();
-                        }
+                            @Override
+                            public View getView(int position, View convertView, ViewGroup parent)
+                            {
+                                View view = super.getView(position, convertView, parent);
+                                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                                tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
+                                tv.setTextSize(textSize);
+                                tv.setTextColor(Color.BLACK);
+
+                                return view;
+                            }
+                        };
+                        listView.setAdapter(arrayAdapter);
+                        dialog1.dismiss();
                     }
                 });
-
                 cancelButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

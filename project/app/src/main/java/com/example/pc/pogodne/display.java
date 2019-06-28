@@ -42,7 +42,7 @@ public class display extends AppCompatActivity {
     boolean hideFirst = false;
     boolean hideSecond = false;
     boolean hideThird = false;
-
+    ExpandableListViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +81,7 @@ public class display extends AppCompatActivity {
         txt = dbHelper.getText(game);
 
         gameName.setText(game);
-        text.setText(txt);
+        text.setText("Kategoria: "+ dbHelper.getCategory(game) + "\n\n" + txt);
 
 
         /*
@@ -172,14 +172,17 @@ public class display extends AppCompatActivity {
                     Button createButton = (Button) dialogView.findViewById(R.id.create);
                     Button addGameButton = (Button) dialogView.findViewById(R.id.addGameButton);
                     Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
-                    final ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(getApplicationContext(), list.get(0), list, listaulu);
-
+                    TextView favoritesDialogTitle = (TextView)dialogView.findViewById(R.id.favoritesDialogTitle);
+                    adapter = null;
                     if(list.isEmpty()) {
+                        favoritesDialogTitle.setVisibility(View.GONE);
                         listaulu.setVisibility(View.GONE);
-                        addGameButton.setVisibility(View.INVISIBLE);
+                        addGameButton.setVisibility(View.GONE);
+
                     }
                     else
                     {
+                        adapter = new ExpandableListViewAdapter(getApplicationContext(), list.get(0), list, listaulu);
                         listaulu.setAdapter(adapter);
                     }
 
@@ -394,6 +397,16 @@ public class display extends AppCompatActivity {
                     if( idgame != maxNR )
                     {
                         game = dbFavorites.gameFromNumber( idgame+1, playlist );
+
+                        idgame = dbFavorites.numberOfGame(playlist, game);
+                        if(idgame == 1)
+                            prevButton.setImageDrawable(getResources().getDrawable(R.drawable.prev_disabled));
+                        else
+                            prevButton.setImageDrawable(getResources().getDrawable(R.drawable.prev));
+                        if(idgame == maxNR)
+                            nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next_disabled));
+                        else
+                            nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next));
                     }
                 }
                 else
@@ -401,9 +414,20 @@ public class display extends AppCompatActivity {
                     String newgame = dbHelper.nextGame(category, game);
                     if (!newgame.equals(""))
                         game = newgame;
+
+                    newgame = dbHelper.nextGame(category, game);
+                    if(newgame.equals(""))
+                        nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next_disabled));
+                    else
+                        nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next));
+                    newgame = dbHelper.prevGame(category, game);
+                    if(newgame.equals(""))
+                        prevButton.setImageDrawable(getResources().getDrawable(R.drawable.prev_disabled));
+                    else
+                        prevButton.setImageDrawable(getResources().getDrawable(R.drawable.prev));
                 }
                 txt = dbHelper.getText(game);
-                text.setText(txt);
+                text.setText("Kategoria: "+ dbHelper.getCategory(game) + "\n\n" + txt);
                 gameName.setText(game);
                 actionBar.setTitle(game);
 
@@ -416,11 +440,21 @@ public class display extends AppCompatActivity {
                 if(category.equals("ulu"))
                 {
                     int idgame = dbFavorites.numberOfGame(playlist, game);
-                    //int maxNR = dbFavorites.maxNumber(playlist);
+                    int maxNR = dbFavorites.maxNumber(playlist);
                     if( idgame != 1 )
                     {
                         game = dbFavorites.gameFromNumber( idgame-1, playlist );
+
                         txt = dbHelper.getText(game);
+                        idgame = dbFavorites.numberOfGame(playlist, game);
+                        if(idgame == 1)
+                            prevButton.setImageDrawable(getResources().getDrawable(R.drawable.prev_disabled));
+                        else
+                            prevButton.setImageDrawable(getResources().getDrawable(R.drawable.prev));
+                        if(idgame == maxNR)
+                            nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next_disabled));
+                        else
+                            nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next));
                     }
                 }
                 else
@@ -428,12 +462,67 @@ public class display extends AppCompatActivity {
                     String newgame = dbHelper.prevGame(category, game);
                     if (!newgame.equals(""))
                         game = newgame;
+
+                    newgame = dbHelper.nextGame(category, game);
+                    if(newgame.equals(""))
+                        nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next_disabled));
+                    else
+                        nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next));
+                    newgame = dbHelper.prevGame(category, game);
+                    if(newgame.equals(""))
+                        prevButton.setImageDrawable(getResources().getDrawable(R.drawable.prev_disabled));
+                    else
+                        prevButton.setImageDrawable(getResources().getDrawable(R.drawable.prev));
                 }
                 txt = dbHelper.getText(game);
-                text.setText(txt);
+                text.setText("Kategoria: "+ dbHelper.getCategory(game) + "\n\n" + txt);
                 gameName.setText(game);
             }
         });
+
+
+        //disable next/prev button
+        boolean disableNext = false;
+        if(category.equals("ulu"))
+        {
+            int idgame = dbFavorites.numberOfGame(playlist, game);
+            int maxNR = dbFavorites.maxNumber(playlist);
+            if( idgame == maxNR )
+            {
+                disableNext = true;
+            }
+        }
+        else
+        {
+            String newgame = dbHelper.nextGame(category, game);
+            if (newgame.equals(""))
+                disableNext = true;
+        }
+
+        boolean disablePrev = false;
+
+        if(category.equals("ulu"))
+        {
+            int idgame = dbFavorites.numberOfGame(playlist, game);
+            //int maxNR = dbFavorites.maxNumber(playlist);
+            if( idgame == 1 )
+            {
+                disablePrev = true;
+            }
+        }
+        else
+        {
+            String newgame = dbHelper.prevGame(category, game);
+            if (newgame.equals(""))
+                disablePrev = true;
+        }
+
+        if(disableNext)
+            nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next_disabled));
+        if(disablePrev)
+            prevButton.setImageDrawable(getResources().getDrawable(R.drawable.prev_disabled));
+
+
 
 
 

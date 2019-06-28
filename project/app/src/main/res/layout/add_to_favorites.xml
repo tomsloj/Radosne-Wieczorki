@@ -21,7 +21,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
-                android:layout_marginEnd="20dp"
                 android:layout_marginBottom="15dp"
                 android:scrollbars="vertical"
                 android:scrollbarAlwaysDrawHorizontalTrack="true"/>
@@ -37,6 +36,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
                 />
 
             <TableRow

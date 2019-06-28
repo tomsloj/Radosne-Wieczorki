@@ -177,9 +177,9 @@ public class list extends AppCompatActivity {
                 Button addGameButton = (Button) dialogView.findViewById(R.id.addGameButton);
                 Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
 
-                TextView favoritesDialogTitle = (TextView)findViewById(R.id.favoritesDialogTitle);
+                TextView favoritesDialogTitle = (TextView)dialogView.findViewById(R.id.favoritesDialogTitle);
                 if(list.isEmpty()) {
-                    favoritesDialogTitle.setVisibility(View.INVISIBLE);
+                    favoritesDialogTitle.setVisibility(View.GONE);
                     listaulu.setVisibility(View.GONE);
                     addGameButton.setVisibility(View.GONE);
                 }

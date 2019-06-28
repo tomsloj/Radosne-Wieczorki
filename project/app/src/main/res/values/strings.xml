@@ -74,4 +74,6 @@
     <string name="addNote">Dodaj notatkę</string>
     <string name="ofCourse">Jasne!</string>
     <string name="noThanks">Nie chcę</string>
+    <string name="removeGame">Usuń zabawę dodaną przez siebie</string>
+
 </resources>

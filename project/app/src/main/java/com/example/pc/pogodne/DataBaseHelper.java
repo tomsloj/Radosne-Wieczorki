@@ -215,6 +215,15 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return false;
     }
 
+    public String getCategory(String game)
+    {
+        String query = "SELECT kategoria FROM DANE WHERE zabawa = '" + game + "'";
+        ArrayList<String> aList = getList(query);
+        if(aList.isEmpty())
+            return "";
+        return aList.get(0);
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
