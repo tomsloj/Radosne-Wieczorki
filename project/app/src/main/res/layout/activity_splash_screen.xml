@@ -1,115 +1,133 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@drawable/splash"
     android:orientation="vertical"
     android:layout_gravity="center">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <TableRow
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <View
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TableRow
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color1"
-                android:layout_weight="1"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color2"
-                android:layout_weight="1"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color3"
-                android:layout_weight="1"
-                />
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color1"
+                    android:layout_weight="1"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color2"
+                    android:layout_weight="1"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color3"
+                    android:layout_weight="1"
+                    />
 
 
-        </TableRow>
-        <TableRow
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color4"
+                    android:layout_weight="1"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color5"
+                    android:layout_weight="1"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color6"
+                    android:layout_weight="1"
+                    />
+
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color7"
+                    android:layout_weight="1"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color8"
+                    android:layout_weight="1"
+                    />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/color9"
+                    android:layout_weight="1"
+                    />
+
+
+            </TableRow>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/botton_line_splash"/>
+        </LinearLayout>
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color4"
-                android:layout_weight="1"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color5"
-                android:layout_weight="1"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color6"
-                android:layout_weight="1"
-                />
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/splash_icon"
+                android:layout_gravity="center"
+                android:paddingBottom="70dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
 
-
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1">
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color7"
-                android:layout_weight="1"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color8"
-                android:layout_weight="1"
-                />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color9"
-                android:layout_weight="1"
-                />
-
-
-        </TableRow>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center">
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/splash_icon"
-            android:layout_gravity="center"
-            android:paddingBottom="70dp"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true" />
-
+            <TextView
+                style="@style/SplashStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/image"
+                android:layout_marginTop="-60dp"
+                android:gravity="center"
+                android:layout_centerHorizontal="true"
+                android:text="@string/app_name" />
+        </RelativeLayout>
         <TextView
-            style="@style/SplashStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image"
-            android:layout_marginTop="-60dp"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:text="@string/app_name" />
-    </RelativeLayout>
+            android:text="@string/app_version"
+            android:layout_gravity="bottom|end"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"/>
+    </FrameLayout>
+    
 
-</FrameLayout>
+
+
+</LinearLayout>

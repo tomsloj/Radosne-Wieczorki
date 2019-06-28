@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -278,6 +279,8 @@ public class listOfFavorites extends AppCompatActivity
             {
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
+                NavUtils.navigateUpFromSameTask(listOfFavorites.this);
+                finish();
                 startActivity(openList);
             }
         });
@@ -289,6 +292,8 @@ public class listOfFavorites extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent openSearch = new Intent(getApplicationContext(), search.class);
+                NavUtils.navigateUpFromSameTask(listOfFavorites.this);
+                finish();
                 startActivity(openSearch);
             }
         });
@@ -335,33 +340,28 @@ public class listOfFavorites extends AppCompatActivity
                                 //create new list of favorites
                                 dbFavoritesHelper.createFavorites(nameOfFavorite, null);
 
-                                final AlertDialog.Builder builder = new AlertDialog.Builder(listOfFavorites.this);
-                                final LayoutInflater inflater = listOfFavorites.this.getLayoutInflater();
-                                final View dialogView = inflater.inflate(R.layout.creation_finished, null);
-                                builder.setView(dialogView);
-                                final AlertDialog dialog3 = builder.create();
-                                dialog3.show();
-                                final Button finish = (Button) dialogView.findViewById(R.id.finish);
-                                Button back = (Button) dialogView.findViewById(R.id.back);
+                                Toast.makeText(getApplicationContext(),"Lista została stworzona", Toast.LENGTH_SHORT).show();
 
-                                back.setOnClickListener(new View.OnClickListener() {
+                                listFavorites = dbHelperFavorites.getFavoritesList();
+
+                                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
+                                {
                                     @Override
-                                    public void onClick(View v) {
-                                        finish();
+                                    public View getView(int position, View convertView, ViewGroup parent)
+                                    {
+                                        View view = super.getView(position, convertView, parent);
+                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                                        tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
+                                        tv.setTextSize(textSize);
+                                        tv.setTextColor(Color.BLACK);
+
+                                        return view;
                                     }
-                                });
+                                };
+                                listOfFavorites.setAdapter(arrayAdapter);
 
-                                finish.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        dialog3.dismiss();
-                                        dialog2.dismiss();
-                                    }
-                                });
+                                dialog2.dismiss();
 
-
-
-                                Toast.makeText(listOfFavorites.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -449,6 +449,11 @@ public class listOfFavorites extends AppCompatActivity
         {
             Intent openSettings = new Intent(getApplicationContext(), settings.class);
             startActivity(openSettings);
+        }
+        else
+        {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

@@ -3,6 +3,7 @@ package com.example.pc.pogodne;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -65,7 +66,7 @@ public class display extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         setSupportActionBar(myToolbar);
 
-        ActionBar actionBar = getSupportActionBar();
+        final ActionBar actionBar = getSupportActionBar();
 
         myToolbar.setTitle(game);
 
@@ -223,30 +224,10 @@ public class display extends AppCompatActivity {
                                             //create new list of favorites
                                             dbFavoritesHelper.createFavorites(nameOfFavorite, game);
 
-                                            final AlertDialog.Builder builder = new AlertDialog.Builder(display.this);
-                                            final LayoutInflater inflater = display.this.getLayoutInflater();
-                                            final View dialogView = inflater.inflate(R.layout.creation_finished, null);
-                                            builder.setView(dialogView);
-                                            final AlertDialog dialog3 = builder.create();
-                                            dialog3.show();
-                                            final Button finish = (Button) dialogView.findViewById(R.id.finish);
-                                            Button back = (Button) dialogView.findViewById(R.id.back);
+                                            Toast.makeText(getApplicationContext(),"Lista została stworzona", Toast.LENGTH_SHORT).show();
+                                            dialog2.dismiss();
+                                            dialog1.dismiss();
 
-                                            back.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    finish();
-                                                }
-                                            });
-
-                                            finish.setOnClickListener(new View.OnClickListener() {
-                                                @Override
-                                                public void onClick(View v) {
-                                                    dialog3.dismiss();
-                                                    dialog2.dismiss();
-                                                    dialog1.dismiss();
-                                                }
-                                            });
 
 
 
@@ -398,8 +379,8 @@ public class display extends AppCompatActivity {
 
         if( category!=null && (category.equals("gameOfTheDay") || category.equals("search")) )
         {
-            nextButton.setVisibility(View.GONE);
-            prevButton.setVisibility(View.GONE);
+            nextButton.setImageResource(R.color.blue);
+            prevButton.setImageResource(R.color.blue);
         }
 
 
@@ -424,6 +405,8 @@ public class display extends AppCompatActivity {
                 txt = dbHelper.getText(game);
                 text.setText(txt);
                 gameName.setText(game);
+                actionBar.setTitle(game);
+
             }
         });
 
@@ -498,6 +481,12 @@ public class display extends AppCompatActivity {
             Intent otworz_ustawienia = new Intent(getApplicationContext(), settings.class);
             startActivity(otworz_ustawienia);
         }
+        else
+        {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 }

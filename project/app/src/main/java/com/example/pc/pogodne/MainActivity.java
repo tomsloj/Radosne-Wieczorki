@@ -82,7 +82,8 @@ public class MainActivity extends AppCompatActivity
                 ArrayList<ArrayList<String> > list = addedGamesService.getList();
                 for ( int i = 0; i < list.size(); ++i )
                 {
-                    dataBaseHelper.addGame(list.get(i).get(0), list.get(i).get(1), list.get(i).get(2) );
+                    if(!dataBaseHelper.gameExist(list.get(i).get(1)))
+                        dataBaseHelper.addGame(list.get(i).get(0), list.get(i).get(1), list.get(i).get(2) );
                 }
             }
             else

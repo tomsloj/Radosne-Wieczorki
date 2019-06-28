@@ -87,16 +87,21 @@ public class AddedGamesService extends SQLiteOpenHelper
     public boolean gameExist(String game)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        String query = "SELECT count(*) FROM " + dataBaseName +" WHERE game = '" + game +"'";
+        String query = "SELECT game FROM " + dataBaseName;
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
-        int counted = cursor.getInt(0);
+        while (!cursor.isAfterLast())
+        {
+            String tmp = cursor.getString(0);
+            if(tmp.toLowerCase().equals(game.toLowerCase()))
+            {
+                cursor.close();
+                return true;
+            }
+            cursor.moveToNext();
+        }
         cursor.close();
-
-        if(counted == 0)
-            return false;
-        else
-            return true;
+        return false;
 
     }
 }

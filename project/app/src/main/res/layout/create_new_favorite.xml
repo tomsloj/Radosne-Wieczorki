@@ -13,7 +13,8 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="18dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/newList" />
+        android:text="@string/newList"
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/newListName"

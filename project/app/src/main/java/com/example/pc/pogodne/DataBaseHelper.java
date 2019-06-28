@@ -194,6 +194,27 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return counted;
     }
 
+    boolean gameExist(String game)
+    {
+        String query = "SELECT zabawa FROM DANE";
+        openDataBase();
+
+        Cursor cursor = myBase.rawQuery(query, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast())
+        {
+            String tmp = cursor.getString(0);
+            if(tmp.toLowerCase().equals(game.toLowerCase()))
+            {
+                cursor.close();
+                return true;
+            }
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return false;
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

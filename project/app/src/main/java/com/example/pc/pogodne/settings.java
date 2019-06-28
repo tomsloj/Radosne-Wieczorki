@@ -3,6 +3,7 @@ package com.example.pc.pogodne;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -203,13 +204,14 @@ public class settings extends AppCompatActivity
                         DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
                         AddedGamesService addedGamesService = new AddedGamesService(getApplicationContext());
 
-                        if(!dataBaseHelper.getText(game).equals("Error 73") && !addedGamesService.gameExist(game))
+                        if(dataBaseHelper.gameExist(game) || addedGamesService.gameExist(game))
                         {
                             Toast.makeText(settings.this, "Ta zabawa jest już dodana", Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
                             dataBaseHelper.addGame(category, game, text);
+                            addedGamesService.addGame(category, game, text);
 
                             final LayoutInflater inflater = LayoutInflater.from(settings.this);
                             final View dialogView = inflater.inflate(R.layout.added_game, null);
@@ -274,6 +276,8 @@ public class settings extends AppCompatActivity
             {
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
+                NavUtils.navigateUpFromSameTask(settings.this);
+                finish();
                 startActivity(openList);
             }
         });
@@ -285,6 +289,8 @@ public class settings extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
+                NavUtils.navigateUpFromSameTask(settings.this);
+                finish();
                 startActivity(openListOfFavorites);
             }
         });
@@ -296,6 +302,8 @@ public class settings extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent openSearch = new Intent(getApplicationContext(), search.class);
+                NavUtils.navigateUpFromSameTask(settings.this);
+                finish();
                 startActivity(openSearch);
             }
         });
@@ -319,7 +327,8 @@ public class settings extends AppCompatActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        return super.onOptionsItemSelected(item);
+        NavUtils.navigateUpFromSameTask(this);
+        return true;
     }
 
 }

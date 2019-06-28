@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -219,30 +221,9 @@ public class displayFavorite extends AppCompatActivity {
                                         //create new list of favorites
                                         dbFavoritesHelper.createFavorites(nameOfFavorite, game);
 
-                                        final AlertDialog.Builder builder = new AlertDialog.Builder(displayFavorite.this);
-                                        final LayoutInflater inflater = displayFavorite.this.getLayoutInflater();
-                                        final View dialogView = inflater.inflate(R.layout.creation_finished, null);
-                                        builder.setView(dialogView);
-                                        final AlertDialog dialog3 = builder.create();
-                                        dialog3.show();
-                                        final Button finish = (Button) dialogView.findViewById(R.id.finish);
-                                        Button back = (Button) dialogView.findViewById(R.id.back);
-
-                                        back.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                finish();
-                                            }
-                                        });
-
-                                        finish.setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                dialog3.dismiss();
-                                                dialog2.dismiss();
-                                                dialog1.dismiss();
-                                            }
-                                        });
+                                        Toast.makeText(getApplicationContext(),"Lista została stworzona", Toast.LENGTH_SHORT).show();
+                                        dialog2.dismiss();
+                                        dialog1.dismiss();
 
 
 
@@ -284,6 +265,60 @@ public class displayFavorite extends AppCompatActivity {
                 });
 
                 return false;
+            }
+        });
+
+
+        final ImageButton wholeListButton = (ImageButton) findViewById(R.id.wholeListButton);
+        final ImageButton searchButton = (ImageButton) findViewById(R.id.findButton);
+        final ImageButton favoritesButton = (ImageButton) findViewById(R.id.favoritesButton);
+
+
+        /*
+         * set what buttons do
+         */
+
+        //show the whole list
+        wholeListButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openList = new Intent(getApplicationContext(), list.class);
+                openList.putExtra("kategoria", "all");
+                NavUtils.navigateUpFromSameTask(displayFavorite.this);
+                finish();
+                startActivity(openList);
+                //finish();
+            }
+        });
+
+        //show search engine
+        searchButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openSearch = new Intent(getApplicationContext(), search.class);
+                startActivity(openSearch);
+                finish();
+            }
+        });
+
+        //show favorites list
+        favoritesButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
+                Intent openMain = new Intent(getApplicationContext(), MainActivity.class);
+                //finish();
+                NavUtils.navigateUpFromSameTask(displayFavorite.this);
+                //startActivity(openMain);
+                //finish();
+                //startActivity(openListOfFavorites);
+
             }
         });
 
@@ -370,6 +405,11 @@ public class displayFavorite extends AppCompatActivity {
         {
             Intent openSettings = new Intent(getApplicationContext(), settings.class);
             startActivity(openSettings);
+        }
+        else
+        {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

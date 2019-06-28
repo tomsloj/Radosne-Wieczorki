@@ -22,15 +22,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".displayFavorite" />
+        <activity android:name=".displayFavorite"
+            android:parentActivityName=".listOfFavorites"/>
         <activity android:name=".editFavorites" />
-        <activity android:name=".listOfFavorites" />
+        <activity android:name=".listOfFavorites"
+            android:parentActivityName=".listOfFavorites"/>
         <activity
             android:name=".search"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".search" />
         <activity
             android:name=".settings"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".settings" />
         <activity
             android:name=".display"
             android:parentActivityName=".MainActivity" />
@@ -44,7 +46,7 @@
         </activity>
         <activity
             android:name=".list"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".list">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
 

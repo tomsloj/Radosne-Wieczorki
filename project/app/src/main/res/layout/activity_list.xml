@@ -11,19 +11,66 @@
         layout="@layout/main_bar"
         android:id="@+id/main_bar"
         />
-
-    <ListView
-        android:id="@+id/listview"
-        android:divider="@color/borderColor"
-        android:dividerHeight="1dp"
+    <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/main_bar"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:background="@color/background"
-        android:cacheColorHint="@color/background"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="0dp"
+        android:background="@color/lightBackground">
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/listview"
+            android:divider="@color/lightBackground"
+            android:dividerHeight="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/main_bar"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="70dp"
+            android:background="@color/lightBackground"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="bottom"
+            android:background="@color/transparent"
+            app:layout_constraintBottom_toBottomOf="@id/frameLayout">
 
-        />
+            <ImageButton
+                android:id="@+id/wholeListButton"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="3"
+
+                android:background="@drawable/down_background"
+                android:src="@drawable/az"
+                android:scaleType="fitCenter"
+                android:padding="20dp" />
+            <ImageButton
+                android:id="@+id/favoritesButton"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary"
+                android:src="@drawable/show_list"
+                android:scaleType="fitCenter"
+                android:padding="12dp"
+                />
+            <ImageButton
+                android:id="@+id/findButton"
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/search"
+                android:background="@drawable/down_background"
+                android:scaleType="fitCenter"
+                android:padding="10dp"
+                />
+        </LinearLayout>
+    </FrameLayout>
+
 </RelativeLayout>
