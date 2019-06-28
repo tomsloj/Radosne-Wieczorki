@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent openList = new Intent(getApplicationContext(), list.class);
-                openList.putExtra("kategoria", "spostrzegawczość");
+                openList.putExtra("kategoria", "refleks");
                 startActivity(openList);
             }
         });

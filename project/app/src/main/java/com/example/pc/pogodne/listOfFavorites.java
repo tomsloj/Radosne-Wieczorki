@@ -37,6 +37,7 @@ public class listOfFavorites extends AppCompatActivity
     int textSize;
     ArrayList<String> listFavorites;
     SwipeMenuListView listOfFavorites;
+    String nameOfFavorite;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -114,7 +115,7 @@ public class listOfFavorites extends AppCompatActivity
                 // set item background
                 editItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
                 // set item width
-                editItem.setWidth(150);
+                editItem.setWidth(140);
 
                 editItem.setIcon(R.drawable.edit);
                 // add to menu
@@ -126,7 +127,7 @@ public class listOfFavorites extends AppCompatActivity
                 // set item background
                 deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
                 // set item width
-                deleteItem.setWidth(150);
+                deleteItem.setWidth(140);
                 // set a icon
                 deleteItem.setIcon(R.drawable.delete);
                 // add to menu
@@ -152,6 +153,10 @@ public class listOfFavorites extends AppCompatActivity
                         final Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
                         final EditText nameEdit = (EditText) dialogView.findViewById(R.id.newName);
 
+                        nameOfFavorite = listFavorites.get(position);
+                        nameEdit.setText(nameOfFavorite);
+
+
                         builder.setView(dialogView);
                         final AlertDialog dialog = builder.create();
 
@@ -161,7 +166,7 @@ public class listOfFavorites extends AppCompatActivity
                                 DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites( getApplicationContext() );
 
                                 String newName = nameEdit.getText().toString();
-                                String nameOfFavorite = listFavorites.get(position);
+
 
                                 if (newName.replace(" ", "").equals(""))
                                 {
@@ -175,6 +180,7 @@ public class listOfFavorites extends AppCompatActivity
                                 {
                                     Toast.makeText(listOfFavorites.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
                                 }
+                                else
                                 if( dbFavoritesHelper.favoriteExist( newName ) )
                                     Toast.makeText( getApplicationContext(), "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
                                 else
@@ -225,7 +231,7 @@ public class listOfFavorites extends AppCompatActivity
                             public void onClick(View v) {
                                 dbHelperFavorites.deleteFavorite(listFavorites.get(position));
                                 listFavorites.remove(position);
-                                Toast.makeText(getApplicationContext(),listFavorites.get(position),Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(getApplicationContext(),listFavorites.get(position),Toast.LENGTH_SHORT).show();
 
 
                                 //update list of favorites

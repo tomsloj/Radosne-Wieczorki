@@ -398,8 +398,9 @@ public class search extends AppCompatActivity {
         if(id == R.id.action_settings)
         {
             Intent openSettings = new Intent(getApplicationContext(), settings.class);
-            startActivity(openSettings);
+            NavUtils.navigateUpFromSameTask(search.this);
             finish();
+            startActivity(openSettings);
         }
         else
         {

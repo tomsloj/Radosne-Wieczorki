@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Radosne Wieczorki</string>
-    <string name="app_version">v2.04</string>
+    <string name="app_version">v2.05</string>
     <string name="action_settings">Ustawienia</string>
     <string name="action_search">Szukaj</string>
     <string name="menu_name">Wszystkie zabawy</string>
@@ -55,7 +55,7 @@
     <string name="category5">Inne</string>
     <string name="shareGame">Podziel się zabawą z innymi</string>
     <string name="az">A...Z</string>
-    <string name="perceptivity">Na spostrzegawczość</string>
+    <string name="perceptivity">Refleks</string>
     <string name="efficiency">Sprawnościowe</string>
     <string name="newList">Nowa lista zabaw</string>
     <string name="create">Utwórz</string>
@@ -70,7 +70,7 @@
     <string name="gameIsSend">Zabawa została wysłana</string>
     <string name="thanks">Dziękujemy za Twój wkład w rozwój aplikacji</string>
     <string name="gameSave">Zabawa została zapisana</string>
-    <string name="addedGameCommunicate">Możesz teraz dodać ją do swoich ulubionych list\nMożesz przesłać jej opis do naszej biblioteki, aby po weryfikacji mogli z niej korzystać inni użytkownicy</string>
+    <string name="addedGameCommunicate">Możesz teraz dodać ją do swoich ulubionych list.\nMożesz przesłać jej opis do naszej biblioteki, aby po weryfikacji mogli z niej korzystać inni użytkownicy.</string>
     <string name="addNote">Dodaj notatkę</string>
     <string name="ofCourse">Jasne!</string>
     <string name="noThanks">Nie chcę</string>

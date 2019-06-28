@@ -181,7 +181,7 @@ public class settings extends AppCompatActivity
                 list.add("Rywalizacja");
                 list.add("Integracyjne");
                 list.add("Piosenki");
-                list.add("Na spostrzegawczość");
+                list.add("Refleks");
                 list.add("Sprawnościowe");
                 final ExpandableListView categoryList = (ExpandableListView) dialogView.findViewById(R.id.categoryList);
                 final ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(getApplicationContext(), list.get(0), list, categoryList);
@@ -203,7 +203,9 @@ public class settings extends AppCompatActivity
 
                         DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
                         AddedGamesService addedGamesService = new AddedGamesService(getApplicationContext());
-
+                        if(game.replaceAll("\\s+","").equals(""))
+                            Toast.makeText(getApplicationContext(),"Nazwa zabawy nie może być pusta", Toast.LENGTH_SHORT).show();
+                        else
                         if(dataBaseHelper.gameExist(game) || addedGamesService.gameExist(game))
                         {
                             Toast.makeText(settings.this, "Ta zabawa jest już dodana", Toast.LENGTH_SHORT).show();
@@ -241,6 +243,11 @@ public class settings extends AppCompatActivity
                                     Toast.makeText(getApplicationContext(), "Dziękujemy za pomoc w rozwijaniu aplikacji", Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
                                     dialog1.dismiss();
+                                    NavUtils.navigateUpFromSameTask(settings.this);
+                                    Intent openGame = new Intent(getApplicationContext(), display.class);
+                                    openGame.putExtra("zabawa", game);
+                                    openGame.putExtra("kategoria", category);
+                                    startActivity(openGame);
                                 }
                             });
 
@@ -249,6 +256,11 @@ public class settings extends AppCompatActivity
                                 public void onClick(View v) {
                                     dialog.dismiss();
                                     dialog1.dismiss();
+                                    NavUtils.navigateUpFromSameTask(settings.this);
+                                    Intent openGame = new Intent(getApplicationContext(), display.class);
+                                    openGame.putExtra("zabawa", game);
+                                    openGame.putExtra("kategoria", category);
+                                    startActivity(openGame);
                                 }
                             });
 

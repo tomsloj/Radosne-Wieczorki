@@ -146,6 +146,15 @@
                 android:background="@drawable/down_background"
                 />
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ikony kategorii: Freepik.com"
+            style="@style/TextStyle"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="100dp"
+            android:layout_marginStart="10dp"
+            />
     </FrameLayout>
 
 </RelativeLayout>

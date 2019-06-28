@@ -41,6 +41,7 @@ public class list extends AppCompatActivity {
     SwipeMenuListView listView;
     int textSize;
     String category;
+    ExpandableListViewAdapter adapter = null;
     
     
     @Override
@@ -59,7 +60,9 @@ public class list extends AppCompatActivity {
             category = "all";
         }
         else
-            myToolbar.setTitle(category);
+        {
+           myToolbar.setTitle(category.substring(0, 1).toUpperCase() + category.substring(1));
+        }
         setSupportActionBar(myToolbar);
 
         ActionBar actionBar = getSupportActionBar();
@@ -119,7 +122,8 @@ public class list extends AppCompatActivity {
                 // set item background
                 addItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
                 // set item width
-                addItem.setWidth(150);
+                addItem.setWidth(140);
+
                 // set item title
                 addItem.setIcon(R.drawable.add);
                 // add to menu
@@ -172,14 +176,16 @@ public class list extends AppCompatActivity {
                 Button createButton = (Button) dialogView.findViewById(R.id.create);
                 Button addGameButton = (Button) dialogView.findViewById(R.id.addGameButton);
                 Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
-                final ExpandableListViewAdapter adapter = new ExpandableListViewAdapter(getApplicationContext(), list.get(0), list, listaulu);
 
+                TextView favoritesDialogTitle = (TextView)findViewById(R.id.favoritesDialogTitle);
                 if(list.isEmpty()) {
+                    favoritesDialogTitle.setVisibility(View.INVISIBLE);
                     listaulu.setVisibility(View.GONE);
-                    addGameButton.setVisibility(View.INVISIBLE);
+                    addGameButton.setVisibility(View.GONE);
                 }
                 else
                 {
+                    adapter = new ExpandableListViewAdapter(getApplicationContext(), list.get(0), list, listaulu);
                     listaulu.setAdapter(adapter);
                 }
 
@@ -248,7 +254,9 @@ public class list extends AppCompatActivity {
                 addGameButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String favoritesName = adapter.getGroup(0).toString();
+                        String favoritesName = "";
+                        if(adapter != null)
+                            favoritesName = adapter.getGroup(0).toString();
 
                         if(dbFavoritesHelper.gameInFavoriteExists(favoritesName, game))
                             Toast.makeText(list.this, "ta zabawa już znajduje sie na tej liście ulubionych",Toast.LENGTH_SHORT).show();
@@ -286,10 +294,10 @@ public class list extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                NavUtils.navigateUpFromSameTask(list.this);
-                finish();
+                //NavUtils.navigateUpFromSameTask(list.this);
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
+                finish();
                 startActivity(openList);
             }
         });
@@ -301,7 +309,6 @@ public class list extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent openSearch = new Intent(getApplicationContext(), search.class);
-                startActivity(openSearch);
                 NavUtils.navigateUpFromSameTask(list.this);
                 finish();
                 startActivity(openSearch);
@@ -315,8 +322,8 @@ public class list extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
+                NavUtils.navigateUpFromSameTask(list.this);
                 startActivity(openListOfFavorites);
-                finish();
             }
         });
 
@@ -393,8 +400,8 @@ public class list extends AppCompatActivity {
         if(id == R.id.action_search)
         {
             Intent openSearch = new Intent(getApplicationContext(), search.class);
+            NavUtils.navigateUpFromSameTask(list.this);
             startActivity(openSearch);
-            finish();
         }
         else
         if(id == R.id.action_settings)

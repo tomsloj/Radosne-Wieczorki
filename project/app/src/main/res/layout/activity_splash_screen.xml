@@ -88,10 +88,6 @@
 
 
             </TableRow>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/botton_line_splash"/>
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"

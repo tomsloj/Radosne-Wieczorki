@@ -29,10 +29,10 @@
             android:parentActivityName=".listOfFavorites"/>
         <activity
             android:name=".search"
-            android:parentActivityName=".search" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".settings"
-            android:parentActivityName=".settings" />
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".display"
             android:parentActivityName=".MainActivity" />
@@ -46,7 +46,7 @@
         </activity>
         <activity
             android:name=".list"
-            android:parentActivityName=".list">
+            android:parentActivityName=".MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
 

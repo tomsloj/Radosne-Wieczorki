@@ -102,7 +102,9 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="70dp"
-            android:background="@color/lightBackground"/>
+            android:background="@color/lightBackground"
+            android:paddingBottom="10dp"
+            android:clipToPadding="false"/>
 
         <TextView
             android:id="@+id/textEmptyFavoritesList"
