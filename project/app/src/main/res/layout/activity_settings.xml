@@ -82,6 +82,30 @@
                     android:layout_gravity="end"/>
             </TableRow>
 
+            <!--
+            <TableRow
+                android:layout_marginTop="22dp"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:id="@+id/removeGameText"
+                    style="@style/TextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:text="@string/addGameText" />
+
+                <ImageButton
+                    android:id="@+id/removeGameButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/delete"
+                    android:background="@drawable/circle_background_red"
+                    android:layout_gravity="end" />
+            </TableRow>
+            -->
+
             <TableRow
                 android:layout_marginTop="22dp"
                 android:layout_width="match_parent">

@@ -1,6 +1,5 @@
 package com.example.pc.pogodne;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,9 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,8 +25,6 @@ import com.baoyz.swipemenulistview.SwipeMenu;
 import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
-import com.shuhart.hoveringcallback.HoverItemDecoration;
-import com.shuhart.hoveringcallback.HoveringCallback;
 
 import java.util.ArrayList;
 
@@ -202,9 +197,7 @@ public class displayFavorite extends AppCompatActivity {
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
                 NavUtils.navigateUpFromSameTask(displayFavorite.this);
-                finish();
                 startActivity(openList);
-                //finish();
             }
         });
 
@@ -216,7 +209,7 @@ public class displayFavorite extends AppCompatActivity {
             {
                 Intent openSearch = new Intent(getApplicationContext(), search.class);
                 startActivity(openSearch);
-                finish();
+                NavUtils.navigateUpFromSameTask(displayFavorite.this);
             }
         });
 
@@ -227,12 +220,8 @@ public class displayFavorite extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
-                Intent openMain = new Intent(getApplicationContext(), MainActivity.class);
-                //finish();
                 NavUtils.navigateUpFromSameTask(displayFavorite.this);
-                //startActivity(openMain);
-                //finish();
-                //startActivity(openListOfFavorites);
+                startActivity(openListOfFavorites);
 
             }
         });
@@ -319,6 +308,7 @@ public class displayFavorite extends AppCompatActivity {
         if(id == R.id.action_settings)
         {
             Intent openSettings = new Intent(getApplicationContext(), settings.class);
+            NavUtils.navigateUpFromSameTask(displayFavorite.this);
             startActivity(openSettings);
         }
         else

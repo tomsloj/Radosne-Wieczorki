@@ -289,7 +289,7 @@ public class settings extends AppCompatActivity
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
                 NavUtils.navigateUpFromSameTask(settings.this);
-                finish();
+                //finish();
                 startActivity(openList);
             }
         });
@@ -302,7 +302,7 @@ public class settings extends AppCompatActivity
             {
                 Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
                 NavUtils.navigateUpFromSameTask(settings.this);
-                finish();
+                //finish();
                 startActivity(openListOfFavorites);
             }
         });
@@ -315,7 +315,7 @@ public class settings extends AppCompatActivity
             {
                 Intent openSearch = new Intent(getApplicationContext(), search.class);
                 NavUtils.navigateUpFromSameTask(settings.this);
-                finish();
+                //finish();
                 startActivity(openSearch);
             }
         });

@@ -294,10 +294,10 @@ public class list extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                //NavUtils.navigateUpFromSameTask(list.this);
+                NavUtils.navigateUpFromSameTask(list.this);
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
-                finish();
+                //finish();
                 startActivity(openList);
             }
         });
@@ -310,7 +310,8 @@ public class list extends AppCompatActivity {
             {
                 Intent openSearch = new Intent(getApplicationContext(), search.class);
                 NavUtils.navigateUpFromSameTask(list.this);
-                finish();
+                //openSearch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //finish();
                 startActivity(openSearch);
             }
         });
@@ -407,6 +408,7 @@ public class list extends AppCompatActivity {
         if(id == R.id.action_settings)
         {
             Intent openSettings = new Intent(getApplicationContext(), settings.class);
+            //NavUtils.navigateUpFromSameTask(list.this);
             startActivity(openSettings);
         }
         else
@@ -416,6 +418,18 @@ public class list extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        category = getIntent().getStringExtra("kategoria");
+
+        getIntent();
+        Toast.makeText(getApplicationContext(),category,Toast.LENGTH_SHORT).show();
+
+        setIntent(intent);
     }
 
 

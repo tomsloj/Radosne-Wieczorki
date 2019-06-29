@@ -1,8 +1,6 @@
 package com.example.pc.pogodne;
 
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.NavUtils;
@@ -21,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -286,7 +283,6 @@ public class listOfFavorites extends AppCompatActivity
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
                 NavUtils.navigateUpFromSameTask(listOfFavorites.this);
-                finish();
                 startActivity(openList);
             }
         });
@@ -299,7 +295,6 @@ public class listOfFavorites extends AppCompatActivity
             {
                 Intent openSearch = new Intent(getApplicationContext(), search.class);
                 NavUtils.navigateUpFromSameTask(listOfFavorites.this);
-                finish();
                 startActivity(openSearch);
             }
         });
@@ -448,6 +443,7 @@ public class listOfFavorites extends AppCompatActivity
         if(id == R.id.action_search) //open search activity
         {
             Intent openSearch = new Intent(getApplicationContext(), search.class);
+            NavUtils.navigateUpFromSameTask(listOfFavorites.this);
             startActivity(openSearch);
         }
         else

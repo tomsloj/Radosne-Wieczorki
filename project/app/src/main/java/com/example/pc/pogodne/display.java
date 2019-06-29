@@ -564,6 +564,7 @@ public class display extends AppCompatActivity {
 
         if (id == R.id.action_search) {
             Intent openSearching = new Intent(getApplicationContext(), search.class);
+            NavUtils.navigateUpFromSameTask(display.this);
             startActivity(openSearching);
         }
         else if (id == R.id.action_settings) {

@@ -344,8 +344,9 @@ public class search extends AppCompatActivity {
             {
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
+                //openList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 NavUtils.navigateUpFromSameTask(search.this);
-                finish();
+                //finish();
                 startActivity(openList);
 
             }
@@ -359,7 +360,7 @@ public class search extends AppCompatActivity {
             {
                 Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
                 NavUtils.navigateUpFromSameTask(search.this);
-                finish();
+                //finish();
                 startActivity(openListOfFavorites);
             }
         });
@@ -398,8 +399,9 @@ public class search extends AppCompatActivity {
         if(id == R.id.action_settings)
         {
             Intent openSettings = new Intent(getApplicationContext(), settings.class);
-            NavUtils.navigateUpFromSameTask(search.this);
-            finish();
+            //openSettings.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            //NavUtils.navigateUpFromSameTask(search.this);
+            //finish();
             startActivity(openSettings);
         }
         else
