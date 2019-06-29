@@ -224,6 +224,14 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return aList.get(0);
     }
 
+    public void remove (String game)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM DANE WHERE "
+                + "zabawa" + " = '" + game + "'";
+        db.execSQL(query);
+    }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {

@@ -477,6 +477,7 @@ public class display extends AppCompatActivity {
                 txt = dbHelper.getText(game);
                 text.setText("Kategoria: "+ dbHelper.getCategory(game) + "\n\n" + txt);
                 gameName.setText(game);
+                actionBar.setTitle(game);
             }
         });
 
