@@ -130,6 +130,14 @@ public class display extends AppCompatActivity {
         {
             notesButton.hide();
         }
+        else
+        {
+            notes = dbFavorites.getNotes(game, playlist);
+            if(notes != null && !notes.equals(""))
+                notesButton.setImageResource(R.drawable.notes_exclamation);
+            else
+                notesButton.setImageResource(R.drawable.notes);
+        }
 
         //favorite
 
@@ -270,66 +278,6 @@ public class display extends AppCompatActivity {
                             dialog1.dismiss();
                         }
                     });
-
-                    /*
-                    stworz.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            String nameOfFavorite = nazwa.getText().toString();
-                            //list can't be empty, and can't contain %<>@#$|
-                            if(nameOfFavorite.isEmpty() || nameOfFavorite.replace(" ", "").isEmpty())
-                            {
-                                Toast.makeText(display.this, "nazwa nie może być pusta",Toast.LENGTH_LONG).show();
-                            }
-                            else
-                            if(nameOfFavorite.contains("%") || nameOfFavorite.contains(">") ||
-                                    nameOfFavorite.contains("@") || nameOfFavorite.contains("<") ||
-                                    nameOfFavorite.contains("#") || nameOfFavorite.contains("|") ||
-                                    nameOfFavorite.contains("$") || nameOfFavorite.contains("'") )
-                            {
-                                Toast.makeText(display.this, "nazwa nie może zawierać:\n%<>@#$|'",Toast.LENGTH_LONG).show();
-                            }
-                            else
-                            {
-                                if(dbFavoritesHelper.favoriteExist(nameOfFavorite))
-                                    Toast.makeText(display.this, "taka nazwa listy ulubionych już istnieje",Toast.LENGTH_SHORT).show();
-                                else
-                                {
-                                    //create new list of favorites
-                                    dbFavoritesHelper.createFavorites(nameOfFavorite, game);
-
-                                    //display new list
-                                    arrayAdapter.add(nameOfFavorite);
-                                    arrayAdapter.notifyDataSetChanged();
-
-                                    text.setText(R.string.selectFavorite);
-
-                                    Toast.makeText(display.this, "nowa lista ulubionych została utworzona",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }
-                    });
-                    */
-
-                    /*
-                    listaulu.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                            String favoritesName = list.get(i);
-
-                            //dbHelper.addToFavorites(favoritesName, zabawa);
-                            if(dbFavoritesHelper.gameInFavoriteExists(favoritesName, game))
-                                Toast.makeText(display.this, "ta zabawa już znajduje sie na tej liście ulubionych",Toast.LENGTH_SHORT).show();
-                            else
-                            {
-                                dbFavoritesHelper.addGametoFavorite(favoritesName, game);
-                                Toast.makeText(display.this, "zabawa została dodana",Toast.LENGTH_SHORT).show();
-                            }
-
-                        }
-                    });
-                    */
                 }
             });
 
@@ -368,6 +316,10 @@ public class display extends AppCompatActivity {
                             notes = notesEditText.getText().toString();
                             dbFavorites.updateNotes(notes, game, playlist);
                             dialog.dismiss();
+                            if(notes != null && !notes.equals(""))
+                                notesButton.setImageResource(R.drawable.notes_exclamation);
+                            else
+                                notesButton.setImageResource(R.drawable.notes);
                         }
                     });
 
