@@ -3,6 +3,7 @@ package com.example.pc.pogodne;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.provider.ContactsContract;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -16,8 +17,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +30,7 @@ import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class displayFavorite extends AppCompatActivity {
 
@@ -38,6 +42,8 @@ public class displayFavorite extends AppCompatActivity {
     int textSize;
     ArrayList<String> list;
     ArrayList<String> favoriteList;
+    ArrayList<Boolean> moovables;
+    AppAdapter arrayAdapter;
 
 
     @Override
@@ -72,21 +78,11 @@ public class displayFavorite extends AppCompatActivity {
 
         list = dbFavorites.getGamesInFavorite(nameOfFavorite);
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this,android.R.layout.simple_list_item_1, list)
-        {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent)
-            {
-                View view = super.getView(position, convertView, parent);
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
-                tv.setTextSize(textSize);
-                tv.setTextColor(Color.BLACK);
+        moovables = new ArrayList<Boolean>(Collections.nCopies(list.size(), false));
 
-                return view;
-            }
-        };
+        arrayAdapter = new AppAdapter();
         listView.setAdapter(arrayAdapter);
+
         if(list.size() == 0)
             listView.setEmptyView(findViewById(R.id.emptyListText));
 
@@ -106,13 +102,25 @@ public class displayFavorite extends AppCompatActivity {
 
             @Override
             public void create(SwipeMenu menu) {
-                // create "add" item
+                // create "edit" item
+                SwipeMenuItem editItem = new SwipeMenuItem(
+                        getApplicationContext());
+                // set item background
+                editItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
+                // set item width
+                editItem.setWidth(130);
+                // set item title
+                editItem.setIcon(R.drawable.edit);
+                // add to menu
+                menu.addMenuItem(editItem);
+
+                // create "delete" item
                 SwipeMenuItem deleteItem = new SwipeMenuItem(
                         getApplicationContext());
                 // set item background
                 deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
                 // set item width
-                deleteItem.setWidth(150);
+                deleteItem.setWidth(130);
                 // set item title
                 deleteItem.setIcon(R.drawable.delete);
                 // add to menu
@@ -127,53 +135,62 @@ public class displayFavorite extends AppCompatActivity {
         listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
-
-                final String game = list.get(position);
-
-                final AlertDialog.Builder builder = new AlertDialog.Builder(displayFavorite.this);
-                final LayoutInflater inflater = displayFavorite.this.getLayoutInflater();
-                final View dialogView = inflater.inflate(R.layout.delete_dialog, null);
-
-
-                builder.setView(dialogView);
-                final AlertDialog dialog1 = builder.create();
-                dialog1.show();
-
-                Button acceptButton = (Button) dialogView.findViewById(R.id.accept);
-                Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
-
-                acceptButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        //Toast.makeText(getApplicationContext(), nameOfFavorite + "  " + game, Toast.LENGTH_SHORT).show();
-                        dbFavorites.deleteGame(nameOfFavorite, game);
-                        Toast.makeText(getApplicationContext(),"Zabawa została usunięta z listy", Toast.LENGTH_SHORT).show();
-                        list = dbFavorites.getGamesInFavorite(nameOfFavorite);
-                        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this,android.R.layout.simple_list_item_1, list)
-                        {
-                            @Override
-                            public View getView(int position, View convertView, ViewGroup parent)
-                            {
-                                View view = super.getView(position, convertView, parent);
-                                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                                tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
-                                tv.setTextSize(textSize);
-                                tv.setTextColor(Color.BLACK);
-
-                                return view;
-                            }
-                        };
+                switch (index)
+                {
+                    case 0:
+                    {
+                        moovables.set(position, true);
                         listView.setAdapter(arrayAdapter);
-                        dialog1.dismiss();
+                        break;
                     }
-                });
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog1.dismiss();
-                    }
-                });
+                    case 1:
+                    {
+                        final String game = list.get(position);
 
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(displayFavorite.this);
+                        final LayoutInflater inflater = displayFavorite.this.getLayoutInflater();
+                        final View dialogView = inflater.inflate(R.layout.delete_dialog, null);
+
+
+                        builder.setView(dialogView);
+                        final AlertDialog dialog1 = builder.create();
+                        dialog1.show();
+
+                        Button acceptButton = (Button) dialogView.findViewById(R.id.accept);
+                        Button cancelButton = (Button) dialogView.findViewById(R.id.cancel);
+
+                        acceptButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //Toast.makeText(getApplicationContext(), nameOfFavorite + "  " + game, Toast.LENGTH_SHORT).show();
+                                dbFavorites.deleteGame(nameOfFavorite, game);
+                                Toast.makeText(getApplicationContext(), "Zabawa została usunięta z listy", Toast.LENGTH_SHORT).show();
+                                list = dbFavorites.getGamesInFavorite(nameOfFavorite);
+                                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this, android.R.layout.simple_list_item_1, list) {
+                                    @Override
+                                    public View getView(int position, View convertView, ViewGroup parent) {
+                                        View view = super.getView(position, convertView, parent);
+                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                                        tv.setBackground(getResources().getDrawable(R.drawable.list_background));
+                                        tv.setTextSize(textSize);
+                                        tv.setTextColor(Color.BLACK);
+
+                                        return view;
+                                    }
+                                };
+                                listView.setAdapter(arrayAdapter);
+                                dialog1.dismiss();
+                            }
+                        });
+                        cancelButton.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog1.dismiss();
+                            }
+                        });
+                    }
+
+                }
                 return false;
             }
         });
@@ -319,4 +336,127 @@ public class displayFavorite extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+    class AppAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return list.size();
+        }
+
+        @Override
+        public String getItem(int position) {
+            return list.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            // menu type count
+            return 1;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            // current menu type
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if(moovables.get(position)) {
+                if (convertView == null) {
+                    convertView = View.inflate(getApplicationContext(),
+                            R.layout.item_list_moovable, null);
+                    new ViewHolder(convertView, position);
+                }
+                ViewHolder holder = (ViewHolder) convertView.getTag();
+                //ApplicationInfo item = getItem(position);
+                //holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
+                holder.tv_name.setText(list.get(position));
+                return convertView;
+            }
+            else
+            {
+                if (convertView == null) {
+                    convertView = View.inflate(getApplicationContext(),
+                            R.layout.item_list_app, null);
+                    new ViewHolder(convertView, position);
+                }
+                ViewHolder holder = (ViewHolder) convertView.getTag();
+                //ApplicationInfo item = getItem(position);
+                //holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
+                holder.tv_name.setText(list.get(position));
+                return convertView;
+            }
+        }
+    }
+    class ViewHolder {
+        TextView tv_name;
+        ImageButton upButton;
+        ImageButton downButton;
+        ImageButton doneButton;
+        DataBaseFavorites dbHelperFavorites = new DataBaseFavorites(getApplicationContext());
+
+        public ViewHolder(View view, final int position) {
+            tv_name = (TextView) view.findViewById(R.id.tv_name);
+            view.setTag(this);
+            if(moovables.get(position))
+            {
+                upButton = (ImageButton) view.findViewById(R.id.upButton);
+                upButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(position > 0)
+                        {
+                            String aboveItem = list.get(position-1);
+                            String game = list.get(position);
+                            list.set(position - 1, list.get(position));
+                            list.set(position, aboveItem);
+                            dbHelperFavorites.upGame(nameOfFavorite, game);
+                            boolean tmp = moovables.get(position);
+                            moovables.set(position, moovables.get(position - 1));
+                            moovables.set(position - 1, tmp);
+                            listView.setAdapter(arrayAdapter);
+                        }
+                    }
+                });
+                downButton = (ImageButton)view.findViewById(R.id.downButton);
+                downButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if(position < list.size()-1)
+                        {
+                            String aboveItem = list.get(position + 1);
+                            String game = list.get(position);
+                            list.set(position + 1, list.get(position));
+                            list.set(position, aboveItem);
+                            boolean tmp = moovables.get(position);
+                            moovables.set(position, moovables.get(position + 1));
+                            moovables.set(position + 1, tmp);
+                            dbHelperFavorites.downGame(nameOfFavorite, game);
+                            //Toast.makeText(getApplicationContext(), nameOfFavorite + " " + game, Toast.LENGTH_SHORT).show();
+                            listView.setAdapter(arrayAdapter);
+                        }
+                    }
+                });
+                doneButton = (ImageButton) view.findViewById(R.id.doneButton);
+                doneButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        moovables.set(position, false);
+                        listView.setAdapter(arrayAdapter);
+                    }
+                });
+            }
+
+        }
+    }
+
+
 }

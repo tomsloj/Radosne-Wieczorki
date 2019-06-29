@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/H:/program_files/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_delete_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/H:/program_files/AndroidStudio/plugins/android/lib/android.jar!/images/material_design_icons/navigation/ic_check_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,13 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="assetSourceType" value="FILE" />
-                            <entry key="color" value="ffffff" />
-                            <entry key="height" value="40" />
-                            <entry key="outputName" value="delete" />
+                            <entry key="outputName" value="done" />
                             <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\PC\Desktop\rysunek.svg" />
-                            <entry key="width" value="35" />
                           </map>
                         </option>
                       </PersistentState>

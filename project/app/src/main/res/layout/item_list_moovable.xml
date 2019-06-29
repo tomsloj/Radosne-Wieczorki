@@ -1,0 +1,48 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/listBackground"
+
+     >
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:text="name"
+        android:padding="13dp"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        />
+    <ImageButton
+        android:id="@+id/upButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/uparrowblack"
+        android:background="@color/listBackground"
+        android:layout_toStartOf="@id/downButton"
+        android:layout_centerVertical="true"
+        />
+
+    <ImageButton
+        android:id="@+id/downButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/downarrowblack"
+        android:background="@color/listBackground"
+        android:layout_toStartOf="@id/doneButton"
+        android:layout_centerVertical="true"/>
+    <ImageButton
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/done"
+        android:background="@color/listBackground"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="5dp"/>
+
+</RelativeLayout>
