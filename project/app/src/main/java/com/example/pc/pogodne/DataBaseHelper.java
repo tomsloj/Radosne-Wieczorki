@@ -142,12 +142,6 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return "";
     }
 
-    public ArrayList<String> getGameInFavorite(String favorite)
-    {
-        String query = "SELECT game FROM FAVORITES WHERE name = '" + favorite + "' ORDER BY number";
-        return getList(query);
-    }
-
     private ArrayList<String> getList(String query)
     {
         ArrayList<String> gamesList = new ArrayList<>();
@@ -178,6 +172,8 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         }
         if(text)
             query = query + "tekst Like '%" + toFind + "%'";
+
+        query = query + " ORDER BY zabawa COLLATE LOCALIZED ASC";
         return getList(query);
     }
 

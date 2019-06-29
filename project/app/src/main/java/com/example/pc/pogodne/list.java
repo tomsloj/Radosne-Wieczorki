@@ -156,7 +156,7 @@ public class list extends AppCompatActivity {
                         // set item background
                         deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
                         // set item width
-                        deleteItem.setWidth(140);
+                        deleteItem.setWidth(130);
 
                         // set item title
                         deleteItem.setIcon(R.drawable.delete);
@@ -191,17 +191,11 @@ public class list extends AppCompatActivity {
                         final DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites(list.this);
 
                         final ArrayList<String> list = dbFavoritesHelper.getFavoritesList();
-                        final ArrayAdapter arrayAdapter = new ArrayAdapter<>(list.this, android.R.layout.simple_list_item_1, list);
 
 
                         builder.setView(dialogView);
                         final AlertDialog dialog1 = builder.create();
                         dialog1.show();
-
-                        Button positiveButton = dialog1.getButton(DialogInterface.BUTTON_POSITIVE);
-                        Button negativButton = dialog1.getButton(DialogInterface.BUTTON_NEGATIVE);
-                        negativButton.setTextColor(getResources().getColor(R.color.colorPrimary));
-                        positiveButton.setTextColor(getResources().getColor(R.color.colorPrimary));
 
                         //display info that user hasn't any list of favorites
                         //final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
