@@ -146,6 +146,7 @@ public class settings extends AppCompatActivity
                             //choosing application which user wants to use to send report
                             Intent chooser = Intent.createChooser(intent, "Wybierz aplikację z której wyślesz maila");
                             startActivity(chooser);
+                            dialog.dismiss();
                         }
                     }
                 });

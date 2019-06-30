@@ -1,9 +1,7 @@
 package com.example.pc.pogodne;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.NavUtils;
@@ -13,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -26,7 +23,6 @@ import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +54,7 @@ public class list extends AppCompatActivity {
         category = getIntent().getStringExtra("kategoria");
 
         //create toolbar
-        Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
+        final Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         if(category== null||category.equals("all"))
         {
             myToolbar.setTitle("Lista zabaw");
@@ -86,7 +82,7 @@ public class list extends AppCompatActivity {
 
         final DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
 
-        arrayList= dbHelper.getGamesInCategory(category);
+        arrayList = dbHelper.getGamesInCategory(category);
 
         /*ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
         {
@@ -358,11 +354,17 @@ public class list extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                /*
                 NavUtils.navigateUpFromSameTask(list.this);
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
-                //finish();
                 startActivity(openList);
+                */
+                category = "all";
+
+                myToolbar.setTitle("Lista zabaw");
+                arrayList= dbHelper.getGamesInCategory(category);
+                listView.setAdapter(arrayAdapter);
             }
         });
 
