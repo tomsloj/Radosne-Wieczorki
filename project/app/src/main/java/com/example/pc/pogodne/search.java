@@ -229,6 +229,7 @@ public class search extends AppCompatActivity {
                                 else {
                                     dbFavoritesHelper.addGametoFavorite(favoritesName, game);
                                     Toast.makeText(search.this, "zabawa została dodana", Toast.LENGTH_SHORT).show();
+                                    dialog1.dismiss();
                                 }
                             }
                         });

@@ -281,6 +281,7 @@ public class list extends AppCompatActivity {
                                 else {
                                     dbFavoritesHelper.addGametoFavorite(favoritesName, game);
                                     Toast.makeText(list.this, "zabawa została dodana", Toast.LENGTH_SHORT).show();
+                                    dialog1.dismiss();
                                 }
                             }
                         });
