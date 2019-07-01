@@ -1,6 +1,7 @@
 package com.example.pc.pogodne;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import androidx.core.app.NavUtils;
 import androidx.appcompat.app.ActionBar;
@@ -38,6 +39,7 @@ public class search extends AppCompatActivity {
     SwipeMenuListView listOfFound;
     ArrayList<String> list = new ArrayList<>();
     ExpandableListViewAdapter adapter = null;
+    AppAdapter appAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +69,7 @@ public class search extends AppCompatActivity {
         final TextView textNoFavorites = (TextView) findViewById(R.id.textEmptyFavoritesList);
 
         listOfFound = (SwipeMenuListView) findViewById(R.id.listOfFound);
-        final AppAdapter appAdapter = new AppAdapter();
+        appAdapter = new AppAdapter();
         listOfFound.setAdapter(appAdapter);
 
         SwipeMenuCreator creator = new SwipeMenuCreator() {
@@ -421,6 +423,29 @@ public class search extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+
+
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        final int currentTextSize = sService.getTextSize();
+        Toast.makeText(getApplicationContext(),currentTextSize,Toast.LENGTH_SHORT).show();
+
+        final CheckBox titleBox = (CheckBox) findViewById(R.id.titlesCheckbox);
+        final CheckBox textBox = (CheckBox) findViewById(R.id.textsCheckbox);
+        final EditText searchSpace = (EditText) findViewById(R.id.searchSpace);
+
+        if(currentTextSize != textSize)
+        {
+            textSize = currentTextSize;
+            textBox.setTextSize(textSize);
+            titleBox.setTextSize(textSize);
+            searchSpace.setTextSize(textSize);
+            listOfFound.setAdapter(appAdapter);
+        }
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_activity, menu);
@@ -497,11 +522,11 @@ public class search extends AppCompatActivity {
             //ApplicationInfo item = getItem(position);
             //holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
             holder.tv_name.setText(list.get(position));
+            holder.tv_name.setTextSize(textSize);
             return convertView;
         }
     }
     class ViewHolder {
-        ImageView iv_icon;
         TextView tv_name;
 
         public ViewHolder(View view) {

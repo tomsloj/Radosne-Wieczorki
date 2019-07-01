@@ -279,6 +279,7 @@ public class displayFavorite extends AppCompatActivity {
             myToolbar.setTitle(nameOfFavorite);
             if(currentTextSize != textSize || toChange)
             {
+                textSize = currentTextSize;
                 ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this, android.R.layout.simple_list_item_1, list) {
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
@@ -318,13 +319,13 @@ public class displayFavorite extends AppCompatActivity {
         if(id == R.id.action_search)
         {
             Intent openSearch = new Intent(getApplicationContext(), search.class);
+            NavUtils.navigateUpFromSameTask(displayFavorite.this);
             startActivity(openSearch);
         }
         else
         if(id == R.id.action_settings)
         {
             Intent openSettings = new Intent(getApplicationContext(), settings.class);
-            NavUtils.navigateUpFromSameTask(displayFavorite.this);
             startActivity(openSettings);
         }
         else
@@ -378,6 +379,7 @@ public class displayFavorite extends AppCompatActivity {
                 //ApplicationInfo item = getItem(position);
                 //holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
                 holder.tv_name.setText(list.get(position));
+                holder.tv_name.setTextSize(textSize);
                 return convertView;
             }
             else
@@ -391,6 +393,7 @@ public class displayFavorite extends AppCompatActivity {
                 //ApplicationInfo item = getItem(position);
                 //holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
                 holder.tv_name.setText(list.get(position));
+                holder.tv_name.setTextSize(textSize);
                 return convertView;
             }
         }

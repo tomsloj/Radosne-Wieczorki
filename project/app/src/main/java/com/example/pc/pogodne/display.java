@@ -489,6 +489,7 @@ public class display extends AppCompatActivity {
         int currentTextSize = sService.getTextSize();
         if(currentTextSize != textSize)
         {
+            textSize = currentTextSize;
             gameName.setTextSize(currentTextSize + 6);
             text.setTextSize(currentTextSize);
         }

@@ -382,6 +382,7 @@ public class listOfFavorites extends AppCompatActivity
 
     }
 
+    @Override
     protected void onResume()
     {
         super.onResume();
@@ -404,6 +405,7 @@ public class listOfFavorites extends AppCompatActivity
         //if is changed: text size, number of favorites or name of one favorite display new list
         if(currentTextSize != textSize  || toChange)
         {
+            textSize = currentTextSize;
             final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
             {
                 @Override
@@ -411,6 +413,7 @@ public class listOfFavorites extends AppCompatActivity
                 {
                     View view = super.getView(position, convertView, parent);
                     TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                    tv.setBackground(getResources().getDrawable(R.drawable.list_background));
                     tv.setTextSize(currentTextSize);
                     tv.setTextColor(Color.BLACK);
 

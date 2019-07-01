@@ -531,6 +531,7 @@ public class list extends AppCompatActivity {
             //ApplicationInfo item = getItem(position);
             //holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
             holder.tv_name.setText(arrayList.get(position));
+            holder.tv_name.setTextSize(textSize);
             return convertView;
         }
     }
