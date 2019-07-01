@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
@@ -206,6 +206,15 @@
                 android:scaleType="fitCenter"
                 android:padding="10dp"
                  />
+            <!--
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Force Crash!"
+                android:onClick="forceCrash"
+                android:layout_centerVertical="true"
+                android:layout_centerHorizontal="true" />
+            -->
         </LinearLayout>
 
     </FrameLayout>
@@ -240,4 +249,4 @@
     -->
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
