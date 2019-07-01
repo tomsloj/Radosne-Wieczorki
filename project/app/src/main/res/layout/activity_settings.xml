@@ -17,122 +17,149 @@
         android:layout_marginTop="56dp"
         android:layout_marginBottom="0dp">
 
-        <TableLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="70dp"
-            android:stretchColumns="1"
-            >
+            android:layout_marginBottom="70dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+                <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="25dp"
+                android:layout_marginBottom="70dp"
+                android:stretchColumns="1"
+                >
 
-            <TableRow
-                android:layout_marginTop="30dp">
+                <TableRow
+                    android:layout_marginTop="30dp"
+                    android:gravity="center">
 
-                <TextView
-                    android:id="@+id/textSizeText"
-                    style="@style/TextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:background="@color/transparent"
-                    android:text="@string/tekstSize" />
+                    <TextView
+                        android:id="@+id/textSizeText"
+                        style="@style/TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@color/transparent"
+                        android:text="@string/tekstSize"
+                        />
 
-                <ImageButton
-                    android:id="@+id/minusButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/minus"
-                    android:background="@drawable/circle_background_blue"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="10dp"/>
+                    <ImageButton
+                        android:id="@+id/minusButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/minus"
+                        android:background="@drawable/circle_background_blue"
+                        android:layout_gravity="end"
+                        android:layout_marginEnd="10dp"/>
 
-                <ImageButton
-                    android:id="@+id/plusButton"
-                    style="@style/NormalButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/plus"
-                    android:background="@drawable/circle_background_blue"
-                    android:layout_gravity="end"
-                    />
-
-
-            </TableRow>
-
-            <TableRow
-                android:layout_marginTop="22dp"
-                android:layout_width="match_parent">
-
-                <TextView
-                    android:id="@+id/addGameText"
-                    style="@style/TextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-
-                    android:text="@string/addGameText" />
-
-                <ImageButton
-                    android:id="@+id/addGameButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/plus"
-                    android:background="@drawable/circle_background_red"
-                    android:layout_gravity="end"/>
-            </TableRow>
-
-            <!--
-            <TableRow
-                android:layout_marginTop="22dp"
-                android:layout_width="match_parent">
-
-                <TextView
-                    android:id="@+id/removeGameText"
-                    style="@style/TextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-
-                    android:text="@string/addGameText" />
-
-                <ImageButton
-                    android:id="@+id/removeGameButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/delete"
-                    android:background="@drawable/circle_background_red"
-                    android:layout_gravity="end" />
-            </TableRow>
-            -->
-
-            <TableRow
-                android:layout_marginTop="22dp"
-                android:layout_width="match_parent">
-
-                <TextView
-                    android:id="@+id/reportText"
-                    style="@style/TextStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/reportInfo" />
-
-                <ImageButton
-                    android:id="@+id/reportButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/send"
-                    android:background="@drawable/circle_background_red"
-                    android:layout_gravity="end"
-                    android:scaleType="fitCenter"
-                    android:padding="4dp" />
+                    <ImageButton
+                        android:id="@+id/plusButton"
+                        style="@style/NormalButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/plus"
+                        android:background="@drawable/circle_background_blue"
+                        android:layout_gravity="end"
+                        />
 
 
-            </TableRow>
+                </TableRow>
 
-        </TableLayout>
+                <TableRow
+                    android:layout_marginTop="22dp"
+                    android:layout_width="match_parent"
+                    android:gravity="center">
 
+                    <TextView
+                        android:id="@+id/addGameText"
+                        style="@style/TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:text="@string/addGameText" />
+
+                    <ImageButton
+                        android:id="@+id/addGameButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/plus"
+                        android:background="@drawable/circle_background_red"
+                        android:layout_gravity="end"/>
+                </TableRow>
+
+                <!--
+                <TableRow
+                    android:layout_marginTop="22dp"
+                    android:layout_width="match_parent">
+
+                    <TextView
+                        android:id="@+id/removeGameText"
+                        style="@style/TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+
+                        android:text="@string/addGameText" />
+
+                    <ImageButton
+                        android:id="@+id/removeGameButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/delete"
+                        android:background="@drawable/circle_background_red"
+                        android:layout_gravity="end" />
+                </TableRow>
+                -->
+
+                <TableRow
+                    android:layout_marginTop="22dp"
+                    android:layout_width="match_parent"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/reportText"
+                        style="@style/TextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/reportInfo" />
+
+                    <ImageButton
+                        android:id="@+id/reportButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/send"
+                        android:background="@drawable/circle_background_red"
+                        android:layout_gravity="end"
+                        android:scaleType="fitCenter"
+                        android:padding="4dp" />
+
+
+                </TableRow>
+
+            </TableLayout>
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ikony kategorii: Freepik.com"
+                style="@style/TextStyle"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="50dp"
+                />
+            </LinearLayout>
+        </ScrollView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -170,15 +197,6 @@
                 android:background="@drawable/down_background"
                 />
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ikony kategorii: Freepik.com"
-            style="@style/TextStyle"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="100dp"
-            android:layout_marginStart="10dp"
-            />
     </FrameLayout>
 
 </RelativeLayout>
