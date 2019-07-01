@@ -30,9 +30,11 @@
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".search"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".settings"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".display"

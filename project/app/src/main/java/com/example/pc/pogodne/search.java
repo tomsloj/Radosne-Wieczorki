@@ -1,6 +1,7 @@
 package com.example.pc.pogodne;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import androidx.core.app.NavUtils;
@@ -22,7 +23,6 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +40,7 @@ public class search extends AppCompatActivity {
     ArrayList<String> list = new ArrayList<>();
     ExpandableListViewAdapter adapter = null;
     AppAdapter appAdapter;
+    SwipeMenuCreator creator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,7 @@ public class search extends AppCompatActivity {
         appAdapter = new AppAdapter();
         listOfFound.setAdapter(appAdapter);
 
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
+        creator = new SwipeMenuCreator() {
 
             @Override
             public void create(SwipeMenu menu) {
@@ -429,7 +430,7 @@ public class search extends AppCompatActivity {
 
         final SettingsService sService = new SettingsService(getApplicationContext());
         final int currentTextSize = sService.getTextSize();
-        Toast.makeText(getApplicationContext(),currentTextSize,Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getApplicationContext(),currentTextSize,Toast.LENGTH_SHORT).show();
 
         final CheckBox titleBox = (CheckBox) findViewById(R.id.titlesCheckbox);
         final CheckBox textBox = (CheckBox) findViewById(R.id.textsCheckbox);
@@ -444,6 +445,18 @@ public class search extends AppCompatActivity {
             listOfFound.setAdapter(appAdapter);
         }
     }
+
+    /*
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        //Toast.makeText(search.this,"onConfig",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(search.this,list.get(0),Toast.LENGTH_SHORT).show();
+        listOfFound.setAdapter(appAdapter);
+        listOfFound.setMenuCreator(creator);
+    }
+    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

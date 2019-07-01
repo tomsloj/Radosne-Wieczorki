@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class settings extends AppCompatActivity
 {
-    int textSize;
+    int textSize = 15;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -67,7 +67,7 @@ public class settings extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if( textSize < 23 )
+                if( textSize < 21 )
                 {
                     sService.setTextSize( textSize + 2 );
                     textSize += 2;
@@ -85,7 +85,7 @@ public class settings extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if( textSize > 10 )
+                if( textSize > 11 )
                 {
                     sService.setTextSize( textSize - 2 );
                     textSize -= 2;
