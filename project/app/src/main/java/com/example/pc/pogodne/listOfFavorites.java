@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,6 +36,7 @@ public class listOfFavorites extends AppCompatActivity
     ArrayList<String> listFavorites;
     SwipeMenuListView listOfFavorites;
     String nameOfFavorite;
+    AppAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,20 +61,8 @@ public class listOfFavorites extends AppCompatActivity
         listFavorites = dbHelperFavorites.getFavoritesList();
 
         //display list of favorites
-        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
-        {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent)
-            {
-                View view = super.getView(position, convertView, parent);
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
-                tv.setTextSize(textSize);
-                tv.setTextColor(Color.BLACK);
+        arrayAdapter = new AppAdapter();
 
-                return view;
-            }
-        };
         listOfFavorites.setAdapter(arrayAdapter);
         if(listFavorites.size() == 0)
             listOfFavorites.setEmptyView(findViewById(R.id.emptyListText));
@@ -112,7 +102,7 @@ public class listOfFavorites extends AppCompatActivity
                 // set item background
                 editItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
                 // set item width
-                editItem.setWidth(140);
+                editItem.setWidth(130);
 
                 editItem.setIcon(R.drawable.edit);
                 // add to menu
@@ -124,7 +114,7 @@ public class listOfFavorites extends AppCompatActivity
                 // set item background
                 deleteItem.setBackground(new ColorDrawable(getResources().getColor(R.color.iconbackground)));
                 // set item width
-                deleteItem.setWidth(140);
+                deleteItem.setWidth(130);
                 // set a icon
                 deleteItem.setIcon(R.drawable.delete);
                 // add to menu
@@ -135,7 +125,7 @@ public class listOfFavorites extends AppCompatActivity
 // set creator
         listOfFavorites.setMenuCreator(creator);
 
-       listOfFavorites.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+        listOfFavorites.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
                 switch (index) {
@@ -187,20 +177,6 @@ public class listOfFavorites extends AppCompatActivity
                                     listFavorites = dbHelperFavorites.getFavoritesList();
 
                                     //update list of favorites
-                                    ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
-                                    {
-                                        @Override
-                                        public View getView(int position, View convertView, ViewGroup parent)
-                                        {
-                                            View view = super.getView(position, convertView, parent);
-                                            TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                                            tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
-                                            tv.setTextSize(textSize);
-                                            tv.setTextColor(Color.BLACK);
-
-                                            return view;
-                                        }
-                                    };
                                     listOfFavorites.setAdapter(arrayAdapter);
                                     dialog.dismiss();
                                 }
@@ -232,20 +208,6 @@ public class listOfFavorites extends AppCompatActivity
 
 
                                 //update list of favorites
-                                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
-                                {
-                                    @Override
-                                    public View getView(int position, View convertView, ViewGroup parent)
-                                    {
-                                        View view = super.getView(position, convertView, parent);
-                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                                        tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
-                                        tv.setTextSize(textSize);
-                                        tv.setTextColor(Color.BLACK);
-
-                                        return view;
-                                    }
-                                };
                                 listOfFavorites.setAdapter(arrayAdapter);
 
                                 dialog.dismiss();
@@ -345,20 +307,6 @@ public class listOfFavorites extends AppCompatActivity
 
                                 listFavorites = dbHelperFavorites.getFavoritesList();
 
-                                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
-                                {
-                                    @Override
-                                    public View getView(int position, View convertView, ViewGroup parent)
-                                    {
-                                        View view = super.getView(position, convertView, parent);
-                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                                        tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
-                                        tv.setTextSize(textSize);
-                                        tv.setTextColor(Color.BLACK);
-
-                                        return view;
-                                    }
-                                };
                                 listOfFavorites.setAdapter(arrayAdapter);
 
                                 dialog2.dismiss();
@@ -406,20 +354,7 @@ public class listOfFavorites extends AppCompatActivity
         if(currentTextSize != textSize  || toChange)
         {
             textSize = currentTextSize;
-            final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(listOfFavorites.this,android.R.layout.simple_list_item_1, listFavorites)
-            {
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent)
-                {
-                    View view = super.getView(position, convertView, parent);
-                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                    tv.setBackground(getResources().getDrawable(R.drawable.list_background));
-                    tv.setTextSize(currentTextSize);
-                    tv.setTextColor(Color.BLACK);
 
-                    return view;
-                }
-            };
             listOfFavorites.setAdapter(arrayAdapter);
         }
     }
@@ -462,5 +397,59 @@ public class listOfFavorites extends AppCompatActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+    class AppAdapter extends BaseAdapter {
+
+        @Override
+        public int getCount() {
+            return listFavorites.size();
+        }
+
+        @Override
+        public String getItem(int position) {
+            return listFavorites.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public int getViewTypeCount() {
+            // menu type count
+            return 2;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            // current menu type
+            return 0;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null) {
+                convertView = View.inflate(getApplicationContext(),
+                        R.layout.item_list_app, null);
+                new ViewHolder(convertView);
+            }
+            ViewHolder holder = (ViewHolder) convertView.getTag();
+            //ApplicationInfo item = getItem(position);
+            //holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
+            holder.tv_name.setText(listFavorites.get(position));
+            holder.tv_name.setTextSize(textSize);
+            return convertView;
+        }
+    }
+    class ViewHolder {
+        TextView tv_name;
+
+        public ViewHolder(View view) {
+            tv_name = (TextView) view.findViewById(R.id.tv_name);
+            view.setTag(this);
+        }
     }
 }
