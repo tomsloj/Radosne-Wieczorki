@@ -24,9 +24,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".displayFavorite"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity"/>
         <activity android:name=".editFavorites" />
         <activity android:name=".listOfFavorites"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity"/>
         <activity
             android:name=".search"
@@ -38,6 +40,7 @@
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".display"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
@@ -50,6 +53,7 @@
         </activity>
         <activity
             android:name=".list"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:parentActivityName=".MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
