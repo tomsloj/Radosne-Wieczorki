@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "783903303467",
+    "firebase_url": "https://radosne-wieczorki.firebaseio.com",
+    "project_id": "radosne-wieczorki",
+    "storage_bucket": "radosne-wieczorki.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783903303467:android:bd764af1b728a374",
+        "android_client_info": {
+          "package_name": "com.example.pc.pogodne"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "783903303467-jtm4mcu9ac4fj2v6b0gp9na4l928vdcp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdKL9Q-go7cUnerb5INsmFRGO3DfBVazM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "783903303467-jtm4mcu9ac4fj2v6b0gp9na4l928vdcp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
