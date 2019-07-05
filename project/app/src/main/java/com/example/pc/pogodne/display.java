@@ -115,7 +115,6 @@ public class display extends AppCompatActivity {
 
         */
 
-        //NOTES BUTTON CAN BE FAVORITE BUTTON
         final ImageButton starButton = (ImageButton) findViewById(R.id.starButton);
         final DataBaseFavorites dbFavorites = new DataBaseFavorites( getApplicationContext() );
         final FloatingActionButton notesButton = (FloatingActionButton)findViewById(R.id.notesButton);
@@ -264,6 +263,7 @@ public class display extends AppCompatActivity {
                             {
                                 dbFavoritesHelper.addGametoFavorite(favoritesName, game);
                                 Toast.makeText(display.this, "zabawa została dodana",Toast.LENGTH_SHORT).show();
+                                dialog1.dismiss();
                             }
                         }
                     });
@@ -356,6 +356,11 @@ public class display extends AppCompatActivity {
                         else
                             nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next));
                     }
+                    notes = dbFavorites.getNotes(game, playlist);
+                    if(notes != null && !notes.equals(""))
+                        notesButton.setImageResource(R.drawable.notes_exclamation);
+                    else
+                        notesButton.setImageResource(R.drawable.notes);
                 }
                 else
                 {
@@ -404,6 +409,11 @@ public class display extends AppCompatActivity {
                         else
                             nextButton.setImageDrawable(getResources().getDrawable(R.drawable.next));
                     }
+                    notes = dbFavorites.getNotes(game, playlist);
+                    if(notes != null && !notes.equals(""))
+                        notesButton.setImageResource(R.drawable.notes_exclamation);
+                    else
+                        notesButton.setImageResource(R.drawable.notes);
                 }
                 else
                 {
