@@ -1,15 +1,12 @@
-package com.example.pc.pogodne;
+package com.tomsloj.pc.pogodne;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Pair;
 
 import java.util.ArrayList;
-
-import javax.sql.StatementEvent;
 
 public class AddedGamesService extends SQLiteOpenHelper
 {
@@ -17,7 +14,7 @@ public class AddedGamesService extends SQLiteOpenHelper
     private static String dataBaseName = "added";
 
     private final Context appContext;
-    public static String dataBasePath = "data/data/com.example.pc.pogodne/databases";
+    public static String dataBasePath = "data/data/com.tomsloj.pc.pogodne/databases";
     public static final int dataBAseVersion = 1;
 
     AddedGamesService(Context context)

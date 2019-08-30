@@ -1,7 +1,6 @@
-package com.example.pc.pogodne;
+package com.tomsloj.pc.pogodne;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import androidx.core.app.NavUtils;
 import androidx.appcompat.app.ActionBar;
@@ -15,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;

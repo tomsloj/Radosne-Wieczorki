@@ -1,4 +1,4 @@
-package com.example.pc.pogodne;
+package com.tomsloj.pc.pogodne;
 
 import android.content.Intent;
 import android.graphics.Color;

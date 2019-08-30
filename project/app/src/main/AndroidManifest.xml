@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.pc.pogodne"
+    package="com.tomsloj.pc.pogodne"
     android:installLocation="preferExternal">
 
 
@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".splashScreen"
+        <activity android:name="com.tomsloj.pc.pogodne.splashScreen"
             android:noHistory="true"
             >
             <intent-filter>
@@ -23,27 +23,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".displayFavorite"
+        <activity android:name="com.tomsloj.pc.pogodne.displayFavorite"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".editFavorites" />
-        <activity android:name=".listOfFavorites"
+            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity"/>
+        <activity android:name="com.tomsloj.pc.pogodne.editFavorites" />
+        <activity android:name="com.tomsloj.pc.pogodne.listOfFavorites"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity"/>
         <activity
-            android:name=".search"
+            android:name="com.tomsloj.pc.pogodne.search"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity" />
         <activity
-            android:name=".settings"
+            android:name="com.tomsloj.pc.pogodne.settings"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity" />
         <activity
-            android:name=".display"
+            android:name="com.tomsloj.pc.pogodne.display"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.tomsloj.pc.pogodne.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask">
             <intent-filter>
@@ -52,9 +52,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".list"
+            android:name="com.tomsloj.pc.pogodne.list"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
 

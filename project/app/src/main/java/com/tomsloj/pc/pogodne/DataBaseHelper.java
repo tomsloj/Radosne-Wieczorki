@@ -1,6 +1,5 @@
-package com.example.pc.pogodne;
+package com.tomsloj.pc.pogodne;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -13,7 +12,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
     private SQLiteDatabase myBase;
     public static String dataBaseName = "baza.sqlite";
     private final Context appContext;
-    public static String dataBasePath = "data/data/com.example.pc.pogodne/databases/";
+    public static String dataBasePath = "data/data/com.tomsloj.pc.pogodne/databases/";
     public static final int dataBAseVersion = 1;
 
     public  DataBaseHelper(Context context)

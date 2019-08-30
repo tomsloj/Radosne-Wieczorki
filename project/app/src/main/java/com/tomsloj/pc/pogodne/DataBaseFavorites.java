@@ -1,4 +1,4 @@
-package com.example.pc.pogodne;
+package com.tomsloj.pc.pogodne;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,7 +13,7 @@ public class DataBaseFavorites extends SQLiteOpenHelper
     private static String dataBaseName = "favorites";
 
     private final Context appContext;
-    public static String dataBasePath = "data/data/com.example.pc.pogodne/databases";
+    public static String dataBasePath = "data/data/com.tomsloj.pc.pogodne/databases";
     public static final int dataBAseVersion = 1;
 
     public DataBaseFavorites(Context context)

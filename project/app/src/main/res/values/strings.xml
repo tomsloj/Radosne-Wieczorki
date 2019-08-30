@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Radosne Wieczorki</string>
-    <string name="app_version">v2.08</string>
+    <string name="app_version">v2.10</string>
     <string name="action_settings">Ustawienia</string>
     <string name="action_search">Szukaj</string>
     <string name="menu_name">Wszystkie zabawy</string>
