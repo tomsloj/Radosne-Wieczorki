@@ -186,6 +186,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
         int counted = cursor.getInt(0);
 
+        cursor.close();
         return counted;
     }
 

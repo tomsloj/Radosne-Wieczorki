@@ -77,7 +77,7 @@ public class AddedGamesService extends SQLiteOpenHelper
             tmp.add(text);
             list.add(tmp);
         }
-
+        data.close();
         return list;
     }
 

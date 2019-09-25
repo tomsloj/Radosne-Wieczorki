@@ -114,7 +114,7 @@
                         android:layout_weight="1"
                         android:drawableTop="@drawable/songs"
                         android:background="@color/button4"
-                        android:text="@string/sings"
+                        android:text="@string/songs"
                         android:textColor="@color/main_activity_background"
                         android:textSize="10.5sp"
                         android:scaleType="fitCenter"

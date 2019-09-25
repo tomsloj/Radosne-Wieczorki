@@ -82,6 +82,7 @@ public class DataBaseFavorites extends SQLiteOpenHelper
         Cursor cursor = db.rawQuery(query, null);
         cursor.moveToFirst();
         int number = cursor.getInt(0);
+        cursor.close();
         return number;
     }
 
@@ -188,6 +189,8 @@ public class DataBaseFavorites extends SQLiteOpenHelper
             if(!cursor.getString(0).equals("remove"))
                 list.add(cursor.getString(0));
 
+        cursor.close();
+
         return list;
     }
 
@@ -208,6 +211,8 @@ public class DataBaseFavorites extends SQLiteOpenHelper
 
         while (data.moveToNext())
             list.add(data.getString(0));
+
+        data.close();
 
         return list;
     }
