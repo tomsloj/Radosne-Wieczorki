@@ -2,8 +2,10 @@ package com.tomsloj.pc.pogodne;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -26,9 +28,18 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
     public void openDataBase()
     {
         //String dbPath = appContext.getDatabasePath(dataBaseName).getPath();
-        if(myBase != null && myBase.isOpen())
+        if (myBase != null && myBase.isOpen()) {
             return;
-        myBase = SQLiteDatabase.openDatabase(dataBasePath + dataBaseName, null, SQLiteDatabase.OPEN_READWRITE);
+        }
+        try
+        {
+            myBase = SQLiteDatabase.openDatabase(dataBasePath + dataBaseName, null, SQLiteDatabase.OPEN_READWRITE);
+        }
+        catch (SQLiteCantOpenDatabaseException e)
+        {
+            Toast.makeText(appContext, "nie można otworzyć bazy danych\nspróbuj uruchomić ponownie aplikację\n" +
+                    "jeśli błąd będzie nadal występował skontaktuj się z developerem", Toast.LENGTH_LONG).show();
+        }
     }
     public void closeDataBase()
     {
