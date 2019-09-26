@@ -78,9 +78,8 @@ public class MainActivity extends AppCompatActivity
             }
             else
             {
-                Toast.makeText(this, "Nie udało się załadować bazy danych\n" +
-                        "w celu naprawy skontaktuj się z developerem:\n" +
-                        "300268@pw.edu.pl", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "nie można otworzyć bazy danych\nspróbuj uruchomić ponownie aplikację\n" +
+                        "jeśli błąd będzie nadal występował skontaktuj się z developerem\n300268@pw.edu.pl", Toast.LENGTH_LONG).show();
                 return;
             }
         }
