@@ -78,7 +78,9 @@ public class MainActivity extends AppCompatActivity
             }
             else
             {
-                Toast.makeText(this, "Copy data error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Nie udało się załadować bazy danych\n" +
+                        "w celu naprawy skontaktuj się z developerem:\n" +
+                        "300268@pw.edu.pl", Toast.LENGTH_LONG).show();
                 return;
             }
         }
@@ -235,7 +237,8 @@ public class MainActivity extends AppCompatActivity
         try
         {
             InputStream inputStream = context.getAssets().open(DataBaseHelper.dataBaseName);
-            String outFileName = DataBaseHelper.dataBasePath + DataBaseHelper.dataBaseName;
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+            String outFileName = dataBaseHelper.dataBasePath + DataBaseHelper.dataBaseName;
             OutputStream outputStream = new FileOutputStream(outFileName);
             byte[]buff = new byte[1024];
             int length = 0;
