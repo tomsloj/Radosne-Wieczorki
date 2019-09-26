@@ -1,0 +1,4 @@
+->naprawiono usuwanie dodanych przez siebie zabaw - będą one usuwane także z naszych list
+->wyłapywanie wyjątku, podczas nieudanej próby otwarcia bazy danych
+->eliminacja wycieków pamięci spowodowanych niezamykniętymi Cursor'ami
+->zamykanie wszystkich otwieranych baz danych
