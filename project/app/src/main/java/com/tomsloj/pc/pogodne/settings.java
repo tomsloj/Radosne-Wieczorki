@@ -222,6 +222,8 @@ public class settings extends AppCompatActivity
 
                             builder.setView(dialogView);
                             final AlertDialog dialog = builder.create();
+                            dialog.setCanceledOnTouchOutside(false);
+
 
                             final Button buttonAccept = (Button) dialogView.findViewById(R.id.accept);
                             final Button buttonCancel = (Button) dialogView.findViewById(R.id.cancel);
