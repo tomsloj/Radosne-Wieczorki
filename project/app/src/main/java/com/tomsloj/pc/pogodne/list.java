@@ -71,9 +71,12 @@ public class list extends AppCompatActivity {
         // Enable the Up button
         //actionBar.setHomeButtonEnabled(true);
 
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.back);
 
+        if ( actionBar != null)
+        {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.back);
+        }
         final SettingsService sService = new SettingsService(getApplicationContext());
         textSize = sService.getTextSize();
 
@@ -84,21 +87,6 @@ public class list extends AppCompatActivity {
 
         arrayList = dbHelper.getGamesInCategory(category);
 
-        /*ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this,android.R.layout.simple_list_item_1, arrayList)
-        {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent)
-            {
-                View view = super.getView(position, convertView, parent);
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
-                tv.setTextSize(textSize);
-                tv.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        */
         final AppAdapter arrayAdapter = new AppAdapter();
         listView.setAdapter(arrayAdapter);
 
@@ -106,7 +94,7 @@ public class list extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent openGame = new Intent(getApplicationContext(), display.class);
-                openGame.putExtra("zabawa", arrayList.get(i).toString());
+                openGame.putExtra("zabawa", arrayList.get(i));
                 openGame.putExtra("kategoria", category);
                 startActivity(openGame);
             }
@@ -313,11 +301,23 @@ public class list extends AppCompatActivity {
                             public void onClick(View v) {
                                 dbHelper.remove(game);
                                 arrayList.remove(position);
-                                //Toast.makeText(getApplicationContext(),listFavorites.get(position),Toast.LENGTH_SHORT).show();
-
 
                                 //update list of favorites
                                 arrayAdapter.notifyDataSetChanged();
+
+                                //delete game from favorites
+                                DataBaseFavorites dbFacorites = new DataBaseFavorites(getApplicationContext());
+                                ArrayList<String> list = dbFacorites.getFavoritesList();
+
+                                for ( String favorite:list )
+                                {
+                                    if( dbFacorites.gameInFavoriteExists(favorite, game) )
+                                    {
+                                        dbFacorites.deleteGame(favorite, game);
+                                    }
+                                }
+
+
 
                                 dialog.dismiss();
                             }
@@ -397,11 +397,13 @@ public class list extends AppCompatActivity {
 
     }
 
+    /*
     private boolean copyDatabase(Context context) {
         try {
 
             InputStream inputStream = context.getAssets().open(DataBaseHelper.dataBaseName);
-            String outFileName = DataBaseHelper.dataBasePath + DataBaseHelper.dataBaseName;
+            DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+            String outFileName = dataBaseHelper.dataBasePath + DataBaseHelper.dataBaseName;
             OutputStream outputStream = new FileOutputStream(outFileName);
             byte[]buff = new byte[1024];
             int length = 0;
@@ -417,6 +419,7 @@ public class list extends AppCompatActivity {
             return false;
         }
     }
+     */
 
     @Override
     protected void onResume()
@@ -434,7 +437,8 @@ public class list extends AppCompatActivity {
 
             ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this, android.R.layout.simple_list_item_1, arrayList) {
                 @Override
-                public View getView(int position, View convertView, ViewGroup parent) {
+                public View getView(int position, View convertView, ViewGroup parent)
+                {
                     View view = super.getView(position, convertView, parent);
                     TextView tv = (TextView) view.findViewById(android.R.id.text1);
                     tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
@@ -536,10 +540,10 @@ public class list extends AppCompatActivity {
         }
     }
         class ViewHolder {
-            ImageView iv_icon;
+
             TextView tv_name;
 
-            public ViewHolder(View view) {
+            ViewHolder(View view) {
                 tv_name = (TextView) view.findViewById(R.id.tv_name);
                 view.setTag(this);
             }
