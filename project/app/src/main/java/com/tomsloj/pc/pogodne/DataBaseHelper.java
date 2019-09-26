@@ -5,27 +5,30 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
+
+import com.crashlytics.android.Crashlytics;
 
 import java.util.ArrayList;
 import java.util.Random;
 
 public class DataBaseHelper  extends SQLiteOpenHelper {
     private SQLiteDatabase myBase;
-    public static String dataBaseName = "baza.sqlite";
+    static  String dataBaseName = "baza.sqlite";
     private final Context appContext;
-    public static String dataBasePath = "data/data/com.tomsloj.pc.pogodne/databases/";
-    public static final int dataBAseVersion = 1;
+    public String dataBasePath ;//= "data/data/com.tomsloj.pc.pogodne/databases/";
+    private static final int dataBAseVersion = 1;
 
-    public  DataBaseHelper(Context context)
+    DataBaseHelper(Context context)
     {
         super(context, dataBaseName, null, dataBAseVersion);
         this.appContext = context;
-        //dataBasePath = context.getDatabasePath(dataBaseName).getPath();
+        dataBasePath = context.getFilesDir().getPath();
         //myBase = getWritableDatabase();
     }
 
-    public void openDataBase()
+   private void openDataBase()
     {
         //String dbPath = appContext.getDatabasePath(dataBaseName).getPath();
         if (myBase != null && myBase.isOpen()) {
@@ -37,23 +40,24 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         }
         catch (SQLiteCantOpenDatabaseException e)
         {
+            Crashlytics.log(Log.ERROR, "opening database", "can;t open database " + dataBasePath);
             Toast.makeText(appContext, "nie można otworzyć bazy danych\nspróbuj uruchomić ponownie aplikację\n" +
                     "jeśli błąd będzie nadal występował skontaktuj się z developerem", Toast.LENGTH_LONG).show();
         }
     }
-    public void closeDataBase()
+    private void closeDataBase()
     {
         if(myBase != null)
             myBase.close();
     }
 
-    public ArrayList<String> getListOfCategories()
+    ArrayList<String> getListOfCategories()
     {
         String query = "SELECT DISTINCT  kategoria FROM DANE";
         return getList(query);
     }
 
-    public String getText(String game)
+    String getText(String game)
     {
         String query = "SELECT tekst FROM DANE WHERE zabawa = '" + game + "'";
         ArrayList<String> aList = getList(query);
@@ -62,26 +66,13 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return aList.get(0);
     }
 
-    public void addGame(String category, String game, String text)
+    void addGame(String category, String game, String text)
     {
         String query = "INSERT INTO DANE (zabawa, kategoria, tekst) VALUES ('" + game + "','"+
                 category + "','" + text + "')";
         openDataBase();
         myBase.execSQL(query);
         closeDataBase();
-
-        /*
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("zabawa", game);
-        contentValues.put("kategoria", category);
-        contentValues.put("tekst", text);
-
-        long result = db.insert(dataBaseName, null, contentValues);
-        db.close();
-        return result;
-        */
 
     }
 
@@ -105,7 +96,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return aList.get(0);
     }
 
-    public ArrayList<String> getGamesInCategory(String category)
+    ArrayList<String> getGamesInCategory(String category)
     {
         String query;
         if(category.equals("all"))
@@ -116,7 +107,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return getList(query);
     }
 
-    public String nextGame (String category, String game)
+    String nextGame (String category, String game)
     {
         ArrayList<String> list = getGamesInCategory(category);
         for( int i = 0; i < list.size(); ++i )
@@ -134,7 +125,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return "";
     }
 
-    public String prevGame (String category, String game)
+    String prevGame (String category, String game)
     {
         ArrayList<String> list = getGamesInCategory(category);
         for( int i = 0; i < list.size(); ++i )
@@ -171,7 +162,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return gamesList;
     }
 
-    public ArrayList<String> find(String toFind, boolean name, boolean text)
+    ArrayList<String> find(String toFind, boolean name, boolean text)
     {
         String query = "SELECT zabawa FROM DANE WHERE ";
         if(name) 
@@ -198,6 +189,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         int counted = cursor.getInt(0);
 
         cursor.close();
+        closeDataBase();
         return counted;
     }
 
@@ -219,10 +211,11 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         cursor.close();
+        closeDataBase();
         return false;
     }
 
-    public String getCategory(String game)
+    String getCategory(String game)
     {
         String query = "SELECT kategoria FROM DANE WHERE zabawa = '" + game + "'";
         ArrayList<String> aList = getList(query);
@@ -231,12 +224,15 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return aList.get(0);
     }
 
-    public void remove (String game)
+    void remove (String game)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+        //SQLiteDatabase db = this.getWritableDatabase();
+        openDataBase();
         String query = "DELETE FROM DANE WHERE "
                 + "zabawa" + " = '" + game + "'";
-        db.execSQL(query);
+        myBase.execSQL(query);
+
+        closeDataBase();
     }
 
 
