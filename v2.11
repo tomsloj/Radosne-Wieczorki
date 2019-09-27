@@ -2,3 +2,5 @@
 ->wyłapywanie wyjątku, podczas nieudanej próby otwarcia bazy danych
 ->eliminacja wycieków pamięci spowodowanych niezamykniętymi Cursor'ami
 ->zamykanie wszystkich otwieranych baz danych
+-> naprawione wysyłanie zabaw
+->poprawione aktualizowanie się list

@@ -426,6 +426,8 @@ public class list extends AppCompatActivity {
     {
         super.onResume();
 
+        final AppAdapter arrayAdapter = new AppAdapter();
+
         final SettingsService sService = new SettingsService(getApplicationContext());
         final int currentTextSize = sService.getTextSize();
         if(currentTextSize != textSize)
@@ -435,11 +437,13 @@ public class list extends AppCompatActivity {
 
             final ArrayList<String> arrayList = dbHelper.getGamesInCategory(category);
 
+            /*
             ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this, android.R.layout.simple_list_item_1, arrayList) {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent)
                 {
                     View view = super.getView(position, convertView, parent);
+                    view.setBackground(getResources().getDrawable( R.drawable.list_background ));
                     TextView tv = (TextView) view.findViewById(android.R.id.text1);
                     tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
                     tv.setTextSize(textSize);
@@ -448,7 +452,10 @@ public class list extends AppCompatActivity {
                     return view;
                 }
             };
+            listView.setDividerHeight(0);
+            */
             listView.setAdapter(arrayAdapter);
+
         }
     }
 

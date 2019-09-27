@@ -165,10 +165,12 @@ public class displayFavorite extends AppCompatActivity {
                                 dbFavorites.deleteGame(nameOfFavorite, game);
                                 Toast.makeText(getApplicationContext(), "Zabawa została usunięta z listy", Toast.LENGTH_SHORT).show();
                                 list = dbFavorites.getGamesInFavorite(nameOfFavorite);
-                                ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this, android.R.layout.simple_list_item_1, list) {
+                                /*ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this, android.R.layout.simple_list_item_1, list) {
                                     @Override
                                     public View getView(int position, View convertView, ViewGroup parent) {
+
                                         View view = super.getView(position, convertView, parent);
+                                        view.setBackground(getResources().getDrawable( R.drawable.list_background ));
                                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
                                         tv.setBackground(getResources().getDrawable(R.drawable.list_background));
                                         tv.setTextSize(textSize);
@@ -177,6 +179,9 @@ public class displayFavorite extends AppCompatActivity {
                                         return view;
                                     }
                                 };
+                                listView.setAdapter(arrayAdapter);
+                                listView.setDividerHeight(0);
+                                */
                                 listView.setAdapter(arrayAdapter);
                                 dialog1.dismiss();
                             }
@@ -277,9 +282,11 @@ public class displayFavorite extends AppCompatActivity {
             }
 
             myToolbar.setTitle(nameOfFavorite);
+
             if(currentTextSize != textSize || toChange)
             {
                 textSize = currentTextSize;
+                /*
                 ArrayAdapter arrayAdapter = new ArrayAdapter<String>(displayFavorite.this, android.R.layout.simple_list_item_1, list) {
                     @Override
                     public View getView(int position, View convertView, ViewGroup parent) {
@@ -292,7 +299,8 @@ public class displayFavorite extends AppCompatActivity {
                         return view;
                     }
                 };
-                listView.setAdapter(arrayAdapter);
+                */
+                        listView.setAdapter(arrayAdapter);
             }
 
         }
