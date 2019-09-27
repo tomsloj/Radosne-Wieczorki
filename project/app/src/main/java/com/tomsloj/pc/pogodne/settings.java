@@ -241,7 +241,7 @@ public class settings extends AppCompatActivity
                                     intent.setType("message/rfc822");
                                     //choosing application which user wants to use to send report
                                     Intent chooser = Intent.createChooser(intent, "Wybierz aplikację z której wyślesz maila");
-                                    startActivity(chooser);
+
 
                                     Toast.makeText(getApplicationContext(), "Dziękujemy za pomoc w rozwijaniu aplikacji", Toast.LENGTH_LONG).show();
                                     dialog.dismiss();
@@ -250,7 +250,9 @@ public class settings extends AppCompatActivity
                                     Intent openGame = new Intent(getApplicationContext(), display.class);
                                     openGame.putExtra("zabawa", game);
                                     openGame.putExtra("kategoria", category);
+
                                     startActivity(openGame);
+                                    startActivity(chooser);
                                 }
                             });
 
