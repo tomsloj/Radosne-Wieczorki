@@ -21,8 +21,8 @@ android {
         applicationId "com.tomsloj.pc.pogodne"
         minSdkVersion 19
         targetSdkVersion 28
-        versionCode 210
-        versionName "2.10"
+        versionCode 211
+        versionName "2.11"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {

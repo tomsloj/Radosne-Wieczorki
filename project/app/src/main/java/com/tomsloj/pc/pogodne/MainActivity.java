@@ -19,6 +19,13 @@ import java.util.ArrayList;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 
+//TODO filtrowanie zabaw po miejscu (wewnątrz/na zewnątrz), wiek, wielkość grupy
+//TODO chwyty gitarowe
+//TODO filmiki pokazujące jak powinny wyglądać tańce
+//TODO melodie piosenek
+//TODO udostępnianie list
+
+
 public class MainActivity extends AppCompatActivity
 {
     @Override
