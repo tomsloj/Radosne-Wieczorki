@@ -1,14 +1,18 @@
 buildscript {
     repositories {
-        maven { url 'https://maven.fabric.io/public' }
+        google()
+    }
+    dependencies {
+//        classpath 'com.google.gms:google-services:4.3.3'
+//        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.3.0'
     }
 
-    dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
-    }
 }
 apply plugin: 'com.android.application'
-apply plugin: 'io.fabric'
+//apply plugin: 'com.google.firebase.crashlytics'
+//apply plugin: 'com.google.firebase.crashlytics'
+//apply plugin: 'com.google.gms.google-services'
+
 
 repositories {
     maven { url 'https://maven.fabric.io/public' }
@@ -16,21 +20,30 @@ repositories {
 
 
 android {
-    compileSdkVersion 28
+    compileSdk 34
     defaultConfig {
         applicationId "com.tomsloj.pc.pogodne"
         minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 211
-        versionName "2.11"
+        targetSdkVersion 33
+        versionCode 300
+        versionName "3.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            firebaseCrashlytics {
+//                nativeSymbolUploadEnabled true
+//            }
         }
+    }
+    namespace 'com.tomsloj.pc.pogodne'
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
@@ -39,21 +52,31 @@ dependencies {
     implementation 'com.shuhart.hoveringcallback:hoveringcallback:1.2.6'
     implementation 'com.baoyz.swipemenulistview:library:1.3.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'com.google.android.material:material:1.11.0'
+//    implementation 'com.google.firebase:firebase-crashlytics:17.2.1'
+//    implementation 'com.google.firebase:firebase-analytics:17.5.0'
+//    implementation 'com.google.firebase:firebase-crashlytics-ndk:17.2.1'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation ('com.crashlytics.sdk.android:crashlytics:2.10.1'){transitive = true}
-    implementation 'com.crashlytics.sdk.android:crashlytics-ndk:2.1.1'
 
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.7.1"))
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
+    implementation 'com.android.support:multidex:1.0.3'
 
 }
 
-crashlytics {
-    enableNdk true
-    androidNdkOut 'src/main/obj'
-    androidNdkLibsOut 'src/main/libs'
-}
+//crashlytics {
+//    androidNdkOut 'src/main/obj'
+//    androidNdkLibsOut 'src/main/libs'
+//}
+

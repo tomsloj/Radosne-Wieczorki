@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.crashlytics.android.Crashlytics;
+//import com.crashlytics.android.Crashlytics;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -40,7 +40,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         }
         catch (SQLiteCantOpenDatabaseException e)
         {
-            Crashlytics.log(Log.ERROR, "opening database", "can;t open database " + dataBasePath);
+            //Crashlytics.log(Log.ERROR, "opening database", "can;t open database " + dataBasePath);
             Toast.makeText(appContext, "nie można otworzyć bazy danych\nspróbuj uruchomić ponownie aplikację\n" +
                     "jeśli błąd będzie nadal występował skontaktuj się z developerem\n300268@pw.edu.pl", Toast.LENGTH_LONG).show();
         }
@@ -203,7 +203,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         while (!cursor.isAfterLast())
         {
             String tmp = cursor.getString(0);
-            if(tmp.toLowerCase().equals(game.toLowerCase()))
+            if(tmp.equalsIgnoreCase(game))
             {
                 cursor.close();
                 return true;
