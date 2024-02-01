@@ -1,1 +1,12 @@
+pluginManagement {
+    repositories {
+        google()
+        jcenter()
+        maven
+                {
+                    url "https://jitpack.io"
+                }
+    }
+}
+
 include ':app'

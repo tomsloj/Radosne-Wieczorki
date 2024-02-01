@@ -1,14 +1,18 @@
-buildscript {
-    repositories {
-        google()
-    }
-    dependencies {
-//        classpath 'com.google.gms:google-services:4.3.3'
-//        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.3.0'
-    }
-
+//buildscript {
+//    repositories {
+//        google()
+//    }
+//    dependencies {
+////        classpath 'com.google.gms:google-services:4.3.3'
+////        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.3.0'
+//    }
+//
+//}
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
-apply plugin: 'com.android.application'
+//apply plugin: 'com.android.application'
 //apply plugin: 'com.google.firebase.crashlytics'
 //apply plugin: 'com.google.firebase.crashlytics'
 //apply plugin: 'com.google.gms.google-services'
@@ -69,8 +73,10 @@ dependencies {
 
     // Add the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation("com.google.firebase:firebase-crashlytics")
+//    implementation("com.google.firebase:firebase-crashlytics")
     implementation("com.google.firebase:firebase-analytics")
+    implementation("com.google.firebase:firebase-database")
+
     implementation 'com.android.support:multidex:1.0.3'
 
 }

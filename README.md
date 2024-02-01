@@ -1,0 +1,1 @@
+Aby skorzystać z bazy danych firebase należy dodać do folderu app plik `google-service.json` pobrany z panelu developera firebase.
