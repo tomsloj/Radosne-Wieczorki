@@ -1,14 +1,12 @@
 package com.tomsloj.pc.pogodne;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteCantOpenDatabaseException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import android.widget.Toast;
-
-//import com.crashlytics.android.Crashlytics;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -68,12 +66,14 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     void addGame(String category, String game, String text)
     {
-        String query = "INSERT INTO DANE (zabawa, kategoria, tekst) VALUES ('" + game + "','"+
-                category + "','" + text + "')";
-        openDataBase();
-        myBase.execSQL(query);
-        closeDataBase();
+        ContentValues values = new ContentValues();
+        values.put("zabawa", game);
+        values.put("kategoria", category);
+        values.put("tekst", text);
 
+        openDataBase();
+        myBase.insert("DANE", null, values);
+        closeDataBase();
     }
 
     public String getRandomGame(int seed)
@@ -84,10 +84,10 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         rand.setSeed(seed);
         int randNumber = rand.nextInt();
         randNumber = ((randNumber % counted) + counted) % counted;
-        ArrayList<String> aList = new ArrayList<String>();
+        ArrayList<String> aList = new ArrayList<>();
         while( aList.isEmpty() )
         {
-            String query = "SELECT zabawa FROM DANE WHERE _id = " + Integer.toString(randNumber + 1) + " AND kategoria <> 'zz'";
+            String query = "SELECT zabawa FROM DANE WHERE _id = " + (randNumber + 1) + " AND kategoria <> 'zz'";
             aList = getList(query);
             randNumber = ((randNumber % counted) + counted) % counted;
         }
