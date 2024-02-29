@@ -2,11 +2,7 @@ package com.tomsloj.pc.pogodne;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.preference.PreferenceManager;
-
-import java.util.Date;
 
 public class SettingsService
 {
@@ -28,42 +24,7 @@ public class SettingsService
     public int getTextSize()
     {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
-        //SharedPreferences.Editor editor = preferences.edit();
         return preferences.getInt("size", 15);
-    }
-
-    private long getLongTime(Date date)
-    {
-        return date.getTime();
-    }
-
-    public void setPrevVersion(String version)
-    {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
-        SharedPreferences.Editor editor = preferences.edit();
-
-        editor.putString("prevVersion", version);
-        editor.commit();
-    }
-
-    public String getPrevVersion()
-    {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
-
-        return preferences.getString("prevVersion", "0");
-    }
-
-    public String getCurrentVersion()
-    {
-        String version = "error";
-        PackageInfo pinfo = null;
-        try {
-            pinfo = settingsContext.getPackageManager().getPackageInfo( settingsContext.getPackageName(), 0);
-            version = pinfo.versionName;
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return version;
     }
 
     public void setNewNameOfFavorite(String name)
@@ -75,11 +36,52 @@ public class SettingsService
         editor.commit();
     }
 
+    public void setLastDatabaseUpdate(String lastDatabaseChange)
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString("prevLastDatabaseUpdate", getLastDatabaseUpdateFromSettings());
+        editor.commit();
+
+        editor.putString("lastDatabaseUpdate", lastDatabaseChange);
+        editor.commit();
+    }
+
+    public String getLastDatabaseUpdateFromSettings() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
+
+        String lastDatabaseChange = preferences.getString("lastDatabaseUpdate", "error");
+        return lastDatabaseChange;
+    }
+
+    public String getPrevLastDatabaseUpdateFromSettings() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
+
+        String prevLastDatabaseUpdate = preferences.getString("prevLastDatabaseUpdate", "error");
+        return prevLastDatabaseUpdate;
+    }
+
+
     public String getNewNameOfFavorite()
     {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
         return preferences.getString("NewNameOfFavorite", "");
+    }
 
+    public Boolean isDatabaseCreated()
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
+        return preferences.getBoolean("isDatabaseCreated", false);
+    }
+
+    public void databaseCreated()
+    {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(settingsContext);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putBoolean("isDatabaseCreated", true);
+        editor.commit();
     }
 
 }
