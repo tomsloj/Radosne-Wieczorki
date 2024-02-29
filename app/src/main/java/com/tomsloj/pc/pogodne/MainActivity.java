@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
@@ -25,20 +27,23 @@ import java.io.InputStream;
 //TODO melodie piosenek
 //TODO udostępnianie list
 
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import com.tomsloj.pc.pogodne.Game;
-
 public class MainActivity extends AppCompatActivity
 {
 
     FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReferenceLastUpdate;
+    DatabaseReference databaseReferenceGames;
 
-    DatabaseReference databaseReference;
+    SettingsService settingsService;
+
+    String lastUpdate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,35 +56,14 @@ public class MainActivity extends AppCompatActivity
         Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         setSupportActionBar(myToolbar);
 
-        /*
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomMenu);
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId())
-                {
-                    case R.id.button1:
-
-                        break;
-                    case R.id.button2:
-
-                        break;
-                    case R.id.button3:
-
-                        break;
-                }
-            }
-        });
-        */
-
         //copy database
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
         DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
-        SettingsService settingsService = new SettingsService(getApplicationContext());
-        String version = settingsService.getCurrentVersion();
-        //update only when new version was installed
-        if(!version.equals(settingsService.getPrevVersion()))
+        settingsService = new SettingsService(getApplicationContext());
+        if(settingsService.isDatabaseCreated())
         {
-            settingsService.setPrevVersion(version);
+            settingsService.databaseCreated();
             dbHelper.getReadableDatabase();
             //copy db
             if(copyDatabase(this))
@@ -95,13 +79,10 @@ public class MainActivity extends AppCompatActivity
                         dataBaseHelper.addGame(list.get(i).get(0), list.get(i).get(1), list.get(i).get(2) );
                 }
             }
-            else
-            {
-                Toast.makeText(this, "nie można otworzyć bazy danych\nspróbuj uruchomić ponownie aplikację\n" +
-                        "jeśli błąd będzie nadal występował skontaktuj się z developerem\n300268@pw.edu.pl", Toast.LENGTH_LONG).show();
-                return;
-            }
         }
+
+        //dodanie listenerów do bazy danych
+        addDatabaseListeners();
 
         //define buttons
         final Button dancesButton = (Button) findViewById(R.id.dancesButton);
@@ -224,64 +205,6 @@ public class MainActivity extends AppCompatActivity
                 startActivity(openListOfFavorites);
             }
         });
-
-        /*
-        //show random play in current day
-        gameOfTheDayButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-
-                int seed = Calendar.getInstance().get(Calendar.YEAR)*366+Calendar.getInstance().get(Calendar.MONTH)*31+Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
-                DataBaseHelper dbHelper = new DataBaseHelper(MainActivity.this);
-                String gameName = dbHelper.getRandomGame(seed);
-
-                Intent openGameOfTheDay = new Intent(getApplicationContext(), display.class);
-                openGameOfTheDay.putExtra("zabawa", gameName);
-                openGameOfTheDay.putExtra("kategoria", "gameOfTheDay");
-                startActivity(openGameOfTheDay);
-            }
-        });
-        */
-
-        // below line is used to get the instance
-        // of our Firebase database.
-        firebaseDatabase = FirebaseDatabase.getInstance();
-
-        // below line is used to get
-        // reference for our database.
-        databaseReference = firebaseDatabase.getReference("0");
-        getdata();
-    }
-
-    private void getdata() {
-
-        // calling add value event listener method
-        // for getting the values from database.
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-                // this method is call to get the realtime
-                // updates in the data.
-                // this method is called when the data is
-                // changed in our Firebase console.
-                // below line is for getting the data from
-                // snapshot of our database.
-                Game value = snapshot.getValue(Game.class);
-
-                // after getting the value we are setting
-                // our value to our text view in below line.
-                Toast.makeText(MainActivity.this, value.zabawa, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // calling on cancelled method when we receive
-                // any error or we are not able to get the data.
-                Toast.makeText(MainActivity.this, "Fail to get data.", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
     /*
@@ -297,7 +220,7 @@ public class MainActivity extends AppCompatActivity
             String outFileName = dataBaseHelper.dataBasePath + DataBaseHelper.dataBaseName;
             OutputStream outputStream = new FileOutputStream(outFileName);
             byte[]buff = new byte[1024];
-            int length = 0;
+            int length;
             while ((length = inputStream.read(buff)) > 0)
             {
                 outputStream.write(buff, 0, length);
@@ -331,12 +254,67 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    void addDatabaseListeners()
+    {
+        databaseReferenceLastUpdate = firebaseDatabase.getReference("lastUpdate");
+        databaseReferenceLastUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                lastUpdate = dataSnapshot.getValue(String.class);
 
-    //public void forceCrash(View view) {
-    //    throw new RuntimeException("This is a crash");
-    //}
+                databaseReferenceGames = firebaseDatabase.getReference("games");
 
+                if(!lastUpdate.equals(settingsService.getLastDatabaseUpdateFromSettings())) {
+                    settingsService.setLastDatabaseUpdate(lastUpdate);
+                    databaseReferenceGames.addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
+                            try {
+                                Game game = dataSnapshot.getValue(Game.class);
 
+                                DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+                                if (game != null && !dataBaseHelper.gameExist(game.zabawa))
+                                    dataBaseHelper.addGame(game.kategoria, game.zabawa, game.tekst);
+                            }
+                            catch (Exception e)
+                            {
+                                settingsService.setLastDatabaseUpdate(settingsService.getPrevLastDatabaseUpdateFromSettings());
+                            }
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            // TODO przechowywać też id
+                            System.out.println("==================onChildChanged");
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                            Game game = snapshot.getValue(Game.class);
+
+                            DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+                            if (game != null && dataBaseHelper.gameExist(game.zabawa))
+                                dataBaseHelper.remove(game.zabawa);
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                            System.out.println("==================onChildMoved");
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            settingsService.setLastDatabaseUpdate(settingsService.getPrevLastDatabaseUpdateFromSettings());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
 }
 
 
