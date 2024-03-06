@@ -58,7 +58,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     ArrayList<String> getListOfCategories()
     {
-        String query = "SELECT DISTINCT  kategoria FROM DANE";
+        String query = "SELECT DISTINCT kategoria FROM DANE";
         return getList(query);
     }
 
@@ -248,7 +248,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     boolean gameExist(String gameName)
     {
-        String query = "SELECT zabawa FROM DANE";
+        String query = "SELECT zabawa FROM DANE WHERE zabawa = '" + gameName + "'";
         openDataBase();
 
         Cursor cursor = myBase.rawQuery(query, null);
@@ -293,12 +293,8 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
 
     void remove (String game)
     {
-        //SQLiteDatabase db = this.getWritableDatabase();
         openDataBase();
-        String query = "DELETE FROM DANE WHERE "
-                + "zabawa" + " = '" + game + "'";
-        myBase.execSQL(query);
-
+        myBase.delete("DANE", "zabawa = ?", new String[]{game});
         closeDataBase();
     }
 
