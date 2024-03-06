@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
 
         DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
         settingsService = new SettingsService(getApplicationContext());
-        if(settingsService.isDatabaseCreated())
+        if( !dbHelper.ifDatabaseCreated() )
         {
             settingsService.databaseCreated();
             dbHelper.getReadableDatabase();

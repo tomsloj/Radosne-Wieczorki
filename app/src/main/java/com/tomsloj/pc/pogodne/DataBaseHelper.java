@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -34,7 +35,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         }
         try
         {
-            myBase = SQLiteDatabase.openDatabase(dataBasePath + dataBaseName, null, SQLiteDatabase.OPEN_READWRITE);
+            myBase = SQLiteDatabase.openDatabase(dataBasePath + "/" + dataBaseName, null, SQLiteDatabase.OPEN_READWRITE);
         }
         catch (SQLiteCantOpenDatabaseException e)
         {
@@ -47,6 +48,12 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
     {
         if(myBase != null)
             myBase.close();
+    }
+
+    boolean ifDatabaseCreated()
+    {
+        File file = new File(dataBasePath + "/" + dataBaseName);
+        return file.exists();
     }
 
     ArrayList<String> getListOfCategories()
