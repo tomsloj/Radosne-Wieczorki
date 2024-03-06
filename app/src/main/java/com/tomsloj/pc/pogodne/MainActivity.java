@@ -72,11 +72,11 @@ public class MainActivity extends AppCompatActivity
 
                 DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
                 AddedGamesService addedGamesService = new AddedGamesService(getApplicationContext());
-                ArrayList<ArrayList<String> > list = addedGamesService.getList();
+                ArrayList<Game> list = addedGamesService.getList();
                 for ( int i = 0; i < list.size(); ++i )
                 {
-                    if(!dataBaseHelper.gameExist(list.get(i).get(1)))
-                        dataBaseHelper.addGame(list.get(i).get(0), list.get(i).get(1), list.get(i).get(2) );
+                    if(!dataBaseHelper.gameExist(list.get(i).zabawa))
+                        dataBaseHelper.addGameOrUpdate( list.get(i) );
                 }
             }
         }
@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity
         {
             InputStream inputStream = context.getAssets().open(DataBaseHelper.dataBaseName);
             DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
-            String outFileName = dataBaseHelper.dataBasePath + DataBaseHelper.dataBaseName;
+            String outFileName = dataBaseHelper.dataBasePath + "/" + DataBaseHelper.dataBaseName;
             OutputStream outputStream = new FileOutputStream(outFileName);
             byte[]buff = new byte[1024];
             int length;
@@ -273,8 +273,15 @@ public class MainActivity extends AppCompatActivity
                                 Game game = dataSnapshot.getValue(Game.class);
 
                                 DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
-                                if (game != null && !dataBaseHelper.gameExist(game.zabawa))
-                                    dataBaseHelper.addGame(game.kategoria, game.zabawa, game.tekst);
+                                if(game != null)
+                                {
+                                    if(game.kategoria.equals("removed"))
+                                    {
+                                        dataBaseHelper.remove(game);
+                                    }
+                                    else if (!game.lastUpdate.equals(dataBaseHelper.getLastUpdate(game)))
+                                        dataBaseHelper.addGameOrUpdate(game);
+                                }
                             }
                             catch (Exception e)
                             {
@@ -305,6 +312,7 @@ public class MainActivity extends AppCompatActivity
                         @Override
                         public void onCancelled(@NonNull DatabaseError databaseError) {
                             settingsService.setLastDatabaseUpdate(settingsService.getPrevLastDatabaseUpdateFromSettings());
+                            Toast.makeText(getApplicationContext(), "Nie udało się połączyć z bazą danych", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -312,6 +320,7 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), "Nie udało się połączyć z bazą danych", Toast.LENGTH_LONG).show();
             }
         });
     }

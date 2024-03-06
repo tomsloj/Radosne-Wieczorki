@@ -61,9 +61,9 @@ public class AddedGamesService extends SQLiteOpenHelper
     }
 
 
-    public ArrayList<ArrayList<String> > getList ()
+    public ArrayList<Game> getList ()
     {
-        ArrayList<ArrayList<String> >list = new ArrayList<>();
+        ArrayList<Game>list = new ArrayList<>();
         Cursor data = getCursor();
 
         while (data.moveToNext())
@@ -71,11 +71,10 @@ public class AddedGamesService extends SQLiteOpenHelper
             String category = data.getString(0);
             String game = data.getString(1);
             String text = data.getString(2);
-            ArrayList<String> tmp = new ArrayList<>();
-            tmp.add(category);
-            tmp.add(game);
-            tmp.add(text);
-            list.add(tmp);
+            String lastUpdate = data.getString(3);
+            Game g = new Game(-1, game, category, text, lastUpdate);
+
+            list.add(g);
         }
         data.close();
         return list;

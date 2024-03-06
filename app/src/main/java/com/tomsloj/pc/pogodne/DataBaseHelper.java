@@ -277,6 +277,20 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return aList.get(0);
     }
 
+    String getLastUpdate (String game)
+    {
+        String query = "SELECT ostatniaAktualizacja FROM DANE WHERE zabawa = '" + game + "'";
+        ArrayList<String> aList = getList(query);
+        if(aList.isEmpty())
+            return "";
+        return aList.get(0);
+    }
+
+    String getLastUpdate (Game game)
+    {
+        return getLastUpdate(game.zabawa);
+    }
+
     void remove (String game)
     {
         //SQLiteDatabase db = this.getWritableDatabase();
@@ -288,6 +302,10 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         closeDataBase();
     }
 
+    void remove (Game game)
+    {
+        remove(game.zabawa);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
