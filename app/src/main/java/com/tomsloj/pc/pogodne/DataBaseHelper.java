@@ -64,15 +64,61 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return aList.get(0);
     }
 
-    void addGame(String category, String game, String text)
+    /*
+    * Add game or update if exists in database
+    * */
+    void addGameOrUpdate(String category, String game, String text, String lastUpdate)
     {
+        if(gameExist(game))
+        {
+            updateGame(category, game, text, lastUpdate);
+        }
+        else
+        {
+            addGame(category, game, text, lastUpdate);
+        }
+    }
+
+    void addGameOrUpdate(String category, String game, String text)
+    {
+        addGameOrUpdate(category, game, text, "");
+    }
+
+    void addGameOrUpdate(Game game)
+    {
+        addGameOrUpdate(game.kategoria, game.zabawa, game.tekst, game.lastUpdate);
+    }
+
+    private void addGame(String category, String game, String text, String lastUpdate)
+    {
+        text = text.replace("\\n", "\n");
         ContentValues values = new ContentValues();
         values.put("zabawa", game);
         values.put("kategoria", category);
         values.put("tekst", text);
+        values.put("ostatniaAktualizacja", lastUpdate);
 
         openDataBase();
         myBase.insert("DANE", null, values);
+        closeDataBase();
+    }
+
+    private void addGame(Game g)
+    {
+        addGame(g.kategoria, g.zabawa, g.tekst, g.lastUpdate);
+    }
+
+    private void updateGame(String category, String game, String text, String lastUpdate)
+    {
+        text = text.replace("\\n", "\n");
+        ContentValues values = new ContentValues();
+        values.put("zabawa", game);
+        values.put("kategoria", category);
+        values.put("tekst", text);
+        values.put("ostatniaAktualizacja", lastUpdate);
+
+        openDataBase();
+        myBase.update("DANE", values, "zabawa = ?", new String[]{game});
         closeDataBase();
     }
 
@@ -193,7 +239,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         return counted;
     }
 
-    boolean gameExist(String game)
+    boolean gameExist(String gameName)
     {
         String query = "SELECT zabawa FROM DANE";
         openDataBase();
@@ -203,7 +249,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         while (!cursor.isAfterLast())
         {
             String tmp = cursor.getString(0);
-            if(tmp.equalsIgnoreCase(game))
+            if(tmp.equalsIgnoreCase(gameName))
             {
                 cursor.close();
                 return true;

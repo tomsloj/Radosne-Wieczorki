@@ -213,7 +213,7 @@ public class settings extends AppCompatActivity
                         }
                         else
                         {
-                            dataBaseHelper.addGame(category, game, text);
+                            dataBaseHelper.addGameOrUpdate(category, game, text);
                             addedGamesService.addGame(category, game, text);
 
                             final LayoutInflater inflater = LayoutInflater.from(settings.this);
