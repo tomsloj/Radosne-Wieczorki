@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity
     DatabaseReference databaseReferenceLastUpdate;
     DatabaseReference databaseReferenceGames;
 
+    ValueEventListener lastUpdateEventListener;
+
+    ChildEventListener gamesEventListener;
+    boolean gamesEventListenerAdded = false;
+
     SettingsService settingsService;
 
     String lastUpdate;
@@ -257,7 +262,59 @@ public class MainActivity extends AppCompatActivity
     void addDatabaseListeners()
     {
         databaseReferenceLastUpdate = firebaseDatabase.getReference("lastUpdate");
-        databaseReferenceLastUpdate.addListenerForSingleValueEvent(new ValueEventListener() {
+
+        gamesEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
+                try {
+                    Game game = dataSnapshot.getValue(Game.class);
+
+                    DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+                    if(game != null)
+                    {
+                        if(game.kategoria.equals("removed"))
+                        {
+                            dataBaseHelper.remove(game);
+                        }
+                        else if (!game.lastUpdate.equals(dataBaseHelper.getLastUpdate(game)))
+                            dataBaseHelper.addGameOrUpdate(game);
+                    }
+                }
+                catch (Exception e)
+                {
+                    settingsService.setLastDatabaseUpdate(settingsService.getPrevLastDatabaseUpdateFromSettings());
+                }
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                // TODO zostawić puste
+                System.out.println("==================onChildChanged");
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                System.out.println("==================onChildRemoved");
+//                            Game game = snapshot.getValue(Game.class);
+//
+//                            DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
+//                            if (game != null && dataBaseHelper.gameExist(game.zabawa))
+//                                dataBaseHelper.remove(game.zabawa);
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                System.out.println("==================onChildMoved");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                settingsService.setLastDatabaseUpdate(settingsService.getPrevLastDatabaseUpdateFromSettings());
+                Toast.makeText(getApplicationContext(), "Nie udało się połączyć z bazą danych", Toast.LENGTH_LONG).show();
+            }
+        };
+
+        lastUpdateEventListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 lastUpdate = dataSnapshot.getValue(String.class);
@@ -266,55 +323,8 @@ public class MainActivity extends AppCompatActivity
 
                 if(!lastUpdate.equals(settingsService.getLastDatabaseUpdateFromSettings())) {
                     settingsService.setLastDatabaseUpdate(lastUpdate);
-                    databaseReferenceGames.addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, String prevChildKey) {
-                            try {
-                                Game game = dataSnapshot.getValue(Game.class);
-
-                                DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
-                                if(game != null)
-                                {
-                                    if(game.kategoria.equals("removed"))
-                                    {
-                                        dataBaseHelper.remove(game);
-                                    }
-                                    else if (!game.lastUpdate.equals(dataBaseHelper.getLastUpdate(game)))
-                                        dataBaseHelper.addGameOrUpdate(game);
-                                }
-                            }
-                            catch (Exception e)
-                            {
-                                settingsService.setLastDatabaseUpdate(settingsService.getPrevLastDatabaseUpdateFromSettings());
-                            }
-                        }
-
-                        @Override
-                        public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                            // TODO przechowywać też id
-                            System.out.println("==================onChildChanged");
-                        }
-
-                        @Override
-                        public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                            Game game = snapshot.getValue(Game.class);
-
-                            DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
-                            if (game != null && dataBaseHelper.gameExist(game.zabawa))
-                                dataBaseHelper.remove(game.zabawa);
-                        }
-
-                        @Override
-                        public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                            System.out.println("==================onChildMoved");
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            settingsService.setLastDatabaseUpdate(settingsService.getPrevLastDatabaseUpdateFromSettings());
-                            Toast.makeText(getApplicationContext(), "Nie udało się połączyć z bazą danych", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    databaseReferenceGames.addChildEventListener(gamesEventListener);
+                    gamesEventListenerAdded = true;
                 }
             }
 
@@ -322,7 +332,18 @@ public class MainActivity extends AppCompatActivity
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(getApplicationContext(), "Nie udało się połączyć z bazą danych", Toast.LENGTH_LONG).show();
             }
-        });
+        };
+
+        databaseReferenceLastUpdate.addListenerForSingleValueEvent(lastUpdateEventListener);
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        databaseReferenceLastUpdate.removeEventListener(lastUpdateEventListener);
+        if(gamesEventListenerAdded)
+            databaseReferenceGames.removeEventListener(gamesEventListener);
     }
 }
 
