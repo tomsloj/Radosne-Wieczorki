@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Radosne Wieczorki</string>
+    <string name="app_name">Pogodne Wieczorki</string>
     <string name="app_version">v3.0</string>
     <string name="action_settings">Ustawienia</string>
     <string name="action_search">Szukaj</string>
@@ -23,7 +23,7 @@
     <string name="home">home</string>
     <string name="back">Wróć</string>
     <string name="tekstSize">Wielkość tekstu</string>
-    <string name="mail">300268@pw.edu.pl</string>
+    <string name="mail">tomsloj@gmail.com</string>
     <string name="check">sprawdź</string>
     <string name="send">Wyślij</string>
     <string name="hint">Jeśli nie znasz hasła wpisz swoje imię i nazwisko i wyślij je wraz z twoim Mac adresem, aby otrzymać hasło dla twojej aplikacji</string>

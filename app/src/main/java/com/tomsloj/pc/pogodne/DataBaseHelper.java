@@ -41,7 +41,7 @@ public class DataBaseHelper  extends SQLiteOpenHelper {
         {
             //Crashlytics.log(Log.ERROR, "opening database", "can;t open database " + dataBasePath);
             Toast.makeText(appContext, "nie można otworzyć bazy danych\nspróbuj uruchomić ponownie aplikację\n" +
-                    "jeśli błąd będzie nadal występował skontaktuj się z developerem\n300268@pw.edu.pl", Toast.LENGTH_LONG).show();
+                    "jeśli błąd będzie nadal występował skontaktuj się z developerem\ntomsloj@gmail.com", Toast.LENGTH_LONG).show();
         }
     }
     private void closeDataBase()
