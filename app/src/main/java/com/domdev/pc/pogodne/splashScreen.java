@@ -1,4 +1,4 @@
-package com.tomsloj.pc.pogodne;
+package com.domdev.pc.pogodne;
 
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;

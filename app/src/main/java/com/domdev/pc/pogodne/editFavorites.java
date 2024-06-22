@@ -1,4 +1,4 @@
-package com.tomsloj.pc.pogodne;
+package com.domdev.pc.pogodne;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import android.widget.Toast;
 import java.io.File;
 import java.util.ArrayList;
 
-import static com.tomsloj.pc.pogodne.R.layout.activity_edit_favorites;
+import static com.domdev.pc.pogodne.R.layout.activity_edit_favorites;
 
 public class editFavorites extends AppCompatActivity {
 

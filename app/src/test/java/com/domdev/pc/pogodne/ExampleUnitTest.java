@@ -1,4 +1,4 @@
-package com.tomsloj.pc.pogodne;
+package com.domdev.pc.pogodne;
 
 import org.junit.Test;
 

@@ -1,8 +1,6 @@
-package com.tomsloj.pc.pogodne;
+package com.domdev.pc.pogodne;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import androidx.core.app.NavUtils;
 import androidx.appcompat.app.ActionBar;
@@ -10,7 +8,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,9 +17,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,84 +29,56 @@ import com.baoyz.swipemenulistview.SwipeMenuCreator;
 import com.baoyz.swipemenulistview.SwipeMenuItem;
 import com.baoyz.swipemenulistview.SwipeMenuListView;
 
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 
-public class list extends AppCompatActivity {
+public class search extends AppCompatActivity {
 
-    SwipeMenuListView listView;
     int textSize;
-    String category;
+    SwipeMenuListView listOfFound;
+    ArrayList<String> list = new ArrayList<>();
     ExpandableListViewAdapter adapter = null;
-    ArrayList<String> arrayList;
-    
-    
+    AppAdapter appAdapter;
+    SwipeMenuCreator creator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
+        setContentView(R.layout.activity_search);
 
-        //get category of list
-        category = getIntent().getStringExtra("kategoria");
+        final SettingsService sService = new SettingsService(getApplicationContext());
+        textSize = sService.getTextSize();
 
-        //create toolbar
-        final Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
-        if(category== null||category.equals("all"))
-        {
-            myToolbar.setTitle("Lista zabaw");
-            category = "all";
-        }
-        else
-        {
-           myToolbar.setTitle(category.substring(0, 1).toUpperCase() + category.substring(1));
-        }
+
+        Toolbar myToolbar = (Toolbar) findViewById(R.id.main_bar);
         setSupportActionBar(myToolbar);
 
         ActionBar actionBar = getSupportActionBar();
 
-        // Enable the Up button
+        actionBar.setTitle("Szukaj");
+
         //actionBar.setHomeButtonEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.back);
 
 
-        if ( actionBar != null)
-        {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeAsUpIndicator(R.drawable.back);
-        }
-        final SettingsService sService = new SettingsService(getApplicationContext());
-        textSize = sService.getTextSize();
+        final Button searchButton = (Button) findViewById(R.id.searchButton);
+        final CheckBox titleBox = (CheckBox) findViewById(R.id.titlesCheckbox);
+        final CheckBox textBox = (CheckBox) findViewById(R.id.textsCheckbox);
+        final EditText searchSpace = (EditText) findViewById(R.id.searchSpace);
+        final TextView textNoFavorites = (TextView) findViewById(R.id.textEmptyFavoritesList);
 
-        listView = (SwipeMenuListView) findViewById(R.id.listview);
+        listOfFound = (SwipeMenuListView) findViewById(R.id.listOfFound);
+        appAdapter = new AppAdapter();
+        listOfFound.setAdapter(appAdapter);
 
-
-        final DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
-
-        arrayList = dbHelper.getGamesInCategory(category);
-
-        final AppAdapter arrayAdapter = new AppAdapter();
-        listView.setAdapter(arrayAdapter);
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent openGame = new Intent(getApplicationContext(), display.class);
-                openGame.putExtra("zabawa", arrayList.get(i));
-                openGame.putExtra("kategoria", category);
-                startActivity(openGame);
-            }
-        });
-
-
-        SwipeMenuCreator creator = new SwipeMenuCreator() {
+        creator = new SwipeMenuCreator() {
 
             @Override
             public void create(SwipeMenu menu) {
                 switch (menu.getViewType()) {
                     case 0:
                     {
-                         // create "add" item
+                        // create "add" item
                         SwipeMenuItem addItem = new SwipeMenuItem(
                                 getApplicationContext());
                         // set item background
@@ -152,43 +122,34 @@ public class list extends AppCompatActivity {
             }
         };
 
-
         // set creator
-        listView.setMenuCreator(creator);
+        listOfFound.setMenuCreator(creator);
 
-        listView.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
+        listOfFound.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(final int position, SwipeMenu menu, int index) {
 
                 switch (index) {
                     case 0: {
-                        final String game = arrayList.get(position);
+                        final String game = list.get(position);
 
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(list.this);
-                        final LayoutInflater inflater = list.this.getLayoutInflater();
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(search.this);
+                        final LayoutInflater inflater = search.this.getLayoutInflater();
                         final View dialogView = inflater.inflate(R.layout.add_to_favorites, null);
 
                         //final Button stworz = (Button) dialogView.findViewById(R.id.createFavorite);
                         //final EditText nazwa =(EditText) dialogView.findViewById(R.id.nameOfFavorite);
                         final ExpandableListView listaulu = (ExpandableListView) dialogView.findViewById(R.id.dialogLisOfFavorites);
 
-                        final DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites(list.this);
+                        final DataBaseFavorites dbFavoritesHelper = new DataBaseFavorites(search.this);
 
                         final ArrayList<String> list = dbFavoritesHelper.getFavoritesList();
+                        final ArrayAdapter arrayAdapter = new ArrayAdapter<>(search.this, android.R.layout.simple_list_item_1, list);
 
 
                         builder.setView(dialogView);
                         final AlertDialog dialog1 = builder.create();
                         dialog1.show();
-
-                        //display info that user hasn't any list of favorites
-                        //final TextView text = (TextView) dialog.findViewById(R.id.textChooseExistingFavorite);
-                            /*
-                            if(list.size() == 0)
-                            {
-                                text.setText("Nie posiadasz jeszcze żadnej listy ulubionych");
-                            }
-                            */
 
                         Button createButton = (Button) dialogView.findViewById(R.id.create);
                         Button addGameButton = (Button) dialogView.findViewById(R.id.addGameButton);
@@ -208,8 +169,8 @@ public class list extends AppCompatActivity {
                         createButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                final AlertDialog.Builder builder = new AlertDialog.Builder(list.this);
-                                final LayoutInflater inflater = list.this.getLayoutInflater();
+                                final AlertDialog.Builder builder = new AlertDialog.Builder(search.this);
+                                final LayoutInflater inflater = search.this.getLayoutInflater();
                                 final View dialogView = inflater.inflate(R.layout.create_new_favorite, null);
                                 builder.setView(dialogView);
                                 final AlertDialog dialog2 = builder.create();
@@ -224,15 +185,15 @@ public class list extends AppCompatActivity {
                                         String nameOfFavorite = name.getText().toString();
                                         //list can't be empty, and can't contain %<>@#$|
                                         if (nameOfFavorite.isEmpty() || nameOfFavorite.replace(" ", "").isEmpty()) {
-                                            Toast.makeText(list.this, "nazwa nie może być pusta", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(search.this, "nazwa nie może być pusta", Toast.LENGTH_LONG).show();
                                         } else if (nameOfFavorite.contains("%") || nameOfFavorite.contains(">") ||
                                                 nameOfFavorite.contains("@") || nameOfFavorite.contains("<") ||
                                                 nameOfFavorite.contains("#") || nameOfFavorite.contains("|") ||
                                                 nameOfFavorite.contains("$") || nameOfFavorite.contains("'")) {
-                                            Toast.makeText(list.this, "nazwa nie może zawierać:\n%<>@#$|'", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(search.this, "nazwa nie może zawierać:\n%<>@#$|'", Toast.LENGTH_LONG).show();
                                         } else {
                                             if (dbFavoritesHelper.favoriteExist(nameOfFavorite))
-                                                Toast.makeText(list.this, "taka nazwa listy ulubionych już istnieje", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(search.this, "taka nazwa listy ulubionych już istnieje", Toast.LENGTH_SHORT).show();
                                             else {
                                                 //create new list of favorites
                                                 dbFavoritesHelper.createFavorites(nameOfFavorite, game);
@@ -265,10 +226,10 @@ public class list extends AppCompatActivity {
                                     favoritesName = adapter.getGroup(0).toString();
 
                                 if (dbFavoritesHelper.gameInFavoriteExists(favoritesName, game))
-                                    Toast.makeText(list.this, "ta zabawa już znajduje sie na tej liście ulubionych", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(search.this, "ta zabawa już znajduje sie na tej liście ulubionych", Toast.LENGTH_SHORT).show();
                                 else {
                                     dbFavoritesHelper.addGametoFavorite(favoritesName, game);
-                                    Toast.makeText(list.this, "zabawa została dodana", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(search.this, "zabawa została dodana", Toast.LENGTH_SHORT).show();
                                     dialog1.dismiss();
                                 }
                             }
@@ -284,10 +245,10 @@ public class list extends AppCompatActivity {
                     }
                     case 1:
                     {
-                        final String game = arrayList.get(position);
+                        final String game = list.get(position);
 
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(list.this);
-                        final LayoutInflater inflater = list.this.getLayoutInflater();
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(search.this);
+                        final LayoutInflater inflater = search.this.getLayoutInflater();
                         final View dialogView = inflater.inflate(R.layout.delete_dialog, null);
 
                         final Button acceptButton = (Button) dialogView.findViewById(R.id.accept);
@@ -295,29 +256,17 @@ public class list extends AppCompatActivity {
 
                         builder.setView(dialogView);
                         final AlertDialog dialog = builder.create();
-
+                        final DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
                         acceptButton.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
                                 dbHelper.remove(game);
-                                arrayList.remove(position);
+                                list.remove(position);
+                                //Toast.makeText(getApplicationContext(),listFavorites.get(position),Toast.LENGTH_SHORT).show();
+
 
                                 //update list of favorites
-                                arrayAdapter.notifyDataSetChanged();
-
-                                //delete game from favorites
-                                DataBaseFavorites dbFacorites = new DataBaseFavorites(getApplicationContext());
-                                ArrayList<String> list = dbFacorites.getFavoritesList();
-
-                                for ( String favorite:list )
-                                {
-                                    if( dbFacorites.gameInFavoriteExists(favorite, game) )
-                                    {
-                                        dbFacorites.deleteGame(favorite, game);
-                                    }
-                                }
-
-
+                                appAdapter.notifyDataSetChanged();
 
                                 dialog.dismiss();
                             }
@@ -339,15 +288,94 @@ public class list extends AppCompatActivity {
                 return false;
             }
         });
-
-        final ImageButton wholeListButton = (ImageButton) findViewById(R.id.wholeListButton);
-        final ImageButton searchButton = (ImageButton) findViewById(R.id.findButton);
-        final ImageButton favoritesButton = (ImageButton) findViewById(R.id.favoritesButton);
-
+        
+        
 
         /*
-         * set what buttons do
-         */
+        ArrayList<String> tmplist = new ArrayList<>();
+        tmplist.add("aaaa");
+        ArrayAdapter arrayAdapter = new ArrayAdapter<String>(search.this, android.R.layout.simple_list_item_1, tmplist)
+        {
+            @Override
+            public View getView(int position, View convertView, ViewGroup parent)
+            {
+                View view = super.getView(position, convertView, parent);
+                TextView tv = (TextView) view.findViewById(android.R.id.text1);
+                tv.setTextSize(textSize);
+                tv.setTextColor(Color.BLACK);
+
+                return view;
+            }
+        };
+        listOfFound.setAdapter(arrayAdapter);
+        */
+        listOfFound.setEmptyView(findViewById(R.id.textEmptyFavoritesList));
+
+
+        textBox.setTextSize(textSize);
+        titleBox.setTextSize(textSize);
+        searchSpace.setTextSize(textSize);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean box1 = titleBox.isChecked();
+                boolean box2 = textBox.isChecked();
+                String toFind = searchSpace.getText().toString();
+
+                if(!box1 && !box2)
+                {
+                    Toast.makeText(search.this, "Wybierz gdzie chcesz szukać",Toast.LENGTH_LONG).show();
+                }
+                else
+                if(toFind.equals(""))
+                {
+                    Toast.makeText(search.this, "Uzupełnij co chcesz wyszukać",Toast.LENGTH_LONG).show();
+                }
+                else
+                if( toFind.contains("'") || toFind.contains("%") || toFind.contains("_") )
+                {
+                    list = new ArrayList<>();
+                    appAdapter.notifyDataSetChanged();
+                    textNoFavorites.setText(R.string.noFound);
+                }
+                else
+                {
+                    DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
+
+                    list = dbHelper.find(toFind, box1, box2);
+
+                    if(!list.isEmpty())
+                    {
+                        appAdapter.notifyDataSetChanged();
+                        textNoFavorites.setText("");
+                    }
+                    else
+                    {
+                        //Toast.makeText(search.this, "ooooooooooo",Toast.LENGTH_LONG).show();
+                        appAdapter.notifyDataSetChanged();
+                        textNoFavorites.setText(R.string.noFound);
+                    }
+                }
+
+
+            }
+        });
+
+        listOfFound.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent openGame = new Intent(getApplicationContext(), display.class);
+                openGame.putExtra("zabawa", listOfFound.getItemAtPosition(i).toString());
+                openGame.putExtra("kategoria", "search");
+                startActivity(openGame);
+            }
+        });
+
+
+        final ImageButton wholeListButton = (ImageButton) findViewById(R.id.wholeListButton);
+        //final ImageButton searchButton = (ImageButton) findViewById(R.id.findButton);
+        final ImageButton favoritesButton = (ImageButton) findViewById(R.id.favoritesButton);
 
         //show the whole list
         wholeListButton.setOnClickListener(new View.OnClickListener()
@@ -355,31 +383,13 @@ public class list extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                /*
-                NavUtils.navigateUpFromSameTask(list.this);
                 Intent openList = new Intent(getApplicationContext(), list.class);
                 openList.putExtra("kategoria", "all");
-                startActivity(openList);
-                */
-                category = "all";
-
-                myToolbar.setTitle("Lista zabaw");
-                arrayList= dbHelper.getGamesInCategory(category);
-                listView.setAdapter(arrayAdapter);
-            }
-        });
-
-        //show search engine
-        searchButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                Intent openSearch = new Intent(getApplicationContext(), search.class);
-                NavUtils.navigateUpFromSameTask(list.this);
-                //openSearch.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                //openList.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                NavUtils.navigateUpFromSameTask(search.this);
                 //finish();
-                startActivity(openSearch);
+                startActivity(openList);
+
             }
         });
 
@@ -390,79 +400,66 @@ public class list extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent openListOfFavorites = new Intent(getApplicationContext(), listOfFavorites.class);
-                NavUtils.navigateUpFromSameTask(list.this);
+                NavUtils.navigateUpFromSameTask(search.this);
+                //finish();
                 startActivity(openListOfFavorites);
             }
         });
 
-    }
-
-    /*
-    private boolean copyDatabase(Context context) {
-        try {
-
-            InputStream inputStream = context.getAssets().open(DataBaseHelper.dataBaseName);
-            DataBaseHelper dataBaseHelper = new DataBaseHelper(getApplicationContext());
-            String outFileName = dataBaseHelper.dataBasePath + DataBaseHelper.dataBaseName;
-            OutputStream outputStream = new FileOutputStream(outFileName);
-            byte[]buff = new byte[1024];
-            int length = 0;
-            while ((length = inputStream.read(buff)) > 0) {
-                outputStream.write(buff, 0, length);
+        /*
+        //show search engine
+        searchButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent openSearch = new Intent(getApplicationContext(), search.class);
+                startActivity(openSearch);
             }
-            outputStream.flush();
-            outputStream.close();
-            Log.w("listActivity","DB copied");
-            return true;
-        }catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
+        });
+        */
+
     }
-     */
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
 
-        final AppAdapter arrayAdapter = new AppAdapter();
 
         final SettingsService sService = new SettingsService(getApplicationContext());
         final int currentTextSize = sService.getTextSize();
+        //Toast.makeText(getApplicationContext(),currentTextSize,Toast.LENGTH_SHORT).show();
+
+        final CheckBox titleBox = (CheckBox) findViewById(R.id.titlesCheckbox);
+        final CheckBox textBox = (CheckBox) findViewById(R.id.textsCheckbox);
+        final EditText searchSpace = (EditText) findViewById(R.id.searchSpace);
+
         if(currentTextSize != textSize)
         {
             textSize = currentTextSize;
-            DataBaseHelper dbHelper = new DataBaseHelper(getApplicationContext());
-
-            final ArrayList<String> arrayList = dbHelper.getGamesInCategory(category);
-
-            /*
-            ArrayAdapter arrayAdapter = new ArrayAdapter<String>(list.this, android.R.layout.simple_list_item_1, arrayList) {
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent)
-                {
-                    View view = super.getView(position, convertView, parent);
-                    view.setBackground(getResources().getDrawable( R.drawable.list_background ));
-                    TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                    tv.setBackground(getResources().getDrawable( R.drawable.list_background ));
-                    tv.setTextSize(textSize);
-                    tv.setTextColor(Color.BLACK);
-
-                    return view;
-                }
-            };
-            listView.setDividerHeight(0);
-            */
-            listView.setAdapter(arrayAdapter);
-
+            textBox.setTextSize(textSize);
+            titleBox.setTextSize(textSize);
+            searchSpace.setTextSize(textSize);
+            listOfFound.setAdapter(appAdapter);
         }
     }
+
+    /*
+    @Override
+    public void onConfigurationChanged(Configuration newConfig)
+    {
+        super.onConfigurationChanged(newConfig);
+        //Toast.makeText(search.this,"onConfig",Toast.LENGTH_SHORT).show();
+        //Toast.makeText(search.this,list.get(0),Toast.LENGTH_SHORT).show();
+        listOfFound.setAdapter(appAdapter);
+        listOfFound.setMenuCreator(creator);
+    }
+    */
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
         return true;
     }
 
@@ -475,18 +472,12 @@ public class list extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-        if(id == R.id.action_search)
-        {
-            Intent openSearch = new Intent(getApplicationContext(), search.class);
-            NavUtils.navigateUpFromSameTask(list.this);
-            startActivity(openSearch);
-        }
-        else
         if(id == R.id.action_settings)
         {
             Intent openSettings = new Intent(getApplicationContext(), settings.class);
-            //NavUtils.navigateUpFromSameTask(list.this);
+            //openSettings.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            //NavUtils.navigateUpFromSameTask(search.this);
+            //finish();
             startActivity(openSettings);
         }
         else
@@ -503,12 +494,12 @@ public class list extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            return arrayList.size();
+            return list.size();
         }
 
         @Override
         public String getItem(int position) {
-            return arrayList.get(position);
+            return list.get(position);
         }
 
         @Override
@@ -526,7 +517,7 @@ public class list extends AppCompatActivity {
         public int getItemViewType(int position) {
             // current menu type
             AddedGamesService addedGamesService = new AddedGamesService(getApplicationContext());
-            if(addedGamesService.gameExist(arrayList.get(position)))
+            if(addedGamesService.gameExist(list.get(position)))
                 return 1;
             return 0;
         }
@@ -541,21 +532,19 @@ public class list extends AppCompatActivity {
             ViewHolder holder = (ViewHolder) convertView.getTag();
             //ApplicationInfo item = getItem(position);
             //holder.iv_icon.setImageDrawable(item.loadIcon(getPackageManager()));
-            holder.tv_name.setText(arrayList.get(position));
+            holder.tv_name.setText(list.get(position));
             holder.tv_name.setTextSize(textSize);
             return convertView;
         }
     }
-        class ViewHolder {
+    class ViewHolder {
+        TextView tv_name;
 
-            TextView tv_name;
-
-            ViewHolder(View view) {
-                tv_name = (TextView) view.findViewById(R.id.tv_name);
-                view.setTag(this);
-            }
+        public ViewHolder(View view) {
+            tv_name = (TextView) view.findViewById(R.id.tv_name);
+            view.setTag(this);
         }
+    }
 
 
 }
-

@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name="com.tomsloj.pc.pogodne.splashScreen"
+        <activity android:name="com.domdev.pc.pogodne.splashScreen"
             android:noHistory="true"
             android:exported="true"
             >
@@ -23,27 +23,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.tomsloj.pc.pogodne.displayFavorite"
+        <activity android:name="com.domdev.pc.pogodne.displayFavorite"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity"/>
-        <activity android:name="com.tomsloj.pc.pogodne.editFavorites" />
-        <activity android:name="com.tomsloj.pc.pogodne.listOfFavorites"
+            android:parentActivityName="com.domdev.pc.pogodne.MainActivity"/>
+        <activity android:name="com.domdev.pc.pogodne.editFavorites" />
+        <activity android:name="com.domdev.pc.pogodne.listOfFavorites"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity"/>
+            android:parentActivityName="com.domdev.pc.pogodne.MainActivity"/>
         <activity
-            android:name="com.tomsloj.pc.pogodne.search"
+            android:name="com.domdev.pc.pogodne.search"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity" />
+            android:parentActivityName="com.domdev.pc.pogodne.MainActivity" />
         <activity
-            android:name="com.tomsloj.pc.pogodne.settings"
+            android:name="com.domdev.pc.pogodne.settings"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity" />
+            android:parentActivityName="com.domdev.pc.pogodne.MainActivity" />
         <activity
-            android:name="com.tomsloj.pc.pogodne.display"
+            android:name="com.domdev.pc.pogodne.display"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity" />
+            android:parentActivityName="com.domdev.pc.pogodne.MainActivity" />
         <activity
-            android:name="com.tomsloj.pc.pogodne.MainActivity"
+            android:name="com.domdev.pc.pogodne.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:exported="true">
@@ -53,9 +53,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tomsloj.pc.pogodne.list"
+            android:name="com.domdev.pc.pogodne.list"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:parentActivityName="com.tomsloj.pc.pogodne.MainActivity"
+            android:parentActivityName="com.domdev.pc.pogodne.MainActivity"
             android:exported="true">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
